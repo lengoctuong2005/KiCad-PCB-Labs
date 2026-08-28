@@ -2844,7 +2844,7 @@
 	(footprint "LAB3_CA1_14:Jumper 3"
 		(layer "F.Cu")
 		(uuid "1cafdfc3-a234-485e-b465-3b29f3fe9cf5")
-		(at 64 129.65)
+		(at 63.7 128.65)
 		(property "Reference" "J6"
 			(at 0 -0.16 0)
 			(unlocked yes)
@@ -3619,7 +3619,7 @@
 	(footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "39367067-8bd2-4af5-9f56-fa36d1700310")
-		(at 30 133)
+		(at 30 132)
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J1"
@@ -4004,7 +4004,7 @@
 	(footprint "LAB3_CA1_14:Connector 3x2"
 		(layer "F.Cu")
 		(uuid "46d8ae37-55d5-4c59-9609-d9265156889b")
-		(at 64.92 102.46 90)
+		(at 64.42 102.46 90)
 		(property "Reference" "J7"
 			(at 0 -0.5 90)
 			(unlocked yes)
@@ -10268,7 +10268,7 @@
 	(footprint "LAB3_CA1_14:Jumper 3"
 		(layer "F.Cu")
 		(uuid "f4763eff-87d1-40e8-80b6-7f41e49cb7a8")
-		(at 55.16 129.65)
+		(at 55.16 128.65)
 		(property "Reference" "J5"
 			(at 0 -0.16 270)
 			(unlocked yes)
@@ -10365,7 +10365,7 @@
 			(uuid "5ffb860d-3b62-41f4-bddc-cc7c5e1933a1")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 5.79 270)
+			(at 0.34 2.85 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "a3d9d916-7676-4832-aab7-e38b1f53a2bb")

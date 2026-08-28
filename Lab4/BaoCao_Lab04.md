@@ -217,7 +217,7 @@ table.report-table tbody tr:nth-child(even) {
     page-break-inside: avoid;
 }
 .report-img {
-    max-width: 92%;
+    max-width: 96%;
     max-height: 98mm;
     height: auto;
     border: 1px solid #cbd5e1;
@@ -272,37 +272,35 @@ table.report-table tbody tr:nth-child(even) {
 
 <div class="page-break"></div>
 
-## BÀI TẬP 1: ĐỒNG BỘ DỮ LIỆU TỪ SCHEMATIC VÀ THIẾT LẬP BOARD OUTLINE
+## CÂU 1: HOÀN THÀNH ĐẦY ĐỦ CÁC BƯỚC THIẾT LẬP PCB CHO MẠCH NGUỒN ĐA NĂNG
 
-Sau khi hoàn thành sơ đồ nguyên lý và kiểm tra quy tắc điện ERC đạt kết quả 0 lỗi, toàn bộ dữ liệu linh kiện và liên kết mạng được chuyển sang giao diện PCB Editor để bắt đầu giai đoạn layout bo mạch.
+Mục tiêu của bài tập là chuyển đổi toàn bộ sơ đồ nguyên lý mạch nguồn đa năng từ Schematic sang PCB Editor, thiết lập khung viền cơ khí bo mạch, cấu hình cấu trúc lớp vật lý (Physical Stackup) và phân loại các nhóm mạng (Net Classes).
 
-### 1. Đồng bộ dữ liệu linh kiện và Netlist sang PCB Editor
-* **Thao tác đồng bộ:** Trong giao diện PCB Editor, vào menu `Tools -> Update PCB from Schematic...` (phím tắt `F8`).
-* **Kiểm tra trạng thái:** Hộp thoại hiển thị danh sách các footprint và netlist trong mục *Changes to Be Applied*. Khi kiểm tra trạng thái đạt `Total warnings: 0, errors: 0`, bấm **Update PCB** rồi bấm **Close** để đưa các linh kiện vào không gian làm việc.
+### 1.1. Đồng bộ dữ liệu Schematic sang PCB Editor (Update PCB from Schematic)
 
-### 2. Thiết lập đường bao bo mạch trên lớp Edge.Cuts
+* **Thao tác thực hiện:** Trong giao diện PCB Editor, mở menu `Tools -> Update PCB from Schematic...` (phím tắt `F8`).
+* **Kiểm tra trạng thái:** Hộp thoại hiển thị danh sách toàn bộ footprint và mạng kết nối (netlist). Quá trình kiểm tra đạt `Total warnings: 0, errors: 0`, xác nhận không có xung đột hay thiếu footprint. Bấm **Update PCB** để nạp linh kiện vào vùng làm việc.
+
+### 1.2. Thiết lập đường bao bo mạch trên lớp Edge.Cuts (Board Outline)
+
 * **Nguyên tắc kỹ thuật:** Lớp `Edge.Cuts` xác định biên dạng cắt thực tế của bo mạch. Đường bao trên lớp này phải tạo thành một đa giác khép kín hoàn toàn và không tự giao cắt.
 * **Các bước thực hiện:**
-  1. Chuyển bước lưới (Grid) về giá trị 1.0 mm để căn chỉnh kích thước tròn số.
-  2. Chọn lớp hoạt động là **`Edge.Cuts`** trong tab Layers của bảng Appearance.
-  3. Chọn công cụ vẽ hình chữ nhật (*Draw Rectangle*), tạo đường bao khép kín bao quanh toàn bộ các footprint của mạch nguồn.
+  1. Chuyển bước lưới (Grid) về giá trị 1.0 mm hoặc 0.5 mm để căn chỉnh kích thước chuẩn xác.
+  2. Chọn lớp hoạt động là **`Edge.Cuts`** trên bảng điều khiển Appearance.
+  3. Dùng công cụ *Draw Rectangle*, vẽ đường bao bo mạch kích thước 50 x 50 mm bao quanh toàn bộ linh kiện đã sắp xếp của mạch nguồn.
 
 <div class="figure-container">
-    <img class="report-img" src="Pic/pcb_board_hd.png" alt="Bản vẽ PCB Editor với khung viền Edge.Cuts" style="max-height: 105mm;">
-    <div class="figure-caption">Hình 1. Bản vẽ PCB Editor sau khi đồng bộ linh kiện và định hình khung viền cơ khí Edge.Cuts (có Title Block)</div>
+    <img class="report-img" src="Pic/gui_pcb_editor.png" alt="Giao diện KiCad PCB Editor sau khi đồng bộ linh kiện và vẽ Edge.Cuts" style="max-height: 100mm;">
+    <div class="figure-caption">Hình 1. Giao diện KiCad PCB Editor sau khi hoàn tất đồng bộ từ Schematic, vẽ đường bao cơ khí Edge.Cuts và hiển thị đường nối mạng (Ratsnest)</div>
 </div>
 
 <div class="page-break"></div>
 
-## BÀI TẬP 2: CẤU HÌNH STACKUP VÀ THIẾT LẬP DESIGN RULES THEO XƯỞNG GIA CÔNG
+### 1.3. Cấu hình cấu trúc lớp bo mạch (Physical Stackup)
 
-Để bo mạch sau thiết kế có thể gia công thực tế tại các xưởng sản xuất (như JLCPCB, PCBWay), cấu trúc xếp lớp (*Physical Stackup*) và các ràng buộc thiết kế (*Design Rules Constraints*) được thiết lập theo đúng năng lực công nghệ gia công.
+Vào `File -> Board Setup... -> Board Stackup -> Physical Stackup` để cấu hình cấu trúc lớp vật lý cho mạch nguồn:
 
-### 1. Cấu hình cấu trúc lớp bo mạch (Physical Stackup)
-
-Vào `File -> Board Setup... -> Board Stackup -> Physical Stackup` để cấu hình:
-
-* **Số lớp đồng (Copper Layers):** Chọn cấu hình **2 lớp** (`F.Cu` và `B.Cu`), phù hợp với mạch nguồn đa năng và tối ưu chi phí gia công.
+* **Số lớp đồng (Copper Layers):** Chọn cấu hình **2 lớp** (`F.Cu` và `B.Cu`), đáp ứng hoàn toàn nhu cầu truyền dẫn dòng và tín hiệu, tối ưu chi phí gia công.
 * **Vật liệu lõi cách điện:** Chuẩn công nghiệp **FR4** với hằng số điện môi xấp xỉ 4.5.
 
 <table class="report-table">
@@ -359,9 +357,83 @@ Vào `File -> Board Setup... -> Board Stackup -> Physical Stackup` để cấu h
     </tbody>
 </table>
 
-### 2. Thiết lập ràng buộc luật thiết kế (Design Rules Constraints) theo xưởng gia công
+<div class="figure-container">
+    <img class="report-img" src="Pic/gui_physical_stackup.png" alt="Hộp thoại cấu hình Physical Stackup trong Board Setup" style="max-height: 80mm;">
+    <div class="figure-caption">Hình 2. Giao diện cấu hình cấu trúc lớp bo mạch Physical Stackup (2 lớp đồng, lõi FR4, tổng độ dày 1.6 mm)</div>
+</div>
 
-Vào `File -> Board Setup... -> Design Rules -> Constraints` để thiết lập các giới hạn kích thước tối thiểu theo năng lực xưởng gia công thực tế:
+<div class="page-break"></div>
+
+### 1.4. Phân nhóm và cấu hình lớp mạng (Net Classes)
+
+Net Class quản lý luật thiết kế theo từng nhóm mạng điện, cho phép tự động áp dụng bề rộng đường mạch (*Track Width*), khoảng cách cách ly (*Clearance*) và kích thước lỗ via (*Via Size*) phù hợp cho từng loại tín hiệu:
+
+* **Nhóm nguồn tải lớn (`Power_Main`):** Gồm `VBUS`, `+5V`, `+3.3V`, `-5V` và `GND`. Bề rộng track đặt 0.80 mm để giảm nội trở đường dây, hạn chế sụt áp và chịu dòng tải tốt.
+* **Nhóm tín hiệu vi sai USB (`USB_Diff`):** Gồm cặp net `D+` và `D-` từ cổng Micro-USB. Bề rộng track 0.30 mm và khoảng cách vi sai 0.20 mm để phối hợp trở kháng đường truyền.
+* **Nhóm tín hiệu UART và xung clock (`Signal_UART`):** Gồm `TXD`, `RXD`, `RTS`, `CTS`, `DTR` và `CLK_555`. Bề rộng track 0.30 mm để đường mạch gọn gàng và dễ layout.
+* **Nhóm tín hiệu mặc định (`Default`):** Áp dụng cho các đường tín hiệu điều khiển còn lại với bề rộng track 0.40 mm.
+
+Vào `File -> Board Setup... -> Design Rules -> Net Classes` để thiết lập các nhóm lớp mạng:
+
+<table class="report-table">
+    <thead>
+        <tr>
+            <th style="width: 15%;">Tên Net Class</th>
+            <th style="width: 12%;">Clearance</th>
+            <th style="width: 14%;">Track Width</th>
+            <th style="width: 13%;">Via Diameter</th>
+            <th style="width: 12%;">Via Drill</th>
+            <th style="width: 34%;">Danh sách các Net được gán</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong><code>Default</code></strong></td>
+            <td>0.20 mm</td>
+            <td>0.40 mm</td>
+            <td>0.60 mm</td>
+            <td>0.30 mm</td>
+            <td>Các net tín hiệu chưa phân lớp riêng</td>
+        </tr>
+        <tr>
+            <td><strong><code>Power_Main</code></strong></td>
+            <td>0.25 mm</td>
+            <td><strong>0.80 mm</strong></td>
+            <td><strong>0.80 mm</strong></td>
+            <td><strong>0.40 mm</strong></td>
+            <td><code>VBUS</code>, <code>+5V</code>, <code>+3.3V</code>, <code>-5V</code>, <code>GND</code></td>
+        </tr>
+        <tr>
+            <td><strong><code>USB_Diff</code></strong></td>
+            <td>0.20 mm</td>
+            <td><strong>0.30 mm</strong></td>
+            <td>0.60 mm</td>
+            <td>0.30 mm</td>
+            <td>Cặp tín hiệu vi sai <code>D+</code>, <code>D-</code></td>
+        </tr>
+        <tr>
+            <td><strong><code>Signal_UART</code></strong></td>
+            <td>0.20 mm</td>
+            <td><strong>0.30 mm</strong></td>
+            <td>0.60 mm</td>
+            <td>0.30 mm</td>
+            <td><code>TXD</code>, <code>RXD</code>, <code>RTS</code>, <code>CTS</code>, <code>DTR</code>, <code>CLK_555</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/gui_net_classes.png" alt="Hộp thoại cấu hình Net Classes trong Board Setup" style="max-height: 78mm;">
+    <div class="figure-caption">Hình 3. Giao diện phân loại và cấu hình thông số kỹ thuật cho các nhóm Net Classes trong KiCad</div>
+</div>
+
+<div class="page-break"></div>
+
+## CÂU 2: THIẾT LẬP LẠI DESIGN RULES THEO CHUẨN NHÀ SẢN XUẤT PCB DỰ KIẾN
+
+Thay vì sử dụng các giá trị mặc định của KiCad (thường quá chặt hoặc chưa phù hợp với năng lực sản xuất thực tế dẫn đến tăng chi phí hoặc lỗi DFM), các thông số ràng buộc thiết kế (*Design Rules Constraints*) được cấu hình lại theo đúng thông số công bố của nhà sản xuất PCB tiêu chuẩn (JLCPCB / PCBWay 2-layer standard process).
+
+Vào `File -> Board Setup... -> Design Rules -> Constraints` để thiết lập các giới hạn kích thước tối thiểu:
 
 <table class="report-table">
     <thead>
@@ -418,77 +490,23 @@ Vào `File -> Board Setup... -> Design Rules -> Constraints` để thiết lập
     </tbody>
 </table>
 
+<div class="figure-container">
+    <img class="report-img" src="Pic/gui_design_rules.png" alt="Hộp thoại thiết lập Design Rules Constraints trong Board Setup" style="max-height: 80mm;">
+    <div class="figure-caption">Hình 4. Giao diện thiết lập ràng buộc luật thiết kế Constraints theo thông số xưởng sản xuất</div>
+</div>
+
 <div class="page-break"></div>
 
-## BÀI TẬP 3: PHÂN NHÓM VÀ CẤU HÌNH LỚP MẠNG (NET CLASSES)
+### KIỂM TRA MÔ HÌNH 3D VÀ ĐÁNH GIÁ TRỰC QUAN BO MẠCH
 
-Net Class quản lý luật thiết kế theo từng nhóm mạng điện, cho phép tự động áp dụng bề rộng đường mạch (*Track Width*), khoảng cách cách ly (*Clearance*) và kích thước lỗ via (*Via Size*) phù hợp cho từng loại tín hiệu mà không cần chỉnh thủ công từng đoạn dây.
-
-### 1. Phân loại các nhóm mạng trong mạch nguồn đa năng
-
-Trong mạch nguồn đa năng và giao tiếp UART, các đường mạch được phân thành 4 nhóm chức năng:
-
-* **Nhóm nguồn tải lớn (`Power_Main`):** Gồm `VBUS`, `+5V`, `+3.3V`, `-5V` và `GND`. Bề rộng track đặt 0.80 mm để giảm nội trở đường dây, hạn chế sụt áp và chịu dòng tải tốt.
-* **Nhóm tín hiệu vi sai USB (`USB_Diff`):** Gồm cặp net `D+` và `D-` từ cổng Micro-USB. Bề rộng track 0.30 mm và khoảng cách vi sai 0.20 mm để phối hợp trở kháng đường truyền.
-* **Nhóm tín hiệu UART và xung clock (`Signal_UART`):** Gồm `TXD`, `RXD`, `RTS`, `CTS`, `DTR` và `CLK_555`. Bề rộng track 0.30 mm để đường mạch gọn gàng và dễ layout.
-* **Nhóm tín hiệu mặc định (`Default`):** Áp dụng cho các đường tín hiệu điều khiển còn lại với bề rộng track 0.40 mm.
-
-### 2. Bảng cấu hình Net Classes trong Board Setup
-
-Vào `File -> Board Setup... -> Design Rules -> Net Classes` để thiết lập các nhóm lớp mạng:
-
-<table class="report-table">
-    <thead>
-        <tr>
-            <th style="width: 15%;">Tên Net Class</th>
-            <th style="width: 12%;">Clearance</th>
-            <th style="width: 14%;">Track Width</th>
-            <th style="width: 13%;">Via Diameter</th>
-            <th style="width: 12%;">Via Drill</th>
-            <th style="width: 34%;">Danh sách các Net được gán</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong><code>Default</code></strong></td>
-            <td>0.20 mm</td>
-            <td>0.40 mm</td>
-            <td>0.60 mm</td>
-            <td>0.30 mm</td>
-            <td>Các net tín hiệu chưa phân lớp riêng</td>
-        </tr>
-        <tr>
-            <td><strong><code>Power_Main</code></strong></td>
-            <td>0.25 mm</td>
-            <td><strong>0.80 mm</strong></td>
-            <td><strong>0.80 mm</strong></td>
-            <td><strong>0.40 mm</strong></td>
-            <td><code>VBUS</code>, <code>+5V</code>, <code>+3.3V</code>, <code>-5V</code>, <code>GND</code></td>
-        </tr>
-        <tr>
-            <td><strong><code>USB_Diff</code></strong></td>
-            <td>0.20 mm</td>
-            <td><strong>0.30 mm</strong></td>
-            <td>0.60 mm</td>
-            <td>0.30 mm</td>
-            <td>Cặp tín hiệu vi sai <code>D+</code>, <code>D-</code></td>
-        </tr>
-        <tr>
-            <td><strong><code>Signal_UART</code></strong></td>
-            <td>0.20 mm</td>
-            <td><strong>0.30 mm</strong></td>
-            <td>0.60 mm</td>
-            <td>0.30 mm</td>
-            <td><code>TXD</code>, <code>RXD</code>, <code>RTS</code>, <code>CTS</code>, <code>DTR</code>, <code>CLK_555</code></td>
-        </tr>
-    </tbody>
-</table>
-
-### 3. Kiểm tra mô hình 3D bo mạch sau thiết lập
-
-Mô hình 3D của bo mạch được kiểm tra trong công cụ 3D Viewer và xuất render từ KiCad CLI để xác nhận vị trí linh kiện và khung viền bo mạch:
+Sau khi hoàn tất toàn bộ các bước thiết lập trong Bài tập về nhà (đồng bộ Schematic, vẽ Board Outline, cấu hình Layer Stackup, Design Rules và Net Classes), mô hình 3D của bo mạch được mở và kiểm tra trực quan bằng công cụ **3D Viewer** tích hợp trong KiCad (`Alt + 3`).
 
 <div class="figure-container">
-    <img class="report-img" src="Pic/3d_board_isometric.png" alt="Phối cảnh 3D bo mạch Isometric View" style="max-height: 80mm;">
-    <div class="figure-caption">Hình 2. Mô hình 3D góc phối cảnh Isometric toàn bo mạch sau khi hoàn tất thiết lập PCB và gán Footprint</div>
+    <img class="report-img" src="Pic/gui_3d_viewer.png" alt="Giao diện cửa sổ 3D Viewer trong KiCad" style="max-height: 92mm;">
+    <div class="figure-caption">Hình 5. Cửa sổ công cụ 3D Viewer trong KiCad kiểm tra hình học và sự phân bố linh kiện trên khung viền cơ khí</div>
+</div>
+
+<div class="figure-container" style="margin-top: 8px;">
+    <img class="report-img" src="Pic/3d_board_isometric.png" alt="Phối cảnh 3D bo mạch Isometric View" style="max-height: 85mm;">
+    <div class="figure-caption">Hình 6. Mô hình 3D góc phối cảnh Isometric toàn bo mạch nguồn đa năng sau khi hoàn thiện toàn bộ thiết lập</div>
 </div>
