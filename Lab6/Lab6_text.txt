@@ -1,0 +1,641 @@
+ 
+ 
+LAB 06 
+ROUTING 
+I. 
+Mục tiêu 
+Đi dây PCB. 
+II. 
+Nội dung thực hành 
+● Manual Routing. 
+● Đi dây nguồn. 
+● Đi dây tín hiệu. 
+● Sử dụng Via. 
+● Đảm bảo góc 45°. 
+a. Tổng quan về trình đi dây của KiCad 
+KiCad được trang bị một trình đi dây với nhiều khả năng: 
+● Cho phép đi dây thủ công hoặc có hỗ trợ (bán tự động). 
+● Cho phép chỉnh sửa các thiết kế đã có. 
+● … 
+Theo mặc định, trình đi dây tuân thủ các quy tắc thiết kế (design rules) đã được cấu 
+hình khi đặt đường mạch. Tuy nhiên, ta có thể vô hiệu hóa hành vi này bằng cách sử dụng 
+chế độ Highlight Collisions và bật tùy chọn Allow DRC Violations trong phần thiết lập 
+của trình đi dây (xem bên dưới). 
+Trình đi dây có ba chế độ, có thể chọn bất kỳ lúc nào trong hộp thoại Interactive 
+Router Settings. Chế độ này được dùng khi đi dây mới, đồng thời cũng áp dụng khi kéo 
+các đường mạch có sẵn bằng lệnh Drag (phím tắt D), bao gồm: 
+
+ 
+ 
+● Highlight Collisions: ở chế độ này hầu hết các tính năng của trình đi dây bị tắt và 
+việc đi dây hoàn toàn thủ công. Khi đi dây, các vi phạm clearance sẽ được tô sáng 
+màu xanh lá và đường mạch mới không thể được cố định nếu vẫn còn va chạm, trừ 
+khi bật tùy chọn Allow DRC Violations. Ở chế độ này, mỗi lần chỉ có thể đặt tối 
+đa hai đoạn mạch (ví dụ một đoạn ngang và một đoạn chéo). 
+● Shove: đường mạch đang đi sẽ đi vòng qua những vật cản không thể di chuyển (ví 
+dụ pad, đường mạch hoặc via đã bị khóa) và đẩy (shove) những vật cản có thể di 
+chuyển ra khỏi đường đi. Ở chế độ này trình đi dây ngăn chặn vi phạm DRC: nếu 
+không có cách nào đi dây tới vị trí con trỏ mà không vi phạm DRC thì sẽ không có 
+đường mạch mới nào được tạo. 
+● Walk Around: trình đi dây hoạt động giống chế độ Shove, ngoại trừ việc không 
+có vật cản nào bị đẩy ra khỏi đường đi. 
+Việc chọn chế độ nào tùy thuộc vào người thiết kế. Với đa số, khuyến nghị dùng 
+chế độ Shove để có trải nghiệm đi dây hiệu quả nhất, hoặc chế độ Walk Around nếu không 
+muốn trình đi dây chỉnh sửa những đường mạch không nằm trong thao tác hiện tại. Lưu ý 
+rằng chế độ Shove và Walk Around luôn tạo ra các đoạn mạch theo phương ngang, dọc và 
+45° (H/V/45). Nếu cần đi dây với góc khác H/V/45, phải dùng chế độ Highlight Collisions 
+và bật tùy chọn Free Angle Mode trong hộp thoại Interactive Router Settings. 
+Có bốn chức năng đi dây chính: Route Single Track, Route Differential Pair, 
+Tune length of a single track và Tune skew of a differential pair. Tất cả đều xuất hiện 
+trong menu Route trên thanh công cụ phía trên (dưới dạng từng mục riêng lẻ) và trên thanh 
+công cụ vẽ bên phải dưới dạng hai biểu tượng gộp, một biểu tượng cho hai chức năng Route 
+và một biểu tượng cho hai chức năng Tune. Ngoài ra, menu Route còn cho phép chọn Set 
+Layer Pair và Interactive Router Settings. 
+Để đi dây, nhấn biểu tượng Route Tracks       hoặc dùng phím tắt X. Nhấp chuột 
+vào vị trí bắt đầu để chọn net cần đi dây và bắt đầu đi dây. Net đang được đi dây sẽ tự động 
+được tô sáng, và khoảng cách an toàn cho phép của net được biểu thị bằng một đường viền 
+xám bao quanh đường mạch đang đi. 
+
+ 
+ 
+Khi trình đi dây đang hoạt động, các đoạn mạch mới sẽ được vẽ từ điểm bắt đầu tới 
+vị trí con trỏ. Đây là những đối tượng tạm thời chưa được cố định, thể hiện các đường mạch 
+sẽ được tạo ra khi nhấp chuột trái hoặc nhấn phím Enter để cố định đường đi. Các đoạn 
+chưa cố định được hiển thị với màu sáng hơn so với các đoạn đã cố định. Khi thoát khỏi 
+trình đi dây bằng phím Esc hoặc bằng cách chọn công cụ khác, chỉ những đoạn mạch đã 
+cố định mới được lưu lại. 
+Trong khi đi dây, có thể dùng lệnh Undo Last Segment (phím tắt Backspace) để 
+bỏ cố định những đoạn mạch vừa được cố định gần nhất. Có thể lặp lại lệnh này nhiều lần 
+để lùi dần trên đường đi đã thực hiện. 
+Trong khi đi dây, giữ phím Ctrl để tắt chức năng bám lưới (grid snapping), và giữ 
+phím Shift để tắt chức năng bám vào các đối tượng như pad và via. 
+b. Thiết lập trình đi dây 
+Có thể mở phần thiết lập trình đi dây thông qua menu Route, hoặc bằng cách nhấp 
+chuột phải vào nút tương ứng trên thanh công cụ. Các thiết lập này chi phối hành vi của 
+trình đi dây khi đi dây mới cũng như khi kéo các đường mạch đã có. 
+[Chèn hình] 
+Hình 1: Hộp thoại Interactive Router Settings 
+Bảng 1: Các thiết lập của trình đi dây tương tác 
+Thiết lập 
+Mô tả 
+Mode 
+Đặt chế độ hoạt động của trình đi dây. Xem 
+phần tổng quan để biết thêm chi tiết. 
+Free angle mode 
+Cho phép đi dây ở góc bất kỳ, thay vì chỉ ở các 
+bội số của 45°. 
+Allow DRC violations 
+Cho phép đặt đường mạch và via vi phạm quy 
+tắc DRC. 
+Shove vias 
+Cho phép trình đi dây đẩy via cùng với đường 
+mạch. Khi tắt, via sẽ không bị đẩy. 
+
+ 
+ 
+Thiết lập 
+Mô tả 
+Jump over obstacles 
+Cho phép trình đi dây thử di chuyển các đường 
+mạch bị va chạm ra phía sau những vật cản đặc 
+(như pad). 
+Remove redundant 
+tracks 
+Tự động xóa các vòng lặp (loop) được tạo ra 
+trên đường mạch đang đi, chỉ giữ lại đoạn được 
+đi gần nhất của vòng lặp đó. 
+Optimize pad 
+connections 
+Khi bật, trình đi dây cố gắng tránh các góc 
+nhọn và những kiểu đi dây không mong muốn 
+khi ra khỏi pad và via. 
+Smooth dragged 
+segments 
+Khi kéo đường mạch, cố gắng gộp các đoạn 
+mạch lại với nhau nhằm giảm thiểu số lần đổi 
+hướng. 
+Optimize entire track 
+being dragged 
+Khi bật, việc kéo một đoạn mạch sẽ khiến 
+KiCad tối ưu phần còn lại của đường mạch 
+đang hiển thị trên màn hình.  
+Use mouse path to set 
+track posture 
+Cố gắng chọn tư thế (posture) của đường mạch 
+dựa trên quỹ đạo chuột tính từ vị trí bắt đầu đi 
+dây. 
+Fix all segments on 
+click 
+Khi bật, việc nhấp chuột trong lúc đi dây sẽ cố 
+định vị trí của tất cả các đoạn mạch đã đi. 
+ 
+c. Tư thế đường mạch (Track posture) 
+Khi đi dây ở chế độ H/V/45, posture chỉ cách mà hai đoạn mạch nối hai điểm không 
+thể nối được bằng một đoạn H/V/45 duy nhất. Trong trường hợp đó, hai điểm sẽ được nối 
+bằng một đoạn ngang hoặc dọc và một đoạn chéo (45°). Posture chính là thứ tự của hai 
+đoạn này: đoạn ngang/dọc đi trước hay đoạn chéo đi trước. 
+Trình đi dây của KiCad cố gắng tự động chọn posture tốt nhất dựa trên nhiều yếu 
+tố. Nhìn chung, trình đi dây sẽ cố giảm thiểu số góc trên đường đi và tránh những góc 
+“xấu” như góc nhọn bất cứ khi nào có thể. 
+
+ 
+ 
+Trong một số trường hợp, KiCad không đoán đúng posture mà người dùng mong 
+muốn. Để chuyển đổi posture của đường mạch trong lúc đi dây, dùng lệnh Switch Track 
+Posture (phím tắt /). 
+Ở những tình huống không có posture “tốt nhất” rõ ràng (ví dụ khi bắt đầu đi dây 
+từ một via), KiCad sẽ dùng chuyển động của con trỏ chuột để chọn posture. Nếu muốn 
+đường mạch bắt đầu bằng một đoạn thẳng (ngang hoặc dọc), hãy di chuyển chuột ra xa vị 
+trí bắt đầu theo hướng chủ yếu là ngang hoặc dọc. Nếu muốn đường mạch bắt đầu bằng 
+đoạn chéo, hãy di chuyển theo hướng chéo. Khi con trỏ đã ở đủ xa vị trí bắt đầu, posture 
+sẽ được chốt và không thay đổi nữa, trừ khi đưa con trỏ trở lại vị trí xuất phát. Có thể tắt 
+chức năng nhận dạng posture theo chuyển động chuột trong hộp thoại Interactive Router 
+Settings như mô tả bên trên. 
+d. Chế độ góc của đường mạch (Track corner mode) 
+Trình đi dây của KiCad có thể đặt đường mạch theo bốn chế độ góc khác nhau: 
+● 45 degree — góc 45° (mặc định). 
+● 45 degree rounded — góc 45° bo tròn. 
+● 90 degree — góc 90°. 
+● 90 degree rounded — góc 90° bo tròn. 
+Dùng lệnh Track Corner Mode (Ctrl + /) để chuyển vòng giữa các chế độ này. 
+Các chế độ góc không áp dụng khi trình đi dây đang ở chế độ free angle. 
+Ở các chế độ 45 độ, đường mạch có thể được đặt theo phương ngang, dọc hoặc 
+chéo 45°, và các đoạn mạch được nối với nhau ở góc 45° hoặc 135°. Đây là chế độ góc phổ 
+biến nhất và được chọn theo mặc định. Các chế độ khác tự kham khảo. 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+Hình 2: Chế độ góc 45 độ 
+e. Độ rộng đường mạch 
+Độ rộng của đường mạch đang được đi được xác định theo một trong ba cách. Thứ 
+nhất, nếu điểm bắt đầu đi dây là đầu mút của một đường mạch đã có và nút tương ứng trên 
+thanh công cụ phía trên đang được bật, độ rộng sẽ được lấy theo độ rộng của đường mạch 
+đã có đó. Thứ hai, nếu ô chọn độ rộng đường mạch trên thanh công cụ phía trên được đặt 
+là “use netclass width”, độ rộng sẽ được lấy từ netclass của net đang đi dây. Cuối cùng, 
+nếu ô chọn độ rộng được đặt là một trong các kích thước định sẵn đã cấu hình trong hộp 
+thoại Board Setup thì độ rộng đó sẽ được sử dụng. 
+f. Đặt via 
+Trong khi đi dây, việc chuyển lớp sẽ chèn một via tại điểm cuối của đoạn mạch 
+chưa cố định hiện tại. Sau khi via được đặt, việc đi dây sẽ tiếp tục trên lớp mới. Có nhiều 
+cách để chọn lớp mới và chèn via: 
+
+ 
+ 
+ 
+● Dùng phím tắt để chọn một lớp cụ thể, ví dụ PgUp để chọn F.Cu hoặc PgDn 
+để chọn B.Cu. 
+● Dùng phím tắt Next Layer hoặc Previous Layer (+ và -). 
+
+ 
+ 
+● Dùng phím tắt Place Via (V), sẽ chuyển sang lớp kế tiếp trong cặp lớp đang 
+hoạt động. Nếu điểm cuối của đường mạch có đường ratsnest nối tới một 
+đối tượng nằm ở lớp khác, việc đặt via sẽ chuyển sang lớp đó. 
+● Dùng lệnh Select Layer and Place Through Via (phím tắt <), sẽ mở một 
+hộp thoại để chọn lớp đích. 
+Sau khi dùng bất kỳ cách nào ở trên để thêm via và đổi lớp, nhưng trước khi nhấp 
+chuột để cố định via và ghi nhận đoạn mạch hiện tại, có thể hủy việc đặt via bằng cách 
+nhấn phím V. Via sẽ bị loại bỏ và việc đi dây tiếp tục trên lớp ban đầu. 
+Cũng có thể đặt một via và kết thúc đường mạch hiện tại mà không đổi lớp, bằng 
+cách nhấn phím V rồi nhấp đúp chuột để đặt via. 
+Kích thước của via được lấy theo thiết lập Via Size đang hoạt động, truy cập từ ô 
+chọn trên thanh công cụ phía trên hoặc bằng phím tắt Increase Via Size (') và Decrease 
+Via Size (\). Tương tự như độ rộng đường mạch, khi kích thước via được đặt là “use 
+netclass sizes”, các kích thước via đã cấu hình trong mục Net Classes của Board Setup sẽ 
+được sử dụng. 
+g.  Cặp lớp (Layer Pairs) 
+Lớp đang hoạt động sẽ được hoán đổi với lớp còn lại trong cặp lớp hiện tại bằng 
+phím tắt Place Via (V). 
+
+ 
+ 
+ 
+ 
+Hình 6: Đổi layer bằng nút V 
+Có thể chọn các layer khác bằng thanh công cụ bên tay phải. 
+
+ 
+ 
+ 
+Hình 7: Danh sách các lớp 
+h. Đặt via tự do (Placing free vias) 
+Ngoài việc đặt via trong lúc đi dây, còn có thể đặt các via độc lập. Những via này 
+sẽ kết nối với các đối tượng mà chúng chạm vào tại thời điểm được đặt. Via tự do có thể 
+hữu ích cho via stitching, via shielding, thiết kế tản nhiệt hoặc các mục đích khác. 
+Để đặt một via tự do, nhấn nút tương ứng hoặc nhấn Ctrl + Shift + X, sau đó nhấp 
+chuột vào vị trí mong muốn trên vùng vẽ. Nếu đặt via ngay trên một đường mạch, nó sẽ 
+kết nối với đường mạch đó như thể được đặt trong lúc đi dây. 
+ 
+i. Chỉnh sửa đường mạch (Modifying tracks) 
+
+ 
+ 
+Sau khi đã đi dây, các đường mạch có thể được chỉnh sửa bằng cách di chuyển 
+(move) hoặc kéo (drag), hoặc bị xóa đi và đi lại. Khi một đoạn mạch đơn được chọn, có 
+thể dùng phím tắt U để mở rộng vùng chọn ra toàn bộ các đoạn mạch nối liền với nó. Lần 
+nhấn U đầu tiên sẽ chọn các đoạn mạch nằm giữa những điểm nối gần nhất với pad hoặc 
+via. Lần nhấn U thứ hai sẽ mở rộng vùng chọn thêm một lần nữa, bao gồm tất cả các đoạn 
+mạch nối với đường mạch đã chọn trên mọi lớp. Kỹ thuật chọn này có thể dùng để xóa 
+nhanh toàn bộ một net đã được đi dây. 
+Cũng có thể di chuyển một footprint mà vẫn giữ các đường mạch gắn vào nó di 
+chuyển theo. Để làm điều này, dùng lệnh drag (D) khi đã chọn một hoặc nhiều footprint.  
+ 
+Để xóa một đoạn mạch, nhấn phím Del. Ngoài ra có thể dùng phím Backspace, 
+phím này xóa một đoạn rồi chọn đoạn kế tiếp, cho phép tiếp tục xóa lần lượt từng đoạn. 
+j. Chỉnh sửa thuộc tính đường mạch và via 
+Có thể thay đổi độ rộng của đường mạch và kích thước của via mà không cần đi 
+dây lại, thông qua hộp thoại thuộc tính của đường mạch hoặc via. Thao tác này áp dụng 
+cho toàn bộ đường mạch và via đang được chọn. Hộp thoại thuộc tính chỉ hiển thị những 
+thuộc tính liên quan tới các đối tượng trong vùng chọn: nếu chọn cả đường mạch lẫn via 
+
+ 
+ 
+thì thuộc tính của cả hai loại đối tượng sẽ được hiển thị, còn nếu chỉ chọn một loại thì thuộc 
+tính của loại kia sẽ không hiển thị. 
+LƯU Ý: Thuộc tính của các đường mạch và via đã chọn cũng có thể được chỉnh 
+sửa bằng Properties Manager. 
+ 
+Hình 8: Hộp thoại thuộc tính đường mạch và via 
+Net của đường mạch và via 
+Trong mục Common, có thể thay đổi net được gán cho các đối tượng đã chọn bằng 
+ô chọn Net. Nếu tùy chọn Automatically update via nets được bật, các via đã chọn không 
+thể được đổi net thủ công mà sẽ được gán net của zone hoặc pad mà chúng chạm vào. Cũng 
+có thể khóa (lock) các đối tượng đã chọn tại đây. 
+Kích thước, vị trí và lớp của đường mạch 
+
+ 
+ 
+Trong mục Tracks, có thể đặt vị trí điểm đầu và điểm cuối của đường mạch cũng 
+như lớp chứa nó. Cũng có thể thay đổi độ rộng đường mạch, chọn từ danh sách các kích 
+thước định sẵn hoặc nhập một giá trị tùy ý. 
+Kích thước, vị trí và lớp của via 
+Trong mục Vias, có thể thay đổi thuộc tính của các via đã chọn. Có thể thay đổi vị 
+trí của via, loại via và các lớp mà nó đi qua. Via xuyên (through via) luôn bắt đầu và kết 
+thúc tại lớp đồng mặt trước và mặt sau, còn microvia và blind/buried via có thể bắt đầu và 
+kết thúc ở lớp bất kỳ. 
+Có thể chỉnh sửa đường kính vành đồng (annulus) và đường kính lỗ khoan của via, 
+chọn từ danh sách các kích thước định sẵn hoặc nhập giá trị tùy ý. Đường kính và kích 
+thước lỗ của via có thể được định nghĩa riêng theo từng lớp — cách này còn được gọi là 
+định nghĩa padstack của via. Chế độ Padstack quyết định hình dạng via giống nhau trên 
+mọi lớp hay được điều khiển riêng cho từng lớp. 
+o Ở chế độ padstack Normal, đường kính và kích thước lỗ của via giống nhau trên 
+mọi lớp. 
+o Ở chế độ padstack Front/Inner/Back, đường kính và kích thước lỗ của via có thể 
+được điều khiển riêng cho lớp mặt trước, lớp mặt sau và các lớp trong (tất cả các 
+lớp trong dùng chung một thiết lập). Ô chọn Edit layer quyết định lớp (hoặc nhóm 
+lớp) nào đang được hiển thị và chỉnh sửa. 
+o Ở chế độ padstack Custom, đường kính và kích thước lỗ của via có thể được điều 
+khiển hoàn toàn độc lập trên từng lớp. Ô chọn Edit layer quyết định lớp nào đang 
+được hiển thị và chỉnh sửa. 
+Thiết lập Annular rings quyết định những lớp nào sẽ có vành đồng cho via. 
+o Khi đặt là All copper layers, via sẽ có vành đồng trên mọi lớp. 
+o Khi đặt là Start, end, and connected layers, via sẽ có vành đồng trên lớp đầu và 
+lớp cuối, cùng với mọi lớp có đường mạch hoặc zone kết nối tới via. Các lớp không 
+có kết nối đường mạch hay zone, ngoài lớp đầu và lớp cuối, sẽ không có vành đồng. 
+
+ 
+ 
+o Khi đặt là Connected layers only, via chỉ có vành đồng trên những lớp có đường 
+mạch hoặc zone kết nối tới via. Lớp không có kết nối sẽ không có vành đồng. 
+o Khi đặt là Start and end layers only, via chỉ có vành đồng trên lớp đầu và lớp 
+cuối. Zone sẽ không kết nối tới bất kỳ lớp nào khác ngoài lớp đầu và lớp cuối. Via 
+được cấu hình theo cách này còn được gọi là skip via. 
+Việc loại bỏ vành đồng trên các lớp không kết nối làm giảm lượng đồng trong thân 
+via. Điều này tạo thêm không gian đi dây trên các lớp trong nơi via không kết nối, đồng 
+thời có thể giảm hiện tượng ghép điện dung không mong muốn giữa via và các đường mạch 
+lân cận trên những lớp đó. 
+MẸO: Với các thiết kế tốc độ cao mật độ dày, việc dùng Start, end, and connected 
+layers hoặc Connected layers only có thể giải phóng thêm kênh đi dây trên các lớp trong. 
+Cần lưu ý một số nhà sản xuất có thể yêu cầu kích thước vành đồng tối thiểu ngay cả trên 
+các lớp không kết nối để bảo đảm độ tin cậy khi chế tạo. 
+Vành đồng có thể được loại bỏ hoặc thêm vào hàng loạt bằng hộp thoại Edit Track 
+and Via Properties hoặc bằng cách chạy công cụ Unused Pads. 
+Bảo vệ via (IPC-4761) 
+
+ 
+ 
+Via có thể được xử lý bổ sung trong quá trình chế tạo, ảnh hưởng tới đặc tính vật 
+lý của chúng.  
+ 
+Ô chọn Protection features cho phép chọn kiểu bảo vệ via được định nghĩa theo 
+tiêu chuẩn IPC-4761, trong đó quy định các tổ hợp chuẩn của những cách xử lý sau: 
+● Tenting (phủ mask): phủ solder mask lên via ở một hoặc cả hai mặt. 
+● Covering (phủ bảo vệ): thêm một lớp bảo vệ bổ sung (như epoxy hoặc 
+nhựa) lên miệng via, ngoài lớp solder mask tiêu chuẩn. 
+● Plugging (nút lỗ): lấp lỗ via bằng vật liệu không dẫn điện (thường là nhựa 
+epoxy) từ một hoặc cả hai mặt. Via được nút lỗ ngăn thiếc chảy xuyên qua 
+lỗ trong quá trình lắp ráp, điều này quan trọng đối với các thiết kế via-in-
+pad. 
+
+ 
+ 
+● Filling (lấp đầy): lấp hoàn toàn lỗ via bằng vật liệu dẫn điện (thường là đồng 
+hoặc hồ dẫn điện), cho khả năng dẫn nhiệt và dẫn điện tối đa. 
+● Capping (bịt nắp): đặt một nắp dẫn điện (thường là lớp mạ đồng) lên trên 
+vật liệu lấp, tạo ra bề mặt phẳng có thể hàn được. 
+Bảng 2: Các kiểu bảo vệ via theo IPC-4761 
+Kiểu 
+Mô tả 
+From rules 
+Kế thừa thiết lập bảo vệ từ giá trị mặc định ở cấp 
+bo mạch được đặt trong Board Setup. 
+None 
+Không áp dụng biện pháp bảo vệ nào. 
+Type I 
+Phủ mask (chỉ solder mask), ở một hoặc cả hai 
+mặt. 
+Type II 
+Phủ bảo vệ và phủ mask, ở một hoặc cả hai mặt. 
+Type III 
+Nút lỗ, ở một hoặc cả hai mặt. 
+Type IV 
+Nút lỗ và phủ mask, ở một hoặc cả hai mặt. 
+Type V 
+Lấp đầy bằng vật liệu dẫn điện. 
+Type VI 
+Lấp đầy và phủ mask, ở một hoặc cả hai mặt. 
+Type VII 
+Lấp đầy và bịt nắp. 
+ 
+MẸO: Các thiết kế via-in-pad thường yêu cầu tối thiểu Type IV (nút lỗ và phủ 
+mask) hoặc Type VII (lấp đầy và bịt nắp). Nên trao đổi các yêu cầu xử lý via với nhà sản 
+xuất ngay từ sớm trong quá trình thiết kế, vì những lựa chọn này ảnh hưởng đáng kể tới 
+chi phí và thời gian giao hàng. 
+Back-drill và gia công sau khoan cho via (counterbore và countersink) 
+Có thể cấu hình back-drill và gia công sau khoan (counterbore và countersink) cho 
+via trong hộp thoại này. Pad xuyên lỗ hỗ trợ các tính năng tương tự trong hộp thoại Pad 
+Properties. 
+Back-drilling 
+
+ 
+ 
+Back-drilling (còn gọi là khoan khống chế độ sâu) là công đoạn sau chế tạo nhằm 
+loại bỏ phần thân via không sử dụng, gọi là via stub. Via stub có thể gây phản xạ tín hiệu 
+và cộng hưởng ở tần số cao, làm suy giảm tính toàn vẹn tín hiệu. Back-drilling loại bỏ các 
+stub này bằng cách khoan bỏ phần lỗ đã mạ từ một hoặc cả hai mặt của bo mạch, xuống 
+tới một lớp được chỉ định. 
+Thiết lập Back-drill mode quyết định via có được back-drill hay không và được 
+back-drill từ (những) mặt nào. 
+Bảng 3: Các chế độ back-drill 
+Chế độ 
+Mô tả 
+No back-drill 
+Via không được back-drill. Đây là giá trị mặc 
+định. 
+Back-drill from 
+bottom 
+Phần thân via không sử dụng được khoan bỏ từ 
+mặt sau (mặt dưới) của bo mạch. 
+Back-drill from top 
+Phần thân via không sử dụng được khoan bỏ từ 
+mặt trước (mặt trên) của bo mạch. 
+Back-drill from 
+both 
+Via được back-drill từ cả mặt trên lẫn mặt 
+dưới. Cách này dùng khi tín hiệu kết nối ở một 
+lớp bên trong và còn stub thừa kéo dài về cả 
+hai phía. 
+ 
+Khi bật back-drill, có thể cấu hình các thông số sau cho mỗi mặt back-drill: 
+● Back-drill must-cut: lớp đồng cuối cùng mà mũi back-drill đi qua. Thông 
+số này nên được đặt là lớp ngay sau lớp tín hiệu có kết nối cuối cùng, nhằm 
+bảo đảm loại bỏ hoàn toàn stub mà vẫn giữ được kết nối của via. 
+● Back-drill size: đường kính của lỗ back-drill. Lỗ back-drill phải lớn hơn lỗ 
+via ban đầu để loại bỏ hoàn toàn lớp mạ trên thành thân via. 
+MẸO: Back-drilling thường được dùng nhất trong các thiết kế số tốc độ cao hoạt 
+động ở tốc độ dữ liệu nhiều gigabit, nơi via stub dài hơn vài milimet có thể gây suy giảm 
+
+ 
+ 
+tín hiệu đo được. Hãy tham khảo nhà sản xuất PCB về khả năng dung sai độ sâu back-drill 
+của họ. 
+Via đã được back-drill được hiển thị trên vùng vẽ dưới dạng một vòng tròn vẽ theo 
+đường kính của back-drill, một nửa mang màu của lớp ngoài của back-drill và một nửa 
+mang màu của lớp must-cut. 
+ 
+
+ 
+ 
+ 
+Hình 9: Via có back-drill được hiển thị trên vùng vẽ 
+Gia công sau khoan (counterbore và countersink) 
+Gia công sau khoan thêm một hốc côn (countersink) hoặc hốc trụ (counterbore) vào 
+mặt trước và/hoặc mặt sau của lỗ khoan. Việc này tạo khoảng trống cho đầu của chi tiết 
+kẹp chặt được lắp trong lỗ. Lỗ countersink có dạng côn (thành nghiêng); lỗ counterbore có 
+thành thẳng và đáy phẳng. 
+Mặt trước và mặt sau của via có thể được cấu hình độc lập với các thiết lập gia công 
+sau khoan khác nhau. 
+Bảng 4: Các chế độ gia công sau khoan 
+Chế độ 
+Mô tả 
+Not post-machined 
+Không áp dụng gia công sau khoan. Đây là giá 
+trị mặc định. 
+Counterbore 
+Khoét một hốc trụ đáy phẳng vào bề mặt bo 
+mạch quanh lỗ khoan. Cách này tạo ra biên 
+dạng lỗ bậc, thường dùng để lắp chìm đầu bu-
+lông hoặc tạo mặt tựa phẳng. 
+
+ 
+ 
+Chế độ 
+Mô tả 
+Countersink 
+Khoét một hốc côn vào bề mặt bo mạch quanh 
+lỗ khoan. Cách này tạo ra miệng lỗ vát, thường 
+dùng cho vít đầu bằng cần nằm ngang bằng 
+hoặc thấp hơn bề mặt bo mạch. 
+ 
+Các thông số sau có thể được cấu hình cho mỗi thao tác gia công sau khoan: 
+o Size: đường kính của counterbore, hoặc đường kính ngoài của countersink 
+tại bề mặt bo mạch. 
+o Depth: (chỉ với counterbore) độ sâu của hốc counterbore tính từ bề mặt bo 
+mạch. 
+o Angle: (chỉ với countersink) góc đỉnh của hình côn countersink, tính bằng 
+độ. Các giá trị thông dụng là 82°, 90° và 100°. 
+LƯU Ý: Không phải nhà sản xuất PCB nào cũng hỗ trợ các thao tác gia 
+công sau khoan; hãy kiểm tra với nhà sản xuất trước khi sử dụng những tính 
+năng này. 
+Via đã được gia công sau khoan được hiển thị trên vùng vẽ kèm theo các 
+vòng tròn nét đứt bao quanh. Mỗi vòng nét đứt biểu diễn giao tuyến của chi 
+tiết gia công với một lớp đồng. Màu của mỗi vòng nét đứt tương ứng với 
+lớp giao cắt đó. 
+
+ 
+ 
+ 
+ 
+Hình 10: Trái: via có countersink. Phải: via có counterbore. 
+i. Teardrop cho via 
+Có thể cấu hình teardrop cho via trong hộp thoại này. Các thuộc tính của teardrop 
+được trình bày trong phần Teardrops. 
+
+ 
+ 
+Chỉnh sửa hàng loạt đường mạch và via 
+Để chỉnh sửa hàng loạt đường mạch và via, có thể dùng hộp thoại Edit Track and 
+Via Properties (Edit → Edit Track & Via Properties…). 
+ 
+Hình 11: Hộp thoại Edit Track and Via Properties 
+Thiết lập Scope giới hạn công cụ chỉ chỉnh sửa đường mạch, via, hoặc cả hai. Via 
+còn có thể được lọc thêm theo loại via. Nếu không chọn scope nào, sẽ không có gì được 
+chỉnh sửa. 
+Filter Items giới hạn công cụ chỉ chỉnh sửa những đối tượng nhất định trong scope 
+đã chọn. Đối tượng chỉ bị chỉnh sửa nếu khớp với tất cả các bộ lọc đang bật và có liên quan 
+
+ 
+ 
+(một số bộ lọc không áp dụng cho vài loại đối tượng — ví dụ bộ lọc đường kính via không 
+áp dụng cho đường mạch). Nếu không bật bộ lọc nào, mọi đối tượng trong scope đã chọn 
+đều bị chỉnh sửa. Với các bộ lọc có ô nhập văn bản, hệ thống hỗ trợ ký tự đại diện: dấu sao 
+khớp với chuỗi ký tự bất kỳ, và dấu chấm hỏi khớp với một ký tự bất kỳ. 
+● Filter items by net lọc theo net được gán cho đối tượng. 
+● Filter items by net class lọc theo net class được gán cho đối tượng. 
+● Filter items by layer lọc theo lớp bo mạch chứa đối tượng. 
+● Filter tracks by width lọc theo độ rộng đường mạch. 
+● Filter vias by diameter lọc theo đường kính via. 
+● Selected items only lọc theo vùng chọn hiện tại. 
+Mục Action quyết định thao tác chỉnh sửa nào sẽ được thực hiện trên các đối tượng 
+đã lọc. 
+● Khi chọn Set to net class / custom rule values, các đối tượng đã lọc sẽ được điều 
+chỉnh để khớp với giá trị quy định bởi net class và custom design rules. 
+● Khi chọn Set to specified values, có thể chọn những thuộc tính cần chỉnh sửa và 
+cách đặt giá trị cho từng thuộc tính. Với mỗi thuộc tính, có thể chọn -- leave 
+unchanged -- để giữ nguyên giá trị hiện có, hoặc chọn giá trị mới từ danh sách thả 
+xuống. 
+o Các thuộc tính có thể chỉnh sửa của đường mạch: Layer; Track width (các 
+lựa chọn được định nghĩa trong mục Pre-defined Sizes của Board Setup). 
+o Các thuộc tính có thể chỉnh sửa của via: Via size (định nghĩa trong mục Pre-
+defined Sizes của Board Setup); Via annular rings; Via protection 
+features. 
+Loại bỏ pad không sử dụng (Removing unused pads) 
+
+ 
+ 
+Có thể nhanh chóng loại bỏ các vành đồng không sử dụng khỏi pad và via bằng 
+công cụ Unused Pads (Tools → Remove Unused Pads…). Công cụ này giữ lại vành đồng 
+ở những lớp có sử dụng và loại bỏ chúng ở những lớp không sử dụng. Một vành đồng được 
+xem là không sử dụng nếu trên lớp đó không có đường mạch hoặc zone nào kết nối tới 
+pad/via. 
+ 
+Hình 12: Hộp thoại Remove Unused Pads 
+Nút Remove Unused Layers loại bỏ toàn bộ vành đồng không sử dụng khỏi các 
+pad và via thỏa mãn thiết lập lọc đã chọn. Nút Restore All Layers khôi phục toàn bộ vành 
+đồng cho các pad và via thỏa mãn thiết lập lọc đã chọn. 
+Các ô đánh dấu dùng để lọc xem đối tượng nào sẽ bị chỉnh sửa (bị loại bỏ hoặc khôi 
+phục vành đồng) và lớp nào sẽ bị loại bỏ trên các đối tượng đó. 
+● Nếu ô Vias được bật, vành đồng của via sẽ được chỉnh sửa. 
+● Nếu ô Pads được bật, vành đồng của pad sẽ được chỉnh sửa. 
+● Nếu ô Selected only được bật, chỉ những via và pad đang được chọn mới 
+bị chỉnh sửa vành đồng. Nếu ô này bị tắt, vành đồng của mọi via và pad đều 
+bị chỉnh sửa. Thiết lập này áp dụng kết hợp với các ô Vias và Pads; ví dụ, 
+một via đang được chọn sẽ không bị chỉnh sửa nếu ô Vias bị tắt. 
+
+ 
+ 
+● Nếu ô Keep outside layers được bật, lớp đầu và lớp cuối của pad hoặc via 
+vẫn được giữ lại, ngay cả khi chúng không được sử dụng. 
+Dọn dẹp đường mạch và via (Cleaning up tracks and vias) 
+KiCad có một công cụ chuyên dụng để thực hiện các thao tác dọn dẹp thường gặp 
+trên đường mạch và via, được chạy từ Tools → Cleanup Tracks & Vias…. 
+ 
+Hình 13: Hộp thoại Cleanup Tracks and Vias 
+Các thao tác dọn dẹp sau đây khả dụng và sẽ được thực hiện khi được chọn: 
+● Refill zones before and after cleanup: tô lại toàn bộ zone cả trước và sau thao tác 
+dọn dẹp. Nếu không chọn, phần tô của zone sẽ không thay đổi. 
+● Delete tracks connecting different nets: xóa mọi đoạn mạch làm ngắn mạch nhiều 
+net với nhau. 
+● Delete redundant vias: xóa các via thừa vì chúng nằm chồng lên một via khác 
+hoặc lên một pad xuyên lỗ. 
+
+ 
+ 
+● Delete vias connected on only one layer: xóa các via chỉ kết nối với đồng trên 
+một lớp duy nhất và do đó không cần thiết. 
+● Merge co-linear tracks: gộp các đoạn mạch nối liền nhau và thẳng hàng thành một 
+đoạn mạch tương đương duy nhất. 
+● Delete tracks unconnected at one end: xóa các đoạn mạch có ít nhất một đầu bị 
+bỏ lửng. 
+● Delete tracks fully inside pads: xóa các đường mạch có cả điểm đầu và điểm cuối 
+nằm bên trong một pad và do đó không cần thiết. 
+Cũng có thể lọc các đối tượng sẽ được dọn dẹp theo net, netclass, lớp hoặc vùng 
+chọn. 
+● Filter items by net: giới hạn việc dọn dẹp cho các đường mạch và via thuộc net 
+được chỉ định. 
+● Filter items by netclass: giới hạn việc dọn dẹp cho các đường mạch và via thuộc 
+netclass được chỉ định. 
+● Filter items by layer: giới hạn việc dọn dẹp cho các đường mạch và via trên lớp 
+được chỉ định. 
+● Selected items only: chỉ dọn dẹp những đường mạch và via đang được chọn. 
+Mọi thay đổi sẽ được áp dụng lên bo mạch được hiển thị ở phía dưới hộp thoại sau 
+khi nhấn nút Build Changes. Sau khi danh sách thay đổi được dựng xong, nút này đổi 
+thành Update PCB. Các thay đổi chỉ thực sự được áp dụng khi nhấn nút Update PCB. 
+Các chức năng tiện ích khi đi dây 
+KiCad cung cấp một số chức năng giúp các thao tác đi dây trở nên thuận tiện hơn. 
+Nếu cần đi dây nhiều đường mạch xuất phát từ một nhóm pad, có thể dùng công cụ 
+Route Selected để đi dây lần lượt từ từng pad. Chọn các pad muốn dùng làm điểm bắt đầu, 
+sau đó nhấp chuột phải và chọn Route Selected (Shift + X) để đi dây tuần tự từ từng pad.  
+
+ 
+ 
+ 
+Trình đi dây sẽ bắt đầu một đường mạch từ pad được chọn đầu tiên, và người dùng 
+đi dây như với bất kỳ đường mạch nào khác. Cũng có thể chọn footprint thay vì pad; khi 
+đó mọi pad chưa đi dây trong các footprint đã chọn sẽ được dùng làm điểm bắt đầu. Khi 
+hoàn tất đường mạch đầu tiên, trình đi dây sẽ tự động bắt đầu một đường mạch mới từ pad 
+kế tiếp trong vùng chọn, theo đúng thứ tự mà các pad đã được chọn. Những pad đã có 
+đường mạch gắn vào sẽ bị bỏ qua. Có thể bỏ qua đường mạch hiện tại và chuyển sang pad 
+kế tiếp bằng cách nhấp chuột phải và chọn Cancel Current Item. Nhấn Esc (hoặc nhấp 
+chuột phải và chọn Cancel) sẽ bỏ qua phần còn lại của thao tác, giữ nguyên những đường 
+mạch đã hoàn thành. 
+Nếu muốn đi dây nhiều đường mạch đến một nhóm pad thay vì đi từ các pad, có 
+thể dùng công cụ Route Selected From Other End. Chọn các pad muốn dùng làm điểm 
+kết thúc, sau đó nhấp chuột phải và chọn Route Selected From Other End (Shift + E). 
+Công cụ này hoạt động giống công cụ Route Selected, chỉ khác ở chỗ nó dùng mỗi pad đã 
+chọn làm điểm kết thúc thay vì điểm bắt đầu. Điểm bắt đầu của mỗi đường mạch là đầu 
+còn lại của đường ratsnest tương ứng với pad đã chọn. 
+
+ 
+ 
+Việc đi dây từ đầu kia cũng có thể thực hiện ngay trong lúc đi dây từng đường 
+mạch: nhấn Ctrl + E khi đang đi dây để ghi nhận đoạn mạch hiện tại và bắt đầu đi dây từ 
+đầu còn lại của đường ratsnest của đường mạch đang thực hiện. 
+Cuối cùng, có thể nhanh chóng gỡ bỏ các đường mạch nối tới một đối tượng 
+(footprint, pad hoặc đường mạch) bằng cách chọn đối tượng đó, nhấp chuột phải và chọn 
+Unroute Selected. Mọi đường mạch nối với đối tượng đã chọn sẽ bị xóa, bắt đầu từ đối 
+tượng đó và tiếp tục cho tới khi gặp một pad khác. 
+Tự động hoàn thiện đường mạch 
+Trình đi dây của KiCad có thể tự động đi dây từng đường mạch riêng lẻ, dựa trên 
+các kết nối đã được định nghĩa trong schematic. Có thể xem đây là một dạng đi dây tự động 
+(auto-routing) giới hạn, chỉ xét một đường mạch tại một thời điểm. Trình đi dây chỉ sử 
+dụng lớp hiện tại; nó không dùng via và không đổi lớp. 
+Khi trình đi dây không phải là công cụ đang hoạt động, có thể tự động đi dây nhiều 
+đường mạch bằng cách chọn các footprint, pad và đường mạch làm điểm xuất phát, nhấp 
+chuột phải và chọn Attempt Finish Selected (Autoroute) (Shift + F).  
+ 
+Không cần chọn cả hai đầu của kết nối mong muốn; trình đi dây sẽ đi dây từ đối 
+tượng đã chọn tới điểm neo ratsnest gần nhất của nó. Nếu nhiều đối tượng được chọn, từng 
+
+ 
+ 
+đối tượng sẽ được đi dây tuần tự theo thứ tự đã chọn. Nếu một kết nối không thể được hoàn 
+thành tự động, công cụ sẽ tạm dừng với trình đi dây đang hoạt động để người dùng hoàn 
+thành đường mạch thủ công.   
+Khi việc hoàn thiện tự động đang tạm dừng để nối thủ công, có thể bỏ qua đường 
+mạch hiện tại và chuyển sang đường kế tiếp bằng cách nhấp chuột phải và chọn Cancel 
+Current Item. Sau khi hoàn thành thủ công hoặc bỏ qua kết nối, công cụ sẽ tiếp tục thử đi 
+dây các kết nối còn lại. Nhấn Esc (hoặc nhấp chuột phải và chọn Cancel) sẽ bỏ qua phần 
+còn lại của thao tác, giữ nguyên những đường mạch đã hoàn thành. 
+III. 
+Kết quả đạt được 
+PCB được Routing hoàn chỉnh. 
+ 
+IV. 
+Bài tập về nhà 
+Hoàn thiện và tối ưu Routing trên PCB cá nhân. 

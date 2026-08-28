@@ -1,0 +1,11 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Capacitor_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/Capacitor_SMD.pretty")(options "")(descr ""))
+  (lib (name "Capacitor_THT")(type "KiCad")(uri "/usr/share/kicad/footprints/Capacitor_THT.pretty")(options "")(descr ""))
+  (lib (name "Resistor_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/Resistor_SMD.pretty")(options "")(descr ""))
+  (lib (name "LED_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/LED_SMD.pretty")(options "")(descr ""))
+  (lib (name "Connector_PinHeader_2.54mm")(type "KiCad")(uri "/usr/share/kicad/footprints/Connector_PinHeader_2.54mm.pretty")(options "")(descr ""))
+  (lib (name "Package_TO_SOT_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/Package_TO_SOT_SMD.pretty")(options "")(descr ""))
+  (lib (name "Package_SO")(type "KiCad")(uri "/usr/share/kicad/footprints/Package_SO.pretty")(options "")(descr ""))
+  (lib (name "LAB3_CA1_14")(type "KiCad")(uri "${KIPRJMOD}/LAB3.pretty")(options "")(descr ""))
+)

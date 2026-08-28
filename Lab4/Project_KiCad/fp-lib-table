@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Lab4_Footprints")(type "KiCad")(uri "${KIPRJMOD}/Lab4_Footprints.pretty")(options "")(descr "Thu vien footprint tu tao cho Lab 4"))
+)

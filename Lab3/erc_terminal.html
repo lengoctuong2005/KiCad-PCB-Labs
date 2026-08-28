@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { background-color: #1e1e1e; color: #d4d4d4; font-family: monospace; padding: 20px; }
+  pre { white-space: pre-wrap; word-wrap: break-word; font-size: 14px; }
+  .prompt { color: #569cd6; }
+  .cmd { color: #ce9178; }
+  .success { color: #6a9955; }
+  .warning { color: #d7ba7d; }
+</style>
+</head>
+<body>
+  <div><span class="prompt">tuong@workspace:~/Lab3$</span> <span class="cmd">kicad-cli sch erc --exit-code-violations ./Project_KiCad/LAB3.kicad_sch</span></div>
+  <pre id="output"></pre>
+  <script>
+    const ercOutput = `Found 5 violations
+Saved ERC Report to erc_report.txt
+ERC report (2026-08-28T16:26:50, Encoding UTF8)
+Report includes: Errors, Warnings
+
+***** Sheet /
+[lib_symbol_mismatch]: Symbol 'jp5' doesn't match copy in library 'jumper'
+    ; <span class="warning">warning</span>
+    @(35.56 mm, 130.81 mm): Symbol J3 [jp5]
+[lib_symbol_mismatch]: Symbol 'Micro_USB' doesn't match copy in library 'LAB3_CA1_14'
+    ; <span class="warning">warning</span>
+    @(46.99 mm, 12.70 mm): Symbol USB1 [Micro_USB]
+[lib_symbol_mismatch]: Symbol 'Jumper_3' doesn't match copy in library 'LAB2_CA1_14'
+    ; <span class="warning">warning</span>
+    @(95.25 mm, 27.94 mm): Symbol J1 [Jumper_3]
+[lib_symbol_mismatch]: Symbol 'LM2776' doesn't match copy in library 'LAB2_CA1_14'
+    ; <span class="warning">warning</span>
+    @(125.73 mm, 30.48 mm): Symbol U2 [LM2776]
+[lib_symbol_mismatch]: Symbol 'ON/OFF_SWITCH' doesn't match copy in library 'LAB3_CA1_14'
+    ; <span class="warning">warning</span>
+    @(190.50 mm, 35.56 mm): Symbol SW2 [ON/OFF_SWITCH]
+
+ ** ERC messages: 5  <span class="success">Errors 0</span>  <span class="warning">Warnings 5</span>`;
+    document.getElementById('output').innerHTML = ercOutput;
+  </script>
+</body>
+</html>

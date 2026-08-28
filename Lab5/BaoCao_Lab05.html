@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Báo cáo Thực hành KiCad - Lab 05: Placement</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 15mm 18mm 18mm 18mm;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', 'Liberation Serif', serif;
+            font-size: 11.5pt;
+            line-height: 1.45;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        /* COVER PAGE FULL A4 */
+        .cover-page {
+            border: 3px double #1e3a8a;
+            border-radius: 8px;
+            padding: 35px 25px;
+            margin: 0;
+            min-height: 258mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            background-color: #ffffff;
+            page-break-after: always !important;
+            break-after: page !important;
+        }
+        .cover-header {
+            margin-top: 10px;
+        }
+        .uni-name {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            line-height: 1.35;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .dept-divider {
+            width: 140px;
+            height: 1.5px;
+            background-color: #1e3a8a;
+            margin: 10px auto 0 auto;
+        }
+        .cover-body {
+            margin: 30px 0;
+        }
+        .report-badge {
+            display: inline-block;
+            font-size: 12pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #b91c1c;
+            padding-bottom: 4px;
+        }
+        .report-title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #b91c1c;
+            line-height: 1.35;
+            margin: 12px 0 16px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .lab-name {
+            font-size: 13.5pt;
+            font-weight: bold;
+            color: #0f172a;
+            line-height: 1.4;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .cover-student {
+            margin: 20px auto 10px auto;
+            width: 88%;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 16px 20px;
+            text-align: left;
+        }
+        .student-info {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12pt;
+            margin: 0;
+        }
+        .student-info td {
+            padding: 5px 8px;
+            border: none;
+            color: #111;
+            line-height: 1.4;
+        }
+        .student-info td:first-child {
+            width: 28%;
+            white-space: nowrap;
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+        .cover-footer {
+            margin-bottom: 10px;
+            font-size: 11.5pt;
+            font-weight: bold;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* MAIN CONTENT STYLING (PAGE 2 ONWARD) */
+        h2:first-of-type {
+            page-break-before: always;
+            break-before: page;
+        }
+        h2 {
+            font-size: 13pt;
+            color: #1e3a8a;
+            border-bottom: 1.5px solid #1e3a8a;
+            padding-bottom: 3px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        h3 {
+            font-size: 11.5pt;
+            color: #0f172a;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        p {
+            margin-top: 4px;
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-top: 4px;
+            margin-bottom: 8px;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 4px;
+            text-align: justify;
+        }
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 9.5pt;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 1px 3px;
+            border-radius: 3px;
+            border: 1px solid #e2e8f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 9.5pt;
+            table-layout: fixed;
+            page-break-inside: auto;
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        th, td {
+            border: 1px solid #334155;
+            padding: 6px 7px;
+            line-height: 1.35;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        th {
+            background-color: #1e3a8a;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #cbd5e1;
+            margin: 16px 0;
+        }
+        pre {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 8.5pt;
+            line-height: 1.25;
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+<div class="cover-page">
+<div class="cover-header">
+<div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
+<div class="dept-divider"></div>
+</div>
+
+<div class="cover-body">
+<div class="report-badge">BÁO CÁO THỰC HÀNH</div>
+<div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
+<div class="lab-name">Lab 05: Placement – Bố trí linh kiện trên bo mạch in PCB</div>
+</div>
+
+<div class="cover-student">
+<table class="student-info">
+<tr><td>Họ và tên:</td><td><b>Lê Ngọc Tường</b></td></tr>
+<tr><td>MSSV:</td><td><b>23207124</b></td></tr>
+<tr><td>Lớp:</td><td><b>23DTV_CLC3</b></td></tr>
+<tr><td>Môn học:</td><td><b>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</b></td></tr>
+</table>
+</div>
+
+<div class="cover-footer">
+TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
+</div>
+</div>
+
+<h2>BÀI TẬP 1: NGUYÊN TẮC PLACEMENT VÀ BỐ TRÍ CÁC KHỐI CHỨC NĂNG TRÊN PCB</h2>
+<p>Placement (sắp xếp linh kiện) là khâu quan trọng bậc nhất trong chu trình thiết kế mạch in PCB (<em>Schematic -&gt; PCB Setup -&gt; Placement -&gt; Routing -&gt; Ground Plane -&gt; DRC -&gt; Gerber</em>). Bố trí linh kiện tối ưu giúp rút ngắn chiều dài đường mạch, giảm số lượng điểm giao cắt khi đi dây, tối ưu hóa phân phối nguồn/mass, tăng hiệu quả tản nhiệt và tạo điều kiện thuận lợi cho việc gia công hàn lắp, đo kiểm.</p>
+<h3>1. Tám nguyên tắc cốt lõi khi bố trí linh kiện trên PCB</h3>
+<ol>
+<li><strong>Ưu tiên linh kiện cơ khí ngoại vi:</strong> Định vị các cổng kết nối (<em>Connector, Header, Switch</em>) và linh kiện có yêu cầu kích thước cố định trước tiên.</li>
+<li><strong>Bố trí theo từng cụm chức năng:</strong> Các linh kiện thuộc cùng một khối chức năng (nguồn vào, LDO 3.3V, đảo áp -5V, USB-UART, NE555) phải được đặt tập trung trong cùng một phân vùng xác định.</li>
+<li><strong>Nguyên tắc khoảng cách tối thiểu:</strong> Các linh kiện có đường dây nối trực tiếp với nhau phải đặt ở khoảng cách gần nhất có thể để giảm điện cảm ký sinh.</li>
+<li><strong>Quy tắc tụ lọc nguồn Bypass/Decoupling:</strong> Tụ bypass bắt buộc phải đặt sát chân cấp nguồn (<code>VCC</code>, <code>VDD</code>, <code>VIN</code>) của IC và chân mass tương ứng.</li>
+<li><strong>Cách ly phân vùng nguồn:</strong> IC nguồn và các linh kiện lọc ngõ vào/ngõ ra liên quan phải tạo thành một khối riêng biệt, tránh đặt rải rác.</li>
+<li><strong>Đảm bảo khoảng hở mép bo mạch:</strong> Không đặt pad linh kiện quá sát mép cắt bo mạch <code>Edge.Cuts</code> (khoảng cách an toàn tối thiểu $\ge 0.50\text{ mm} - 1.0\text{ mm}$) để tránh sứt mẻ trong quá trình phay cắt bo mạch.</li>
+<li><strong>Tránh chồng lấn Footprint (Courtyard Clearance):</strong> Đảm bảo khoảng cách an toàn giữa các thân linh kiện theo vùng <code>F.CrtYd</code> để thuận lợi cho đầu mũi hàn thao tác và que đo dao động ký tiếp cận.</li>
+<li><strong>Đồng nhất hướng đặt linh kiện:</strong> Sắp xếp các linh kiện cùng loại (như điện trở, tụ dán 0805, LED) theo cùng một trục định hướng (ngang hoặc dọc) để tăng tính thẩm mỹ và hỗ trợ máy gắp dán SMD tự động.</li>
+</ol>
+<h3>2. Chiến lược bố trí chi tiết 7 khối mạch chức năng trên bo mạch $50 \times 50\text{ mm}$</h3>
+<ul>
+<li><strong>Khối cổng giao tiếp và linh kiện cơ khí ngoại vi:</strong></li>
+<li>Cổng <code>USB1</code> (Micro-USB 5P SMD) đặt sát mép cạnh bên trái bo mạch, hướng miệng cắm ra ngoài mép bo mạch để người dùng cắm cáp dễ dàng.</li>
+<li>Công tắc gạt <code>SW1</code> (SS12D00) đặt ngay liền kề sau cổng USB1 ở mép bo mạch, tạo luồng ngắt nguồn trực tiếp trước khi cấp vào toàn mạch.</li>
+<li>Các rào cắm <code>J1</code>, <code>J2</code>, <code>J5</code> (Header 1x3) và <code>J3</code>, <code>J4</code> (Header 2x3) bố trí dọc theo các mép cạnh trên và cạnh phải bo mạch để thuận tiện cho việc cắm dây bus sang Breadboard và mạch ngoài.</li>
+<li><strong>Khối nguồn LDO 3.3V (AMS1117-3.3) và Đảo áp -5V (LM2776):</strong></li>
+<li>Đặt IC <code>U2</code> (AMS1117) ở góc trên bên trái, gần công tắc <code>SW1</code>. Tụ ngõ vào <code>C2</code> (100nF) đặt sát chân <code>VIN</code>, tụ ngõ ra <code>C3</code> (10µF) đặt sát chân <code>VOUT</code>.</li>
+<li>Đặt IC <code>U1</code> (LM2776 SOT-23-6) ở phân khu nguồn liền kề. Tụ bay <code>C4</code> (1µF) đặt sát chân 5-6 (<code>C1+</code>, <code>C1-</code>), tụ lọc ngõ ra <code>C5</code> (1µF) đặt sát chân 1 (<code>OUT</code>).</li>
+<li><strong>Khối chuyển đổi giao tiếp USB-UART (CP2102-GMR):</strong></li>
+<li>Bố trí IC <code>U3</code> (QFN-28) tại khu vực trung tâm nửa trên bo mạch.</li>
+<li>Đặt chân vi sai <code>D+</code>, <code>D-</code> hướng về phía cổng <code>USB1</code> để đường truyền vi sai ngắn nhất và đối xứng.</li>
+<li>Tụ bypass <code>C6</code> (100nF) và <code>C7</code> (4.7µF) đặt ngay sát các chân <code>VDD</code> và <code>REGIN</code>.</li>
+<li><strong>Khối dao động định thời NE555 và LED hiển thị:</strong></li>
+<li>Bố trí IC <code>U4</code> (NE555 SOIC-8) tại nửa dưới bo mạch. Cặp điện trở định thời <code>R3</code>, <code>R4</code>, tụ hóa <code>C8</code> và tụ lọc <code>C9</code> bố trí bao quanh thân IC theo đúng luồng nạp xả chân 2, 6 và 7.</li>
+<li>Dãy 6 LED chỉ thị (<code>D1-D6</code>) và các điện trở hạn dòng tương ứng (<code>R1</code>, <code>R2</code>, <code>R5</code>, <code>R6</code>, <code>R7</code>, <code>R8</code>) được xếp thẳng hàng ở mép dưới bo mạch theo thứ tự chức năng rõ ràng: LED nguồn +5V, LED +3.3V, LED -5V, LED TX, LED RX và LED xung Clock 555.</li>
+</ul>
+<hr />
+<h2>BÀI TẬP 2: BẢNG KIỂM TRA ĐÁNH GIÁ CHẤT LƯỢNG PLACEMENT TRƯỚC KHI ROUTING</h2>
+<p>Bảng checklist đối soát toàn diện các tiêu chí đánh giá chất lượng bố trí linh kiện trên bo mạch PCB mạch nguồn đa năng:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">STT</th>
+<th style="text-align: left;">Nội dung kiểm tra chất lượng Placement</th>
+<th style="text-align: left;">Tiêu chuẩn kỹ thuật áp dụng</th>
+<th style="text-align: center;">Trạng thái đánh giá</th>
+<th style="text-align: left;">Ghi chú kết quả thực tế trên bo mạch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;">Không có Footprint chồng lấn vật lý</td>
+<td style="text-align: left;">Ranh giới lớp <code>F.CrtYd</code> cách ly hoàn toàn</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Các linh kiện cách nhau $\ge 0.50\text{ mm}$, không chạm pad</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Vị trí và hướng cắm Connector/Switch chuẩn xác</td>
+<td style="text-align: left;">Cổng quay miệng ra mép ngoài bo mạch</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Micro-USB và công tắc SW1 đặt sát mép trái, dễ cắm/gạt</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Phân chia linh kiện theo từng khối mạch</td>
+<td style="text-align: left;">Các khối chức năng tập trung theo cụm</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">7 khối mạch phân vùng rõ ràng, không đan xen chéo</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Tụ lọc ngõ vào/ra đặt sát chân IC nguồn</td>
+<td style="text-align: left;">Chiều dài mạch lọc $\le 3.0\text{ mm}$</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Tụ <code>C2, C3</code> sát <code>U2</code>; tụ <code>C4, C5</code> sát <code>U1</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;">Tụ Decoupling đặt sát chân cấp nguồn IC</td>
+<td style="text-align: left;">Đặt trực tiếp tại chân <code>VDD</code>/<code>VIN</code> và <code>GND</code></td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Tụ <code>C6, C7</code> đặt áp sát chân nguồn IC CP2102</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Đảm bảo khoảng cách an toàn đến mép bo mạch</td>
+<td style="text-align: left;">Khoảng cách mép <code>Edge.Cuts</code> $\ge 0.50\text{ mm}$</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Toàn bộ pad hàn nằm cách mép bo mạch từ $1.0\text{ mm} - 2.0\text{ mm}$</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Đủ không gian thông thoáng cho công đoạn Routing</td>
+<td style="text-align: left;">Đường dây tín hiệu không bị bao vây kín</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Kênh đi dây rộng rãi cho cả 2 lớp đồng <code>F.Cu</code> và <code>B.Cu</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: left;">Thuận tiện cho thao tác hàn lắp và đo kiểm</td>
+<td style="text-align: left;">Header và LED nằm ở vị trí dễ tiếp cận</td>
+<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
+<td style="text-align: left;">Các chân rào cắm và test point phân bố thoáng ở mép bo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>BÀI TẬP 3: GIẢI ĐÁP CÁC CÂU HỎI KỸ THUẬT CHUYÊN SÂU VỀ PLACEMENT</h2>
+<h3>1. Tại sao tụ lọc ngõ vào (Input) và ngõ ra (Output) của IC nguồn bắt buộc phải đặt gần IC?</h3>
+<ul>
+<li><strong>Giảm điện cảm ký sinh ($L_{parasitic}$):</strong> Đường mạch in bằng đồng trên PCB luôn tồn tại điện cảm ký sinh tỷ lệ thuận với chiều dài đường dây. Khi IC chuyển mạch (như LM2776 tần số 2 MHz) hoặc tải thay đổi dòng đột ngột ($\frac{di}{dt}$ lớn), điện cảm ký sinh sẽ tạo ra các xung điện áp quá độ nguy hiểm theo công thức $V = L \cdot \frac{di}{dt}$. Đặt tụ áp sát chân IC giúp vòng lặp dòng điện (<em>Current Loop</em>) nhỏ nhất, triệt tiêu sụt áp đột ngột và chống nhiễu bức xạ EMI.</li>
+<li><strong>Ổn định vòng phản hồi hồi tiếp:</strong> Đối với IC ổn áp LDO AMS1117, tụ ngõ ra <code>C3</code> tham gia trực tiếp vào việc bù tần số và xác lập điểm cực ổn định (<em>Zero/Pole compensation</em>) cho mạch khuếch đại sai số nội. Nếu đặt tụ xa, nội trở và điện cảm đường mạch sẽ làm trễ pha phản hồi, dễ gây ra hiện tượng tự kích dao động điện áp ngõ ra.</li>
+</ul>
+<h3>2. Phân tích lý do lựa chọn vị trí cho 3 linh kiện cụ thể trên bo mạch</h3>
+<ol>
+<li><strong>Cổng Micro-USB (<code>USB1</code>):</strong> Được đặt sát mép cạnh bên trái bo mạch với hướng cắm quay ra ngoài. Lý do: Đảm bảo tương thích cơ khí khi đóng vỏ hộp, cho phép người dùng cắm cáp Micro-USB chắc chắn mà không bị cấn vào các linh kiện cao xung quanh như tụ hóa hay rào cắm.</li>
+<li><strong>Tụ bay chuyển mạch $1\mu\text{F}$ (<code>C4</code>):</strong> Được đặt áp sát ngay giữa hai chân 5 (<code>C1+</code>) và chân 6 (<code>C1-</code>) của IC đảo áp LM2776. Lý do: Tụ bay liên tục nạp và đảo cực tính với tần số đóng ngắt rất cao (2.0 MHz). Đặt tụ sát chân giúp giảm diện tích vòng lặp dòng AC chuyển mạch, triệt tiêu xung gai nhiễu cao tần lan truyền sang khối xử lý UART CP2102.</li>
+<li><strong>Cụm 6 LED chỉ thị (<code>D1-D6</code>):</strong> Bố trí thành hàng ngang đều đặn ở mép dưới cùng bo mạch. Lý do: Giúp người sử dụng dễ dàng quan sát trạng thái hoạt động (báo nguồn, nhấp nháy truyền nhận TX/RX và xung nhịp NE555) mà không bị che khuất bởi các ngón tay khi thao tác cắm dây trên bo mạch.</li>
+</ol>
+<h3>3. Tại sao các cổng kết nối (Connector/Header) luôn được xác định vị trí trước các linh kiện khác?</h3>
+<ul>
+<li><strong>Ràng buộc cơ khí ngoại vi bất biến:</strong> Cổng kết nối và công tắc gạt là giao diện tương tác vật lý trực tiếp giữa bo mạch PCB với người dùng, vỏ hộp thiết bị (<em>Enclosure</em>) hoặc các bo mạch mở rộng khác. Vị trí và cao độ của chúng thường bị cố định bởi bản vẽ thiết kế cơ khí 3D của sản phẩm.</li>
+<li><strong>Quy hoạch hướng luồng tín hiệu (Floorplanning):</strong> Vị trí của các Connector xác lập điểm bắt đầu (nguồn vào, tín hiệu vào) và điểm kết thúc (nguồn ra, tín hiệu ra) của toàn bộ bo mạch. Cố định Connector trước giúp định hình luồng di chuyển của dòng điện từ trái sang phải, ngăn ngừa việc các đường tín hiệu phải đi vòng vèo bắt chéo qua lại trên bo mạch.</li>
+</ul>
+<hr />
+<h2>BÀI TẬP 4: SƠ ĐỒ BỐ TRÍ LINH KIỆN HOÀN THIỆN TRÊN PCB EDITOR</h2>
+<p>Sơ đồ phân vùng và bố trí 38 linh kiện trên bo mạch PCB kích thước $50 \times 50\text{ mm}$ được thực hiện hoàn chỉnh trên KiCad 10:</p>
+<pre><code class="language-text">+-------------------------------------------------------------------------------+
+| [EDGE.CUTS: 50 x 50 mm]                                                       |
+|                                                                               |
+|   +---------------+      +-----------------+      +-----------------------+   |
+|   |  KHỐI NGUỒN   |      | KHỐI USB-UART   |      | KHỐI HEADER NGOẠI VI  |   |
+|   |  LDO 3.3V     |      | IC CP2102 (U3)  |      | J3, J4 (Header 2x3)   |   |
+|   |  AMS1117 (U2) |      | Tụ C6, C7       |      | J1, J2 (Header 1x3)   |   |
+|   |  Tụ C2, C3    |      |                 |      |                       |   |
+|   +---------------+      +-----------------+      +-----------------------+   |
+|                                                                               |
+|   +---------------+      +-----------------+      +-----------------------+   |
+|   |  NGUỒN VÀO    |      | KHỐI ĐẢO ÁP -5V |      | KHỐI DAO ĐỘNG NE555   |   |
+|   |  Micro-USB    |      | LM2776 (U1)     |      | IC NE555 (U4)         |   |
+|   |  (USB1)       |      | Tụ bay C4, C5   |      | Trở R3, R4            |   |
+|   |  Công tắc SW1 |      |                 |      | Tụ hóa C8, tụ C9      |   |
+|   |  Tụ lọc C1    |      |                 |      | Header J5 (CLK Out)   |   |
+|   +---------------+      +-----------------+      +-----------------------+   |
+|                                                                               |
+|   +-----------------------------------------------------------------------+   |
+|   | KHỐI LED CHỈ THỊ TRẠNG THÁI: D1(5V) - D2(3V3) - D3(-5V) - D4(TX)      |   |
+|   |                             - D5(RX) - D6(CLK 555) + Trở R1,R2,R5-R8  |   |
+|   +-----------------------------------------------------------------------+   |
++-------------------------------------------------------------------------------+
+</code></pre>
+<p>Bo mạch sau khi hoàn tất công đoạn Placement đạt độ cân đối không gian cao, phân luồng tín hiệu mạch lạc, không xuất hiện bất kỳ cảnh báo va chạm Courtyard nào trên trình kiểm tra 3D Viewer và sẵn sàng $100\%$ cho công đoạn đi dây mạch in (<em>Routing - Lab 06</em>).</p>
+</body>
+</html>

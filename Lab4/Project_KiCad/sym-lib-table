@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Lab4")(type "KiCad")(uri "${KIPRJMOD}/Lab4_Lib.kicad_sym")(options "")(descr "Thu vien symbol tu tao cho Lab 4 - LM2776"))
+)

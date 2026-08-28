@@ -1,0 +1,27 @@
+ERC report (2026-08-28T16:47:57, Encoding UTF8)
+Report includes: Errors, Warnings
+
+***** Sheet /
+[lib_symbol_mismatch]: Symbol 'jp5' doesn't match copy in library 'jumper'
+    ; warning
+    @(35.56 mm, 130.81 mm): Symbol J3 [jp5]
+[lib_symbol_mismatch]: Symbol 'Micro_USB' doesn't match copy in library 'LAB3_CA1_14'
+    ; warning
+    @(46.99 mm, 12.70 mm): Symbol USB1 [Micro_USB]
+[lib_symbol_mismatch]: Symbol 'Jumper_3' doesn't match copy in library 'LAB2_CA1_14'
+    ; warning
+    @(95.25 mm, 27.94 mm): Symbol J1 [Jumper_3]
+[lib_symbol_mismatch]: Symbol 'LM2776' doesn't match copy in library 'LAB2_CA1_14'
+    ; warning
+    @(125.73 mm, 30.48 mm): Symbol U2 [LM2776]
+[lib_symbol_mismatch]: Symbol 'ON/OFF_SWITCH' doesn't match copy in library 'LAB3_CA1_14'
+    ; warning
+    @(190.50 mm, 35.56 mm): Symbol SW2 [ON/OFF_SWITCH]
+
+ ** ERC messages: 5  Errors 0  Warnings 5
+
+ ** Ignored checks:
+    - Global label only appears once in the schematic
+    - Four connection points are joined together
+    - SPICE model issue
+    - Assigned footprint doesn't match footprint filters

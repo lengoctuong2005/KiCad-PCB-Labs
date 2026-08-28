@@ -1,0 +1,157 @@
+ 
+ LAB 0 4 
+THIẾT LẬP PCB  
+I. Mục tiêu  
+Bài th ực hành này giúp sinh viên làm quen v ới giai đo ạn thi ết lập PCB (Printed 
+Circuit Board) trong KiCad , PCB là bước chuy ển tiếp giữa sơ đ ồ nguyên lý 
+(schematic) đã hoàn ch ỉnh ở các bu ổi trước và quá trình s ắp xếp linh ki ện, đi dây 
+thực tế trên board m ạch in. C ụ thể, sinh viên c ần nắm đư ợc cách đưa d ữ liệu từ 
+schematic sang trình so ạn thảo PCB (PCB Editor), cách xác đ ịnh hình d ạng vật lý 
+của board, cách c ấu hình s ố lớp đồng cùng các lu ật thiết kế (Design Rules) và lớp 
+mạng (Net Classes) sao cho board thi ết kế ra vừa đúng v ề điện, vừa khả thi khi 
+đưa đi gia công th ực tế. 
+II. Quy trình PCB Editor trong KiCad  
+KiCad tách riêng vi ệc vẽ sơ đồ nguyên lý ( Schematic Editor ) và vi ệc bố trí board 
+mạch in ( PCB Editor ) thành hai c ửa sổ làm vi ệc độc lập, nhưng luôn g ắn kết với 
+nhau thông qua danh sách linh ki ện và netlist đã khai báo. Sau khi schematic đư ợc 
+kiểm tra ERC không còn l ỗi, sinh viên m ở PCB Editor t ừ cửa sổ Project đ ể bắt đầu 
+giai đo ạn layout.  
+ 
+Hình 1. Sơ đ ồ nguyên lý mạch ngu ồn đơn gi ản dùng làm ví d ụ minh h ọa xuyên su ốt bài  
+ 
+ III. N ội dung th ực hành  
+1. Cập nh ật PCB t ừ Schematic (Update PCB from Schematic)  
+Khi m ới mở, file PCB còn tr ống vì chưa có linh ki ện nào đư ợc đưa sang t ừ schematic. Đ ể 
+đồng bộ dữ liệu, vào Tools → Update PCB from Schematic ... (ho ặc nhấn phím t ắt F8, 
+hoặc bấm nút tương ứng trên thanh công c ụ). Hộp tho ại Update PCB from Schematic 
+hiện ra, li ệt kê toàn b ộ thay đ ổi sẽ được áp d ụng vào ph ần Changes to Be Applied , ví dụ 
+như trong m ạch minh h ọa, ba linh kiện BT1 ( Battery Holder ), D1 (LED) và R1 (đi ện trở) 
+sẽ lần lượt được thêm vào board cùng v ới footprint tương ứng đã khai báo ở schematic.  
+ 
+Hình 2. H ộp tho ại Update PCB from Schematic hi ển thị danh sách linh ki ện sẽ được thêm vào 
+board  
+Sau khi ki ểm tra không có l ỗi/cảnh báo (Total warnings: 0, errors: 0), b ấm Update PCB  
+rồi Close  để đóng h ộp tho ại, sau đó click vào màn hình  để đặt tạm các footprint v ừa được 
+thêm vào board. V ị trí đặt lúc này chưa c ần chính xác vì s ẽ được sắp xếp lại ở bước sau.  
+ 
+  
+Hình  3. Ba footprint BT1, R1, D1 đã đư ợc đưa vào PCB Editor sau khi c ập nh ật từ schematic  
+Một điểm cần lưu ý là vi ệc đồng bộ này trong KiCad không di ễn ra t ự động: mỗi khi 
+schematic đư ợc chỉnh sửa (thêm/b ớt linh ki ện, đổi chân...), ngư ời thiết kế phải chủ động 
+chạy lại Update PCB from Schematic đ ể layout luôn kh ớp với sơ đ ồ nguyên lý.  
+2. Thi ết lập Board Outline  
+Board Outline là đư ờng bao xác đ ịnh hình d ạng vật lý c ủa board m ạch in, đư ợc vẽ trên 
+lớp Edge.Cuts. Đây là l ớp đặc biệt: bất kỳ đối tượng nào đư ợc vẽ trên Edge.Cuts đ ều 
+được xưởng gia công hi ểu là ranh gi ới cắt board, do đó yêu c ầu duy nh ất là đư ờng bao 
+phải là m ột hình khép kín và không t ự cắt chính nó.  
+Trước khi v ẽ, nên chuy ển lưới (grid) hi ển thị về bước thô hơn, ví d ụ 1 mm, đ ể dễ chọn 
+được kích thư ớc board là s ố tròn. Ti ếp theo, ch ọn lớp Edge.Cuts làm l ớp hoạt động bằng 
+cách b ấm vào tên l ớp trong tab Layers c ủa Appearance Panel.  
+ 
+  
+Hình 4. Ch ọn lớp Edge.Cuts làm l ớp ho ạt động trong tab Layers c ủa Appearance Panel  
+Sau đó ch ọn công c ụ vẽ hình ch ữ nhật (Rectangle) trên thanh công c ụ bên ph ải canvas, 
+click đ ể đặt góc đ ầu tiên r ồi click l ần nữa để đặt góc đ ối diện sao cho hình ch ữ nhật bao 
+trọn các footprint đã đ ặt. Với board có hình d ạng không ph ải chữ nhật, có th ể phối hợp 
+thêm các công c ụ line, arc, circle ho ặc polygon mi ễn là k ết quả cuối cùng v ẫn là m ột 
+đường bao khép kín duy nh ất. 
+ 
+Hình 5. Board Outline sau khi v ẽ hoàn ch ỉnh, vùng màu xám nh ạt bên trong đư ờng bao là ph ần 
+diện tích thu ộc về board  
+ 
+ 3. Thi ết lập Layer (Board Stackup)  
+Trước khi b ố trí linh ki ện và đi dây, c ần khai báo c ấu trúc v ật lý c ủa board (stackup): 
+board s ẽ có bao nhiêu l ớp đồng, v ật liệu và đ ộ dày c ủa từng lớp lõi cách đi ện. Vi ệc này 
+được thực hiện tại File → Board Setup... → Board Stackup → Physical Stackup . 
+Với các m ạch đơn gi ản, ít linh ki ện như m ạch ngu ồn dùng làm ví d ụ, board 2 l ớp đồng là 
+lựa chọn phổ biến nhất vì chi phí gia công th ấp mà v ẫn đủ không gian đi dây cho c ả mặt 
+trên (F.Cu) l ẫn mặt dưới (B.Cu). V ật liệu lõi m ặc định là FR4 , loại vật liệu composite tiêu 
+chuẩn trong công nghi ệp PCB nh ờ giá thành h ợp lý và tính cách đi ện tốt. 
+ 
+Hình 6. C ấu hình Physical Stackup v ới 2 l ớp đồng (Copper layers: 2), lõi FR4  
+Bảng 1. Thông s ố Board Stackup m ặc định cho board 2 l ớp 
+Thông s ố Giá tr ị mặc định 
+Số lớp đồng (Copper layers)  2 (F.Cu và B.Cu)  
+Độ dày l ớp đồng 0,035 mm (~1 oz)  
+Vật liệu lõi cách đi ện (Core)  FR4 
+Độ dày lõi cách đi ện 1,51 mm  
+ 
+ Thông s ố Giá tr ị mặc định 
+Độ dày l ớp phủ Solder Mask  0,01 mm  
+Tổng độ dày board  1,6 mm  
+Các thông s ố này ch ỉ mang tính m ặc định của phần mềm, khi tri ển khai th ực tế, nếu bạn 
+không t ự làm m ạch in, cần đối chiếu lại với thông tin  xưởng gia công PCB công b ố (độ 
+dày board, đ ộ dày đ ồng kh ả dụng...) đ ể điều chỉnh cho phù h ợp trư ớc khi xu ất file gia 
+công.  
+4. Thi ết lập Design Rules  
+Design Rules là t ập hợp các ràng bu ộc tối thiểu áp d ụng cho toàn b ộ board, đóng vai trò 
+tương t ự ERC nhưng ở cấp độ layout , chúng quy đ ịnh các gi ới hạn như b ề rộng track nh ỏ 
+nhất, kho ảng cách cách đi ện tối thiểu giữa hai đ ối tượng đồng khác lư ới, kích thư ớc via 
+và lỗ khoan nh ỏ nhất... Các thông s ố này đư ợc khai báo t ại File → Board Setup... → 
+Design Rules → Constraints.  
+ 
+Hình 7. Trang Constraints trong Design Rules, nơi khai báo các gi ới hạn tối thi ểu cho track, via 
+và lỗ khoan  
+ 
+ Bảng 2. M ột số ràng bu ộc thi ết kế (Design Rules – Constraints) m ặc định 
+Thông s ố Giá tr ị mặc định Ý nghĩa  
+Minimum clearance  0 mm  Khoảng cách nh ỏ nhất giữa hai đ ối 
+tượng đồng khác lư ới điện 
+Minimum track width  0,2 mm  Bề rộng nh ỏ nhất cho phép c ủa một 
+đường m ạch (track)  
+Minimum via diameter  0,5 mm  Đường kính ngoài nh ỏ nhất của via  
+Minimum drill size  0,3 mm  Đường kính l ỗ khoan nh ỏ nhất 
+Copper to hole clearance  0,25 mm  Khoảng cách t ừ đồng đến lỗ khoan 
+không cùng lư ới 
+Copper to edge clearance  0,5 mm  Khoảng cách t ừ đồng đến mép board 
+(Edge.Cuts)  
+Hole to hole clearance  0,25 mm  Khoảng cách nh ỏ nhất giữa hai l ỗ 
+khoan  
+Đây chính là các giá tr ị mặc định do KiCad đ ề xuất, phù h ợp cho vi ệc học và th ử nghiệm. 
+Đối với một dự án th ực tế chuẩn bị đặt hàng gia công, các thông s ố này b ắt buộc phải 
+được chỉnh lại theo đúng kh ả năng s ản xuất của nhà máy PCB d ự kiến sử dụng, đây cũng 
+chính là n ội dung c ủa bài t ập về nhà s ố 2. Sau khi hoàn t ất bố trí và đi dây, luôn c ần chạy 
+công c ụ Inspect → Design Rules Checker (DRC)  để rà soát các vi ph ạm như h ở mạch, 
+chạm mạch hay vi ph ạm kho ảng cách trư ớc khi xu ất file gia công.  
+5. Thi ết lập Net Classes  
+Net Class là m ột nhóm lu ật thiết kế (clearance, track width, via size...) đư ợc gán cho m ột 
+tập hợp netlist  cụ thể, cho phép qu ản lý lu ật thiết kế theo t ừng nhóm net thay vì ph ải 
+chỉnh tay t ừng đư ờng m ạch. M ặc định, khi chưa gán net class riêng, m ọi net trong thi ết  
+ kế đều thu ộc net class Default. N ội dung này đư ợc cấu hình t ại Design Rules → Net 
+Classes  trong Board Setup.  
+ 
+Hình 8. Danh sách Net Classes, hàng Default áp d ụng cho toàn b ộ net chưa đư ợc gán class riêng  
+Bảng 3. Thông s ố Net Class Default  
+Clearance  Track 
+Width  Via Size  Via Hole  µVia Size  µVia 
+Hole  DP 
+Width  DP Gap  
+0,2 mm  0,4 mm *  0,6 mm  0,3 mm  0,3 mm  0,1 mm  0,2 mm  0,25 mm  
+* Track Width m ặc định của KiCad là 0,2 mm , với các board ít linh ki ện, không gian đi 
+dây tho ải mái như m ạch ngu ồn ví d ụ, nên tăng Track Width c ủa net class Default lên 0,4 
+mm đ ể đường m ạch ch ắc chắn hơn v ề cơ khí và t ải dòng t ốt hơn. T ừ thời điểm ch ỉnh sửa, 
+mọi track đư ợc vẽ mới sẽ tự động lấy bề rộng 0,4 mm.  
+Với các thi ết kế phức tạp hơn, có th ể tạo thêm nhi ều net class khác nhau , ví dụ một class 
+"High Current" dùng track r ộng cho các đư ờng cấp ngu ồn dòng l ớn, ho ặc một class "50 
+ohm" quy đ ịnh bề rộng và kho ảng cách track riêng đ ể đảm bảo trở kháng đ ặc tính cho các 
+đường tín hi ệu cao t ần. Vi ệc gán net vào t ừng class có th ể thực hiện ngay t ại bảng 
+Netclass Assignments trong PCB Editor ho ặc gán tr ực tiếp từ Schematic Editor.  
+IV. K ết quả đạt được 
+• Board PCB đư ợc tạo thành công: d ữ liệu linh ki ện và lư ới điện từ schematic đã đư ợc 
+đồng bộ đầy đủ sang PCB Editor b ằng ch ức năng Update PCB from Schematic.  
+• Đường bao board đư ợc vẽ hoàn ch ỉnh trên l ớp Edge.Cuts, khép kín và bao tr ọn các 
+footprint.  
+ 
+ • Cấu trúc l ớp mạch in đư ợc cấu hình v ới 2 lớp đồng, v ật liệu FR4 . 
+• Design Rules  và Net Classes đư ợc thiết lập, làm cơ s ở để phần mềm tự kiểm tra vi 
+phạm trong quá trình đi dây ở các bư ớc tiếp theo.  
+• Board đã s ẵn sàng đ ể chuy ển sang giai đo ạn sắp xếp linh ki ện (placement) và đi dây 
+(routing) ở buổi thực hành k ế tiếp. 
+V. Bài t ập về nhà 
+1. Hoàn thành đ ầy đủ các bư ớc thiết lập PCB đã trình bày ở trên (Update PCB from 
+Schematic, v ẽ Board Outline, c ấu hình Layer, Design Rules và Net Classes) cho 
+mạch ngu ồn đã thi ết kế sơ đồ nguyên lý ở bài th ực hành trư ớc. 
+2. Thiết lập lại các thông s ố Design Rules (track width, clearance, kích thư ớc via, l ỗ 
+khoan t ối thiểu...) theo đúng thông s ố công b ố của nhà s ản xuất PCB d ự kiến đặt 
+hàng, thay vì s ử dụng các giá tr ị mặc định của KiCad.  
+ 

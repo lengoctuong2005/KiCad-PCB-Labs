@@ -1,0 +1,23 @@
+# Agent, rules & manifests
+.agents/
+.opencode/
+RULES_MANIFEST.md
+SKILLS_MANIFEST.md
+.manifest_cache.json
+
+# Node modules & cache
+node_modules/
+package-lock.json
+
+# Temporary KiCad locks & backup
+*.lck
+*.bak
+*.bak2
+*-bak
+_saved-*
+.history/
+*.tmp
+
+# System & OS
+.DS_Store
+Thumbs.db

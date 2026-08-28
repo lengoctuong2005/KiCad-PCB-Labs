@@ -1,0 +1,154 @@
+ 
+ 
+LAB 05 
+PLACEMENT – BỐ TRÍ LINH KIỆN TRÊN PCB 
+I. 
+Mục tiêu 
+• Hiểu khái niệm Placement và vai trò của bố trí linh kiện trong thiết kế PCB. 
+• Biết xác định vị trí linh kiện dựa trên chức năng mạch, luồng tín hiệu, đường 
+nguồn và yêu cầu cơ khí. 
+• Biết bố trí Connector, IC, tụ lọc, LED, Header và các linh kiện phụ trợ trên PCB. 
+• Biết sử dụng PCB Editor của KiCad để di chuyển, xoay và sắp xếp Footprint. 
+• Hoàn thành một bố trí linh kiện hợp lý, tạo điều kiện thuận lợi cho bước Routing. 
+II. 
+Nội dung thực hành 
+Placement là quá trình xác định vị trí và hướng đặt của các Footprint trên PCB 
+trước khi thực hiện Routing. Placement tốt sẽ giúp giảm chiều dài đường mạch, 
+giảm giao cắt khi đi dây, thuận lợi cho phân phối nguồn/GND, tản nhiệt, lắp ráp 
+và kiểm tra. 
+Nhắc lại sơ lược quy trình thiết kế PCB: Schematic  →  PCB Setup  →  
+Placement  →  Routing  →  Ground Plane  →  DRC  →  Gerber. 
+Để thực hiện đúng quy trình Placement cho ra kết quả tốt. Bên dưới là các mục 
+cần thực hiện khi tiến hành Placement footprint. 
+• Một số nguyên tắc Placement:  
+1. Xác định vị trí Connector, Header hoặc linh kiện có yêu cầu cơ khí trước. 
+2. Các linh kiện thuộc cùng một khối chức năng nên được đặt gần nhau. 
+3. Linh kiện có kết nối trực tiếp với nhau nên có khoảng cách nhỏ nhất. 
+4. Tụ bypass/decoupling nên đặt gần chân nguồn của IC. 
+
+ 
+ 
+5. IC nguồn và các linh kiện Input/Output liên quan nên được bố trí thành một 
+cụm, một khu vực riêng biệt. 
+6. Không đặt linh kiện quá sát mép PCB, phải đảm bảo khoảng hở phù hợp. 
+7. Không để các Footprint chồng lấn hoặc quá sát gây cản trở cho việc routing, 
+hàn, lắp ráp và đo kiểm. 
+8. Hướng linh kiện cần phù hợp với khả năng Routing và thao tác sử dụng sau 
+khi có mạch thật và kiểm tra. 
+• Phân tích mạch trước khi Placement: 
+1. Xác định đầu vào của mạch. Trong ví dụ này, Micro USB là một trong các 
+điểm giao tiếp với bên ngoài. 
+2. Xác định các khối nguồn và các IC xử lý nguồn. 
+3. Xác định các tụ Input/Output và tụ decoupling liên quan đến từng IC. 
+4. Xác định các Connector/Header dùng cho nguồn, tín hiệu hoặc kết nối với 
+module khác. 
+5. Xác định các linh kiện cần đặt ở mép board hoặc có yêu cầu thao tác trực 
+tiếp. 
+6. Chia PCB thành các vùng chức năng trước khi đặt từng Footprint. 
+• Mở PCB Editor và kiểm tra Footprint: 
+1. Mở Project KiCad và chọn PCB Editor. 
+2. Kiểm tra Board Outline đã được tạo ở Lab 04. 
+3. Kiểm tra các Footprint đã được Update từ Schematic đã đủ chưa. 
+4. Kiểm tra kích thước và hướng của các Footprint quan trọng trước khi đặt. 
+ 
+ 
+
+ 
+ 
+• Bố trí Connector và các linh kiện cơ khí 
+1. Đặt các Connector/Header trước vì vị trí của chúng thường phụ thuộc vào 
+cách PCB được sử dụng thực tế. Connector cần được đặt sao cho người 
+dùng có thể cắm/rút dễ dàng và không bị linh kiện khác cản trở. 
+2. Đặt các Connector cần giao tiếp với bên ngoài gần mép PCB. 
+3. Xác định hướng của Connector theo hướng cắm thực tế. 
+4. Kiểm tra khoảng trống xung quanh Connector. 
+5. Sau khi đặt xong Connector, hạn chế thay đổi vị trí của chúng. 
+• Bố trí khối nguồn:  
+Đối với khối nguồn, IC nguồn và các linh kiện phụ trợ cần được đặt thành một 
+cụm. Tụ Input và Output nên nằm gần các chân tương ứng của IC để giảm chiều 
+dài đường mạch và tạo điều kiện thuận lợi cho Routing. 
+1. Đặt IC nguồn tại vị trí trung tâm của khối nguồn. 
+2. Đặt tụ Input gần phía nguồn vào của IC. 
+3. Đặt tụ Output gần phía nguồn ra của IC. 
+4. Các linh kiện Feedback hoặc linh kiện phụ trợ nên đặt gần IC tương ứng. 
+5. Đảm bảo khu vực nguồn có đủ không gian để đi dây nguồn và GND. 
+• Bố trí khối IC và tụ decoupling: 
+Các IC điều khiển nên được bố trí sao cho các nhóm tín hiệu đi vào và đi ra có thể 
+Routing thuận lợi. Các tụ decoupling cần đặt gần chân nguồn của IC thay vì đặt ở 
+vị trí xa. 
+1. Đặt IC điều khiển ở vị trí phù hợp với các Connector tín hiệu. 
+2. Đặt tụ decoupling gần chân VDD/VCC và GND của IC. 
+
+ 
+ 
+3. Hạn chế đường kết nối dài giữa IC và tụ decoupling. 
+4. Dành không gian cho đường nguồn và GND. 
+• Bố trí LED và Header 
+1. LED báo nguồn/trạng thái nên đặt ở vị trí dễ quan sát. 
+2. Điện trở hạn dòng nên đặt gần LED để thuận tiện Routing. 
+3. Header dùng cho đo kiểm/debug nên đặt ở vị trí dễ tiếp cận. 
+4. Không đặt Header ở vị trí bị linh kiện khác hoặc mép board gây cản trở thao 
+tác. 
+• Kiểm tra Placement trước khi Routing: 
+Trước khi tiến hành Routing, cần kiểm tra lại toàn bộ placement của thiết kế. Có 
+thể lặp một danh sách như mẫu bên dưới để kiểm tra placement của từng linh kiện 
+và của tổng thể PCB trước khi routing, đảm bảo việc routing diễn ra dễ dàng và 
+không bị lỗi. 
+Bảng 1: Mẫu danh sách kiểm tra Placement. 
+STT 
+Nội dung kiểm tra 
+Đạt 
+1 
+Không có Footprint chồng lấn 
+☐ 
+2 
+Connector/USB/Header đúng 
+vị trí và hướng 
+☐ 
+3 
+IC được bố trí theo từng khối 
+chức năng 
+☐ 
+4 
+Tụ Input/Output đặt gần IC 
+tương ứng 
+☐ 
+5 
+Tụ decoupling đặt gần chân 
+nguồn IC 
+☐ 
+6 
+Không có linh kiện đặt quá sát 
+☐ 
+
+ 
+ 
+mép PCB 
+7 
+Đủ không gian để Routing 
+☐ 
+8 
+Đủ không gian cho hàn, lắp 
+ráp và đo kiểm 
+☐ 
+ 
+• Ví dụ Placement sau khi hoàn thiện: 
+Hình dưới đây là mẫu PCB ở bước Placement. Chỉ có tác dụng tham khảo cách 
+sắp xếp linh kiện trên PCB như thế nào trước khi tiến hành Routing 
+(Khuến khích Placement theo ý tưởng của bản thân) 
+ 
+Hình 1: PCB mẫu Placement. 
+III. 
+Kết quả đạt được 
+• Placement hoàn chỉnh. 
+IV. 
+Bài tập về nhà 
+1. Giải thích tại sao tụ Input/Output của IC nguồn nên đặt gần IC. 
+
+ 
+ 
+2. Chọn 3 linh kiện trên PCB của cá nhân, giải thích lý do lựa chọn vị trí của chúng. 
+3. Chỉ ra một vị trí Placement chưa tối ưu trên PCB mẫu và đề xuất cách cải thiện. 
+4. Giải thích tại sao Connector thường được xác định vị trí trước các linh kiện khác. 
+5. Chụp ảnh PCB cá nhân sau khi hoàn thành Placement, đánh dấu các khối chức 
+năng trên ảnh. 

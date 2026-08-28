@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo cáo Lab</title>
+</head>
+<body>
+<style>
+@page {
+    size: A4 portrait;
+    margin: 14mm 16mm 14mm 16mm;
+    @bottom-right {
+        content: "Trang " counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+        color: #555;
+    }
+    @bottom-left {
+        content: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 03";
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+        color: #555;
+    }
+}
+
+@page:first {
+    margin: 14mm 16mm 14mm 16mm;
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', 'Liberation Serif', serif;
+    font-size: 11pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* KHUNG BÌA CHUẨN A4 */
+.cover-page {
+    border: 3px double #1e3a8a;
+    border-radius: 8px;
+    padding: 35px 25px;
+    margin: 0;
+    min-height: 262mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #ffffff;
+    page-break-after: always !important;
+    break-after: page !important;
+}
+
+.cover-header { margin-top: 10px; }
+.uni-name {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.dept-divider {
+    width: 140px;
+    height: 1.5px;
+    background-color: #1e3a8a;
+    margin: 10px auto 0 auto;
+}
+
+.cover-body { margin: 30px 0; }
+.report-badge {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #b91c1c;
+    padding-bottom: 4px;
+}
+.report-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #b91c1c;
+    line-height: 1.35;
+    margin: 12px 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.lab-name {
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #0f172a;
+    line-height: 1.4;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.cover-student {
+    margin: 20px auto 10px auto;
+    width: 88%;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-align: left;
+}
+.student-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12pt;
+    margin: 0;
+}
+.student-info td {
+    padding: 5px 8px;
+    border: none;
+    color: #111;
+    line-height: 1.4;
+}
+.student-info td:first-child {
+    width: 28%;
+    white-space: nowrap;
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.cover-footer {
+    margin-bottom: 10px;
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* NỘI DUNG BÁO CÁO */
+.page-break {
+    page-break-before: always;
+    break-before: page;
+}
+
+h2 {
+    font-size: 12.5pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 3px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+h3 {
+    font-size: 11pt;
+    color: #0f172a;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+p {
+    margin-top: 3px;
+    margin-bottom: 6px;
+    text-align: justify;
+}
+ul, ol {
+    margin-top: 3px;
+    margin-bottom: 6px;
+    padding-left: 20px;
+}
+li {
+    margin-bottom: 3px;
+    text-align: justify;
+}
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 3px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+table.bom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 8.5pt;
+    table-layout: fixed;
+}
+table.bom-table th, table.bom-table td {
+    border: 1px solid #334155;
+    padding: 3.5px 5px;
+    line-height: 1.25;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+table.bom-table th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 4px;
+}
+table.bom-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+.figure-container {
+    text-align: center;
+    margin: 6px 0;
+    page-break-inside: avoid;
+}
+.report-img {
+    max-width: 92%;
+    max-height: 98mm;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.figure-caption {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 4px;
+}
+</style>
+
+<div class="cover-page">
+    <div class="cover-header">
+        <div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
+        <div class="dept-divider"></div>
+    </div>
+
+    <div class="cover-body">
+        <div class="report-badge">BÁO CÁO THỰC HÀNH</div>
+        <div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
+        <div class="lab-name">Lab 03: Schematic phức hợp & Gán Footprint</div>
+    </div>
+
+    <div class="cover-student">
+        <table class="student-info">
+            <tr>
+                <td>Họ và tên:</td>
+                <td>Lê Ngọc Tường</td>
+            </tr>
+            <tr>
+                <td>MSSV:</td>
+                <td>23207124</td>
+            </tr>
+            <tr>
+                <td>Lớp:</td>
+                <td>23DTV_CLC3</td>
+            </tr>
+            <tr>
+                <td>Môn học:</td>
+                <td>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="cover-footer">
+        TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>BÀI TẬP 1: KIỂM TRA ERC VÀ XỬ LÝ LỖI TRÊN SCHEMATIC</h2>
+<p>Sơ đồ nguyên lý mạch nguồn đa năng và giao tiếp UART gồm các khối chức năng: mạch chuyển đổi USB-UART CP2102, IC ổn áp tuyến tính AMS1117-3.3, mạch tạo điện áp âm LM2776 và mạch tạo xung NE555. Sau khi vẽ và gán nhãn kết nối, công cụ Electrical Rules Checker (ERC) được dùng để kiểm tra tính đúng đắn của sơ đồ.</p>
+<p>Kết quả kiểm tra quy tắc điện trên KiCad xác nhận mạch không còn lỗi (0 Errors):</p>
+<div class="figure-container">
+    <img class="report-img" src="Pic/kicad_erc_gui.png" alt="Cửa sổ Electrical Rules Checker trên KiCad" style="max-height: 82mm;">
+    <div class="figure-caption">Hình 1. Giao diện kiểm tra quy tắc điện (ERC) trên KiCad với kết quả 0 lỗi (0 Errors)</div>
+</div>
+
+<h3>1. Các lỗi ERC thường gặp và cách xử lý</h3>
+<ul>
+<li><strong>Lỗi 1: Input Power pin not driven by any Output Power pins</strong></li>
+<li><em>Hiện tượng:</em> Trình ERC báo lỗi vi phạm tại các chân cấp nguồn <code>VCC</code>, <code>GND</code> của IC U1 (AMS1117-3.3), U2 (LM2776), U3 (CP2102) và U5 (NE555).</li>
+<li><em>Nguyên nhân:</em> Các nhãn nguồn <code>VDD_5V</code>, <code>VDD_3V3</code>, <code>GND</code> có thuộc tính điện là <code>Power input</code>. KiCad yêu cầu mỗi net nguồn phải có ít nhất một chân phát kiểu <code>Power output</code> điều khiển.</li>
+<li><em>Cách khắc phục:</em> Đặt ký hiệu cờ nguồn <code>PWR_FLAG</code> (chọn từ thư viện <code>power</code>) vào đường nguồn đầu vào <code>VBUS</code> (từ cổng Micro USB) và đường mass <code>GND</code> của mạch.</li>
+<li><strong>Lỗi 2: Pin not connected (and no no-connect symbol found on this pin)</strong></li>
+<li><em>Hiện tượng:</em> Báo lỗi tại các chân không dùng của IC CP2102 (DTR, RTS, RI, DCD, DSR) và IC NE555.</li>
+<li><em>Nguyên nhân:</em> Chân linh kiện để hở nhưng chưa được gắn cờ xác nhận bỏ trống.</li>
+<li><em>Cách khắc phục:</em> Đặt cờ ngắt kết nối <code>No Connect Flag</code> (phím tắt <code>Q</code>) vào các chân không dùng.</li>
+</ul>
+<div class="page-break"></div>
+
+<ul>
+<li><strong>Lỗi 3: Missing connection between items / Wire not connected</strong></li>
+<li><em>Hiện tượng:</em> Dây dẫn chưa chạm vào điểm kết nối của chân linh kiện hoặc hai đường dây giao nhau nhưng thiếu điểm nối chung.</li>
+<li>
+<p><em>Cách khắc phục:</em> Đi lại dây nối (phím <code>W</code>) và đặt điểm nối <code>Junction</code> (phím <code>J</code>) tại các vị trí phân nhánh.</p>
+</li>
+<li>
+<p><strong>Cảnh báo (Warnings): Symbol mismatch with library cache</strong></p>
+</li>
+<li><em>Hiện tượng:</em> Xuất hiện 5 cảnh báo do các Symbol được tạo tùy chỉnh trong thư viện đồ án (<code>jumper:jp5</code>, <code>LAB3_CA2_14:Micro_USB</code>, <code>LAB2_CA2_14:Jumper_3</code>, <code>LAB2_CA2_14:LM2776</code>, <code>LAB3_CA2_14:ON/OFF_SWITCH</code>).</li>
+<li><em>Đánh giá:</em> Các symbol này đã lưu trực tiếp trong tập tin schematic <code>LAB3.kicad_sch</code>, các chân kết nối chính xác và đạt 0 lỗi nên chuyển sang bước layout mạch in.</li>
+</ul>
+<div class="figure-container">
+    <img class="report-img" src="Pic/schematic_hd.png" alt="Sơ đồ nguyên lý mạch nguồn đa năng hoàn chỉnh" style="max-height: 105mm;">
+    <div class="figure-caption">Hình 2. Sơ đồ nguyên lý mạch nguồn đa chức năng xuất từ KiCad Schematic Editor</div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>BÀI TẬP 2: GÁN FOOTPRINT VÀ KIỂM TRA MÔ HÌNH 3D</h2>
+<p>Nội dung Bài tập 2 gồm: lập bảng đối chiếu linh kiện - Package - Footprint, thiết kế các Footprint tùy chỉnh cho linh kiện chưa có sẵn trong thư viện và kiểm tra mô hình 3D của các linh kiện đã gán.</p>
+<h3>1. Bảng đối chiếu linh kiện, Package và Footprint</h3>
+<p>Dựa trên datasheet của linh kiện và danh mục vật tư (BOM), toàn bộ 38 linh kiện trên sơ đồ đã được gán Footprint tương ứng:</p>
+<table class="bom-table">
+    <thead>
+        <tr>
+            <th style="width: 12%;">Ký hiệu</th>
+            <th style="width: 20%;">Giá trị</th>
+            <th style="width: 18%;">Package Datasheet</th>
+            <th style="width: 32%;">Footprint trong KiCad</th>
+            <th style="width: 18%;">Nguồn thư viện</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">U1</td>
+            <td>AMS1117-3.3</td>
+            <td>SOT-223-3</td>
+            <td><code>Package_TO_SOT_SMD:SOT-223-3_TabPin2</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">U2</td>
+            <td>LM2776</td>
+            <td>SOT-23-6</td>
+            <td><code>Package_TO_SOT_SMD:SOT-23-6</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">U3</td>
+            <td>CP2102</td>
+            <td>QFN-28 (5×5 mm)</td>
+            <td><code>LAB3_CA2_14:CP2102</code></td>
+            <td>Thư viện đồ án</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">U5</td>
+            <td>NE555</td>
+            <td>SOIC-8</td>
+            <td><code>Package_SO:SO-8_3.9x4.9mm_P1.27mm</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">USB1</td>
+            <td>Micro_USB</td>
+            <td>Micro-B SMD</td>
+            <td><code>LAB3_CA2_14:Micro_USB</code></td>
+            <td>Thư viện đồ án</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">SW2</td>
+            <td>ON/OFF SWITCH</td>
+            <td>SPDT gạt THT</td>
+            <td><code>LAB3_CA2_14:SWITCH_ON_OFF</code></td>
+            <td>Thư viện đồ án</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">C1-C6</td>
+            <td>2.2 µF / 1 µF</td>
+            <td>0805 SMD</td>
+            <td><code>Capacitor_SMD:C_0805_2012Metric</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">C7-C9</td>
+            <td>100 nF</td>
+            <td>0805 SMD</td>
+            <td><code>Capacitor_SMD:C_0805_2012Metric</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">C10, C11</td>
+            <td>10 µF (Tụ hóa)</td>
+            <td>Radial D5.0 mm</td>
+            <td><code>Capacitor_THT:CP_Radial_D5.0mm_P2.50mm</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">R1-R6</td>
+            <td>1 kΩ</td>
+            <td>0805 SMD</td>
+            <td><code>Resistor_SMD:R_0805_2012Metric</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">R7, R8</td>
+            <td>47 kΩ / 100 kΩ</td>
+            <td>0805 SMD</td>
+            <td><code>Resistor_SMD:R_0805_2012Metric</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">D1-D6</td>
+            <td>LED hiển thị</td>
+            <td>0805 SMD</td>
+            <td><code>LED_SMD:LED_0805_2012Metric</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">J1, J5, J6</td>
+            <td>Jumper 3 chân</td>
+            <td>Header 1x03 P2.54</td>
+            <td><code>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">J3, J4</td>
+            <td>Header 5P / 2P</td>
+            <td>Header 1x05 / 1x02</td>
+            <td><code>Connector_PinHeader_2.54mm:PinHeader_1x05 / 1x02_Vertical</code></td>
+            <td>KiCad Standard</td>
+        </tr>
+        <tr>
+            <td style="text-align: center; font-weight: bold;">J7, J8</td>
+            <td>Connector 3×2</td>
+            <td>Header 2x03 P2.54</td>
+            <td><code>LAB3_CA2_14:Connector 3x2</code></td>
+            <td>Thư viện đồ án</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h3>2. Thiết kế Footprint tùy chỉnh và chuyển sang PCB Editor</h3>
+<p>Sau khi gán Footprint, sơ đồ được cập nhật sang giao diện PCB Editor bằng tính năng <em>Update PCB from Schematic</em> (phím tắt <code>F8</code>):</p>
+<div class="figure-container">
+    <img class="report-img" src="Pic/kicad_ganchan_pcb.png" alt="Giao diện PCB Editor sau khi gán Footprint" style="max-height: 72mm;">
+    <div class="figure-caption">Hình 3. Giao diện PCB Editor sau khi gán Footprint và tải mạng nối (Ratsnest)</div>
+</div>
+
+<p>Các linh kiện chưa có sẵn trong thư viện chuẩn (cổng Micro USB, Switch gạt ON/OFF, CP2102 QFN-28 và LM2776 SOT-23-6) được tạo trong <strong>Footprint Editor</strong> dựa theo thông số kỹ thuật của nhà sản xuất:
+- Xác định loại Pad (SMD hoặc Through-hole), kích thước pad và đường kính lỗ khoan.
+- Thiết lập khoảng cách chân chính xác (Micro USB pitch 0.65 mm, CP2102 pitch 0.5 mm, Header pitch 2.54 mm).
+- Vẽ các lớp gia công: <code>F.Cu</code> (lớp đồng), <code>F.Mask</code> (mặt nạ hàn), <code>F.SilkS</code> (lớp in lụa đánh dấu chân 1) và <code>F.CrtYd</code> (vùng biên an toàn của linh kiện).</p>
+<div class="figure-container">
+    <img class="report-img" src="Pic/custom_footprints_matrix.png" alt="Các footprint tùy chỉnh thiết kế trên KiCad" style="max-height: 72mm;">
+    <div class="figure-caption">Hình 4. Các Footprint tùy chỉnh trong thư viện LAB3.pretty (Micro_USB, SWITCH_ON_OFF, CP2102, SOT-23-6_LM2776)</div>
+</div>
+
+<div class="page-break"></div>
+
+<h3>3. Kiểm tra mô hình 3D của các linh kiện đã gán</h3>
+<p>Sau khi hoàn tất gán footprint, mô hình 3D của bo mạch được kiểm tra trong công cụ <strong>3D Viewer</strong> của KiCad để xác nhận vị trí, kích thước và hình dáng linh kiện:</p>
+<div class="figure-container">
+    <img class="report-img" src="Pic/kicad_3d_viewer_gui.png" alt="Mô hình 3D Viewer trên KiCad" style="max-height: 120mm;">
+    <div class="figure-caption">Hình 5. Kiểm tra mô hình 3D của bo mạch trong công cụ 3D Viewer</div>
+</div>
+</body>
+</html>

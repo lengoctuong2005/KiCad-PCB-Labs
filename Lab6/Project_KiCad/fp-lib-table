@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "LAB3_CA1_14")(type "KiCad")(uri "${KIPRJMOD}/LAB3.pretty")(options "")(descr ""))
+)
