@@ -2,291 +2,14 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Báo cáo Lab 02 - KiCad</title>
 <style>
-@page {
-    size: A4 portrait;
-    margin: 15mm 18mm 18mm 18mm;
-    @bottom-right {
-        content: "Trang " counter(page);
-        font-family: 'Times New Roman', serif;
-        font-size: 10pt;
-        color: #555;
-    }
-    @bottom-left {
-        content: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 02";
-        font-family: 'Times New Roman', serif;
-        font-size: 10pt;
-        color: #555;
-    }
-}
-
-@page:first {
-    margin: 15mm 18mm 18mm 18mm;
-    @bottom-right { content: none; }
-    @bottom-left { content: none; }
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Times New Roman', 'Liberation Serif', serif;
-    font-size: 11.5pt;
-    line-height: 1.45;
-    color: #1a1a1a;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-}
-
-/* COVER PAGE FULL A4 (CHUẨN LAB 5) */
-.cover-page {
-    border: 3px double #1e3a8a;
-    border-radius: 8px;
-    padding: 35px 25px;
-    margin: 0;
-    min-height: 258mm;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-    background-color: #ffffff;
-    page-break-after: always !important;
-    break-after: page !important;
-}
-
-.cover-header {
-    margin-top: 10px;
-}
-
-.uni-name {
-    font-size: 13pt;
-    font-weight: bold;
-    color: #1e3a8a;
-    line-height: 1.35;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dept-divider {
-    width: 140px;
-    height: 1.5px;
-    background-color: #1e3a8a;
-    margin: 10px auto 0 auto;
-}
-
-.cover-body {
-    margin: 30px 0;
-}
-
-.report-badge {
-    display: inline-block;
-    font-size: 12pt;
-    font-weight: bold;
-    color: #1e3a8a;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
-    border-bottom: 2px solid #b91c1c;
-    padding-bottom: 4px;
-}
-
-.report-title {
-    font-size: 18pt;
-    font-weight: bold;
-    color: #b91c1c;
-    line-height: 1.35;
-    margin: 12px 0 16px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-}
-
-.lab-name {
-    font-size: 13.5pt;
-    font-weight: bold;
-    color: #0f172a;
-    line-height: 1.4;
-    max-width: 90%;
-    margin: 0 auto;
-}
-
-.cover-student {
-    margin: 20px auto 10px auto;
-    width: 88%;
-    background-color: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 16px 20px;
-    text-align: left;
-}
-
-.student-info {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12pt;
-    margin: 0;
-}
-
-.student-info td {
-    padding: 5px 8px;
-    border: none;
-    color: #111;
-    line-height: 1.4;
-}
-
-.student-info td:first-child {
-    width: 28%;
-    white-space: nowrap;
-    color: #1e3a8a;
-    font-weight: bold;
-}
-
-.cover-footer {
-    margin-bottom: 10px;
-    font-size: 11.5pt;
-    font-weight: bold;
-    color: #334155;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* MAIN CONTENT STYLING (PAGE 2 ONWARD) */
-h2:first-of-type {
-    page-break-before: always;
-    break-before: page;
-}
-
-h2 {
-    font-size: 13pt;
-    color: #1e3a8a;
-    border-bottom: 1.5px solid #1e3a8a;
-    padding-bottom: 3px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
-h3 {
-    font-size: 11.5pt;
-    color: #0f172a;
-    margin-top: 14px;
-    margin-bottom: 6px;
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
-h4 {
-    font-size: 11pt;
-    color: #1e293b;
-    margin-top: 12px;
-    margin-bottom: 4px;
-    page-break-after: avoid;
-    break-after: avoid;
-}
-
-p {
-    margin-top: 4px;
-    margin-bottom: 8px;
-    text-align: justify;
-}
-
-ul, ol {
-    margin-top: 4px;
-    margin-bottom: 8px;
-    padding-left: 22px;
-}
-
-li {
-    margin-bottom: 4px;
-    text-align: justify;
-}
-
-code {
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 9.5pt;
-    background-color: #f1f5f9;
-    color: #0f172a;
-    padding: 1px 3px;
-    border-radius: 3px;
-    border: 1px solid #e2e8f0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 9.5pt;
-    table-layout: fixed;
-    page-break-inside: auto;
-}
-
-tr {
-    page-break-inside: avoid;
-    page-break-after: auto;
-}
-
-th, td {
-    border: 1px solid #334155;
-    padding: 6px 7px;
-    line-height: 1.35;
-    word-wrap: break-word;
-    word-break: break-word;
-    overflow-wrap: break-word;
-}
-
-th {
-    background-color: #1e3a8a;
-    color: #ffffff;
-    font-weight: bold;
-    text-align: center;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f8fafc;
-}
-
-.figure-container {
-    text-align: center;
-    margin: 14px 0;
-    page-break-inside: avoid;
-}
-
-.report-img {
-    max-width: 95%;
-    height: auto;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-.figure-caption {
-    font-size: 10.5pt;
-    font-style: italic;
-    color: #334155;
-    margin-top: 6px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #cbd5e1;
-    margin: 16px 0;
-}
-
-pre {
-    background-color: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    padding: 10px;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 8.5pt;
-    line-height: 1.25;
-    overflow-x: auto;
-    page-break-inside: avoid;
-}
+body { font-family: 'Times New Roman', serif; margin: 30px; line-height: 1.5; font-size: 14px; }
+h1, h2, h3 { color: #1a365d; }
+img { max-width: 90%; height: auto; display: block; margin: 15px auto; border: 1px solid #ccc; }
+table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+th, td { border: 1px solid #718096; padding: 8px; text-align: left; }
+th { background-color: #e2e8f0; }
+code { background-color: #edf2f7; padding: 2px 4px; border-radius: 3px; }
 </style>
 </head>
 <body>
@@ -319,9 +42,9 @@ TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
 <h2>BÀI TẬP 1: HOÀN THÀNH TOÀN BỘ SCHEMATIC MẠCH TẠO NGUỒN ĐIỆN ÁP ÂM DÙNG LM2776</h2>
 <h3>1. Giới thiệu tổng quan và cấu trúc mạch nguồn âm LM2776</h3>
 <p>IC LM2776 của Texas Instruments là vi mạch tạo nguồn áp âm sử dụng cơ chế bơm điện tích (Switched-Capacitor Inverter). Mạch hoạt động với tần số chuyển mạch 2 MHz, nhận điện áp vào từ +2.7V đến +5.5V và đảo thành điện áp âm từ -2.7V đến -5.5V với dòng tải tối đa 200mA.</p>
-<p>Sơ đồ nguyên lý gồm các khối chức năng:<br />
-- <strong>Khối nguồn vào:</strong> Nhận nguồn +5V từ đầu cắm J1, qua tụ gốm C1 (2.2µF / 0805) để ổn định điện áp cấp cho chân VIN (chân 3) và chân kích hoạt EN (chân 4).<br />
-- <strong>Khối bơm điện tích (Charge Pump):</strong> Tụ bay (Flying Capacitor) C2 (1µF / 0805) gắn giữa hai chân C1+ (chân 5) và C1- (chân 6). Trong nửa chu kỳ đầu, tụ C2 nạp điện từ VIN; ở nửa chu kỳ sau, mạch đảo cực tính để truyền năng lượng sang ngõ ra.<br />
+<p>Sơ đồ nguyên lý gồm các khối chức năng:
+- <strong>Khối nguồn vào:</strong> Nhận nguồn +5V từ đầu cắm J1, qua tụ gốm C1 (2.2µF / 0805) để ổn định điện áp cấp cho chân VIN (chân 3) và chân kích hoạt EN (chân 4).
+- <strong>Khối bơm điện tích (Charge Pump):</strong> Tụ bay (Flying Capacitor) C2 (1µF / 0805) gắn giữa hai chân C1+ (chân 5) và C1- (chân 6). Trong nửa chu kỳ đầu, tụ C2 nạp điện từ VIN; ở nửa chu kỳ sau, mạch đảo cực tính để truyền năng lượng sang ngõ ra.
 - <strong>Khối lọc điện áp âm ngõ ra:</strong> Chân VOUT (chân 1) xuất điện áp âm tương ứng (-5V hoặc -3.3V tùy vị trí nối nguồn vào), qua tụ gốm C3 (2.2µF / 0805) nối mass GND để lọc phẳng điện áp cấp ra tải.</p>
 <div class="figure-container">
 <img src="Pic/schematic_circuit_hd.png" alt="Sơ đồ nguyên lý hoàn chỉnh mạch tạo nguồn điện áp âm LM2776" class="report-img" style="max-width: 90%;">
@@ -337,14 +60,14 @@ TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
 </div>
 
 <h4>Bước 2: Tạo Symbol IC LM2776 và Jumper trong thư viện cá nhân</h4>
-<p>Do linh kiện LM2776 chưa có trong thư viện mặc định của đề bài, ta mở Symbol Editor (<code>Ctrl+Shift+L</code>), tạo thư viện <code>Lab2NT.kicad_sym</code> và tạo symbol LM2776 với các thông số:<br />
-- <strong>Đóng gói:</strong> SOT-23-6 (6 chân).<br />
-- <strong>Cấu hình các chân (Pin) theo datasheet:</strong><br />
-  - Chân 1 (<code>OUT</code>): Kiểu điện học Power Output.<br />
-  - Chân 2 (<code>GND</code>): Kiểu điện học Power Input.<br />
-  - Chân 3 (<code>VIN</code>): Kiểu điện học Power Input.<br />
-  - Chân 4 (<code>EN</code>): Kiểu điện học Input.<br />
-  - Chân 5 (<code>C1+</code>): Kiểu điện học Passive.<br />
+<p>Do linh kiện LM2776 chưa có trong thư viện mặc định của đề bài, ta mở Symbol Editor (<code>Ctrl+Shift+L</code>), tạo thư viện <code>Lab2NT.kicad_sym</code> và tạo symbol LM2776 với các thông số:
+- <strong>Đóng gói:</strong> SOT-23-6 (6 chân).
+- <strong>Cấu hình các chân (Pin) theo datasheet:</strong>
+  - Chân 1 (<code>OUT</code>): Kiểu điện học Power Output.
+  - Chân 2 (<code>GND</code>): Kiểu điện học Power Input.
+  - Chân 3 (<code>VIN</code>): Kiểu điện học Power Input.
+  - Chân 4 (<code>EN</code>): Kiểu điện học Input.
+  - Chân 5 (<code>C1+</code>): Kiểu điện học Passive.
   - Chân 6 (<code>C1-</code>): Kiểu điện học Passive.</p>
 <div class="figure-container" style="display: flex; justify-content: center; gap: 20px; align-items: center;">
   <div style="text-align: center;">
@@ -359,10 +82,10 @@ TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
 
 <p>Thư viện <code>Lab2NT.kicad_sym</code> cũng chứa các symbol nguồn <code>VDD_5V</code>, <code>VDD_3V3</code>, <code>VDD_N</code> để định danh các net nguồn trên bản vẽ.</p>
 <h4>Bước 3: Lấy linh kiện và đặt lên bản vẽ (Place Symbols)</h4>
-<p>Nhấn phím <code>A</code> (Add Symbol) để lấy các linh kiện đặt vào bản vẽ:<br />
-- 01 IC LM2776 (từ thư viện <code>Lab2NT</code>).<br />
-- 03 Tụ gốm C (từ thư viện <code>Device:C</code>).<br />
-- 01 Header 3 chân Jumper_3.<br />
+<p>Nhấn phím <code>A</code> (Add Symbol) để lấy các linh kiện đặt vào bản vẽ:
+- 01 IC LM2776 (từ thư viện <code>Lab2NT</code>).
+- 03 Tụ gốm C (từ thư viện <code>Device:C</code>).
+- 01 Header 3 chân Jumper_3.
 - Các cổng nối đất GND (phím tắt <code>P</code>).</p>
 <div class="figure-container">
 <img src="Pic/components_placement_clean.png" alt="Bố trí linh kiện và các cổng Power trước khi nối dây" class="report-img" style="max-width: 75%;">
@@ -412,25 +135,25 @@ TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
 </tbody>
 </table>
 <h3>2. Tự động đánh số tham chiếu (Annotate Schematic)</h3>
-<p>Mở công cụ <strong>Annotate Schematic</strong> trên thanh công cụ:<br />
-- <strong>Phạm vi:</strong> Toàn bộ sơ đồ (Entire schematic).<br />
-- <strong>Thứ tự:</strong> Sort by X position (đánh số thứ tự linh kiện từ trái sang phải).<br />
+<p>Mở công cụ <strong>Annotate Schematic</strong> trên thanh công cụ:
+- <strong>Phạm vi:</strong> Toàn bộ sơ đồ (Entire schematic).
+- <strong>Thứ tự:</strong> Sort by X position (đánh số thứ tự linh kiện từ trái sang phải).
 - <strong>Quy tắc:</strong> Gán lại nhãn để làm sạch các dấu <code>?</code> chưa định danh.</p>
 <p>Kết quả sau khi đánh số: toàn bộ linh kiện có định danh chuẩn xác <code>U1</code>, <code>C1</code>, <code>C2</code>, <code>C3</code>, <code>J1</code> như trên Hình 1.</p>
 <h3>3. Kiểm tra sơ đồ bằng công cụ ERC (Electrical Rules Check)</h3>
 <p>Chạy ERC trên sơ đồ nguyên lý để phát hiện các lỗi hở chân, thiếu nguồn driving hoặc xung đột kiểu chân.</p>
-<p>Các điểm kỹ thuật đã xử lý:<br />
-- Đặt symbol <code>PWR_FLAG</code> trên các net nguồn vào <code>VDD_5V</code>, <code>VDD_3V3</code>, net <code>VIN/EN</code> và net <code>GND</code> để thông báo cho trình kiểm tra ERC biết nguồn cấp chủ động.<br />
-- Net <code>VDD_N</code> kết nối trực tiếp với chân <code>VOUT</code> (kiểu Power Output) của U1 nên không gắn thêm <code>PWR_FLAG</code>, tránh xung đột logic hai nguồn cấp trên cùng một đường dây.<br />
+<p>Các điểm kỹ thuật đã xử lý:
+- Đặt symbol <code>PWR_FLAG</code> trên các net nguồn vào <code>VDD_5V</code>, <code>VDD_3V3</code>, net <code>VIN/EN</code> và net <code>GND</code> để thông báo cho trình kiểm tra ERC biết nguồn cấp chủ động.
+- Net <code>VDD_N</code> kết nối trực tiếp với chân <code>VOUT</code> (kiểu Power Output) của U1 nên không gắn thêm <code>PWR_FLAG</code>, tránh xung đột logic hai nguồn cấp trên cùng một đường dây.
 - Kết quả kiểm tra đạt 0 lỗi (0 Errors) và 0 cảnh báo (0 Warnings).</p>
 <h3>4. Thiết lập khung tên bản vẽ kỹ thuật (Page Settings)</h3>
-<p>Vào menu <strong>File -&gt; Page Settings</strong> để điền thông tin khung tên kỹ thuật:<br />
-- Paper Size: A4 (297 x 210 mm, Landscape)<br />
-- Title: Mach tao nguon dien ap am su dung LM2776<br />
-- Revision: Rev 1.0 - Date: 2026-08-26<br />
-- Company: Truong Dai Hoc Khoa Hoc Tu Nhien - DHQG TPHCM<br />
-- Comment 1: Nguoi thiet ke: Le Ngoc Tuong<br />
-- Comment 2: MSSV: 23207124<br />
+<p>Vào menu <strong>File -&gt; Page Settings</strong> để điền thông tin khung tên kỹ thuật:
+- Paper Size: A4 (297 x 210 mm, Landscape)
+- Title: Mach tao nguon dien ap am su dung LM2776
+- Revision: Rev 1.0 - Date: 2026-08-26
+- Company: Truong Dai Hoc Khoa Hoc Tu Nhien - DHQG TPHCM
+- Comment 1: Nguoi thiet ke: Le Ngoc Tuong
+- Comment 2: MSSV: 23207124
 - Comment 3: Lop: 23DTV_CLC3 - Ca thuc hanh: Ca 2</p>
 <div class="figure-container">
 <img src="Pic/img_p5_47.png" alt="Khung tên bản vẽ kỹ thuật sau khi thiết lập Page Settings" class="report-img" style="max-width: 85%;">
