@@ -1,6 +1,5 @@
 (sym_lib_table
-	(version 7)
-	(lib (name "LAB2_CA1_14")(type "KiCad")(uri "${KIPRJMOD}/LAB2_CA1_14.kicad_sym")(options "")(descr ""))
-	(lib (name "LAB3_CA1_14")(type "KiCad")(uri "${KIPRJMOD}/LAB3.kicad_sym")(options "")(descr ""))
-	(lib (name "jumper")(type "KiCad")(uri "${KIPRJMOD}/jumper.kicad_sym")(options "")(descr ""))
+  (version 7)
+  (lib (name "MachNguon_Library")(type "KiCad")(uri "/mnt/Windows/HK3-25-26/KhoaHe_PCB/Lab5/Project_KiCad/Lib_MachNguon_Library.kicad_sym")(options "")(descr ""))
+  (lib (name "my_library")(type "KiCad")(uri "/mnt/Windows/HK3-25-26/KhoaHe_PCB/Lab5/Project_KiCad/Lib_my_library.kicad_sym")(options "")(descr ""))
 )

@@ -244,3 +244,38 @@ ls -la Pic/pdf_preview/
 | **Lab 04** | Thiết lập PCB & Design Rules | Vẽ viền bo Edge.Cuts $50\times 50\text{ mm}$, cấu hình Stackup 2 lớp FR4, Net Classes | Cấu hình Stackup, bảng Design Rules, bảng Net Classes |
 | **Lab 05** | Bố trí linh kiện (Placement) | Sắp xếp linh kiện tối ưu, tụ lọc sát chân IC, phân chia khối nguồn | Bản vẽ PCB 2D sau placement, ảnh 3D linh kiện đã sắp xếp |
 | **Lab 06** | Đi dây (Routing), Phủ đồng & Xuất Gerber | Routing lớp Top/Bottom, đổ đồng GND, chạy DRC 0 lỗi, xuất Gerber/BOM | Bản vẽ Routing hoàn chỉnh, bản vẽ phủ đồng, báo cáo DRC 0 lỗi |
+
+---
+
+## VIII. KINH NGHIỆM VÀ QUY CHUẨN KỸ THUẬT NÂNG CAO (ĐÃ ĐƯỢC THỰC NGHIỆM)
+
+### 1. Quy chuẩn căn chỉnh mô hình 3D (3D Model Alignment & Offsets)
+* **Quy tắc đảo dấu trục Y giữa PCB và 3D STEP:**
+  - Hệ toạ độ mặt phẳng 2D trong KiCad PCB quy định trục $+Y$ hướng xuống dưới (downward).
+  - Hệ toạ độ không gian 3D OpenGL / STEP quy định trục $+Y$ hướng lên trên (upward).
+  - Khi gán offset 3D `(offset (xyz ox oy oz))` trong tệp `.kicad_pcb`: toạ độ $Y_{\text{3D\_offset}} = - Y_{\text{PCB\_offset}}$.
+* **Kiểm tra khớp chân linh kiện (Pads vs 3D Pins):**
+  - **Headers 2x3 (J5, J6, J7, J8):** Đảm bảo dùng đúng tệp `PinHeader_2x03_P2.54mm_Vertical.step` (không dùng nhầm 1x03), kiểm tra vị trí chân số 1 và góc xoay footprint để 6 chân cắm lọt 100% vào 6 lỗ pad.
+  - **IC QFN-28 (CP2102 - U3):** Đảm bảo dấu chấm Pin 1 trên thân IC trùng với ký hiệu Pin 1 trên lớp Silkscreen và pad đồng góc dưới bên trái; cân chỉnh offset và xoay góc `(xyz 0 0 90)`.
+  - **Cổng Micro USB (USB1) & Công tắc trượt (SW2):** Cân chỉnh chính xác vị trí các pad gá vỏ kim loại chịu lực và các chân tín hiệu tiếp xúc.
+* **Lệnh render 3D kiểm tra qua CLI:**
+  ```bash
+  # Render nhìn thẳng từ trên xuống (Top View)
+  kicad-cli pcb render --side top --quality high -o Pic/3d_placement_top.png Project_KiCad/LAB5.kicad_pcb
+
+  # Render góc phối cảnh 3D Isometric chuẩn
+  kicad-cli pcb render --rotate '-45,0,45' --perspective --quality high -o Pic/3d_placement_isometric.png Project_KiCad/LAB5.kicad_pcb
+  ```
+
+### 2. Quy chuẩn tạo ảnh đồ họa chú thích bo mạch (PCB Image Annotations)
+* **Tỉ lệ ánh xạ tọa độ vật lý sang pixel:**
+  - Với bo mạch $50 \times 50\text{ mm}$ xuất ảnh kích thước $1927 \times 1927\text{ px}$, hệ số chuyển đổi là $\approx 38.54\text{ px/mm}$.
+* **Quy tắc đóng khung bao (Bounding Boxes):**
+  - Khung bao khối chức năng hoặc linh kiện bắt buộc phải bao trọn: toàn bộ diện tích thân linh kiện (Body), toàn bộ các chân pad hàn (Pads), và nhãn định danh (Silkscreen Reference).
+  - Tuyệt đối không để khung chỉ bao quanh phần chữ định danh mà bỏ sót cụm pad mạch in.
+
+### 3. Quy chuẩn an toàn trước khi Commit và Push GitHub
+* **Dọn dẹp tệp tin rác:** Xóa toàn bộ ảnh cắt tạm thời (`crop_*.png`, `test_3d_render_*.png`), thư mục preview trung gian (`Pic/pdf_preview/`), và cache `__pycache__`.
+* **Quét bảo mật bí mật (Secret Scan):** Chạy kiểm tra qua công cụ `safety_guard.py` để đảm bảo không rò rỉ token, khóa riêng tư hoặc thông tin cá nhân ngoài quy chuẩn.
+* **Đồng bộ định danh tác giả Git:** Đảm bảo `git config user.name` và `git config user.email` thể hiện đúng tên sinh viên *Lê Ngọc Tường*.
+

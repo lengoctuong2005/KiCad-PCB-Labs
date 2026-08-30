@@ -5,11 +5,19 @@ RULES_MANIFEST.md
 SKILLS_MANIFEST.md
 .manifest_cache.json
 
+# Temporary build artifacts & preview renders
+__pycache__/
+*.pyc
+page_*.png
+page_new_*.png
+*.rpt
+
 # Node modules & cache
 node_modules/
 package-lock.json
 
 # Temporary KiCad locks & backup
+*.kicad_prl
 *.lck
 *.bak
 *.bak2
@@ -21,3 +29,4 @@ _saved-*
 # System & OS
 .DS_Store
 Thumbs.db
+

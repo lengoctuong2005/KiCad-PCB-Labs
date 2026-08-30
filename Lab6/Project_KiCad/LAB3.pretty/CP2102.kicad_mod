@@ -1,11 +1,11 @@
 (footprint "CP2102"
-	(version 20241229)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -0.5 0)
-
+		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "631049ad-c8fd-483b-8d88-1eb92b5c2df8")
 		(effects
@@ -17,7 +17,7 @@
 	)
 	(property "Value" "CP2102"
 		(at 0 1 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "41fe91c7-46cf-4a1b-92b1-7609c1108606")
@@ -30,7 +30,7 @@
 	)
 	(property "Datasheet" ""
 		(at 0 0 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "b2846d0b-423c-4a3f-adf5-0d1c507c917f")
@@ -43,7 +43,7 @@
 	)
 	(property "Description" ""
 		(at 0 0 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "cc2157cc-7a59-46c0-8801-8541cf25f352")
@@ -55,7 +55,7 @@
 		)
 	)
 	(attr smd)
-
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -3.5 1.62)
 		(end -2.775 1.62)
@@ -362,7 +362,7 @@
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 4.26 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "eb8aa1ce-fc08-4937-b554-071d44f9749b")
 		(effects
@@ -578,9 +578,3 @@
 	)
 	(embedded_fonts no)
 )
-
-
-
-
-
-

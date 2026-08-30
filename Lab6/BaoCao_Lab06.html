@@ -1,414 +1,524 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <title>Báo cáo Thực hành KiCad - Lab 06: Routing</title>
-    <style>
-        @page {
-            size: A4 portrait;
-            margin: 15mm 18mm 18mm 18mm;
-        }
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Times New Roman', 'Liberation Serif', serif;
-            font-size: 11.5pt;
-            line-height: 1.45;
-            color: #1a1a1a;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-        }
-
-        /* COVER PAGE FULL A4 */
-        .cover-page {
-            border: 3px double #1e3a8a;
-            border-radius: 8px;
-            padding: 35px 25px;
-            margin: 0;
-            min-height: 258mm;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-            background-color: #ffffff;
-            page-break-after: always !important;
-            break-after: page !important;
-        }
-        .cover-header {
-            margin-top: 10px;
-        }
-        .uni-name {
-            font-size: 13pt;
-            font-weight: bold;
-            color: #1e3a8a;
-            line-height: 1.35;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .dept-divider {
-            width: 140px;
-            height: 1.5px;
-            background-color: #1e3a8a;
-            margin: 10px auto 0 auto;
-        }
-        .cover-body {
-            margin: 30px 0;
-        }
-        .report-badge {
-            display: inline-block;
-            font-size: 12pt;
-            font-weight: bold;
-            color: #1e3a8a;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #b91c1c;
-            padding-bottom: 4px;
-        }
-        .report-title {
-            font-size: 18pt;
-            font-weight: bold;
-            color: #b91c1c;
-            line-height: 1.35;
-            margin: 12px 0 16px 0;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        .lab-name {
-            font-size: 13.5pt;
-            font-weight: bold;
-            color: #0f172a;
-            line-height: 1.4;
-            max-width: 90%;
-            margin: 0 auto;
-        }
-        .cover-student {
-            margin: 20px auto 10px auto;
-            width: 88%;
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 16px 20px;
-            text-align: left;
-        }
-        .student-info {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12pt;
-            margin: 0;
-        }
-        .student-info td {
-            padding: 5px 8px;
-            border: none;
-            color: #111;
-            line-height: 1.4;
-        }
-        .student-info td:first-child {
-            width: 28%;
-            white-space: nowrap;
-            color: #1e3a8a;
-            font-weight: bold;
-        }
-        .cover-footer {
-            margin-bottom: 10px;
-            font-size: 11.5pt;
-            font-weight: bold;
-            color: #334155;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* MAIN CONTENT STYLING (PAGE 2 ONWARD) */
-        h2:first-of-type {
-            page-break-before: always;
-            break-before: page;
-        }
-        h2 {
-            font-size: 13pt;
-            color: #1e3a8a;
-            border-bottom: 1.5px solid #1e3a8a;
-            padding-bottom: 3px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            page-break-after: avoid;
-            break-after: avoid;
-        }
-        h3 {
-            font-size: 11.5pt;
-            color: #0f172a;
-            margin-top: 14px;
-            margin-bottom: 6px;
-            page-break-after: avoid;
-            break-after: avoid;
-        }
-        p {
-            margin-top: 4px;
-            margin-bottom: 8px;
-            text-align: justify;
-        }
-        ul, ol {
-            margin-top: 4px;
-            margin-bottom: 8px;
-            padding-left: 22px;
-        }
-        li {
-            margin-bottom: 4px;
-            text-align: justify;
-        }
-        code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 9.5pt;
-            background-color: #f1f5f9;
-            color: #0f172a;
-            padding: 1px 3px;
-            border-radius: 3px;
-            border: 1px solid #e2e8f0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 9.5pt;
-            table-layout: fixed;
-            page-break-inside: auto;
-        }
-        tr {
-            page-break-inside: avoid;
-            page-break-after: auto;
-        }
-        th, td {
-            border: 1px solid #334155;
-            padding: 6px 7px;
-            line-height: 1.35;
-            word-wrap: break-word;
-            word-break: break-word;
-            overflow-wrap: break-word;
-        }
-        th {
-            background-color: #1e3a8a;
-            color: #ffffff;
-            font-weight: bold;
-            text-align: center;
-        }
-        tbody tr:nth-child(even) {
-            background-color: #f8fafc;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #cbd5e1;
-            margin: 16px 0;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Báo cáo Lab 06 - KiCad</title>
 </head>
 <body>
+<style>
+@page {
+    size: A4 portrait;
+    margin: 14mm 16mm 14mm 16mm;
+    @bottom-right {
+        content: "Trang " counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+        color: #555;
+    }
+    @bottom-left {
+        content: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 06";
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+        color: #555;
+    }
+}
+
+@page:first {
+    margin: 14mm 16mm 14mm 16mm;
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', 'Liberation Serif', serif;
+    font-size: 11pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* KHUNG BÌA CHUẨN A4 */
+.cover-page {
+    border: 3px double #1e3a8a;
+    border-radius: 8px;
+    padding: 35px 25px;
+    margin: 0;
+    min-height: 262mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #ffffff;
+    page-break-after: always !important;
+    break-after: page !important;
+}
+
+.cover-header { margin-top: 10px; }
+.uni-name {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.dept-divider {
+    width: 140px;
+    height: 1.5px;
+    background-color: #1e3a8a;
+    margin: 10px auto 0 auto;
+}
+
+.cover-body { margin: 30px 0; }
+.report-badge {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #b91c1c;
+    padding-bottom: 4px;
+}
+.report-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #b91c1c;
+    line-height: 1.35;
+    margin: 12px 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.lab-name {
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #0f172a;
+    line-height: 1.4;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.cover-student {
+    margin: 20px auto 10px auto;
+    width: 88%;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-align: left;
+}
+.student-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12pt;
+    margin: 0;
+}
+.student-info td {
+    padding: 5px 8px;
+    border: none;
+    color: #111;
+    line-height: 1.4;
+}
+.student-info td:first-child {
+    width: 28%;
+    white-space: nowrap;
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.cover-footer {
+    margin-bottom: 10px;
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* NỘI DUNG BÁO CÁO */
+.page-break {
+    page-break-before: always;
+    break-before: page;
+}
+
+h2 {
+    font-size: 12pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 3px;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+h3 {
+    font-size: 10.5pt;
+    color: #0f172a;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+p {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    text-align: justify;
+}
+ul, ol {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    padding-left: 18px;
+}
+li {
+    margin-bottom: 2px;
+    text-align: justify;
+}
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 3px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+table.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 5px 0;
+    font-size: 8.5pt;
+    table-layout: fixed;
+}
+table.report-table th, table.report-table td {
+    border: 1px solid #334155;
+    padding: 3.5px 5px;
+    line-height: 1.25;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+table.report-table th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px 4px;
+}
+table.report-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+.figure-container {
+    text-align: center;
+    margin: 5px 0;
+    page-break-inside: avoid;
+}
+.report-img {
+    max-width: 96%;
+    max-height: 98mm;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.figure-caption {
+    font-size: 9.5pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 3px;
+}
+</style>
+
 <div class="cover-page">
-<div class="cover-header">
-<div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
-<div class="dept-divider"></div>
+    <div class="cover-header">
+        <div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
+        <div class="dept-divider"></div>
+    </div>
+
+    <div class="cover-body">
+        <div class="report-badge">BÁO CÁO THỰC HÀNH</div>
+        <div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
+        <div class="lab-name">Lab 06: Routing – Kỹ thuật Đi dây Mạch in, Cấu hình Trình đi dây Tương tác và Quản lý Via</div>
+    </div>
+
+    <div class="cover-student">
+        <table class="student-info">
+            <tr>
+                <td>Họ và tên:</td>
+                <td>Lê Ngọc Tường</td>
+            </tr>
+            <tr>
+                <td>MSSV:</td>
+                <td>23207124</td>
+            </tr>
+            <tr>
+                <td>Lớp:</td>
+                <td>23DTV_CLC3</td>
+            </tr>
+            <tr>
+                <td>Môn học:</td>
+                <td>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="cover-footer">
+        TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
+    </div>
 </div>
 
-<div class="cover-body">
-<div class="report-badge">BÁO CÁO THỰC HÀNH</div>
-<div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
-<div class="lab-name">Lab 06: Routing – Kỹ thuật Đi dây Mạch in, Cấu hình Trình đi dây Tương tác và Quản lý Via</div>
-</div>
+<div class="page-break"></div>
 
-<div class="cover-student">
-<table class="student-info">
-<tr><td>Họ và tên:</td><td><b>Lê Ngọc Tường</b></td></tr>
-<tr><td>MSSV:</td><td><b>23207124</b></td></tr>
-<tr><td>Lớp:</td><td><b>23DTV_CLC3</b></td></tr>
-<tr><td>Môn học:</td><td><b>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</b></td></tr>
-</table>
-</div>
-
-<div class="cover-footer">
-TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
-</div>
-</div>
-
-<h2>BÀI TẬP 1: TỔNG QUAN TRÌNH ĐI DÂY TƯƠNG TÁC (INTERACTIVE ROUTER) VÀ CÁC CHẾ ĐỘ HOẠT ĐỘNG</h2>
-<p>Routing (đi dây mạch in) là công đoạn biến các đường liên kết logic ratsnest từ sơ đồ nguyên lý thành các đường mạch đồng (<em>Copper Tracks</em>) và lỗ xuyên lớp (<em>Vias</em>) vật lý trên các lớp dẫn điện của bo mạch PCB. Trong KiCad 10, Interactive Router là công cụ đi dây bán tự động mạnh mẽ, tích hợp khả năng kiểm soát ràng buộc luật thiết kế (DRC) theo thời gian thực.</p>
-<h3>1. Ba chế độ hoạt động chính của Interactive Router</h3>
-<p>Vào menu <code>Route -&gt; Interactive Router Settings...</code> (hoặc nhấp chuột phải vào biểu tượng Route trên thanh công cụ) để lựa chọn chế độ làm việc:</p>
-<ul>
-<li><strong>Chế độ Highlight Collisions (Tô sáng va chạm):</strong></li>
-<li><em>Nguyên lý vận hành:</em> Trình đi dây hoạt động ở chế độ thủ công hoàn toàn. Khi người thiết kế kéo đường dây chạm vào chướng ngại vật (pad, via hoặc track khác net), vùng vi phạm khoảng cách cách điện (<em>Clearance</em>) sẽ được tô sáng màu xanh lá cây cảnh báo.</li>
-<li><em>Đặc điểm:</em> Đường mạch không thể cố định điểm đặt nếu vẫn còn va chạm, trừ khi người dùng đánh dấu chọn <code>Allow DRC Violations</code>. Mỗi thao tác đi dây chỉ cho phép đặt tối đa hai đoạn mạch (một đoạn thẳng và một đoạn chéo).</li>
-<li><strong>Chế độ Shove (Đẩy vật cản):</strong></li>
-<li><em>Nguyên lý vận hành:</em> Khi đường mạch đang đi tiếp cận các vật cản có thể di dời (các đường mạch hoặc via khác có thể dịch chuyển được), trình đi dây sẽ tự động đẩy (<em>shove</em>) các đối tượng đó dạt sang bên để mở đường đi mới mà vẫn bảo toàn khoảng cách clearance an toàn. Đối với các vật cản cố định (pad linh kiện, đường mạch/via bị khóa <code>Locked</code>), đường dây sẽ tự động bẻ góc lách qua.</li>
-<li><em>Đặc điểm:</em> Ngăn chặn tuyệt đối vi phạm DRC. Nếu không còn không gian khả dụng để đẩy vật cản, đường dây sẽ dừng lại và không thể cố định tại vị trí con trỏ chuột.</li>
-<li><strong>Chế độ Walk Around (Đi vòng quanh vật cản):</strong></li>
-<li><em>Nguyên lý vận hành:</em> Tương tự như chế độ Shove nhưng không làm thay đổi hay xê dịch bất kỳ đường mạch, via nào đã có sẵn trên bo mạch. Trình đi dây sẽ tự động tính toán quỹ đạo ngắn nhất để ôm sát và đi vòng qua mép ngoài của các chướng ngại vật.</li>
-<li><em>Đặc điểm:</em> Rất hữu ích khi thiết kế các khối mạch đã được tinh chỉnh tối ưu và không muốn bị xáo trộn vị trí dây cũ.</li>
-</ul>
-<h3>2. Các chức năng đi dây và điều khiển tư thế đường mạch (Track Posture &amp; Corner Mode)</h3>
-<ul>
-<li><strong>Bốn công cụ đi dây cốt lõi trong menu Route:</strong></li>
-<li><code>Route Single Track</code> (Phím tắt <strong><code>X</code></strong>): Đi dây đơn lẻ cho các đường nguồn và tín hiệu thông thường.</li>
-<li><code>Route Differential Pair</code> (Phím tắt <strong><code>6</code></strong>): Đi dây vi sai đồng thời cho cặp tín hiệu vi sai (như <code>D+</code> và <code>D-</code> của chuẩn USB) nhằm đảm bảo song hành và bảo toàn trở kháng vi sai.</li>
-<li><code>Tune length of a single track</code> (Phím tắt <strong><code>7</code></strong>): Uốn lượn sóng (meander) để cân bằng chiều dài đường truyền tín hiệu tốc độ cao.</li>
-<li><code>Tune skew of a differential pair</code> (Phím tắt <strong><code>8</code></strong>): Cân bằng độ lệch pha (skew) giữa hai nhánh của cặp vi sai.</li>
-<li><strong>Tư thế đường mạch (Track Posture):</strong> Khi nối hai điểm không nằm trên cùng đường thẳng ngang hoặc dọc, đường dây sẽ bao gồm một đoạn thẳng (ngang/dọc) và một đoạn chéo 45&deg;. Nhấn phím tắt <strong><code>/</code></strong> (<em>Switch Track Posture</em>) để đảo thứ tự ưu tiên đoạn nào đi trước.</li>
-<li><strong>Chế độ góc đường mạch (Track Corner Mode):</strong> Nhấn tổ hợp phím <strong><code>Ctrl + /</code></strong> để chuyển đổi tuần hoàn giữa 4 chế độ góc: <strong>45 degree</strong> (mặc định), <strong>45 degree rounded</strong> (bo tròn góc 45&deg;), <strong>90 degree</strong> (góc vuông 90&deg;) và <strong>90 degree rounded</strong> (bo tròn góc 90&deg;).</li>
-</ul>
+<h2>BÀI TẬP VỀ NHÀ: HOÀN THIỆN VÀ TỐI ƯU HÓA ROUTING TRÊN PCB CÁ NHÂN</h2>
+<p><strong>Yêu cầu:</strong> Thực hiện định tuyến (Routing) toàn bộ mạng dây cho bo mạch cá nhân (Mạch nguồn đa năng USB - UART - NE555) đảm bảo đầy đủ các nguyên tắc kỹ thuật: phân bổ Net Classes (IPC-2152), cấu hình Trình đi dây tương tác (Interactive Router), uốn góc 45°, quản lý chuyển lớp via tối ưu, dọn dẹp mạch in (Cleanup) và vượt qua kiểm tra DRC (0 Errors, 0 Warnings).</p>
 <hr />
-<h2>BÀI TẬP 2: QUY TẮC ĐỘ RỘNG ĐƯỜNG MẠCH, KỸ THUẬT SỬ DỤNG VIA VÀ TIÊU CHUẨN IPC-4761</h2>
-<h3>1. Phân bổ độ rộng đường mạch theo Net Class và khả năng chịu dòng tải</h3>
-<p>Độ rộng đường mạch (<em>Track Width</em>) quyết định điện trở nội, độ sụt áp và khả năng phát nhiệt của đường đồng khi có dòng điện chạy qua. Dựa trên tiêu chuẩn IPC-2152 và cấu hình Net Classes đã thiết lập ở Lab 04, toàn bộ các net trên bo mạch nguồn đa năng được phân nhóm chặt chẽ:</p>
-<table>
+<h3>1. Cấu hình Trình đi dây Tương tác (Interactive Router)</h3>
+<p>Trình đi dây tương tác trong KiCad 10 cho phép định tuyến đường mạch bán tự động với khả năng kiểm soát va chạm theo thời gian thực dựa trên hệ thống Design Rules (DRC).</p>
+<ul>
+<li><strong>Ba chế độ định tuyến chính (Router Modes):</strong></li>
+<li><strong>Highlight Collisions:</strong> Đi dây thủ công, tô sáng màu xanh lá cây cảnh báo khi vi phạm khoảng cách an toàn (clearance).</li>
+<li><strong>Shove (Chế độ tiêu chuẩn áp dụng):</strong> Tự động đẩy các đường mạch hoặc via xung quanh dạt sang bên để mở lối đi cho đường mạch mới mà vẫn đảm bảo tuyệt đối khoảng cách an toàn. Đối với vật cản cố định (pad linh kiện hoặc track bị khóa), đường dây sẽ tự động luồn lách qua.</li>
+<li><strong>Walk Around:</strong> Tự động ôm sát biên dạng ngoài của các vật cản để tìm đường đi ngắn nhất mà không làm xê dịch đối tượng khác.</li>
+</ul>
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh1_interactive_router_settings.png" alt="Hộp thoại Interactive Router Settings" style="max-height: 75mm;">
+    <div class="figure-caption">Hình 1. Hộp thoại cấu hình Trình đi dây Tương tác (Interactive Router Settings) trong KiCad</div>
+</div>
+
+<ul>
+<li><strong>Bảng thiết lập tối ưu hóa đi dây trong Interactive Router:</strong></li>
+</ul>
+<table class="report-table">
 <thead>
 <tr>
-<th style="text-align: left;">Tên nhóm Net Class</th>
-<th style="text-align: center;">Độ rộng Track</th>
-<th style="text-align: center;">Khoảng hở Clearance</th>
-<th style="text-align: center;">Kích thước Via (Đường kính / Lỗ)</th>
-<th style="text-align: left;">Net áp dụng thực tế trên bo mạch</th>
-<th style="text-align: left;">Vai trò kỹ thuật và yêu cầu chịu tải</th>
+<th style="width: 25%;">Tùy chọn (Option)</th>
+<th style="width: 45%;">Ý nghĩa kỹ thuật</th>
+<th style="width: 30%;">Thiết lập áp dụng</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong><code>Power_Main</code></strong></td>
-<td style="text-align: center;"><strong>$0.80\text{ mm}$</strong></td>
-<td style="text-align: center;">$0.25\text{ mm}$</td>
-<td style="text-align: center;"><strong>$0.80\text{ mm}$ / $0.40\text{ mm}$</strong></td>
-<td style="text-align: left;"><code>VBUS</code>, <code>+5V</code>, <code>+3.3V</code>, <code>-5V</code>, <code>GND</code></td>
-<td style="text-align: left;">Chịu dòng tải $1.0\text{A} - 1.5\text{A}$, giảm sụt áp, phân phối nguồn chính</td>
+<td><b>Mode</b></td>
+<td>Chọn 1 trong 3 chế độ: Highlight collisions, Shove, Walk around</td>
+<td><b>Shove</b> (để đi dây linh hoạt)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong><code>USB_Diff</code></strong></td>
-<td style="text-align: center;"><strong>$0.30\text{ mm}$</strong></td>
-<td style="text-align: center;">$0.20\text{ mm}$</td>
-<td style="text-align: center;">$0.60\text{ mm}$ / $0.30\text{ mm}$</td>
-<td style="text-align: left;"><code>D+</code>, <code>D-</code> (Cổng Micro-USB)</td>
-<td style="text-align: left;">Đi dây cặp vi sai song hành, phối hợp trở kháng vi sai $90\text{ }\Omega$</td>
+<td><b>Shove vias</b></td>
+<td>Cho phép đẩy via cùng với đường mạch khi phát sinh va chạm</td>
+<td><b>Enabled</b> (tối ưu mật độ dây)</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong><code>Signal_UART</code></strong></td>
-<td style="text-align: center;"><strong>$0.30\text{ mm}$</strong></td>
-<td style="text-align: center;">$0.20\text{ mm}$</td>
-<td style="text-align: center;">$0.60\text{ mm}$ / $0.30\text{ mm}$</td>
-<td style="text-align: left;"><code>TXD</code>, <code>RXD</code>, <code>RTS</code>, <code>CTS</code>, <code>DTR</code>, <code>CLK_555</code></td>
-<td style="text-align: left;">Tín hiệu giao tiếp dữ liệu logic 3.3V và xung clock NE555</td>
+<td><b>Jump over obstacles</b></td>
+<td>Tự động nhảy vượt qua phía sau chướng ngại vật cố định</td>
+<td><b>Enabled</b></td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong><code>Default</code></strong></td>
-<td style="text-align: center;"><strong>$0.40\text{ mm}$</strong></td>
-<td style="text-align: center;">$0.20\text{ mm}$</td>
-<td style="text-align: center;">$0.60\text{ mm}$ / $0.30\text{ mm}$</td>
-<td style="text-align: left;">Các đường tín hiệu LED, phân cực</td>
-<td style="text-align: left;">Tín hiệu logic chung, điều khiển LED báo nguồn/trạng thái</td>
+<td><b>Remove redundant tracks</b></td>
+<td>Tự động xóa các vòng lặp (loops) dư thừa khi vẽ đường thay thế</td>
+<td><b>Enabled</b> (chống tạo loop nhiễu)</td>
+</tr>
+<tr>
+<td><b>Optimize pad connections</b></td>
+<td>Tự động căn chỉnh hướng thoát dây ra khỏi pad, tránh góc nhọn</td>
+<td><b>Enabled</b> (chống đứt gãy pad)</td>
+</tr>
+<tr>
+<td><b>Smooth dragged segments</b></td>
+<td>Làm mượt và gộp các đoạn dây khi kéo giãn để giảm số lần đổi hướng</td>
+<td><b>Enabled</b></td>
+</tr>
+<tr>
+<td><b>Allow DRC violations</b></td>
+<td>Bỏ qua cảnh báo khoảng cách an toàn, cho phép đặt đè đường mạch</td>
+<td><b>Disabled</b> (bảo đảm an toàn mạch)</td>
 </tr>
 </tbody>
 </table>
-<h3>2. Kỹ thuật chuyển lớp và sử dụng Via trong mạch in 2 lớp</h3>
+
+<div class="page-break"></div>
+
+<h3>2. Quy chuẩn Net Classes, Góc uốn 45° và Kỹ thuật Quản lý Via</h3>
+<h4>2.1. Tư thế đường mạch (Track Posture) và Góc uốn 45° (Corner Mode)</h4>
 <ul>
-<li><strong>Thao tác đặt Via khi đang đi dây:</strong></li>
-<li>Nhấn phím <strong><code>V</code></strong> (<em>Place Via</em>): Tự động chèn một via xuyên lỗ tại đầu mút đường mạch và hoán đổi lớp làm việc giữa cặp lớp hoạt động (<code>F.Cu</code> &harr; <code>B.Cu</code>).</li>
-<li>Nhấn phím <strong><code>Page Up</code></strong> để chọn lớp mặt trên <code>F.Cu</code>, hoặc <strong><code>Page Down</code></strong> để chọn lớp mặt dưới <code>B.Cu</code>.</li>
-<li>Nhấn phím <strong><code>Backspace</code></strong> (<em>Undo Last Segment</em>) để rút lùi từng đoạn dây vừa cố định; nhấn <strong><code>Del</code></strong> để xóa đoạn mạch được chọn.</li>
-<li><strong>Cấu hình vành đồng của Via (Annular Rings):</strong></li>
-<li><code>All copper layers</code>: Via có vành đồng trên cả lớp trên và lớp dưới (chuẩn cho bo mạch 2 lớp).</li>
-<li><code>Connected layers only</code> / <code>Start, end, and connected layers</code>: Loại bỏ vành đồng không sử dụng trên các lớp trong (Unused Pads), giúp tăng không gian đi dây và giảm điện dung ký sinh đối với mạch nhiều lớp.</li>
-<li><strong>Phân loại bảo vệ Via theo tiêu chuẩn IPC-4761:</strong></li>
-<li><em>Type I (Tenting):</em> Phủ lớp mực hàn (Solder Mask) trùm lên miệng via ở một hoặc cả hai mặt để cách điện và chống oxy hóa.</li>
-<li><em>Type II (Covering):</em> Phủ thêm một lớp nhựa bảo vệ bổ sung bên ngoài lớp solder mask tiêu chuẩn.</li>
-<li><em>Type III/IV (Plugging):</em> Bịt kín lỗ via bằng nhựa epoxy không dẫn điện nhằm ngăn thiếc hàn chảy tụt qua lỗ khi lắp ráp linh kiện dán (Via-in-Pad).</li>
-<li><em>Type V/VI/VII (Filling &amp; Capping):</em> Lấp đầy lỗ via bằng đồng hoặc vật liệu dẫn điện và mạ phẳng bề mặt để có thể hàn trực tiếp linh kiện lên bề mặt via.</li>
+<li><strong>Tư thế đường mạch (Track Posture):</strong> Sử dụng phím tắt <strong><code>/</code></strong> (<em>Switch Track Posture</em>) để đảo thứ tự ưu tiên giữa đoạn thẳng và đoạn chéo 45°.</li>
+<li><strong>Chế độ góc uốn 45°:</strong> Sử dụng phím tắt <strong><code>Ctrl + /</code></strong> để thiết lập chế độ <em>45 degree</em>.</li>
+<li><strong>Nguyên tắc chống bẫy axit (Acid Traps) và giảm bức xạ EMI:</strong> Toàn bộ đường mạch được vát góc 45° hoặc 135°, triệt tiêu tuyệt đối góc vuông 90° và góc nhọn (&lt; 90°) nhằm ngăn chặn ứ đọng dung dịch ăn mòn hóa học gây đứt dây mạch và loại bỏ hiện tượng phát xạ nhiễu điện từ.</li>
 </ul>
-<hr />
-<h2>BÀI TẬP 3: NGUYÊN TẮC ĐI DÂY THỰC HÀNH VÀ CÔNG CỤ DỌN DẸP MẠCH IN (CLEANUP)</h2>
-<h3>1. Các quy tắc vàng khi thực hiện Manual Routing trên bo mạch nguồn đa năng</h3>
-<ol>
-<li><strong>Tuyệt đối tránh bẻ góc vuông 90&deg;:</strong> Các góc chuyển hướng bắt buộc phải sử dụng góc vát 45&deg; hoặc góc tù 135&deg;. Góc 90&deg; tạo ra "bẫy axit" (<em>Acid Traps</em>) gây ăn mòn đứt mạch trong quá trình khắc đồng và gây đột biến trở kháng đối với tín hiệu cao tần.</li>
-<li><strong>Quy hoạch phân tầng ưu tiên (Layer Directional Bias):</strong> Lớp trên <code>F.Cu</code> ưu tiên đi dây tín hiệu ngắn và kết nối linh kiện SMD; lớp dưới <code>B.Cu</code> ưu tiên đi trục nguồn chính và bảo lưu diện tích đồng tối đa cho mặt phẳng mass dập nhiễu (<em>Ground Plane</em>).</li>
-<li><strong>Quy tắc đi dây cụm vi sai USB (<code>D+</code>, <code>D-</code>):</strong> Tuyệt đối đi song hành đối xứng từ chân Micro-USB đến IC CP2102, chiều dài hai nhánh cân bằng (&Delta;L &le; 0.5 mm), không chèn via chuyển lớp trên đường vi sai nếu không thực sự bắt buộc.</li>
-<li><strong>Quy tắc đi dây khối nguồn và tụ bypass:</strong> Đường nguồn từ công tắc <code>SW1</code> phải đi qua tụ lọc <code>C1</code> trước khi vào chân IC nguồn; đường nguồn ngõ ra từ IC nguồn phải đi qua tụ lọc trước khi tỏa đi các khối tiêu thụ; tụ bypass (<code>C6</code>, <code>C7</code>) phải đấu nối trực tiếp vào chân nguồn IC trước khi lấy nguồn tổng.</li>
-<li><strong>Hạn chế số lượng Via:</strong> Mỗi via tạo ra điện cảm ký sinh ($\approx 1\text{ nH} - 1.5\text{ nH}$) và điện dung ký sinh. Giảm thiểu số lượng via trên các đường tín hiệu xung nhịp NE555 và đường truyền dữ liệu UART.</li>
-</ol>
-<h3>2. Công cụ dọn dẹp và chuẩn hóa đường mạch (Cleanup Tracks &amp; Vias)</h3>
-<p>Sau khi hoàn tất đi dây thủ công, chạy công cụ tự động tại menu <code>Tools -&gt; Cleanup Tracks &amp; Vias...</code> để loại bỏ các khuyết tật hình học:
-* <strong>Delete redundant vias:</strong> Xóa các via thừa nằm trùng lặp lên nhau hoặc đặt đè lên pad xuyên lỗ.
-* <strong>Delete vias connected on only one layer:</strong> Tự động phát hiện và loại bỏ các via cụt chỉ có kết nối ở một mặt duy nhất.
-* <strong>Merge co-linear tracks:</strong> Gộp các đoạn mạch thẳng hàng nối tiếp nhau thành một đoạn dây liền mạch duy nhất để tối ưu hóa dữ liệu Gerber.
-* <strong>Delete tracks unconnected at one end:</strong> Loại bỏ các đoạn đường đồng bị bỏ lửng (Antenna stubs) gây phát xạ nhiễu điện từ EMI.
-* <strong>Delete tracks fully inside pads:</strong> Xóa các đoạn dây thừa nằm trọn trong lòng pad linh kiện.</p>
-<hr />
-<h2>BÀI TẬP 4: BẢNG KIỂM TRA ĐÁNH GIÁ VÀ TỔNG KẾT KẾT QUẢ ROUTING (DRC READINESS)</h2>
-<p>Bảng đối soát chất lượng hoàn thiện công đoạn Routing trên toàn bộ 38 linh kiện của bo mạch nguồn đa năng $50 \times 50\text{ mm}$:</p>
-<table>
+<h4>2.2. Bảng phân bổ Net Classes và quy chuẩn bề rộng đường đồng (IPC-2152)</h4>
+<table class="report-table">
 <thead>
 <tr>
-<th style="text-align: center;">STT</th>
-<th style="text-align: left;">Hạng mục kiểm tra kỹ thuật Routing</th>
-<th style="text-align: left;">Tiêu chuẩn chất lượng kiểm tra</th>
-<th style="text-align: center;">Kết quả đánh giá</th>
-<th style="text-align: left;">Nhận xét chi tiết trên bản vẽ bo mạch</th>
+<th style="width: 18%;">Tên Net Class</th>
+<th style="width: 15%;">Độ rộng Track</th>
+<th style="width: 15%;">Clearance</th>
+<th style="width: 18%;">Via (Đường kính / Lỗ)</th>
+<th style="width: 34%;">Các Net áp dụng & Chức năng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b><code>Power_Main</code></b></td>
+<td style="text-align: center; font-weight: bold;">0.80 mm</td>
+<td style="text-align: center;">0.25 mm</td>
+<td style="text-align: center;">0.80 / 0.40 mm</td>
+<td><code>VBUS</code>, <code>+5V</code>, <code>+3.3V</code>, <code>-5V</code>, <code>GND</code> (Dòng tải lớn 1.0A-1.5A, chống sụt áp)</td>
+</tr>
+<tr>
+<td><b><code>USB_Diff</code></b></td>
+<td style="text-align: center; font-weight: bold;">0.30 mm</td>
+<td style="text-align: center;">0.20 mm</td>
+<td style="text-align: center;">0.60 / 0.30 mm</td>
+<td><code>D+</code>, <code>D-</code> từ cổng Micro-USB (Cặp vi sai song hành, trở kháng vi sai 90 &Omega;)</td>
+</tr>
+<tr>
+<td><b><code>Signal_UART</code></b></td>
+<td style="text-align: center; font-weight: bold;">0.30 mm</td>
+<td style="text-align: center;">0.20 mm</td>
+<td style="text-align: center;">0.60 / 0.30 mm</td>
+<td><code>TXD</code>, <code>RXD</code>, <code>RTS</code>, <code>CTS</code>, <code>DTR</code>, <code>CLK</code> (Tín hiệu logic 3.3V và xung NE555)</td>
+</tr>
+<tr>
+<td><b><code>Default</code></b></td>
+<td style="text-align: center; font-weight: bold;">0.40 mm</td>
+<td style="text-align: center;">0.20 mm</td>
+<td style="text-align: center;">0.60 / 0.30 mm</td>
+<td>Các đường LED D1-D6, phân cực (Tín hiệu điều khiển chung trên bo mạch)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>2.3. Kỹ thuật Quản lý Via, Chuẩn bảo vệ IPC-4761 và Dọn dẹp mạch in (Cleanup)</h4>
+<ul>
+<li><strong>Kỹ thuật chuyển lớp via:</strong> Trong quá trình đi dây bằng lệnh <strong><code>X</code></strong>, nhấn phím <strong><code>V</code></strong> (<em>Place Via</em>) để chèn via xuyên lớp và chuyển đổi vùng làm việc giữa lớp mặt trên <code>F.Cu</code> và mặt dưới <code>B.Cu</code>.</li>
+<li><strong>Tiêu chuẩn bảo vệ Via (IPC-4761):</strong> Áp dụng chế độ <em>Type I (Tenting)</em> phủ kín lớp mặt nạ hàn (Solder Mask) lên lỗ via chống oxy hóa; các via chịu dòng nguồn được tăng kích thước vành đồng lên 0.80 mm / lỗ 0.40 mm.</li>
+<li><strong>Dọn dẹp tối ưu hóa mạch in (Cleanup Tracks &amp; Vias):</strong> Chạy công cụ <strong>Tools -&gt; Cleanup Tracks &amp; Vias...</strong> để tự động gộp các đoạn thẳng hàng (<em>Merge co-linear tracks</em>), xóa các đoạn dây cụt bỏ lửng (<em>Delete tracks unconnected at one end</em>) và loại bỏ via trùng lặp (<em>Delete redundant vias</em>).</li>
+</ul>
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh6_layer_via_switch.png" alt="Cấu hình kích thước Track và Via định sẵn" style="max-height: 58mm;">
+    <div class="figure-caption">Hình 2. Hộp thoại cấu hình Track & Via Sizes</div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh13_cleanup_tracks_vias.png" alt="Hộp thoại Cleanup Tracks and Vias" style="max-height: 70mm;">
+    <div class="figure-caption">Hình 3. Hộp thoại Cleanup Tracks & Vias</div>
+</div>
+
+<h3>3. Kết quả Thiết kế Bản vẽ 2D PCB Layout và Mô hình Phối cảnh 3D</h3>
+<p>Bo mạch nguồn đa năng kích thước 50 &times; 50 mm gồm 38 linh kiện và 29 nets đã được định tuyến hoàn chỉnh trên 2 lớp đồng (<code>F.Cu</code> và <code>B.Cu</code>), tích hợp đầy đủ khung bản vẽ Title Block chuẩn thông tin sinh viên.</p>
+<h4>3.1. Bản vẽ Thiết kế 2D PCB Layout hoàn chỉnh</h4>
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab6_layout_2d.png" alt="Bản vẽ 2D PCB Layout hoàn thiện" style="max-height: 120mm;">
+    <div class="figure-caption">Hình 4. Bản vẽ 2D PCB Layout hoàn thiện (Lớp Top F.Cu màu đỏ, Lớp Bottom B.Cu màu xanh, Title Block cá nhân)</div>
+</div>
+
+<div class="page-break"></div>
+
+<h4>3.2. Phối cảnh 3D Render trực quan của Bo mạch hoàn thiện</h4>
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab6_3d_top.png" alt="3D Top View" style="max-height: 65mm;">
+    <div class="figure-caption">Hình 5. Phối cảnh 3D Mặt Trên (Top Layer F.Cu)</div>
+</div>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab6_3d_bottom.png" alt="3D Bottom View" style="max-height: 65mm;">
+    <div class="figure-caption">Hình 6. Phối cảnh 3D Mặt Dưới (Bottom Layer B.Cu)</div>
+</div>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab6_3d_iso.png" alt="3D Isometric View" style="max-height: 65mm;">
+    <div class="figure-caption">Hình 7. Phối cảnh 3D Đa góc nhìn (Isometric View) thể hiện độ hoàn thiện thực tế của bo mạch Lab 06</div>
+</div>
+
+<div class="page-break"></div>
+
+<h3>4. Đánh giá Kiểm tra DRC và Chiến lược Tối ưu hóa Bo mạch</h3>
+<h4>4.1. Bảng Kiểm tra và Đánh giá Chất lượng Thiết kế</h4>
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 6%;">STT</th>
+<th style="width: 32%;">Hạng mục kiểm tra</th>
+<th style="width: 28%;">Tiêu chuẩn chất lượng</th>
+<th style="width: 18%;">Kết quả thực tế</th>
+<th style="width: 16%;">Đánh giá</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: center;">1</td>
-<td style="text-align: left;">Tỷ lệ hoàn thành kết nối mạng (Ratsnest)</td>
-<td style="text-align: left;">$100\%$ các net đã được kết nối (0 Unrouted)</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Toàn bộ 28 net tín hiệu và nguồn đã nối dây hoàn chỉnh</td>
+<td><b>Tỷ lệ kết nối mạng (Ratsnest)</b></td>
+<td>100% các net được kết nối (0 unrouted)</td>
+<td style="text-align: center; font-weight: bold;">0 unconnected</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">2</td>
-<td style="text-align: left;">Góc chuyển hướng đường mạch (Corner Mode)</td>
-<td style="text-align: left;">Góc vát $45^\circ$ / $135^\circ$, không có góc $90^\circ$</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">$100\%$ đường mạch bẻ góc 45&deg;, triệt tiêu bẫy axit</td>
+<td><b>Góc chuyển hướng đường mạch</b></td>
+<td>Vát góc 45° / 135°, triệt tiêu góc 90°</td>
+<td style="text-align: center;">100% góc 45°</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">3</td>
-<td style="text-align: left;">Độ rộng đường nguồn chính (<code>Power_Main</code>)</td>
-<td style="text-align: left;">Đạt bề rộng $\ge 0.80\text{ mm}$ theo Net Class</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Các đường <code>VBUS</code>, <code>+5V</code>, <code>+3.3V</code>, <code>-5V</code> đạt chuẩn chịu dòng</td>
+<td><b>Độ rộng đường nguồn (<code>Power_Main</code>)</b></td>
+<td>Bề rộng dây &ge; 0.80 mm theo Net Class</td>
+<td style="text-align: center;">0.80 mm trục nguồn</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">4</td>
-<td style="text-align: left;">Cặp vi sai USB (<code>D+</code>, <code>D-</code>)</td>
-<td style="text-align: left;">Đi song hành đối xứng, không chuyển lớp</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Đường vi sai ngắn $&lt; 10\text{ mm}$, trở kháng phối hợp $90\text{ }\Omega$</td>
+<td><b>Cặp vi sai USB (<code>D+</code>, <code>D-</code>)</b></td>
+<td>Đi song hành đối xứng, cách ly nhiễu tốt</td>
+<td style="text-align: center;">Song hành, không via</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">5</td>
-<td style="text-align: left;">Tụ lọc nguồn và bypass</td>
-<td style="text-align: left;">Đường mạch đi từ nguồn &rarr; tụ &rarr; chân IC</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Vòng lặp khử nhiễu tối ưu, tụ bypass ôm sát chân nguồn</td>
+<td><b>Bố trí Tụ lọc nguồn & Bypass</b></td>
+<td>Nguồn &rarr; Tụ lọc &rarr; Chân cấp IC</td>
+<td style="text-align: center;">Tụ ôm sát chân IC</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">6</td>
-<td style="text-align: left;">Khoảng cách an toàn tới mép bo (<code>Edge.Cuts</code>)</td>
-<td style="text-align: left;">Khoảng cách dây đồng $\ge 0.50\text{ mm}$</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Toàn bộ đường mạch nằm cách mép bo từ $1.0\text{ mm} - 2.5\text{ mm}$</td>
+<td><b>Khoảng cách mép bo (<code>Edge.Cuts</code>)</b></td>
+<td>Khoảng cách đường đồng &ge; 0.50 mm</td>
+<td style="text-align: center;">1.0 mm &ndash; 2.5 mm</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">7</td>
-<td style="text-align: left;">Tối ưu hóa Via xuyên lớp</td>
-<td style="text-align: left;">Via $0.8/0.4\text{ mm}$ cho nguồn, $0.6/0.3\text{ mm}$ cho tín hiệu</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Số lượng via tối thiểu (14 vias), không có via thừa</td>
+<td><b>Tối ưu hóa Via xuyên lớp</b></td>
+<td>Via 0.8/0.4mm (Nguồn), 0.6/0.3mm (Tín hiệu)</td>
+<td style="text-align: center;">Số lượng tối thiểu</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 <tr>
 <td style="text-align: center;">8</td>
-<td style="text-align: left;">Kiểm tra dọn dẹp đường mạch (Cleanup)</td>
-<td style="text-align: left;">Không có stub thừa, không có via một đầu</td>
-<td style="text-align: center;"><strong>ĐẠT (Passed)</strong></td>
-<td style="text-align: left;">Đã chạy <code>Cleanup Tracks &amp; Vias</code>, bo mạch sẵn sàng phủ đồng</td>
+<td><b>Dọn dẹp mạch in (Cleanup)</b></td>
+<td>Không stub thừa, không via cụt 1 đầu</td>
+<td style="text-align: center;">Đã tối ưu hoàn toàn</td>
+<td style="text-align: center; font-weight: bold; color: #16a34a;">ĐẠT (Passed)</td>
 </tr>
 </tbody>
 </table>
-<p>Toàn bộ quy trình đi dây cho bo mạch nguồn đa năng kích thước $50 \times 50\text{ mm}$ trên KiCad 10 đã được thực hiện chuẩn xác, đảm bảo toàn vẹn tín hiệu, đáp ứng đầy đủ tiêu chuẩn chế tạo công nghiệp và sẵn sàng cho công đoạn phủ đồng mặt phẳng mass (<em>Ground Plane &amp; Copper Pour - Lab 07</em>).</p>
+
+<h4>4.2. Chiến lược Tối ưu hóa và Bài học Kinh nghiệm</h4>
+<ul>
+<li><strong>Quy hoạch phân tầng (Layer Stackup Strategy):</strong></li>
+<li>Lớp trên <code>F.Cu</code>: Định tuyến các đường tín hiệu ngắn, kết nối trực tiếp các chân linh kiện dán SMD (AMS1117, CP2102, NE555).</li>
+<li>Lớp dưới <code>B.Cu</code>: Phân phối các trục nguồn chính liên kết giữa các cọc Jumpers và Header, tạo hành lang thông thoáng để chuẩn bị cho việc phủ đồng mặt phẳng mass (<em>Ground Plane</em>) ở Lab 07.</li>
+<li><strong>Kỹ thuật chống nhiễu cho khối tạo xung NE555:</strong> Tụ lọc phân cực 10 &mu;F và tụ bypass 100 nF đặt sát chân 8 (VCC) và chân 5 (CV) của NE555. Đường xung ngõ ra <code>CLK_555</code> được cách ly với các đường truyền dữ liệu vi sai USB để tránh gây nhiễu chéo (<em>Crosstalk</em>).</li>
+<li><strong>Tối ưu hóa phân tán nhiệt và dòng tải cho IC nguồn:</strong> Đường mạch ngõ ra <code>+3.3V</code> của AMS1117-3.3V (U1) được mở rộng lên 0.80 mm, tạo vùng đệm đồng tản nhiệt tại Pad số 2 (Tab) nhằm nâng cao độ bền và ổn định nhiệt.</li>
+<li><strong>Quy trình kiểm soát chất lượng:</strong> Luôn ưu tiên đi dây đường nguồn và cặp vi sai USB trước; tận dụng chế độ Shove để tối ưu hóa không gian; chạy Cleanup Tracks &amp; Vias và kiểm tra DRC đạt 0 lỗi trước khi bàn giao thiết kế.</li>
+</ul>
 </body>
 </html>

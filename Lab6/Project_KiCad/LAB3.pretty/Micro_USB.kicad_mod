@@ -1,11 +1,11 @@
 (footprint "Micro_USB"
-	(version 20241229)
+	(version 20260206)
 	(generator "pcbnew")
-	(generator_version "9.0")
+	(generator_version "10.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
 		(at 0 -0.5 0)
-
+		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "415dad9e-c8e2-4213-b3be-0b521c5b6d38")
 		(effects
@@ -17,7 +17,7 @@
 	)
 	(property "Value" "Micro_USB"
 		(at 0 0.15 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "c3cbb530-6e22-4347-b57d-4854b468504e")
@@ -30,7 +30,7 @@
 	)
 	(property "Datasheet" ""
 		(at 0 0 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "28e5e878-24c8-4025-87ce-a65aa6b12ba3")
@@ -43,7 +43,7 @@
 	)
 	(property "Description" ""
 		(at 0 0 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
 		(uuid "fdd1ff9d-9679-45fb-8239-67720b2924cc")
@@ -55,7 +55,7 @@
 		)
 	)
 	(attr smd)
-
+	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -4.17 3.59)
 		(end -4.17 4.99)
@@ -369,7 +369,7 @@
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -0.53 0)
-
+		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "7780ff1c-411f-44c1-95ca-1c18194084a8")
 		(effects
@@ -466,9 +466,3 @@
 	)
 	(embedded_fonts no)
 )
-
-
-
-
-
-
