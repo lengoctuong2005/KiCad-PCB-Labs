@@ -1,0 +1,151 @@
+name: USB-C TP4056 KiCad 10 verification
+
+on:
+  push:
+    branches:
+      - main
+      - audit/usb-tp4056-production-ready
+    paths:
+      - "DoAn/USB_TypeC_TP4056_Charger/**"
+      - ".github/workflows/usb-tp4056-kicad-verify.yml"
+  pull_request:
+    paths:
+      - "DoAn/USB_TypeC_TP4056_Charger/**"
+      - ".github/workflows/usb-tp4056-kicad-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: ERC, DRC, and manufacturing export
+    runs-on: ubuntu-latest
+    container:
+      image: kicad/kicad:10.0
+    defaults:
+      run:
+        shell: bash
+        working-directory: DoAn/USB_TypeC_TP4056_Charger
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Record tool versions
+        run: |
+          set -euxo pipefail
+          kicad-cli version
+          python3 --version
+
+      - name: Run schematic ERC
+        id: erc
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          mkdir -p ci-out/reports
+          set +e
+          kicad-cli sch erc \
+            --output ci-out/reports/erc.rpt \
+            --severity-all \
+            --exit-code-violations \
+            USB_TypeC_TP4056_Charger.kicad_sch
+          status=$?
+          cat ci-out/reports/erc.rpt || true
+          exit "$status"
+
+      - name: Run PCB DRC and schematic parity check
+        id: drc
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          mkdir -p ci-out/reports
+          set +e
+          kicad-cli pcb drc \
+            --output ci-out/reports/drc.rpt \
+            --format report \
+            --units mm \
+            --severity-all \
+            --schematic-parity \
+            --refill-zones \
+            --exit-code-violations \
+            USB_TypeC_TP4056_Charger.kicad_pcb
+          status=$?
+          cat ci-out/reports/drc.rpt || true
+          exit "$status"
+
+      - name: Export fabrication data from source PCB
+        id: export
+        if: always()
+        continue-on-error: true
+        run: |
+          set -euxo pipefail
+          rm -rf ci-out/fabrication
+          mkdir -p ci-out/fabrication ci-out/assembly ci-out/reports
+
+          kicad-cli pcb export gerbers \
+            --output ci-out/fabrication \
+            --layers "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts" \
+            --precision 6 \
+            --check-zones \
+            USB_TypeC_TP4056_Charger.kicad_pcb
+
+          kicad-cli pcb export drill \
+            --output ci-out/fabrication \
+            --format excellon \
+            --drill-origin absolute \
+            --excellon-units mm \
+            --generate-report \
+            --report-path ci-out/reports/drill.rpt \
+            USB_TypeC_TP4056_Charger.kicad_pcb
+
+          kicad-cli pcb export pos \
+            --output ci-out/assembly/USB_TypeC_TP4056_Charger-pos.csv \
+            --side front \
+            --format csv \
+            --units mm \
+            --smd-only \
+            --exclude-dnp \
+            USB_TypeC_TP4056_Charger.kicad_pcb
+
+          cp outputs/BOM.csv ci-out/assembly/BOM.csv
+
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZIP_DEFLATED, ZipFile
+
+          root = Path("ci-out")
+          members = sorted((root / "fabrication").iterdir())
+          if not members:
+              raise SystemExit("No fabrication files were generated")
+          archive = root / "Gerber_USB_TypeC_TP4056_Charger.zip"
+          with ZipFile(archive, "w", ZIP_DEFLATED) as zf:
+              for path in members:
+                  if path.is_file():
+                      zf.write(path, path.name)
+          print("Generated files:")
+          for path in members:
+              if path.is_file():
+                  print(f"  {path.name}: {path.stat().st_size} bytes")
+          print(f"  {archive.name}: {archive.stat().st_size} bytes")
+          PY
+
+          sha256sum ci-out/fabrication/* ci-out/assembly/* ci-out/Gerber_USB_TypeC_TP4056_Charger.zip \
+            | tee ci-out/SHA256SUMS.txt
+
+      - name: Upload audit reports and generated manufacturing files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: usb-tp4056-kicad-audit
+          path: DoAn/USB_TypeC_TP4056_Charger/ci-out
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Enforce all checks
+        if: always()
+        run: |
+          set -euxo pipefail
+          test "${{ steps.erc.outcome }}" = "success"
+          test "${{ steps.drc.outcome }}" = "success"
+          test "${{ steps.export.outcome }}" = "success"
