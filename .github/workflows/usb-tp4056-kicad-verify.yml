@@ -25,7 +25,7 @@ jobs:
       image: kicad/kicad:10.0
     defaults:
       run:
-        shell: bash
+        shell: sh
         working-directory: DoAn/USB_TypeC_TP4056_Charger
 
     steps:
@@ -34,18 +34,18 @@ jobs:
 
       - name: Record tool versions
         run: |
-          set -euxo pipefail
-          kicad-cli version
-          python3 --version
+          set -eu
+          /usr/bin/kicad-cli version
+          /usr/bin/python3 --version
 
       - name: Run schematic ERC
         id: erc
         continue-on-error: true
         run: |
-          set -uo pipefail
+          set -u
           mkdir -p ci-out/reports
           set +e
-          kicad-cli sch erc \
+          /usr/bin/kicad-cli sch erc \
             --output ci-out/reports/erc.rpt \
             --severity-all \
             --exit-code-violations \
@@ -58,10 +58,10 @@ jobs:
         id: drc
         continue-on-error: true
         run: |
-          set -uo pipefail
+          set -u
           mkdir -p ci-out/reports
           set +e
-          kicad-cli pcb drc \
+          /usr/bin/kicad-cli pcb drc \
             --output ci-out/reports/drc.rpt \
             --format report \
             --units mm \
@@ -79,18 +79,18 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          set -euxo pipefail
+          set -eu
           rm -rf ci-out/fabrication
           mkdir -p ci-out/fabrication ci-out/assembly ci-out/reports
 
-          kicad-cli pcb export gerbers \
+          /usr/bin/kicad-cli pcb export gerbers \
             --output ci-out/fabrication \
             --layers "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts" \
             --precision 6 \
             --check-zones \
             USB_TypeC_TP4056_Charger.kicad_pcb
 
-          kicad-cli pcb export drill \
+          /usr/bin/kicad-cli pcb export drill \
             --output ci-out/fabrication \
             --format excellon \
             --drill-origin absolute \
@@ -99,7 +99,7 @@ jobs:
             --report-path ci-out/reports/drill.rpt \
             USB_TypeC_TP4056_Charger.kicad_pcb
 
-          kicad-cli pcb export pos \
+          /usr/bin/kicad-cli pcb export pos \
             --output ci-out/assembly/USB_TypeC_TP4056_Charger-pos.csv \
             --side front \
             --format csv \
@@ -110,7 +110,7 @@ jobs:
 
           cp outputs/BOM.csv ci-out/assembly/BOM.csv
 
-          python3 - <<'PY'
+          /usr/bin/python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -145,7 +145,7 @@ jobs:
       - name: Enforce all checks
         if: always()
         run: |
-          set -euxo pipefail
+          set -eu
           test "${{ steps.erc.outcome }}" = "success"
           test "${{ steps.drc.outcome }}" = "success"
           test "${{ steps.export.outcome }}" = "success"
