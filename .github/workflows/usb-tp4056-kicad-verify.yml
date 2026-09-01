@@ -17,39 +17,54 @@ on:
 permissions:
   contents: read
 
+env:
+  PROJECT_DIR: DoAn/USB_TypeC_TP4056_Charger
+  KICAD_IMAGE: kicad/kicad:10.0
+
 jobs:
   verify:
     name: ERC, DRC, and manufacturing export
     runs-on: ubuntu-latest
-    container:
-      image: kicad/kicad:10.0
     defaults:
       run:
-        shell: sh
+        shell: bash
         working-directory: DoAn/USB_TypeC_TP4056_Charger
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Record tool versions
+      - name: Pull KiCad 10 image and record versions
         run: |
-          set -eu
-          /usr/bin/kicad-cli version
-          /usr/bin/python3 --version
+          set -euxo pipefail
+          docker pull "$KICAD_IMAGE"
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli version
+          python3 --version
 
       - name: Run schematic ERC
         id: erc
         continue-on-error: true
         run: |
-          set -u
+          set -uo pipefail
           mkdir -p ci-out/reports
           set +e
-          /usr/bin/kicad-cli sch erc \
-            --output ci-out/reports/erc.rpt \
-            --severity-all \
-            --exit-code-violations \
-            USB_TypeC_TP4056_Charger.kicad_sch
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli sch erc \
+              --output ci-out/reports/erc.rpt \
+              --severity-all \
+              --exit-code-violations \
+              USB_TypeC_TP4056_Charger.kicad_sch
           status=$?
           cat ci-out/reports/erc.rpt || true
           exit "$status"
@@ -58,18 +73,24 @@ jobs:
         id: drc
         continue-on-error: true
         run: |
-          set -u
+          set -uo pipefail
           mkdir -p ci-out/reports
           set +e
-          /usr/bin/kicad-cli pcb drc \
-            --output ci-out/reports/drc.rpt \
-            --format report \
-            --units mm \
-            --severity-all \
-            --schematic-parity \
-            --refill-zones \
-            --exit-code-violations \
-            USB_TypeC_TP4056_Charger.kicad_pcb
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli pcb drc \
+              --output ci-out/reports/drc.rpt \
+              --format report \
+              --units mm \
+              --severity-all \
+              --schematic-parity \
+              --refill-zones \
+              --exit-code-violations \
+              USB_TypeC_TP4056_Charger.kicad_pcb
           status=$?
           cat ci-out/reports/drc.rpt || true
           exit "$status"
@@ -79,38 +100,56 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          set -eu
-          rm -rf ci-out/fabrication
+          set -euxo pipefail
+          rm -rf ci-out/fabrication ci-out/assembly
           mkdir -p ci-out/fabrication ci-out/assembly ci-out/reports
 
-          /usr/bin/kicad-cli pcb export gerbers \
-            --output ci-out/fabrication \
-            --layers "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts" \
-            --precision 6 \
-            --check-zones \
-            USB_TypeC_TP4056_Charger.kicad_pcb
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli pcb export gerbers \
+              --output ci-out/fabrication \
+              --layers "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts" \
+              --precision 6 \
+              --check-zones \
+              USB_TypeC_TP4056_Charger.kicad_pcb
 
-          /usr/bin/kicad-cli pcb export drill \
-            --output ci-out/fabrication \
-            --format excellon \
-            --drill-origin absolute \
-            --excellon-units mm \
-            --generate-report \
-            --report-path ci-out/reports/drill.rpt \
-            USB_TypeC_TP4056_Charger.kicad_pcb
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli pcb export drill \
+              --output ci-out/fabrication \
+              --format excellon \
+              --drill-origin absolute \
+              --excellon-units mm \
+              --generate-report \
+              --report-path ci-out/reports/drill.rpt \
+              USB_TypeC_TP4056_Charger.kicad_pcb
 
-          /usr/bin/kicad-cli pcb export pos \
-            --output ci-out/assembly/USB_TypeC_TP4056_Charger-pos.csv \
-            --side front \
-            --format csv \
-            --units mm \
-            --smd-only \
-            --exclude-dnp \
-            USB_TypeC_TP4056_Charger.kicad_pcb
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w "/workspace/$PROJECT_DIR" \
+            "$KICAD_IMAGE" \
+            /usr/bin/kicad-cli pcb export pos \
+              --output ci-out/assembly/USB_TypeC_TP4056_Charger-pos.csv \
+              --side front \
+              --format csv \
+              --units mm \
+              --smd-only \
+              --exclude-dnp \
+              USB_TypeC_TP4056_Charger.kicad_pcb
 
           cp outputs/BOM.csv ci-out/assembly/BOM.csv
 
-          /usr/bin/python3 - <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -145,7 +184,7 @@ jobs:
       - name: Enforce all checks
         if: always()
         run: |
-          set -eu
+          set -euxo pipefail
           test "${{ steps.erc.outcome }}" = "success"
           test "${{ steps.drc.outcome }}" = "success"
           test "${{ steps.export.outcome }}" = "success"
