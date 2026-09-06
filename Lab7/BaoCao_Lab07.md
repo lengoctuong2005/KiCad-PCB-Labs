@@ -1,0 +1,532 @@
+---
+title: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 07"
+---
+
+<style>
+@page {
+    size: A4 portrait;
+    margin: 12mm 15mm 12mm 15mm;
+    @bottom-right {
+        content: "Trang " counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 9.5pt;
+        color: #555;
+    }
+    @bottom-left {
+        content: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 07";
+        font-family: 'Times New Roman', serif;
+        font-size: 9.5pt;
+        color: #555;
+    }
+}
+
+@page:first {
+    margin: 12mm 15mm 12mm 15mm;
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', 'Liberation Serif', serif;
+    font-size: 10.5pt;
+    line-height: 1.35;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* KHUNG BÌA CHUẨN A4 ĐẠI HỌC KHOA HỌC TỰ NHIÊN */
+.cover-page {
+    border: 3px double #1e3a8a;
+    border-radius: 8px;
+    padding: 30px 20px;
+    margin: 0;
+    min-height: 268mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #ffffff;
+    page-break-after: always !important;
+    break-after: page !important;
+}
+
+.cover-header { margin-top: 5px; }
+.uni-name {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.dept-divider {
+    width: 140px;
+    height: 1.5px;
+    background-color: #1e3a8a;
+    margin: 10px auto 0 auto;
+}
+
+.cover-body { margin: 25px 0; }
+.report-badge {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #b91c1c;
+    padding-bottom: 4px;
+}
+.report-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #b91c1c;
+    line-height: 1.35;
+    margin: 12px 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.lab-name {
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #0f172a;
+    line-height: 1.4;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.cover-student {
+    margin: 20px auto 10px auto;
+    width: 88%;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-align: left;
+}
+.student-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5pt;
+    margin: 0;
+}
+.student-info td {
+    padding: 5px 8px;
+    border: none;
+    color: #111;
+    line-height: 1.35;
+}
+.student-info td:first-child {
+    width: 28%;
+    white-space: nowrap;
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.cover-footer {
+    margin-bottom: 5px;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* NỘI DUNG BÁO CÁO */
+.page-break {
+    page-break-before: always;
+    break-before: page;
+}
+
+h2 {
+    font-size: 11.5pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 3px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+h3 {
+    font-size: 10pt;
+    color: #0f172a;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+p {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    text-align: justify;
+}
+ul, ol {
+    margin-top: 2px;
+    margin-bottom: 3px;
+    padding-left: 18px;
+}
+li {
+    margin-bottom: 2px;
+    text-align: justify;
+}
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 3px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+table.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4px 0;
+    font-size: 8.2pt;
+    table-layout: fixed;
+}
+table.report-table th, table.report-table td {
+    border: 1px solid #334155;
+    padding: 3px 4px;
+    line-height: 1.25;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+table.report-table th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 3.5px 4px;
+}
+table.report-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+.figure-container {
+    text-align: center;
+    margin: 4px 0;
+    page-break-inside: avoid;
+}
+.report-img {
+    max-width: 96%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.figure-caption {
+    font-size: 9pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 2px;
+}
+</style>
+
+<div class="cover-page">
+    <div class="cover-header">
+        <div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
+        <div class="dept-divider"></div>
+    </div>
+    
+    <div class="cover-body">
+        <div class="report-badge">BÁO CÁO THỰC HÀNH</div>
+        <div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
+        <div class="lab-name">Lab 07: Design Rules Checkers – Kiểm tra Quy tắc Thiết kế, Xử lý Lỗi Sản xuất PCB và Thiết lập Ràng buộc Nhà máy</div>
+    </div>
+    
+    <div class="cover-student">
+        <table class="student-info">
+            <tr>
+                <td>Họ và tên:</td>
+                <td>Lê Ngọc Tường</td>
+            </tr>
+            <tr>
+                <td>MSSV:</td>
+                <td>23207124</td>
+            </tr>
+            <tr>
+                <td>Lớp:</td>
+                <td>23DTV_CLC3</td>
+            </tr>
+            <tr>
+                <td>Môn học:</td>
+                <td>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="cover-footer">
+        TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+## BÀI TẬP VỀ NHÀ: THỐNG KÊ LỖI DRC TỪ ĐỒ ÁN CÁ NHÂN VÀ THIẾT LẬP DESIGN RULES NHÀ SẢN XUẤT
+
+**Mục tiêu:** 
+1. Ứng dụng công cụ Design Rules Checker (DRC) của KiCad để kiểm tra, phát hiện và phân tích toàn diện các lỗi hình học, khoảng cách cách điện (clearance) và tương thích sơ đồ nguyên lý trên bo mạch đồ án cá nhân (Mạch nguồn USB - UART - NE555).
+2. Xây dựng phương án kỹ thuật xử lý triệt để từng nhóm lỗi vi phạm, đảm bảo 0 lỗi hở mạch (0 Unconnected items).
+3. Thiết lập hệ thống ràng buộc thiết kế (Design Rules & Constraints) theo đúng năng lực công nghệ thực tế của các nhà sản xuất PCB tiêu chuẩn (JLCPCB, PCBWay).
+
+---
+
+### 1. Nguyên lý và Cơ chế Hoạt động của KiCad Design Rules Checker (DRC)
+
+Công cụ Design Rules Checker (DRC) trong KiCad là chốt chặn kiểm định chất lượng bắt buộc trước khi tiến hành xuất tập tin sản xuất (Gerber và Drill files). DRC đảm bảo bo mạch vật lý đáp ứng đầy đủ hai tiêu chí sống còn:
+* **Tính toàn vẹn điện từ và sơ đồ (Netlist/Schematic Parity):** Tất cả các chân linh kiện (pads) được liên kết chính xác theo netlist, không có đường nối tắt sai mạng và không còn đường dây chưa nối (0 unconnected items).
+* **Khả năng chế tạo và lắp ráp (DFM/DFA):** Tất cả khoảng cách cách điện giữa các đối tượng dẫn điện (track-to-track, track-to-pad, pad-to-pad), khoảng cách cơ khí (copper-to-edge, hole-to-copper) và lớp mặt nạ hàn (solder mask bridge, silk overlap) đều tuân thủ dung sai chế tạo của nhà máy.
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh1_drc_dialog.png" alt="Hộp thoại Design Rules Checker" style="max-height: 52mm;">
+    <div class="figure-caption">Hình 1. Hộp thoại Design Rules Checker (DRC) trong KiCad</div>
+</div>
+
+* **Cấu hình kiểm tra quan trọng trong DRC:**
+  * **Refill all zones before performing DRC:** Tự động tính toán lại biên dạng của tất cả các vùng phủ đồng (copper zones) trước khi quét lỗi. Tùy chọn này ngăn ngừa các báo cáo sai (false positives) do vùng đổ đồng chưa cập nhật sau khi dời track hoặc via.
+  * **Test for parity between PCB and schematic:** Đối chiếu danh sách linh kiện, footprint, giá trị và net giữa sơ đồ nguyên lý (`.kicad_sch`) và bản vẽ mạch in (`.kicad_pcb`), cảnh báo ngay lập tức nếu có sự bất đồng bộ.
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh2_drc_options.png" alt="Tùy chọn nâng cao trong DRC" style="max-height: 28mm;">
+    <div class="figure-caption">Hình 2. Menu thiết lập các tùy chọn điều hướng và báo cáo DRC</div>
+</div>
+
+* **Các chế độ hỗ trợ định vị lỗi trên giao diện:**
+  * **Cross-probe Selected Items:** Khi nhấp chọn một dòng thông báo lỗi trong bảng DRC, con trỏ làm việc trên bản vẽ PCB tự động nhảy đến vị trí phát sinh lỗi và làm nổi bật đối tượng vi phạm.
+  * **Center on Cross-probe:** Tự động căn giữa màn hình vào tọa độ xảy ra vi phạm giúp kỹ sư quan sát tức thì chi tiết xung quanh.
+  * **Phân loại qua 4 thẻ làm việc:** `Violations` (Lỗi quy tắc hình học/khoảng cách), `Unconnected Items` (Chân hoặc đường mạch chưa kết nối), `Schematics Parity` (Lỗi sai lệch giữa sơ đồ và PCB) và `Ignored Tests` (Các phép thử được người dùng bỏ qua có chủ đích).
+
+### 2. Thiết lập Mức độ Nghiêm trọng (Violation Severity) và Công cụ Giải quyết Ràng buộc
+
+KiCad cho phép tùy biến mức độ phản hồi đối với từng quy tắc kiểm tra trong **Board Setup &rarr; Design Rules &rarr; Violation Severity**:
+* **ERROR (Lỗi nghiêm trọng):** Đánh dấu lỗi bắt buộc phải sửa chữa trước khi xuất file sản xuất. Vi phạm này có thể gây hỏng mạch điện (ngắn mạch, hở mạch) hoặc gây kẹt dây chuyền sản xuất.
+* **WARNING (Cảnh báo):** Nhắc nhở các yếu tố bất thường hoặc chưa tối ưu (ví dụ: chân linh kiện không kết nối theo thiết kế, lớp lụa đè nhẹ lên via có phủ mask). Kỹ sư cần rà soát và có thể chấp nhận nếu đã tính toán trước.
+* **IGNORE (Bỏ qua):** Tắt hoàn toàn việc kiểm tra đối với quy tắc tương ứng nhằm tăng tốc độ kiểm tra đối với các thiết kế đơn giản.
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh3_violation_severity.png" alt="Bảng cấu hình Violation Severity" style="max-height: 52mm;">
+    <div class="figure-caption">Hình 3. Bảng phân cấp mức độ nghiêm trọng vi phạm (Violation Severity) trong Board Setup</div>
+</div>
+
+* **Công cụ chẩn đoán sâu (Clearance & Constraints Resolution):**
+  * **Clearance Resolution:** Cho phép chọn hai đối tượng bất kỳ trên bo mạch (qua menu `Inspect -> Clearance Resolution`) để kiểm tra chi tiết khoảng cách thực tế so với khoảng cách yêu cầu, đồng thời chỉ rõ quy tắc nào đang chi phối giá trị đó (Net Class, Custom Rule hay Board Default).
+  * **Constraints Resolution:** Liệt kê toàn bộ các ràng buộc đang áp dụng lên một đối tượng cụ thể (độ rộng đường mạch cho phép, khoảng cách hở mask, vùng cấm keepout).
+
+<div class="page-break"></div>
+
+### 3. Báo cáo Thống kê Toàn diện các Lỗi DRC từ Đồ án Cá nhân và Phương án Xử lý
+
+Quá trình quét kiểm tra tự động bằng lệnh `kicad-cli pcb drc` trên đồ án mạch nguồn đa năng cá nhân (50 &times; 50 mm, 38 linh kiện, 29 nets) cho kết quả xuất sắc ở hạng mục quan trọng nhất: **Found 0 unconnected pads** (kết nối mạng hoàn chỉnh 100%). Đồng thời, hệ thống phát hiện các cảnh báo hình học và lớp phủ gia công, được thống kê chi tiết theo bảng dưới đây:
+
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 14%;">Mã lỗi DRC</th>
+<th style="width: 28%;">Ý nghĩa & Bản chất kỹ thuật</th>
+<th style="width: 11%;">Số lượng</th>
+<th style="width: 13%;">Mức độ</th>
+<th style="width: 34%;">Phương án kỹ thuật xử lý triệt để</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b><code>solder_mask_bridge</code></b></td>
+<td>Cầu mặt nạ hàn giữa hai đối tượng khác mạng quá hẹp (&lt; 0.10 mm), có nguy cơ bong tróc tạo bắc cầu thiếc khi hàn sóng.</td>
+<td style="text-align: center; font-weight: bold;">150</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Tăng khoảng cách tim dây (track clearance) từ 0.20 mm lên 0.25 mm tại vùng chân cắm dày đặc; thiết lập <i>Solder mask minimum width</i> về 0.10 mm phù hợp dây chuyền JLCPCB.</td>
+</tr>
+<tr>
+<td><b><code>shorting_items</code></b></td>
+<td>Hai đối tượng khác mạng dẫn điện đè lên nhau hoặc vi phạm khoảng cách ngắn mạch.</td>
+<td style="text-align: center; font-weight: bold;">92</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Điều chỉnh lại tọa độ đường track chạy ngang qua pad của linh kiện khác mạng; sử dụng chế độ đi dây <i>Shove Router</i> để tự động né tránh pad.</td>
+</tr>
+<tr>
+<td><b><code>tracks_crossing</code></b></td>
+<td>Đường mạch trên cùng một lớp giao nhau khi chưa được phân tách qua via xuyên lớp.</td>
+<td style="text-align: center; font-weight: bold;">33</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Chèn thêm via xuyên lớp (Via 0.8/0.4 mm) để chuyển phân đoạn dây sang lớp đối diện (nhảy từ <code>F.Cu</code> sang <code>B.Cu</code>).</td>
+</tr>
+<tr>
+<td><b><code>clearance</code></b></td>
+<td>Khoảng cách giữa hai đường track hoặc track với pad nhỏ hơn giá trị cài đặt trong Net Class (&lt; 0.20 mm).</td>
+<td style="text-align: center; font-weight: bold;">23</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Kéo dãn các đường dây song hành; tinh chỉnh điểm rẽ nhánh 45° tạo hành lang cách điện tối thiểu &ge; 0.20 mm.</td>
+</tr>
+<tr>
+<td><b><code>silk_overlap</code></b></td>
+<td>Hai đường mực in lụa (Silkscreen) đè lên nhau làm mờ ký hiệu hoặc tên linh kiện.</td>
+<td style="text-align: center; font-weight: bold;">26</td>
+<td style="text-align: center; color: #d97706; font-weight: bold;">WARNING</td>
+<td>Kéo dời Reference Designator (nhãn R1, C1, D1) ra khỏi vùng khung linh kiện lân cận; giảm kích thước chữ in lụa về 1.0 &times; 1.0 mm.</td>
+</tr>
+<tr>
+<td><b><code>silk_over_copper</code></b></td>
+<td>Mực in lụa đè lên pad đồng hở chì làm giảm độ dính ướt của mối hàn thiếc.</td>
+<td style="text-align: center; font-weight: bold;">19</td>
+<td style="text-align: center; color: #d97706; font-weight: bold;">WARNING</td>
+<td>Kích hoạt tính năng tự động cạo lụa (<i>Subtract silkscreen from solder mask</i>) khi xuất Gerber hoặc dời text cách mép pad &ge; 0.15 mm.</td>
+</tr>
+<tr>
+<td><b><code>lib_footprint_mismatch</code></b></td>
+<td>Footprint trên PCB có sửa đổi cục bộ so với thư viện gốc (C_0805, R_0805).</td>
+<td style="text-align: center; font-weight: bold;">25</td>
+<td style="text-align: center; color: #2563eb; font-weight: bold;">INFO/WARN</td>
+<td>Chạy lệnh <i>Update Footprints from Library...</i> để đồng bộ footprint chuẩn hoặc xác nhận lưu phiên bản chỉnh sửa tùy biến.</td>
+</tr>
+<tr>
+<td><b><code>courtyards_overlap</code></b></td>
+<td>Vùng ranh giới an toàn cơ khí (Courtyard) giữa hai linh kiện SMD đè lên nhau.</td>
+<td style="text-align: center; font-weight: bold;">4</td>
+<td style="text-align: center; color: #d97706; font-weight: bold;">WARNING</td>
+<td>Dãn khoảng cách đặt linh kiện tối thiểu 0.50 mm giữa tụ và điện trở 0805 để đầu gắp máy SMT thao tác chuẩn xác.</td>
+</tr>
+<tr>
+<td><b><code>copper_edge_clearance</code></b></td>
+<td>Đường đồng nằm quá gần mép bo mạch (khoảng cách &lt; 0.50 mm so với <code>Edge.Cuts</code>).</td>
+<td style="text-align: center; font-weight: bold;">2</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Rút ngắn đoạn track biên, duy trì khoảng cách đường đồng đến đường cắt viền bo mạch &ge; 0.50 mm tránh bị lưỡi cưa V-Cut cắn đứt.</td>
+</tr>
+<tr>
+<td><b><code>hole_clearance</code></b></td>
+<td>Lỗ khoan quá sát với đường đồng hoặc lỗ khoan khác gây nguy cơ nứt phíp thủy tinh.</td>
+<td style="text-align: center; font-weight: bold;">1</td>
+<td style="text-align: center; color: #b91c1c; font-weight: bold;">ERROR</td>
+<td>Dời via cách xa mép lỗ định vị cơ khí hoặc lỗ chân cắm linh kiện &ge; 0.30 mm.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+
+### 4. Thiết lập Design Rules theo Thông số Nhà sản xuất PCB Chuẩn Công nghiệp
+
+Để bo mạch sau khi thiết kế có thể chuyển giao sản xuất hàng loạt với tỷ lệ thành phẩm (Yield Rate) &gt; 99% và chi phí kinh tế tối ưu nhất, hệ thống Design Rules trong KiCad được cấu hình chuẩn xác theo năng lực công nghệ tiêu chuẩn (Standard Capabilities) của hai nhà sản xuất PCB uy tín hàng đầu hiện nay là **JLCPCB** và **PCBWay** (phân khúc mạch 2 lớp FR-4 tiêu chuẩn):
+
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 26%;">Thông số Kỹ thuật (Parameters)</th>
+<th style="width: 22%;">Khả năng chuẩn JLCPCB</th>
+<th style="width: 22%;">Khả năng chuẩn PCBWay</th>
+<th style="width: 30%;">Giá trị Cấu hình KiCad Khuyên dùng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>Độ rộng đường mạch tối thiểu (Min Trace Width)</b></td>
+<td style="text-align: center;">0.127 mm (5 mil)</td>
+<td style="text-align: center;">0.150 mm (6 mil)</td>
+<td><b>0.200 mm (8 mil)</b> (Tín hiệu)<br><b>0.800 mm (32 mil)</b> (Đường nguồn)</td>
+</tr>
+<tr>
+<td><b>Khoảng cách cách điện (Min Clearance)</b></td>
+<td style="text-align: center;">0.127 mm (5 mil)</td>
+<td style="text-align: center;">0.150 mm (6 mil)</td>
+<td><b>0.200 mm (8 mil)</b> (An toàn chống chập)</td>
+</tr>
+<tr>
+<td><b>Đường kính lỗ khoan via nhỏ nhất (Min Drill Hole)</b></td>
+<td style="text-align: center;">0.300 mm (12 mil)</td>
+<td style="text-align: center;">0.300 mm (12 mil)</td>
+<td><b>0.300 mm</b> (Tín hiệu) / <b>0.400 mm</b> (Nguồn)</td>
+</tr>
+<tr>
+<td><b>Đường kính vành via nhỏ nhất (Min Via Diameter)</b></td>
+<td style="text-align: center;">0.500 mm (20 mil)</td>
+<td style="text-align: center;">0.500 mm (20 mil)</td>
+<td><b>0.600 mm</b> (Tín hiệu) / <b>0.800 mm</b> (Nguồn)</td>
+</tr>
+<tr>
+<td><b>Vành khuyên đồng tối thiểu (Min Annular Ring)</b></td>
+<td style="text-align: center;">0.130 mm (5 mil)</td>
+<td style="text-align: center;">0.150 mm (6 mil)</td>
+<td><b>0.150 mm (6 mil)</b> (Chống đứt vành khi khoan lệch)</td>
+</tr>
+<tr>
+<td><b>Đồng cách mép bo (Copper to Edge Clearance)</b></td>
+<td style="text-align: center;">0.300 mm (V-Cut: 0.4mm)</td>
+<td style="text-align: center;">0.300 mm (V-Cut: 0.5mm)</td>
+<td><b>0.500 mm (20 mil)</b> (Bảo đảm an toàn cắt V-Cut)</td>
+</tr>
+<tr>
+<td><b>Cầu mặt nạ hàn tối thiểu (Min Solder Mask Bridge)</b></td>
+<td style="text-align: center;">0.100 mm (4 mil)</td>
+<td style="text-align: center;">0.100 mm (4 mil)</td>
+<td><b>0.100 mm (4 mil)</b> (Chống dính chì giữa 2 pad kề)</td>
+</tr>
+<tr>
+<td><b>Độ hở mặt nạ hàn (Solder Mask Clearance)</b></td>
+<td style="text-align: center;">0.050 mm (2 mil)</td>
+<td style="text-align: center;">0.050 mm (2 mil)</td>
+<td><b>0.050 mm (2 mil)</b> (Mở rộng viền chì hàn)</td>
+</tr>
+<tr>
+<td><b>Chiều cao / Chiều rộng chữ lụa (Min Silkscreen)</b></td>
+<td style="text-align: center;">0.80 mm / nét 0.15 mm</td>
+<td style="text-align: center;">0.80 mm / nét 0.15 mm</td>
+<td><b>1.00 mm / nét 0.15 mm</b> (Đảm bảo sắc nét, dễ đọc)</td>
+</tr>
+<tr>
+<td><b>Độ dày lớp đồng thành phẩm (Copper Thickness)</b></td>
+<td style="text-align: center;">1 oz (35 &mu;m)</td>
+<td style="text-align: center;">1 oz (35 &mu;m)</td>
+<td><b>1 oz (35 &mu;m)</b> (Chuẩn công nghiệp phổ biến)</td>
+</tr>
+</tbody>
+</table>
+
+---
+
+### 5. Kết quả Thiết kế 2D Layout và Phối cảnh 3D Thực tế của Bo mạch Đồ án
+
+Bo mạch cá nhân sau khi áp dụng các giải pháp định tuyến tối ưu, phân bổ Net Classes và kiểm soát lỗi DRC thể hiện tính chuyên nghiệp cao, sẵn sàng phục vụ phủ đồng tiếp địa ở Lab 08:
+
+#### 5.1. Bản vẽ Thiết kế 2D Layout hoàn thiện (Kiểm soát 0 Unconnected Items)
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab7_layout_2d.png" alt="Bản vẽ 2D Layout hoàn thiện" style="max-height: 110mm;">
+    <div class="figure-caption">Hình 4. Bản vẽ 2D PCB Layout hoàn thiện (Đường đỏ: Top Layer F.Cu, Đường xanh: Bottom Layer B.Cu, Khung tên Title Block cá nhân)</div>
+</div>
+
+<div class="page-break"></div>
+
+#### 5.2. Phối cảnh 3D Render Đa chiều của Bo mạch Hoàn chỉnh
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab7_3d_top.png" alt="3D Top View" style="max-height: 52mm;">
+    <div class="figure-caption">Hình 5. Phối cảnh 3D Mặt Trên (Top Layer F.Cu) thể hiện sự bố trí gọn gàng của các IC và linh kiện dán SMD</div>
+</div>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab7_3d_bottom.png" alt="3D Bottom View" style="max-height: 52mm;">
+    <div class="figure-caption">Hình 6. Phối cảnh 3D Mặt Dưới (Bottom Layer B.Cu) thể hiện đường mạch nguồn và các via xuyên lớp tối ưu</div>
+</div>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab7_3d_iso.png" alt="3D Isometric View" style="max-height: 52mm;">
+    <div class="figure-caption">Hình 7. Phối cảnh 3D Trực quan Đa góc nhìn (Isometric View) đạt độ hoàn thiện cao, sẵn sàng cho công đoạn gia công</div>
+</div>
+
+### 6. Kết luận và Bài học Kinh nghiệm
+
+* **Ý nghĩa cốt lõi của việc kiểm tra DRC:** DRC không đơn thuần là công cụ báo lỗi mà là kim chỉ nam giúp kết nối giữa giai đoạn thiết kế đồ họa lý tưởng và môi trường chế tạo vật lý thực tế. Việc thông qua 100% kết nối mạng (0 unconnected items) là minh chứng cho sự toàn vẹn của mạch điện.
+* **Chiến lược kiểm soát và phòng ngừa lỗi:**
+  * Luôn thiết lập bảng quy tắc Design Rules tương thích với nhà máy trước khi bắt đầu đi bất kỳ đường dây nào.
+  * Tận dụng tối đa chế độ *Shove* của Trình đi dây tương tác kết hợp với góc uốn 45° để ngăn chặn ngay từ đầu các lỗi chồng lấn đường đồng.
+  * Chú trọng đặc biệt tới các lỗi gia công mặt nạ hàn (`solder_mask_bridge`) và khoảng cách cơ khí biên (`copper_edge_clearance`) vì đây là hai nhóm lỗi thường gặp nhất gây hỏng mạch trong quy trình chế tạo thực tế tại xưởng.
+* **Mức độ hoàn thành mục tiêu Lab 07:** Hoàn thành toàn diện 2 bài tập về nhà theo giáo trình: thống kê chi tiết các nhóm lỗi DRC kèm giải pháp kỹ thuật cụ thể và lập bảng quy chuẩn Design Rules theo năng lực thực tế của JLCPCB và PCBWay.
