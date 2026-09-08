@@ -1,0 +1,570 @@
+---
+title: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 08"
+---
+
+<style>
+@page {
+    size: A4 portrait;
+    margin: 11mm 15mm 11mm 15mm;
+    @bottom-right {
+        content: "Trang " counter(page);
+        font-family: 'Times New Roman', serif;
+        font-size: 9.5pt;
+        color: #555;
+    }
+    @bottom-left {
+        content: "Báo cáo Thực hành Thiết kế Mạch in PCB - Lab 08";
+        font-family: 'Times New Roman', serif;
+        font-size: 9.5pt;
+        color: #555;
+    }
+}
+
+@page:first {
+    margin: 11mm 15mm 11mm 15mm;
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Times New Roman', 'Liberation Serif', serif;
+    font-size: 10.2pt;
+    line-height: 1.32;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* KHUNG BÌA CHUẨN A4 */
+.cover-page {
+    border: 3px double #1e3a8a;
+    border-radius: 8px;
+    padding: 35px 25px;
+    margin: 0;
+    min-height: 270mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: #ffffff;
+    page-break-after: always !important;
+    break-after: page !important;
+}
+
+.cover-header { margin-top: 10px; }
+.uni-name {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    line-height: 1.35;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.dept-divider {
+    width: 140px;
+    height: 1.5px;
+    background-color: #1e3a8a;
+    margin: 10px auto 0 auto;
+}
+
+.cover-body { margin: 30px 0; }
+.report-badge {
+    display: inline-block;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #b91c1c;
+    padding-bottom: 4px;
+}
+.report-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #b91c1c;
+    line-height: 1.35;
+    margin: 12px 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.lab-name {
+    font-size: 13.5pt;
+    font-weight: bold;
+    color: #0f172a;
+    line-height: 1.4;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.cover-student {
+    margin: 20px auto 10px auto;
+    width: 88%;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px 20px;
+    text-align: left;
+}
+.student-info {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12pt;
+    margin: 0;
+}
+.student-info td {
+    padding: 5px 8px;
+    border: none;
+    color: #111;
+    line-height: 1.4;
+}
+.student-info td:first-child {
+    width: 28%;
+    white-space: nowrap;
+    color: #1e3a8a;
+    font-weight: bold;
+}
+
+.cover-footer {
+    margin-bottom: 10px;
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* NỘI DUNG BÁO CÁO */
+.page-break {
+    page-break-before: always;
+    break-before: page;
+}
+
+h2 {
+    font-size: 11.2pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #1e3a8a;
+    padding-bottom: 2px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+h3 {
+    font-size: 9.8pt;
+    color: #0f172a;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    text-align: justify;
+}
+ul, ol {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-left: 18px;
+}
+li {
+    margin-bottom: 1.5px;
+    text-align: justify;
+}
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8.2pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1px 3px;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+table.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3px 0;
+    font-size: 8pt;
+    table-layout: fixed;
+}
+table.report-table th, table.report-table td {
+    border: 1px solid #334155;
+    padding: 2.5px 3.5px;
+    line-height: 1.18;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+table.report-table th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 3.5px;
+}
+table.report-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+.figure-container {
+    text-align: center;
+    margin: 3px 0;
+    page-break-inside: avoid;
+}
+.report-img {
+    max-width: 95%;
+    max-height: 75mm;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.figure-caption {
+    font-size: 8.8pt;
+    font-style: italic;
+    color: #334155;
+    margin-top: 2px;
+}
+</style>
+
+<div class="cover-page">
+    <div class="cover-header">
+        <div class="uni-name">ĐẠI HỌC KHOA HỌC TỰ NHIÊN - ĐHQG TP.HCM<br>KHOA ĐIỆN TỬ - VIỄN THÔNG</div>
+        <div class="dept-divider"></div>
+    </div>
+    
+    <div class="cover-body">
+        <div class="report-badge">BÁO CÁO THỰC HÀNH</div>
+        <div class="report-title">THIẾT KẾ MẠCH IN PCB VỚI KICAD</div>
+        <div class="lab-name">Lab 08: Gerber & Manufacturing – Xuất Tệp Gia Công Sản Xuất, Tệp Khoan Cơ Khí và Kiểm Tra Nghiệm Thu Bằng GerbView</div>
+    </div>
+    
+    <div class="cover-student">
+        <table class="student-info">
+            <tr>
+                <td>Họ và tên:</td>
+                <td>Lê Ngọc Tường</td>
+            </tr>
+            <tr>
+                <td>MSSV:</td>
+                <td>23207124</td>
+            </tr>
+            <tr>
+                <td>Lớp:</td>
+                <td>23DTV_CLC3</td>
+            </tr>
+            <tr>
+                <td>Môn học:</td>
+                <td>Thiết kế mạch in PCB với KiCad (HK3/2025-2026)</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="cover-footer">
+        TP. HỒ CHÍ MINH, NĂM HỌC 2025 - 2026
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+## BÀI TẬP 1: TÌM HIỂU CÁC ĐỊNH DẠNG XUẤT BẢN VẼ NGOÀI GERBER TRONG THIẾT KẾ PCB
+
+**Yêu cầu:** Nghiên cứu và phân tích các định dạng tệp xuất bản vẽ trong kỹ thuật chế tạo mạch in (CAD/CAM), so sánh vai trò của Gerber chuẩn với các định dạng vector, đồ họa kỹ thuật và các chuẩn sản xuất thông minh thế hệ mới (ODB++, IPC-2581).
+
+---
+
+### 1. Phân loại và so sánh các định dạng xuất từ KiCad Plot
+
+Trong quá trình hoàn thiện thiết kế PCB, kỹ sư cần giao tiếp dữ liệu với nhiều bộ phận: xưởng chế tạo mạch thô (PCB Fab), dây chuyền dán linh kiện tự động (SMT Assembly), kỹ sư cơ khí (Mechanical CAD) và bộ phận quản lý tài liệu kỹ thuật. Bảng dưới đây tổng hợp các định dạng xuất thông dụng:
+
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 16%;">Định dạng</th>
+<th style="width: 14%;">Đuôi tệp tin</th>
+<th style="width: 40%;">Mục đích sử dụng chính</th>
+<th style="width: 30%;">Đặc tính kỹ thuật và khuyến nghị</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>Gerber RS-274X / X2</b></td>
+<td><code>.gbr</code>, <code>.gtl</code>, <code>.gbl</code>...</td>
+<td>Định dạng tiêu chuẩn toàn cầu để gửi xưởng sản xuất bo mạch PCB (JLCPCB, PCBWay).</td>
+<td>Mô tả hình học 2D từng lớp, chuẩn X2 nhúng thêm thuộc tính Netlist và Stackup.</td>
+</tr>
+<tr>
+<td><b>Excellon Drill</b></td>
+<td><code>.drl</code></td>
+<td>Điều khiển máy CNC khoan các lỗ xuyên mạ (PTH) và lỗ cơ khí không mạ (NPTH).</td>
+<td>Định dạng toạ độ mũi khoan dạng ASCII, kèm tệp báo cáo tổng hợp <code>.rpt</code>.</td>
+</tr>
+<tr>
+<td><b>PDF (Vector)</b></td>
+<td><code>.pdf</code></td>
+<td>Xem trực quan, in phim thủ công, đính kèm hồ sơ kỹ thuật và báo cáo nghiệm thu.</td>
+<td>Không phụ thuộc phần mềm, hỗ trợ in tỷ lệ 1:1, kiểm tra bố cục nhanh.</td>
+</tr>
+<tr>
+<td><b>SVG (Scalable Vector)</b></td>
+<td><code>.svg</code></td>
+<td>Chèn hình ảnh vector vào tài liệu web, minh họa kỹ thuật độ nét cao không vỡ nét.</td>
+<td>Dễ chỉnh sửa bằng Inkscape/Illustrator, giữ cấu trúc layer vector linh hoạt.</td>
+</tr>
+<tr>
+<td><b>DXF (AutoCAD)</b></td>
+<td><code>.dxf</code></td>
+<td>Trao đổi với kỹ sư cơ khí thiết kế vỏ hộp (Enclosure), gá lắp máy CNC/In 3D.</td>
+<td>Mô tả biên dạng cơ học Edge.Cuts, vị trí tâm lỗ bắt vít và cổng cắm ngoại vi.</td>
+</tr>
+<tr>
+<td><b>ODB++ / IPC-2581</b></td>
+<td><code>.tgz</code> / <code>.xml</code></td>
+<td>Định dạng dữ liệu sản xuất thông minh tích hợp (All-in-One: mạch, khoan, linh kiện, BOM).</td>
+<td>Loại bỏ sự phân mảnh của Gerber truyền thống, chuẩn hóa dây chuyền lắp ráp công nghiệp.</td>
+</tr>
+</tbody>
+</table>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh1_plot_dialog_settings.png" alt="Cấu hình hộp thoại Plot trong KiCad" style="max-height: 60mm;">
+    <div class="figure-caption">Hình 1. Thiết lập cấu hình xuất tệp gia công Gerber trong hộp thoại Plot của KiCad PCB Editor</div>
+</div>
+
+* **Các tùy chọn cấu hình bắt buộc khi xuất Gerber chuẩn công nghiệp:**
+  * **`Plot drawing sheet` (TẮT):** Tuyệt đối không in khung bản vẽ vào tệp Gerber để tránh nhầm lẫn với viền bo mạch thực tế.
+  * **`Subtract soldermask from silkscreen` (BẬT):** Tự động trừ lớp in lụa tại các vùng pad hàn để tránh dính mực in lụa gây cản trở tiếp xúc thiếc hàn.
+  * **`Use drill/place file origin` (BẬT):** Đồng bộ gốc toạ độ giữa bản vẽ Gerber, tệp khoan và máy gắp linh kiện tự động (Pick & Place).
+  * **`Check zone fills before plotting` (BẬT):** Tự động đổ lại các vùng đồng trước khi xuất, tránh sót lỗi cập nhật sau khi dời linh kiện.
+
+<div class="page-break"></div>
+
+### 2. Cấu hình xuất tệp khoan cơ khí (Generate Drill Files)
+
+Tệp khoan điều khiển mũi khoan CNC tạo các lỗ xuyên mạ (Plated Through Hole - PTH) dùng cho via, chân cắm linh kiện và lỗ cơ khí định vị (Non-Plated Through Hole - NPTH).
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh2_drill_dialog_settings.png" alt="Cấu hình xuất tệp khoan Drill trong KiCad" style="max-height: 58mm;">
+    <div class="figure-caption">Hình 2. Cửa sổ thiết lập xuất tệp khoan cơ khí (Generate Drill Files) và bảng tổng kết lỗ khoan</div>
+</div>
+
+* **Bảng tổng kết cấu hình và số liệu lỗ khoan thực tế dự án (lab8-drill.rpt):**
+
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 10%;">Mã dao</th>
+<th style="width: 18%;">Đường kính lỗ</th>
+<th style="width: 18%;">Đơn vị (Inch)</th>
+<th style="width: 16%;">Số lượng</th>
+<th style="width: 38%;">Chức năng kỹ thuật trên bo mạch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;"><b>T1</b></td>
+<td style="text-align:center; font-weight:bold; color:#16a34a;">0.300 mm</td>
+<td style="text-align:center;">0.0118"</td>
+<td style="text-align:center;">16 lỗ</td>
+<td>Lỗ via nối tín hiệu và Plane GND giữa Top/Bottom (Via 0.6/0.3mm).</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>T2</b></td>
+<td style="text-align:center;">0.400 mm</td>
+<td style="text-align:center;">0.0157"</td>
+<td style="text-align:center;">3 lỗ</td>
+<td>Lỗ via phụ và điểm đo kiểm tra điện áp (Test Points).</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>T3 - T6</b></td>
+<td style="text-align:center;">0.550 - 0.850 mm</td>
+<td style="text-align:center;">0.0217 - 0.0335"</td>
+<td style="text-align:center;">10 lỗ (slot)</td>
+<td>Chân gá cơ học chịu lực cho cổng Micro USB1 và công tắc trượt SW2.</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>T7</b></td>
+<td style="text-align:center;">0.900 mm</td>
+<td style="text-align:center;">0.0354"</td>
+<td style="text-align:center;">3 lỗ</td>
+<td>Chân cắm Jumper 3 chân (J1) cấu hình mức nguồn 3.3V / 5V.</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>T8</b></td>
+<td style="text-align:center; font-weight:bold; color:#1e3a8a;">0.950 mm</td>
+<td style="text-align:center;">0.0374"</td>
+<td style="text-align:center;">24 lỗ</td>
+<td>Chân cắm các khối Header đôi 2x3 (J5, J6, J7, J8) ngõ ra tín hiệu.</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>T9</b></td>
+<td style="text-align:center;">1.000 mm</td>
+<td style="text-align:center;">0.0394"</td>
+<td style="text-align:center;">10 lỗ</td>
+<td>Chân cắm Header đơn 1x5 (J3), Header 1x2 (J4) và tụ hóa C10, C11.</td>
+</tr>
+<tr>
+<td colspan="3" style="text-align:right; font-weight:bold;">Tổng cộng lỗ xuyên mạ (PTH):</td>
+<td style="text-align:center; font-weight:bold; color:#16a34a;">66 lỗ</td>
+<td style="font-style:italic;">100% mạ đồng dẫn điện thành ống</td>
+</tr>
+<tr>
+<td style="text-align:center;"><b>NPTH-T1</b></td>
+<td style="text-align:center;">0.800 mm</td>
+<td style="text-align:center;">0.0315"</td>
+<td style="text-align:center;">2 lỗ</td>
+<td>Lỗ định vị cơ khí cổng USB (không mạ đồng, tệp <code>lab8-NPTH.drl</code>).</td>
+</tr>
+</tbody>
+</table>
+
+<div class="page-break"></div>
+
+## BÀI TẬP 2: TẠO VÀ NGHIỆM THU GÓI GERBER CHO THIẾT KẾ BO MẠCH CÁ NHÂN
+
+**Yêu cầu:** Tạo trọn bộ tệp Gerber và tệp khoan cho bo mạch nguồn đa năng tích hợp (Lab 08), sử dụng phần mềm KiCad Gerber Viewer (GerbView) để nghiệm thu đa tầng và đóng gói sản xuất chuẩn công nghiệp.
+
+---
+
+### 1. Danh mục các tệp tin chế tạo trong gói sản xuất (Manufacturing Package)
+
+Toàn bộ các tệp tin xuất ra được lưu tại thư mục `Gerber/` và nén vào tệp `Production/LAB8_GERBER_MANUFACTURING.zip` bao gồm:
+
+<table class="report-table">
+<thead>
+<tr>
+<th style="width: 6%;">STT</th>
+<th style="width: 25%;">Tên tệp</th>
+<th style="width: 20%;">Quy ước</th>
+<th style="width: 49%;">Mô tả nội dung hình học và chức năng sản xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">1</td>
+<td><code>lab8-F_Cu.gtl</code></td>
+<td>Top Copper</td>
+<td>Lớp đồng mặt trên: đường mạch nguồn, tín hiệu vi sai, pad linh kiện SMD.</td>
+</tr>
+<tr>
+<td style="text-align:center;">2</td>
+<td><code>lab8-B_Cu.gbl</code></td>
+<td>Bottom Copper</td>
+<td>Lớp đồng mặt dưới: đường mạch kết nối phụ và mặt phẳng phủ mass GND.</td>
+</tr>
+<tr>
+<td style="text-align:center;">3</td>
+<td><code>lab8-F_Mask.gts</code></td>
+<td>Top Solder Mask</td>
+<td>Mặt nạ hàn mặt trên: chừa cửa sổ hở đồng tại các pad để ăn thiếc hàn.</td>
+</tr>
+<tr>
+<td style="text-align:center;">4</td>
+<td><code>lab8-B_Mask.gbs</code></td>
+<td>Bottom Mask</td>
+<td>Mặt nạ hàn mặt dưới: bảo vệ đường đồng chống oxy hóa và bắc cầu chì hàn.</td>
+</tr>
+<tr>
+<td style="text-align:center;">5</td>
+<td><code>lab8-F_Silkscreen.gto</code></td>
+<td>Top Silk</td>
+<td>Mực in lụa mặt trên: ký hiệu linh kiện (R, C, U, D), tên cổng, vạch phân cực.</td>
+</tr>
+<tr>
+<td style="text-align:center;">6</td>
+<td><code>lab8-B_Silkscreen.gbo</code></td>
+<td>Bottom Silk</td>
+<td>Mực in lụa mặt dưới: tên tác giả, MSSV, mã phiên bản bo mạch.</td>
+</tr>
+<tr>
+<td style="text-align:center;">7</td>
+<td><code>lab8-F_Paste.gtp</code></td>
+<td>Top Paste</td>
+<td>Khuôn quét kem hàn mặt trên: dùng cắt stencil laser gia công hàn dán SMD.</td>
+</tr>
+<tr>
+<td style="text-align:center;">8</td>
+<td><code>lab8-B_Paste.gbp</code></td>
+<td>Bottom Paste</td>
+<td>Khuôn kem hàn mặt dưới (không có linh kiện dán mặt dưới).</td>
+</tr>
+<tr>
+<td style="text-align:center;">9</td>
+<td><code>lab8-Edge_Cuts.gm1</code></td>
+<td>Board Outline</td>
+<td>Đường biên viền bo mạch: máy phay CNC cắt viền chính xác 50x50 mm.</td>
+</tr>
+<tr>
+<td style="text-align:center;">10</td>
+<td><code>lab8-PTH.drl</code></td>
+<td>Plated Drill</td>
+<td>Tệp khoan điều khiển CNC gia công 66 lỗ mạ xuyên kim loại.</td>
+</tr>
+<tr>
+<td style="text-align:center;">11</td>
+<td><code>lab8-NPTH.drl</code></td>
+<td>Non-Plated</td>
+<td>Tệp khoan 2 lỗ cơ khí không mạ định vị cổng USB.</td>
+</tr>
+<tr>
+<td style="text-align:center;">12</td>
+<td><code>lab8-job.gbrjob</code></td>
+<td>Gerber Job</td>
+<td>Mô tả cấu trúc vật liệu: 2 lớp FR4, độ dày bo 1.6mm, đồng 1oz (35µm).</td>
+</tr>
+</tbody>
+</table>
+
+### 2. Quy trình kiểm tra nghiệm thu trên KiCad Gerber Viewer (GerbView)
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/hinh3_gerbview_inspection.png" alt="Kiểm tra xếp chồng các lớp Gerber trên GerbView" style="max-height: 48mm;">
+    <div class="figure-caption">Hình 3. Giao diện kiểm tra đối soát xếp chồng các lớp chế tạo trên phần mềm KiCad GerbView</div>
+</div>
+
+* **7 Bước nghiệm thu kỹ thuật bắt buộc trước khi gửi xưởng sản xuất:**
+  * **Kiểm tra xếp chồng:** Nạp toàn bộ 12 tệp vào GerbView, bật tắt từng lớp để kiểm tra khớp tâm tuyệt đối giữa F.Cu, B.Cu và Solder Mask.
+  * **Đường biên Edge.Cuts:** Xác minh đường viền khép kín 100%, không bị hở hoặc đứt đoạn, kích thước bo chuẩn 50.0 x 50.0 mm.
+  * **Tâm lỗ khoan:** Toàn bộ 68 lỗ khoan (lab8-PTH.drl và lab8-NPTH.drl) nằm đúng tâm pad/via, vành Annular ring &ge; 0.15 mm.
+  * **Khoảng hở Solder Mask & Silk:** Tùy chọn Subtract soldermask loại trừ triệt để mực in lụa lem vào vùng pad hàn SMD.
+  * **Tính tương thích Parity:** Đạt 0 lỗi parity mismatch, đồng bộ hoàn toàn netlist giữa nguyên lý và mạch in.
+  * **Đối soát năng lực xưởng (JLCPCB):** Track min 0.25 mm &ge; 0.127 mm; Clearance min 0.20 mm &ge; 0.127 mm; Drill min 0.30 mm &ge; 0.30 mm.
+  * **Đóng gói lưu trữ:** Tệp nén `LAB8_GERBER_MANUFACTURING.zip` dung lượng 28 KB hoàn chỉnh, sẵn sàng đặt hàng.
+
+<div class="page-break"></div>
+
+### 3. Bản vẽ Mạch in 2D và Phối cảnh 3D Nghiệm thu Dự án Lab 08
+
+* **Bản vẽ bố trí mạch in 2D hoàn thiện:**
+  Minh họa cấu trúc định tuyến 2 lớp đồng F.Cu (đỏ), B.Cu (xanh), cổng USB1 đã quay miệng ra mép bo và đường bao kích thước chuẩn 50 x 50 mm.
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab8_layout_2d.png" alt="Bản vẽ 2D PCB Layout hoàn thiện Lab 08" style="max-height: 70mm;">
+    <div class="figure-caption">Hình 4. Bản vẽ 2D PCB Layout hoàn thiện của Dự án Lab 08 phục vụ xuất Gerber chế tạo</div>
+</div>
+
+* **Phối cảnh 3D Mặt trên, Mặt dưới và Phối cảnh Isometric:**
+
+<table style="width:100%; border:none; margin:2px 0;">
+    <tr style="background:none;">
+        <td style="width:50%; border:none; text-align:center; padding:1px;">
+            <img class="report-img" src="Pic/lab8_3d_top.png" alt="3D Top View Lab 08" style="max-height: 40mm;">
+            <div class="figure-caption">Hình 5. Phối cảnh 3D Mặt trên (Top View)</div>
+        </td>
+        <td style="width:50%; border:none; text-align:center; padding:1px;">
+            <img class="report-img" src="Pic/lab8_3d_bottom.png" alt="3D Bottom View Lab 08" style="max-height: 40mm;">
+            <div class="figure-caption">Hình 6. Phối cảnh 3D Mặt dưới (Bottom View)</div>
+        </td>
+    </tr>
+</table>
+
+<div class="figure-container">
+    <img class="report-img" src="Pic/lab8_3d_iso.png" alt="3D Isometric View Lab 08" style="max-height: 45mm;">
+    <div class="figure-caption">Hình 7. Phối cảnh 3D góc nghiêng Isometric hoàn chỉnh của bo mạch đa năng Lab 08</div>
+</div>
+

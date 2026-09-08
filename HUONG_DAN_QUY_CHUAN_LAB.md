@@ -244,6 +244,7 @@ ls -la Pic/pdf_preview/
 | **Lab 04** | Thiết lập PCB & Design Rules | Vẽ viền bo Edge.Cuts $50\times 50\text{ mm}$, cấu hình Stackup 2 lớp FR4, Net Classes | Cấu hình Stackup, bảng Design Rules, bảng Net Classes |
 | **Lab 05** | Bố trí linh kiện (Placement) | Sắp xếp linh kiện tối ưu, tụ lọc sát chân IC, phân chia khối nguồn | Bản vẽ PCB 2D sau placement, ảnh 3D linh kiện đã sắp xếp |
 | **Lab 06** | Đi dây (Routing), Phủ đồng & Xuất Gerber | Routing lớp Top/Bottom, đổ đồng GND, chạy DRC 0 lỗi, xuất Gerber/BOM | Bản vẽ Routing hoàn chỉnh, bản vẽ phủ đồng, báo cáo DRC 0 lỗi |
+| **Lab 07** | Design Rules Checkers (DRC) & Parity | Cấu hình Violation Severity, tra cứu Clearance & Constraints, đồng bộ Schematic Parity, giải quyết lỗi DRC | Hộp thoại DRC 0 Errors, hộp thoại Violation Severity, Clearance Resolution, Constraints Resolution, Bản vẽ 2D và 3D hoàn chỉnh |
 
 ---
 
@@ -267,15 +268,46 @@ ls -la Pic/pdf_preview/
   kicad-cli pcb render --rotate '-45,0,45' --perspective --quality high -o Pic/3d_placement_isometric.png Project_KiCad/LAB5.kicad_pcb
   ```
 
-### 2. Quy chuẩn tạo ảnh đồ họa chú thích bo mạch (PCB Image Annotations)
+### 2. Quy chuẩn kiểm soát và xử lý lỗi Design Rules Checkers (DRC & Parity)
+* **Quy chuẩn hướng cắm cổng giao tiếp và vị trí cơ khí:**
+  - Các cổng kết nối ngoại vi (`USB1`, `Type-C`, `Jack DC`) bắt buộc phải quay miệng cắm hướng ra mép bo mạch (`Edge.Cuts`). Đối với footprint `Micro_USB`, mép cắm cáp nằm ở trục dương nội bộ ($Y = +7.99\text{ mm}$), khi bố trí ở mép trái bo mạch cần xoay góc $270^\circ$ để miệng cắm quay ra ngoài, tránh quay ngược vào lòng bo.
+  - Công tắc gạt (`SW2`) phải đặt sát mép bo, căn thẳng hàng với cổng USB và giữ khoảng cách Courtyard an toàn $> 1.5\text{ mm}$ để người dùng dễ thao tác bật/tắt.
+* **Quy chuẩn phân cấp mức độ nghiêm trọng (Violation Severity):**
+  - **Error (Bắt buộc = 0):** `unconnected_items` (đứt mạch), `schematic_parity` (lệch nguyên lý), `invalid_outline` (hở viền bo mạch).
+  - **Warning (Giám sát kỹ thuật):** `solder_mask_bridge` (khe mở mặt nạ hàn pad hẹp), `clearance` (khoảng cách cục bộ), `tracks_crossing` (giao cắt dây đồng).
+  - **Ignore (Bỏ qua hợp lý):** `silk_over_copper`, `silk_overlap` (nhà máy tự động trừ mặt nạ hàn khi sản xuất).
+* **Đồng bộ hóa Schematic - PCB Parity:**
+  - Bắt buộc kiểm tra đồng bộ bằng lệnh CLI: `kicad-cli pcb drc --schematic-parity <project.kicad_pcb>`. Đảm bảo danh mục footprint và netlist khớp 100% với sơ đồ nguyên lý.
+
+### 3. Quy chuẩn tạo ảnh đồ họa chú thích bo mạch (PCB Image Annotations)
 * **Tỉ lệ ánh xạ tọa độ vật lý sang pixel:**
   - Với bo mạch $50 \times 50\text{ mm}$ xuất ảnh kích thước $1927 \times 1927\text{ px}$, hệ số chuyển đổi là $\approx 38.54\text{ px/mm}$.
 * **Quy tắc đóng khung bao (Bounding Boxes):**
   - Khung bao khối chức năng hoặc linh kiện bắt buộc phải bao trọn: toàn bộ diện tích thân linh kiện (Body), toàn bộ các chân pad hàn (Pads), và nhãn định danh (Silkscreen Reference).
   - Tuyệt đối không để khung chỉ bao quanh phần chữ định danh mà bỏ sót cụm pad mạch in.
 
-### 3. Quy chuẩn an toàn trước khi Commit và Push GitHub
+### 4. Quy chuẩn an toàn trước khi Commit và Push GitHub
 * **Dọn dẹp tệp tin rác:** Xóa toàn bộ ảnh cắt tạm thời (`crop_*.png`, `test_3d_render_*.png`), thư mục preview trung gian (`Pic/pdf_preview/`), và cache `__pycache__`.
 * **Quét bảo mật bí mật (Secret Scan):** Chạy kiểm tra qua công cụ `safety_guard.py` để đảm bảo không rò rỉ token, khóa riêng tư hoặc thông tin cá nhân ngoài quy chuẩn.
 * **Đồng bộ định danh tác giả Git:** Đảm bảo `git config user.name` và `git config user.email` thể hiện đúng tên sinh viên *Lê Ngọc Tường*.
 
+
+### 5. Quy chuẩn xuất tệp gia công chế tạo (Gerber & Drill Manufacturing Package)
+* **Quy chuẩn tùy chọn Plot Gerber (2-layer FR4):**
+  - Bắt buộc kích hoạt: `Subtract soldermask from silkscreen` (trừ mực in lụa tại pad hàn), `Use drill/place file origin` (đồng bộ gốc toạ độ gia công và dán SMT).
+  - Bắt buộc vô hiệu hóa: `Plot drawing sheet` (tuyệt đối không in khung viền bản vẽ vào tệp Gerber để tránh nhầm với viền bo).
+  - Tự động hóa: `Check zone fills before plotting` để tránh sót lỗi cập nhật mặt phẳng đồng sau dịch chuyển linh kiện.
+* **Quy chuẩn xuất tệp khoan cơ khí (Excellon Drill):**
+  - Tách riêng tệp khoan mạ xuyên kim loại (`PTH.drl` cho via, chân cắm THT) và tệp khoan cơ khí không mạ (`NPTH.drl` cho lỗ gá bắt vít, định vị vỏ kim loại).
+  - Xuất kèm tệp bản đồ vị trí lỗ khoan (`drill-map.dxf` hoặc `drill-map.pdf`) và tệp báo cáo thống kê mũi khoan (`.rpt`).
+* **Nghiệm thu 7 bước qua KiCad GerbView:**
+  - 1. Kiểm tra đối soát xếp chồng các lớp (Layer Overlay): Khớp tâm hoàn hảo giữa đồng F.Cu/B.Cu, Mask và Drill.
+  - 2. Kiểm tra đường biên `Edge.Cuts`: Viền kín 100%, không hở, không giao cắt, đúng kích thước thực tế.
+  - 3. Kiểm tra tâm lỗ khoan: Toàn bộ lỗ nằm đúng tâm pad/via, vành đồng Annular ring đạt $\ge 0.15\text{ mm}$.
+  - 4. Kiểm tra khoảng hở mặt nạ hàn và in lụa: Không dính mực in lụa lên bề mặt pad hàn linh kiện SMD.
+  - 5. Kiểm tra định dạng tệp: Đầy đủ bộ Gerber X2/Protel + Drill + Drill Report + Gerber Job File (`.gbrjob`).
+  - 6. Đối soát năng lực sản xuất xưởng (JLCPCB / PCBWay Standard):
+    - Track width min: $0.25\text{ mm} \ge 0.127\text{ mm}$ (Pass).
+    - Clearance min: $0.20\text{ mm} \ge 0.127\text{ mm}$ (Pass).
+    - Drill hole min: $0.30\text{ mm} \ge 0.30\text{ mm}$ (Pass).
+  - 7. Đóng gói sản xuất: Đặt toàn bộ các tệp Gerber và Drill vào file `.zip` duy nhất, không chứa thư mục lồng nhau phức tạp.

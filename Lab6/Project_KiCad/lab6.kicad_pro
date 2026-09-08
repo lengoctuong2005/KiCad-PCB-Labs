@@ -488,7 +488,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "LAB6.kicad_pro",
+    "filename": "lab6.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -739,8 +739,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "LAB6.kicad_sch",
-        "name": "LAB6",
+        "filename": "lab6.kicad_sch",
+        "name": "lab6",
         "uuid": "2fa66d21-ecc6-4561-b176-5d0c6525ff06"
       }
     ],

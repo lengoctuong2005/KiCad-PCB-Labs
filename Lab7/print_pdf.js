@@ -4,16 +4,16 @@ const puppeteer = require('../Lab5/node_modules/puppeteer');
 (async () => {
   try {
     const browser = await puppeteer.launch({
-      executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      executablePath: '/usr/bin/google-chrome',
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
-    const htmlPath = path.resolve(__dirname, 'BaoCao_Lab06.html');
+    const htmlPath = path.resolve(__dirname, 'BaoCao_Lab07.html');
     const fileUrl = 'file:///' + htmlPath.replace(/\\/g, '/');
     console.log('Navigating to:', fileUrl);
     await page.goto(fileUrl, { waitUntil: 'networkidle0' });
     
-    const pdfPath = path.resolve(__dirname, 'BaoCao_Lab06_KiCad.pdf');
+    const pdfPath = path.resolve(__dirname, 'BaoCao_Lab07.pdf');
     await page.pdf({
       path: pdfPath,
       format: 'A4',
