@@ -1,6 +1,11 @@
 # Agent, rules & manifests
 .agents/
 .opencode/
+.gemini/
+.claude/
+.obsidian/
+session-state.md
+PROJECT_MAP.md
 RULES_MANIFEST.md
 SKILLS_MANIFEST.md
 .manifest_cache.json

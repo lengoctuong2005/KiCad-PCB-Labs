@@ -9048,7 +9048,7 @@
 	(footprint "LAB3_CA1_14:Micro_USB"
 		(layer "F.Cu")
 		(uuid "c1d02067-fb01-47c1-b806-3e2d99d212fa")
-		(at 33 96 -90)
+		(at 32.84 95.87 -90)
 		(property "Reference" "USB1"
 			(at 6.355 4.69 270)
 			(unlocked yes)
