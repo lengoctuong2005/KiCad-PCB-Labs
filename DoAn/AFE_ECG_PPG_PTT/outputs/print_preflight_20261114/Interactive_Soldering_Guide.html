@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Soldering &amp; Bring-Up Guide - AFE ECG + PPG PAT (92x70 mm)</title>
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 13px;
+}
+header {
+    background: #1e293b;
+    border-bottom: 2px solid #334155;
+    padding: 10px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+header h1 {
+    margin: 0;
+    font-size: 16px;
+    color: #f8fafc;
+}
+.safety-pill {
+    background: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fecaca;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 11.5px;
+}
+.toolbar {
+    background: #162032;
+    padding: 8px 18px;
+    border-bottom: 1px solid #334155;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.btn {
+    background: #1e293b;
+    color: #cbd5e1;
+    border: 1px solid #475569;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.btn:hover { background: #334155; color: #fff; }
+.btn.active { background: #2563eb; border-color: #60a5fa; color: #fff; font-weight: 600; }
+.btn-stage.active { background: #b45309; border-color: #fbbf24; color: #fff; }
+.layout {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 12px;
+    padding: 12px 18px;
+}
+@media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+}
+.panel {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px;
+}
+.panel h2 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #93c5fd;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 5px;
+}
+.svg-wrap {
+    background: #0b1220;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    overflow: auto;
+    max-height: 680px;
+    display: block;
+}
+svg#board-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+}
+.stage-banner {
+    margin-top: 8px;
+    background: #172554;
+    border-left: 4px solid #3b82f6;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    line-height: 1.45;
+}
+.inspector-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 4px 10px;
+    font-size: 12.5px;
+    margin-bottom: 10px;
+}
+.inspector-k { color: #94a3b8; font-weight: 600; }
+.inspector-v { color: #f8fafc; word-break: break-word; }
+.note-box {
+    background: #0f172a;
+    border: 1px solid #475569;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #fde68a;
+}
+.tp-table, .bom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+}
+.tp-table th, .tp-table td, .bom-table th, .bom-table td {
+    border: 1px solid #334155;
+    padding: 4px 6px;
+    text-align: left;
+}
+.tp-table th, .bom-table th {
+    background: #0f172a;
+    color: #93c5fd;
+    position: sticky;
+    top: 0;
+}
+.bom-scroll {
+    max-height: 310px;
+    overflow-y: auto;
+    margin-top: 8px;
+    border: 1px solid #334155;
+    border-radius: 5px;
+}
+tr.bom-row { cursor: pointer; }
+tr.bom-row:hover { background: #26354d; }
+tr.bom-row.selected { background: #1d4ed8; color: #fff; }
+input#search-box {
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 12px;
+    width: 210px;
+}
+.comp-group { cursor: pointer; transition: opacity 0.15s ease; }
+.comp-dim { opacity: 0.16; }
+.comp-body { fill: rgba(30, 58, 138, 0.22); stroke: #64748b; stroke-width: 0.18; }
+.comp-group:hover .comp-body { stroke: #38bdf8; stroke-width: 0.35; }
+.comp-selected .comp-body { fill: rgba(245, 158, 11, 0.25); stroke: #fbbf24; stroke-width: 0.55; }
+.pad-smd { fill: #eab308; stroke: #713f12; stroke-width: 0.05; }
+.pad-th { fill: #d97706; stroke: #fef08a; stroke-width: 0.08; }
+.pad-drill { fill: #0b1220; }
+.tp-ring { fill: #facc15; stroke: #fef08a; stroke-width: 0.15; }
+.ref-label { font-family: monospace; font-size: 1.55px; fill: #f8fafc; pointer-events: none; text-anchor: middle; dominant-baseline: central; }
+.pin1-dot { fill: #ef4444; stroke: #ffffff; stroke-width: 0.18; pointer-events: none; }
+.check-list label { display: block; margin: 4px 0; cursor: pointer; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+    <div>
+        <h1>AFE ECG + PPG PAT Interactive Soldering &amp; Bring-Up Map</h1>
+        <div style="color:#94a3b8;font-size:11.5px;">92 x 70 mm 2-Layer FR-4 | 46 Footprints | U1 65.2% Segmented EP Paste | 38 Tented Vias | 3 J1 Slots</div>
+    </div>
+    <div class="safety-pill">BENCH SIMULATOR ONLY - NO HUMAN CONNECTION - NOT IEC 60601-1</div>
+</header>
+
+<div class="toolbar">
+    <span style="color:#94a3b8;font-weight:600;">Soldering Stage:</span>
+    <div id="stage-buttons" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    <span style="margin-left:auto;display:flex;gap:6px;align-items:center;">
+        <button class="btn" id="btn-toggle-labels">Labels: ON</button>
+        <button class="btn" id="btn-toggle-pin1">Pin-1 Dots: ON</button>
+        <button class="btn" id="btn-zoom-in">Zoom +</button>
+        <button class="btn" id="btn-zoom-out">Zoom -</button>
+        <button class="btn" id="btn-zoom-reset">Reset</button>
+    </span>
+</div>
+
+<div class="layout">
+    <div>
+        <div class="panel">
+            <h2>92 x 70 mm Top Board View (Click Any Footprint or Pad)</h2>
+            <div class="svg-wrap" id="svg-wrap">
+                <svg id="board-svg" viewBox="-2 -2 96 74" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="stage-banner" id="stage-banner"></div>
+        </div>
+
+        <div class="panel" style="margin-top:12px;">
+            <h2>TP1..TP7 Multimeter &amp; Bring-Up Expected Checks</h2>
+            <table class="tp-table">
+                <thead>
+                    <tr><th>Pad</th><th>Net</th><th>Unpowered Check</th><th>Powered Bench Target</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>TP7</code></td><td>GND</td><td>0.0 Ohm to H1..H4</td><td>0.000 V reference</td><td>Common ground probe clip</td></tr>
+                    <tr><td><code>TP6</code></td><td>+3V3</td><td>&gt; 10 kOhm to TP7</td><td>3.30 V +/-5%</td><td>Verify before plugging U2/ESP32</td></tr>
+                    <tr><td><code>TP5</code></td><td>+VS_A</td><td>&gt; 10 kOhm to TP7</td><td>2.80 V +/-2%</td><td>MCP1700-2802E output, C10 1 uF 50V</td></tr>
+                    <tr><td><code>TP2</code></td><td>REFOUT</td><td>&gt; 100 kOhm to TP7</td><td>~1.40 V</td><td>Mid-rail +VS_A / 2 via R9, R10</td></tr>
+                    <tr><td><code>TP1</code></td><td>ECG_OUT</td><td>No short to GND/3V3</td><td>~1.40 V idle DC</td><td>AD8232 output after R15, C7</td></tr>
+                    <tr><td><code>TP3</code></td><td>LOD_P</td><td>High-Z to GND</td><td>~2.80 V open / &lt; 0.40 V load</td><td>GPIO32 ADC1 threshold 1400 mV</td></tr>
+                    <tr><td><code>TP4</code></td><td>LOD_N</td><td>High-Z to GND</td><td>~2.80 V open / &lt; 0.40 V load</td><td>GPIO33 ADC1 threshold 1400 mV</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <div class="panel">
+            <h2>Component Inspector</h2>
+            <div id="inspector-body"></div>
+        </div>
+
+        <div class="panel" style="margin-top:12px;">
+            <h2>Interactive BOM &amp; Stage Filter (46 Footprints)</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;">
+                <button class="btn active filter-btn" data-group="all">All (46)</button>
+                <button class="btn filter-btn" data-group="ic">ICs (3)</button>
+                <button class="btn filter-btn" data-group="conn">Conn (3)</button>
+                <button class="btn filter-btn" data-group="res">Res (18)</button>
+                <button class="btn filter-btn" data-group="cap">Cap (11)</button>
+                <button class="btn filter-btn" data-group="tp">TP (7)</button>
+                <button class="btn filter-btn" data-group="mh">M3 (4)</button>
+                <input id="search-box" type="text" placeholder="Filter Ref, MPN, LCSC...">
+            </div>
+            <div class="bom-scroll">
+                <table class="bom-table">
+                    <thead>
+                        <tr><th>Ref</th><th>Val</th><th>MPN</th><th>LCSC</th><th>Stg</th><th>Stock</th></tr>
+                    </thead>
+                    <tbody id="bom-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel" style="margin-top:12px;">
+            <h2>Critical Soldering &amp; High-Z Cleaning Checklist</h2>
+            <div class="check-list">
+                <label><input type="checkbox"> 1. Inspect U1 stencil: 4x 1.05x1.05 mm (65.2%) EP windows, reflow with thermocouple.</label>
+                <label><input type="checkbox"> 2. Verify U1, U2, U3, J1, J2, J3 Pin-1 alignment against red markers before solder.</label>
+                <label><input type="checkbox"> 3. Scrub all 10 MOhm high-Z nodes (R4..R6, R8..R10, R18, C1, C2) with 99% IPA.</label>
+                <label><input type="checkbox"> 4. Check J1 3x G85 slots and trim 2x 1x20P C429947 strips to 1x19P for J2.</label>
+                <label><input type="checkbox"> 5. Verify TP5/TP6/TP7 resistance &gt; 10 kOhm before USB or power connection.</label>
+                <label><input type="checkbox"> 6. Confirm MAX30102 J3 wiring (1:+3V3, 2:SCL, 3:SDA, 4:INT, 7:GND) before plug-in.</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const GUIDE_DATA = {"components": [{"ref": "C1", "val": "0.33u", "x": 32.0, "y": 31.0, "rx": 30.8, "ry": 29.2, "rot": 0.0, "bx": 30.525, "by": 30.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 31.225, "y": 31.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HPDRIVE"}, {"n": "2", "x": 32.775, "y": 31.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HPSENSE"}], "nets": ["1:HPDRIVE", "2:HPSENSE"], "mpn": "0603B334K250CT", "lcsc": "C384782", "pkg": "0603 25V X7R 10%", "stock": "6754", "usd": 0.0266, "stage": 2, "group": "cap", "note": "HPF capacitor 0.33 uF connected to high-Z node; clean flux thoroughly with 99% IPA in Stage 4."}, {"ref": "C10", "val": "1u", "x": 13.0, "y": 64.0, "rx": 13.0, "ry": 62.2, "rot": 0.0, "bx": 11.525, "by": 63.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 12.225, "y": 64.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "2", "x": 13.775, "y": 64.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:+VS_A", "2:GND"], "mpn": "TCC0603X7R105K500CT", "lcsc": "C5360793", "pkg": "0603 50V X7R 10%", "stock": "41343", "usd": 0.0285, "stage": 3, "group": "cap", "note": "MCP1700 output stability capacitor 1 uF 50V X7R on +VS_A 2.8 V; high voltage rating limits DC bias derating and keeps ESR within 0..2 Ohm."}, {"ref": "C11", "val": "0.1u", "x": 43.0, "y": 33.0, "rx": 43.0, "ry": 30.8, "rot": 0.0, "bx": 41.525, "by": 32.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 42.225, "y": 33.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "2", "x": 43.775, "y": 33.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:+VS_A", "2:GND"], "mpn": "MT18B104K500CT", "lcsc": "C323570", "pkg": "0603 50V X7R 10%", "stock": "2603", "usd": 0.0095, "stage": 2, "group": "cap", "note": "AD8232 +VS_A local bypass capacitor 0.1 uF."}, {"ref": "C2", "val": "0.33u", "x": 37.0, "y": 45.0, "rx": 37.0, "ry": 46.8, "rot": 0.0, "bx": 35.525, "by": 44.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 36.225, "y": 45.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SW_NODE"}, {"n": "2", "x": 37.775, "y": 45.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}], "nets": ["1:SW_NODE", "2:REFOUT"], "mpn": "0603B334K250CT", "lcsc": "C384782", "pkg": "0603 25V X7R 10%", "stock": "6754", "usd": 0.0266, "stage": 2, "group": "cap", "note": "HPF capacitor 0.33 uF between SW_NODE and REFOUT; clean flux thoroughly with 99% IPA in Stage 4."}, {"ref": "C3", "val": "1n", "x": 28.0, "y": 43.0, "rx": 28.0, "ry": 44.8, "rot": 0.0, "bx": 26.525, "by": 42.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 27.225, "y": 43.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RLDFB"}, {"n": "2", "x": 28.775, "y": 43.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RLD_E"}], "nets": ["1:RLDFB", "2:RLD_E"], "mpn": "GCM1885C2A102JA16D", "lcsc": "C437457", "pkg": "0603 100V C0G 5%", "stock": "23390", "usd": 0.0338, "stage": 2, "group": "cap", "note": "RLD integrator capacitor 1 nF C0G between RLDFB and RLD_E."}, {"ref": "C4", "val": "0.1u", "x": 39.0, "y": 32.0, "rx": 37.2, "ry": 30.2, "rot": 0.0, "bx": 37.525, "by": 31.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 38.225, "y": 32.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFIN"}, {"n": "2", "x": 39.775, "y": 32.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:REFIN", "2:GND"], "mpn": "MT18B104K500CT", "lcsc": "C323570", "pkg": "0603 50V X7R 10%", "stock": "2603", "usd": 0.0095, "stage": 2, "group": "cap", "note": "REFIN bypass 0.1 uF; clean adjacent 10 MOhm R9/R10 nodes in Stage 4."}, {"ref": "C5", "val": "1.5n", "x": 36.0, "y": 55.0, "rx": 36.0, "ry": 53.2, "rot": 0.0, "bx": 34.525, "by": 54.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 35.225, "y": 55.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SK_N1"}, {"n": "2", "x": 36.775, "y": 55.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "AD_OUT"}], "nets": ["1:SK_N1", "2:AD_OUT"], "mpn": "GRM1885C1H152JA01D", "lcsc": "C162204", "pkg": "0603 50V C0G 5%", "stock": "15788", "usd": 0.0194, "stage": 2, "group": "cap", "note": "Sallen-Key LPF feedback capacitor 1.5 nF C0G (SK_N1 to AD_OUT); critical for f0 = 41.09 Hz."}, {"ref": "C6", "val": "10n", "x": 41.0, "y": 55.0, "rx": 41.0, "ry": 56.8, "rot": 0.0, "bx": 39.525, "by": 54.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 40.225, "y": 55.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_P"}, {"n": "2", "x": 41.775, "y": 55.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}], "nets": ["1:OPAMP_P", "2:REFOUT"], "mpn": "0603CG103J500NT", "lcsc": "C82282", "pkg": "0603 50V C0G 5%", "stock": "Verify live", "usd": 0.0355, "stage": 2, "group": "cap", "note": "Sallen-Key LPF capacitor 10 nF C0G (OPAMP_P to REFOUT); critical for f0 = 41.09 Hz."}, {"ref": "C7", "val": "10n", "x": 47.0, "y": 40.0, "rx": 48.6, "ry": 38.2, "rot": 0.0, "bx": 45.525, "by": 39.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 46.225, "y": 40.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "ECG_OUT"}, {"n": "2", "x": 47.775, "y": 40.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:ECG_OUT", "2:GND"], "mpn": "0603CG103J500NT", "lcsc": "C82282", "pkg": "0603 50V C0G 5%", "stock": "Verify live", "usd": 0.0355, "stage": 2, "group": "cap", "note": "ADS1115 AIN0 anti-alias shunt capacitor 10 nF C0G."}, {"ref": "C8", "val": "0.1u", "x": 58.5, "y": 45.5, "rx": 58.5, "ry": 47.5, "rot": 0.0, "bx": 57.025, "by": 44.775, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 57.725, "y": 45.5, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "2", "x": 59.275, "y": 45.5, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:+3V3", "2:GND"], "mpn": "MT18B104K500CT", "lcsc": "C323570", "pkg": "0603 50V X7R 10%", "stock": "2603", "usd": 0.0095, "stage": 3, "group": "cap", "note": "ADS1115 +3V3 local decoupling capacitor 0.1 uF."}, {"ref": "C9", "val": "1u", "x": 22.0, "y": 64.0, "rx": 22.0, "ry": 62.2, "rot": 0.0, "bx": 20.525, "by": 63.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 21.225, "y": 64.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "2", "x": 22.775, "y": 64.0, "w": 0.9, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:+3V3", "2:GND"], "mpn": "TCC0603X7R105K500CT", "lcsc": "C5360793", "pkg": "0603 50V X7R 10%", "stock": "41343", "usd": 0.0285, "stage": 3, "group": "cap", "note": "MCP1700 input decoupling 1 uF 50V X7R on +3V3."}, {"ref": "H1", "val": "MH", "x": 5.0, "y": 5.0, "rx": 5.0, "ry": 9.4, "rot": 0.0, "bx": 1.55, "by": 1.55, "bw": 6.9, "bh": 6.9, "pin1": null, "pads": [{"n": "1", "x": 5.0, "y": 5.0, "w": 6.4, "h": 6.4, "s": "circle", "dw": 3.2, "dh": 3.2, "net": "GND"}], "nets": ["1:GND"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "M3 3.2mm Plated", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "mh", "note": "Plated M3 mounting hole connected to GND."}, {"ref": "H2", "val": "MH", "x": 54.0, "y": 6.0, "rx": 54.0, "ry": 1.6, "rot": 0.0, "bx": 50.55, "by": 2.55, "bw": 6.9, "bh": 6.9, "pin1": null, "pads": [{"n": "1", "x": 54.0, "y": 6.0, "w": 6.4, "h": 6.4, "s": "circle", "dw": 3.2, "dh": 3.2, "net": "GND"}], "nets": ["1:GND"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "M3 3.2mm Plated", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "mh", "note": "Plated M3 mounting hole connected to GND."}, {"ref": "H3", "val": "MH", "x": 5.0, "y": 65.0, "rx": 5.0, "ry": 60.6, "rot": 0.0, "bx": 1.55, "by": 61.55, "bw": 6.9, "bh": 6.9, "pin1": null, "pads": [{"n": "1", "x": 5.0, "y": 65.0, "w": 6.4, "h": 6.4, "s": "circle", "dw": 3.2, "dh": 3.2, "net": "GND"}], "nets": ["1:GND"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "M3 3.2mm Plated", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "mh", "note": "Plated M3 mounting hole connected to GND."}, {"ref": "H4", "val": "MH", "x": 54.0, "y": 65.0, "rx": 54.0, "ry": 60.6, "rot": 0.0, "bx": 50.55, "by": 61.55, "bw": 6.9, "bh": 6.9, "pin1": null, "pads": [{"n": "1", "x": 54.0, "y": 65.0, "w": 6.4, "h": 6.4, "s": "circle", "dw": 3.2, "dh": 3.2, "net": "GND"}], "nets": ["1:GND"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "M3 3.2mm Plated", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "mh", "note": "Plated M3 mounting hole connected to GND."}, {"ref": "J1", "val": "ECG_3.5mm", "x": 14.0, "y": 5.55, "rx": 20.0, "ry": 8.0, "rot": 0.0, "bx": 9.5, "by": 0.0, "bw": 9.0, "bh": 18.8, "pin1": {"x": 16.0, "y": 7.95, "name": "T"}, "pads": [{"n": "R", "x": 16.0, "y": 13.45, "w": 2.8, "h": 1.8, "s": "oval", "dw": 2.0, "dh": 1.0, "net": "LA_IN"}, {"n": "S", "x": 14.0, "y": 5.55, "w": 2.8, "h": 1.8, "s": "oval", "dw": 2.0, "dh": 1.0, "net": "RL_E"}, {"n": "T", "x": 16.0, "y": 7.95, "w": 2.8, "h": 1.8, "s": "oval", "dw": 2.0, "dh": 1.0, "net": "RA_IN"}], "nets": ["R:LA_IN", "S:RL_E", "T:RA_IN"], "mpn": "SJ1-3533N", "lcsc": "C4992360", "pkg": "8x14mm TRS 3-pin TH", "stock": "3", "usd": 2.6004, "stage": 5, "group": "conn", "note": "Confirm mechanical fit against SJ1-3533NG slots (3x G85 plated 2.0x1.0 mm). Solder flush with board top edge; Tip=RA, Ring=LA, Sleeve=RL."}, {"ref": "J2", "val": "ESP32_DEVKIT", "x": 63.0, "y": 16.0, "rx": 75.7, "ry": 13.4, "rot": 0.0, "bx": 61.5, "by": 14.5, "bw": 28.4, "bh": 48.7, "pin1": {"x": 63.0, "y": 16.0, "name": "1"}, "pads": [{"n": "1", "x": 63.0, "y": 16.0, "w": 1.7, "h": 1.7, "s": "rect", "dw": 1.0, "dh": 1.0, "net": "+3V3"}, {"n": "2", "x": 63.0, "y": 18.54, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-EN-Pad2)"}, {"n": "3", "x": 63.0, "y": 21.08, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-VP-Pad3)"}, {"n": "4", "x": 63.0, "y": 23.62, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-VN-Pad4)"}, {"n": "5", "x": 63.0, "y": 26.16, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "ECG_OUT"}, {"n": "6", "x": 63.0, "y": 28.7, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO35-Pad6)"}, {"n": "7", "x": 63.0, "y": 31.24, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "LOD_P"}, {"n": "8", "x": 63.0, "y": 33.78, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "LOD_N"}, {"n": "9", "x": 63.0, "y": 36.32, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO25-Pad9)"}, {"n": "10", "x": 63.0, "y": 38.86, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "INT_MAX"}, {"n": "11", "x": 63.0, "y": 41.4, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "ALERT"}, {"n": "12", "x": 63.0, "y": 43.94, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO14-Pad12)"}, {"n": "13", "x": 63.0, "y": 46.48, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO12-Pad13)"}, {"n": "14", "x": 63.0, "y": 49.02, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "GND"}, {"n": "15", "x": 63.0, "y": 51.56, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO13-Pad15)"}, {"n": "16", "x": 63.0, "y": 54.1, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-SD2-Pad16)"}, {"n": "17", "x": 63.0, "y": 56.64, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-SD3-Pad17)"}, {"n": "18", "x": 63.0, "y": 59.18, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-CMD-Pad18)"}, {"n": "19", "x": 63.0, "y": 61.72, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "+5V"}, {"n": "20", "x": 88.4, "y": 16.0, "w": 1.7, "h": 1.7, "s": "rect", "dw": 1.0, "dh": 1.0, "net": "GND"}, {"n": "21", "x": 88.4, "y": 18.54, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO23-Pad21)"}, {"n": "22", "x": 88.4, "y": 21.08, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "SCL"}, {"n": "23", "x": 88.4, "y": 23.62, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-TXD0-Pad23)"}, {"n": "24", "x": 88.4, "y": 26.16, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-RXD0-Pad24)"}, {"n": "25", "x": 88.4, "y": 28.7, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "SDA"}, {"n": "26", "x": 88.4, "y": 31.24, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "GND"}, {"n": "27", "x": 88.4, "y": 33.78, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO19-Pad27)"}, {"n": "28", "x": 88.4, "y": 36.32, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO18-Pad28)"}, {"n": "29", "x": 88.4, "y": 38.86, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO5-Pad29)"}, {"n": "30", "x": 88.4, "y": 41.4, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO17-Pad30)"}, {"n": "31", "x": 88.4, "y": 43.94, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO16-Pad31)"}, {"n": "32", "x": 88.4, "y": 46.48, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO4-Pad32)"}, {"n": "33", "x": 88.4, "y": 49.02, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO0-Pad33)"}, {"n": "34", "x": 88.4, "y": 51.56, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO2-Pad34)"}, {"n": "35", "x": 88.4, "y": 54.1, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-IO15-Pad35)"}, {"n": "36", "x": 88.4, "y": 56.64, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-SD1-Pad36)"}, {"n": "37", "x": 88.4, "y": 59.18, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-SD0-Pad37)"}, {"n": "38", "x": 88.4, "y": 61.72, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J2-CLK-Pad38)"}], "nets": ["1:+3V3", "2:unconnected-(J2-EN-Pad2)", "3:unconnected-(J2-VP-Pad3)", "4:unconnected-(J2-VN-Pad4)", "5:ECG_OUT", "6:unconnected-(J2-IO35-Pad6)", "7:LOD_P", "8:LOD_N", "9:unconnected-(J2-IO25-Pad9)", "10:INT_MAX", "11:ALERT", "12:unconnected-(J2-IO14-Pad12)", "13:unconnected-(J2-IO12-Pad13)", "14:GND", "15:unconnected-(J2-IO13-Pad15)", "16:unconnected-(J2-SD2-Pad16)", "17:unconnected-(J2-SD3-Pad17)", "18:unconnected-(J2-CMD-Pad18)", "19:+5V", "20:GND", "21:unconnected-(J2-IO23-Pad21)", "22:SCL", "23:unconnected-(J2-TXD0-Pad23)", "24:unconnected-(J2-RXD0-Pad24)", "25:SDA", "26:GND", "27:unconnected-(J2-IO19-Pad27)", "28:unconnected-(J2-IO18-Pad28)", "29:unconnected-(J2-IO5-Pad29)", "30:unconnected-(J2-IO17-Pad30)", "31:unconnected-(J2-IO16-Pad31)", "32:unconnected-(J2-IO4-Pad32)", "33:unconnected-(J2-IO0-Pad33)", "34:unconnected-(J2-IO2-Pad34)", "35:unconnected-(J2-IO15-Pad35)", "36:unconnected-(J2-SD1-Pad36)", "37:unconnected-(J2-SD0-Pad37)", "38:unconnected-(J2-CLK-Pad38)"], "mpn": "22850120ANG1SYA01", "lcsc": "C429947", "pkg": "1x20P 2.54mm Female", "stock": "2328", "usd": 0.1737, "stage": 5, "group": "conn", "note": "Order 2 strips per board and trim each 1x20P strip down to 1x19P. Check 25.4 mm row spacing with ESP32-DevKitC V4 before final solder."}, {"ref": "J3", "val": "MAX30102", "x": 58.0, "y": 16.0, "rx": 58.0, "ry": 13.2, "rot": 0.0, "bx": 56.9, "by": 14.9, "bw": 2.2, "bh": 17.44, "pin1": {"x": 58.0, "y": 16.0, "name": "1"}, "pads": [{"n": "1", "x": 58.0, "y": 16.0, "w": 1.7, "h": 1.7, "s": "rect", "dw": 1.0, "dh": 1.0, "net": "+3V3"}, {"n": "2", "x": 58.0, "y": 18.54, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "SCL"}, {"n": "3", "x": 58.0, "y": 21.08, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "SDA"}, {"n": "4", "x": 58.0, "y": 23.62, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "INT_MAX"}, {"n": "5", "x": 58.0, "y": 26.16, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J3-RD-Pad5)"}, {"n": "6", "x": 58.0, "y": 28.7, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "unconnected-(J3-IRD-Pad6)"}, {"n": "7", "x": 58.0, "y": 31.24, "w": 1.7, "h": 1.7, "s": "circle", "dw": 1.0, "dh": 1.0, "net": "GND"}], "nets": ["1:+3V3", "2:SCL", "3:SDA", "4:INT_MAX", "5:unconnected-(J3-RD-Pad5)", "6:unconnected-(J3-IRD-Pad6)", "7:GND"], "mpn": "2541WV-07P", "lcsc": "C25503132", "pkg": "1x7P 2.54mm Male", "stock": "4173", "usd": 0.0246, "stage": 5, "group": "conn", "note": "Wire to external MAX30102 board rather than blind plug-in. Pinout: 1=+3V3, 2=SCL, 3=SDA, 4=INT_MAX, 5=RD NC, 6=IRD NC, 7=GND."}, {"ref": "R1", "val": "360k", "x": 32.0, "y": 35.0, "rx": 32.0, "ry": 36.8, "rot": 0.0, "bx": 30.525, "by": 34.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 31.175, "y": 35.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RA_IN"}, {"n": "2", "x": 32.825, "y": 35.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RA_P"}], "nets": ["1:RA_IN", "2:RA_P"], "mpn": "RCT03360KFLF", "lcsc": "C177519", "pkg": "0603 1% 100mW", "stock": "20007", "usd": 0.0014, "stage": 2, "group": "res", "note": "RA input protection 360 kOhm for bench evaluation only; not IEC 60601-1 safety isolation."}, {"ref": "R10", "val": "10M", "x": 44.0, "y": 29.0, "rx": 44.0, "ry": 27.2, "rot": 0.0, "bx": 42.525, "by": 28.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 43.175, "y": 29.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFIN"}, {"n": "2", "x": 44.825, "y": 29.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:REFIN", "2:GND"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm REFIN lower divider resistor. High-Z node: scrub thoroughly with 99% IPA in Stage 4."}, {"ref": "R11", "val": "1M", "x": 36.0, "y": 50.0, "rx": 34.0, "ry": 47.6, "rot": 0.0, "bx": 34.525, "by": 49.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 35.175, "y": 50.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "IAOUT"}, {"n": "2", "x": 36.825, "y": 50.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SK_N1"}], "nets": ["1:IAOUT", "2:SK_N1"], "mpn": "CRCW06031M00FKEA", "lcsc": "C844922", "pkg": "0603 1% 100mW", "stock": "119733", "usd": 0.0044, "stage": 2, "group": "res", "note": "1 MOhm Sallen-Key LPF input resistor. High-Z node: clean flux with 99% IPA."}, {"ref": "R12", "val": "1M", "x": 41.0, "y": 50.0, "rx": 41.0, "ry": 48.2, "rot": 0.0, "bx": 39.525, "by": 49.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 40.175, "y": 50.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SK_N1"}, {"n": "2", "x": 41.825, "y": 50.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_P"}], "nets": ["1:SK_N1", "2:OPAMP_P"], "mpn": "CRCW06031M00FKEA", "lcsc": "C844922", "pkg": "0603 1% 100mW", "stock": "119733", "usd": 0.0044, "stage": 2, "group": "res", "note": "1 MOhm Sallen-Key LPF second resistor. High-Z node: clean flux with 99% IPA."}, {"ref": "R13", "val": "100k", "x": 35.0, "y": 41.0, "rx": 31.8, "ry": 41.0, "rot": 0.0, "bx": 33.525, "by": 40.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 34.175, "y": 41.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}, {"n": "2", "x": 35.825, "y": 41.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_N"}], "nets": ["1:REFOUT", "2:OPAMP_N"], "mpn": "CRCW0603100KFKTA", "lcsc": "C844120", "pkg": "0603 1% 100mW", "stock": "3773", "usd": 0.0231, "stage": 2, "group": "res", "note": "100 kOhm op-amp feedback divider to REFOUT, sets K = 11 with R14."}, {"ref": "R14", "val": "1M", "x": 39.0, "y": 41.0, "rx": 39.0, "ry": 42.8, "rot": 0.0, "bx": 37.525, "by": 40.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 38.175, "y": 41.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_N"}, {"n": "2", "x": 39.825, "y": 41.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "AD_OUT"}], "nets": ["1:OPAMP_N", "2:AD_OUT"], "mpn": "CRCW06031M00FKEA", "lcsc": "C844922", "pkg": "0603 1% 100mW", "stock": "119733", "usd": 0.0044, "stage": 2, "group": "res", "note": "1 MOhm op-amp feedback resistor to OUT, sets K = 11 with R13."}, {"ref": "R15", "val": "1k", "x": 46.0, "y": 44.0, "rx": 43.8, "ry": 45.8, "rot": 0.0, "bx": 44.525, "by": 43.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 45.175, "y": 44.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "AD_OUT"}, {"n": "2", "x": 46.825, "y": 44.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "ECG_OUT"}], "nets": ["1:AD_OUT", "2:ECG_OUT"], "mpn": "ERJPA3F1001V", "lcsc": "C441922", "pkg": "0603 1% 333mW", "stock": "13066", "usd": 0.0269, "stage": 2, "group": "res", "note": "1 kOhm ADS1115 anti-alias series resistor."}, {"ref": "R16", "val": "4.7k", "x": 58.0, "y": 38.0, "rx": 58.0, "ry": 36.2, "rot": 0.0, "bx": 56.525, "by": 37.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 57.175, "y": 38.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "2", "x": 58.825, "y": 38.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SCL"}], "nets": ["1:+3V3", "2:SCL"], "mpn": "0603WAF4701T5E", "lcsc": "C23162", "pkg": "0603 1% 100mW", "stock": "Verify live", "usd": 0.0028, "stage": 3, "group": "res", "note": "4.7 kOhm I2C SCL pull-up to +3V3. Check total bus parallel pull-ups if external MAX30102 breakout includes onboard pull-ups."}, {"ref": "R17", "val": "4.7k", "x": 58.0, "y": 42.0, "rx": 56.8, "ry": 40.2, "rot": 0.0, "bx": 56.525, "by": 41.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 57.175, "y": 42.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "2", "x": 58.825, "y": 42.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SDA"}], "nets": ["1:+3V3", "2:SDA"], "mpn": "0603WAF4701T5E", "lcsc": "C23162", "pkg": "0603 1% 100mW", "stock": "Verify live", "usd": 0.0028, "stage": 3, "group": "res", "note": "4.7 kOhm I2C SDA pull-up to +3V3. Check total bus parallel pull-ups if external MAX30102 breakout includes onboard pull-ups."}, {"ref": "R18", "val": "1.4M", "x": 33.0, "y": 45.0, "rx": 30.6, "ry": 46.8, "rot": 0.0, "bx": 31.525, "by": 44.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 32.175, "y": 45.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HP_MID"}, {"n": "2", "x": 33.825, "y": 45.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SW_NODE"}], "nets": ["1:HP_MID", "2:SW_NODE"], "mpn": "0603WAF1404T5E", "lcsc": "C38070", "pkg": "0603 1% 100mW", "stock": "Verify live", "usd": 0.0019, "stage": 2, "group": "res", "note": "1.4 MOhm HPF resistor to SW_NODE. High-Z node: scrub thoroughly with 99% IPA in Stage 4."}, {"ref": "R19", "val": "10k", "x": 53.0, "y": 51.0, "rx": 53.0, "ry": 49.2, "rot": 0.0, "bx": 51.525, "by": 50.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 52.175, "y": 51.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "2", "x": 53.825, "y": 51.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "ALERT"}], "nets": ["1:+3V3", "2:ALERT"], "mpn": "CRGCQ0603F10K", "lcsc": "C4210728", "pkg": "0603 1% 100mW", "stock": "19719", "usd": 0.0094, "stage": 3, "group": "res", "note": "10 kOhm open-drain ALERT/RDY pull-up to +3V3."}, {"ref": "R2", "val": "360k", "x": 32.0, "y": 39.0, "rx": 29.2, "ry": 39.0, "rot": 0.0, "bx": 30.525, "by": 38.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 31.175, "y": 39.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LA_IN"}, {"n": "2", "x": 32.825, "y": 39.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LA_P"}], "nets": ["1:LA_IN", "2:LA_P"], "mpn": "RCT03360KFLF", "lcsc": "C177519", "pkg": "0603 1% 100mW", "stock": "20007", "usd": 0.0014, "stage": 2, "group": "res", "note": "LA input protection 360 kOhm for bench evaluation only; not IEC 60601-1 safety isolation."}, {"ref": "R3", "val": "360k", "x": 25.0, "y": 30.0, "rx": 25.0, "ry": 28.2, "rot": 0.0, "bx": 23.525, "by": 29.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 24.175, "y": 30.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RL_E"}, {"n": "2", "x": 25.825, "y": 30.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RLD_E"}], "nets": ["1:RL_E", "2:RLD_E"], "mpn": "RCT03360KFLF", "lcsc": "C177519", "pkg": "0603 1% 100mW", "stock": "20007", "usd": 0.0014, "stage": 2, "group": "res", "note": "RL drive resistor 360 kOhm."}, {"ref": "R4", "val": "10M", "x": 26.0, "y": 16.0, "rx": 27.2, "ry": 17.8, "rot": 0.0, "bx": 24.525, "by": 15.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 25.175, "y": 16.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "2", "x": 26.825, "y": 16.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RA_IN"}], "nets": ["1:+VS_A", "2:RA_IN"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm DC lead-off pull-up on RA_IN. High-Z node: scrub thoroughly with 99% IPA to eliminate conductive flux leakage."}, {"ref": "R5", "val": "10M", "x": 26.0, "y": 21.0, "rx": 26.0, "ry": 22.8, "rot": 0.0, "bx": 24.525, "by": 20.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 25.175, "y": 21.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "2", "x": 26.825, "y": 21.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LA_IN"}], "nets": ["1:+VS_A", "2:LA_IN"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm DC lead-off pull-up on LA_IN. High-Z node: scrub thoroughly with 99% IPA to eliminate conductive flux leakage."}, {"ref": "R6", "val": "10M", "x": 32.0, "y": 27.0, "rx": 32.0, "ry": 25.2, "rot": 0.0, "bx": 30.525, "by": 26.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 31.175, "y": 27.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HPSENSE"}, {"n": "2", "x": 32.825, "y": 27.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HP_MID"}], "nets": ["1:HPSENSE", "2:HP_MID"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm HPF resistor. High-Z node: scrub thoroughly with 99% IPA in Stage 4."}, {"ref": "R8", "val": "10M", "x": 37.0, "y": 27.0, "rx": 37.0, "ry": 25.2, "rot": 0.0, "bx": 35.525, "by": 26.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 36.175, "y": 27.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HP_MID"}, {"n": "2", "x": 37.825, "y": 27.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "IAOUT"}], "nets": ["1:HP_MID", "2:IAOUT"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm HPF resistor. High-Z node: scrub thoroughly with 99% IPA in Stage 4."}, {"ref": "R9", "val": "10M", "x": 40.0, "y": 29.0, "rx": 40.0, "ry": 27.2, "rot": 0.0, "bx": 38.525, "by": 28.275, "bw": 2.95, "bh": 1.45, "pin1": null, "pads": [{"n": "1", "x": 39.175, "y": 29.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "2", "x": 40.825, "y": 29.0, "w": 0.8, "h": 0.95, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFIN"}], "nets": ["1:+VS_A", "2:REFIN"], "mpn": "AC0603FR-0710ML", "lcsc": "C227547", "pkg": "0603 1% 100mW", "stock": "59286", "usd": 0.0082, "stage": 2, "group": "res", "note": "10 MOhm REFIN upper divider resistor. High-Z node: scrub thoroughly with 99% IPA in Stage 4."}, {"ref": "TP1", "val": "ECG_OUT", "x": 47.0, "y": 48.0, "rx": 49.4, "ry": 48.0, "rot": 0.0, "bx": 46.0, "by": 47.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 47.0, "y": 48.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "ECG_OUT"}], "nets": ["1:ECG_OUT"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "tp", "note": "ECG_OUT test pad. Expected DC idle near 1.40 V with zero differential input; verify waveform from patient simulator."}, {"ref": "TP2", "val": "REFOUT", "x": 47.0, "y": 52.0, "rx": 47.0, "ry": 54.2, "rot": 0.0, "bx": 46.0, "by": 51.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 47.0, "y": 52.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}], "nets": ["1:REFOUT"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "tp", "note": "REFOUT test pad. Expected ~1.40 V mid-rail reference when +VS_A is 2.80 V."}, {"ref": "TP3", "val": "LOD_P", "x": 44.0, "y": 36.0, "rx": 46.4, "ry": 36.0, "rot": 0.0, "bx": 43.0, "by": 35.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 44.0, "y": 36.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "LOD_P"}], "nets": ["1:LOD_P"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "tp", "note": "LOD_P test pad. Expected ~2.80 V when J1 open, < 0.40 V when RA/LA biased through simulator load; GPIO32 ADC1 threshold 1400 mV."}, {"ref": "TP4", "val": "LOD_N", "x": 44.0, "y": 40.0, "rx": 45.2, "ry": 42.2, "rot": 0.0, "bx": 43.0, "by": 39.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 44.0, "y": 40.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "LOD_N"}], "nets": ["1:LOD_N"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 5, "group": "tp", "note": "LOD_N test pad. Expected ~2.80 V when J1 open, < 0.40 V when RA/LA biased through simulator load; GPIO33 ADC1 threshold 1400 mV."}, {"ref": "TP5", "val": "+VS_A", "x": 23.0, "y": 58.0, "rx": 23.0, "ry": 54.4, "rot": 0.0, "bx": 22.0, "by": 57.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 23.0, "y": 58.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}], "nets": ["1:+VS_A"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 4, "group": "tp", "note": "+VS_A test pad. Unpowered check: > 10 kOhm to TP7 GND. Powered check: 2.744 V to 2.856 V nominal from U3."}, {"ref": "TP6", "val": "+3V3", "x": 18.0, "y": 58.0, "rx": 18.0, "ry": 54.4, "rot": 0.0, "bx": 17.0, "by": 57.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 18.0, "y": 58.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "+3V3"}], "nets": ["1:+3V3"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 4, "group": "tp", "note": "+3V3 test pad. Unpowered check: > 10 kOhm to TP7 GND. Powered check: 3.15 V to 3.45 V nominal."}, {"ref": "TP7", "val": "GND", "x": 13.0, "y": 58.0, "rx": 13.0, "ry": 54.4, "rot": 0.0, "bx": 12.0, "by": 57.0, "bw": 2.0, "bh": 2.0, "pin1": null, "pads": [{"n": "1", "x": 13.0, "y": 58.0, "w": 1.5, "h": 1.5, "s": "circle", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:GND"], "mpn": "PCB_INTEGRATED", "lcsc": "DNP", "pkg": "D1.5mm Pad", "stock": "N/A", "usd": 0.0, "stage": 4, "group": "tp", "note": "GND reference pad. Verify 0.0 Ohm continuity to H1..H4 mounting pads and J1 sleeve."}, {"ref": "U1", "val": "AD8232", "x": 38.0, "y": 36.0, "rx": 35.6, "ry": 32.4, "rot": 0.0, "bx": 35.374, "by": 33.374, "bw": 5.251, "bh": 5.251, "pin1": {"x": 36.062, "y": 35.0, "name": "1"}, "pads": [{"n": "", "x": 37.35, "y": 35.35, "w": 1.05, "h": 1.05, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "NC"}, {"n": "", "x": 37.35, "y": 36.65, "w": 1.05, "h": 1.05, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "NC"}, {"n": "", "x": 38.65, "y": 35.35, "w": 1.05, "h": 1.05, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "NC"}, {"n": "", "x": 38.65, "y": 36.65, "w": 1.05, "h": 1.05, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "NC"}, {"n": "1", "x": 36.062, "y": 35.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HPDRIVE"}, {"n": "2", "x": 36.062, "y": 35.5, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RA_P"}, {"n": "3", "x": 36.062, "y": 36.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LA_P"}, {"n": "4", "x": 36.062, "y": 36.5, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RLDFB"}, {"n": "5", "x": 36.062, "y": 37.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "RLD_E"}, {"n": "6", "x": 37.0, "y": 37.938, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SW_NODE"}, {"n": "7", "x": 37.5, "y": 37.938, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_P"}, {"n": "8", "x": 38.0, "y": 37.938, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}, {"n": "9", "x": 38.5, "y": 37.938, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "OPAMP_N"}, {"n": "10", "x": 39.0, "y": 37.938, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "AD_OUT"}, {"n": "11", "x": 39.938, "y": 37.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LOD_N"}, {"n": "12", "x": 39.938, "y": 36.5, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "LOD_P"}, {"n": "13", "x": 39.938, "y": 36.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "14", "x": 39.938, "y": 35.5, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "15", "x": 39.938, "y": 35.0, "w": 0.875, "h": 0.25, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "16", "x": 39.0, "y": 34.062, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "17", "x": 38.5, "y": 34.062, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "18", "x": 38.0, "y": 34.062, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFIN"}, {"n": "19", "x": 37.5, "y": 34.062, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "IAOUT"}, {"n": "20", "x": 37.0, "y": 34.062, "w": 0.25, "h": 0.875, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "HPSENSE"}, {"n": "21", "x": 38.0, "y": 36.0, "w": 2.6, "h": 2.6, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}], "nets": ["1:HPDRIVE", "2:RA_P", "3:LA_P", "4:RLDFB", "5:RLD_E", "6:SW_NODE", "7:OPAMP_P", "8:REFOUT", "9:OPAMP_N", "10:AD_OUT", "11:LOD_N", "12:LOD_P", "13:+VS_A", "14:GND", "15:+VS_A", "16:GND", "17:+VS_A", "18:REFIN", "19:IAOUT", "20:HPSENSE", "21:GND"], "mpn": "AD8232ACPZ-R7", "lcsc": "C43216", "pkg": "LFCSP-20 4x4", "stock": "1755", "usd": 6.7141, "stage": 1, "group": "ic", "note": "Reflow with 4x 1.05x1.05 mm (65.2% area) segmented EP paste stencil; verify with thermocouple and inspect 0.5 mm perimeter leads for bridges."}, {"ref": "U2", "val": "ADS1115", "x": 53.0, "y": 44.0, "rx": 53.0, "ry": 41.2, "rot": 0.0, "bx": 49.875, "by": 42.6, "bw": 6.25, "bh": 2.8, "pin1": {"x": 50.85, "y": 43.0, "name": "1"}, "pads": [{"n": "1", "x": 50.85, "y": 43.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "2", "x": 50.85, "y": 43.5, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "ALERT"}, {"n": "3", "x": 50.85, "y": 44.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "4", "x": 50.85, "y": 44.5, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "ECG_OUT"}, {"n": "5", "x": 50.85, "y": 45.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "REFOUT"}, {"n": "6", "x": 55.15, "y": 45.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "7", "x": 55.15, "y": 44.5, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "8", "x": 55.15, "y": 44.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}, {"n": "9", "x": 55.15, "y": 43.5, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SDA"}, {"n": "10", "x": 55.15, "y": 43.0, "w": 1.45, "h": 0.3, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "SCL"}], "nets": ["1:GND", "2:ALERT", "3:GND", "4:ECG_OUT", "5:REFOUT", "6:GND", "7:GND", "8:+3V3", "9:SDA", "10:SCL"], "mpn": "ADS1115IDGSR", "lcsc": "C37593", "pkg": "VSSOP-10 3x3", "stock": "Verify live", "usd": 1.4023, "stage": 1, "group": "ic", "note": "0.5 mm pitch; tack Pin 1 corner first, align all 10 pins, solder with flux and drag technique or hot air."}, {"ref": "U3", "val": "MCP1700-2802E", "x": 18.0, "y": 64.0, "rx": 18.0, "ry": 61.2, "rot": 0.0, "bx": 16.075, "by": 62.5, "bw": 3.851, "bh": 3.0, "pin1": {"x": 17.062, "y": 63.05, "name": "1"}, "pads": [{"n": "1", "x": 17.062, "y": 63.05, "w": 1.475, "h": 0.6, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "GND"}, {"n": "2", "x": 17.062, "y": 64.95, "w": 1.475, "h": 0.6, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+VS_A"}, {"n": "3", "x": 18.938, "y": 64.0, "w": 1.475, "h": 0.6, "s": "rect", "dw": 0.0, "dh": 0.0, "net": "+3V3"}], "nets": ["1:GND", "2:+VS_A", "3:+3V3"], "mpn": "MCP1700T-2802E/TT", "lcsc": "C625349", "pkg": "SOT-23-3", "stock": "202", "usd": 0.4973, "stage": 1, "group": "ic", "note": "Pin 1 GND, Pin 2 VOUT +VS_A 2.8 V, Pin 3 VIN +3V3. Verify Pin 1 orientation dot before soldering."}], "stages": [{"id": 0, "title": "All 46 Footprints", "desc": "Complete 92 x 70 mm prototype board overview. Select a stage or click any footprint or BOM row to inspect pads, MPN, LCSC code, and verification notes."}, {"id": 1, "title": "Stage 1: IC Reflow (U1, U2, U3)", "desc": "Stencil solder paste using 4x 1.05x1.05 mm (65.2%) segmented apertures on U1 EP. Reflow U1 LFCSP-20 with thermocouple monitoring, solder U2 TSSOP-10 and U3 SOT-23, and inspect 0.5 mm leads under magnification for bridges."}, {"id": 2, "title": "Stage 2: Analog 0603 Passives", "desc": "Populate ECG protection R1..R3, 10 MOhm high-Z divider and HPF parts R4..R6, R8..R10, R18, C1..C2, Sallen-Key LPF R11..R12, C5..C6, gain resistors R13..R14, and bypass C3, C4, C7, C11, R15."}, {"id": 3, "title": "Stage 3: Power & I2C 0603 Passives", "desc": "Solder C9 and C10 (1 uF 50V X7R for MCP1700 stability), U2 local bypass C8, I2C pull-ups R16..R17 (4.7 kOhm), and ALERT pull-up R19 (10 kOhm)."}, {"id": 4, "title": "Stage 4: 99% IPA Clean & Short Check", "desc": "Scrub all 10 MOhm high-Z nodes (R4..R10, R18, C1..C2, U1 pins) with 99% IPA and ESD brush to eliminate surface flux leakage. Before plugging any module, measure > 10 kOhm between TP6 (+3V3), TP5 (+VS_A), and TP7 (GND)."}, {"id": 5, "title": "Stage 5: THT Connectors & TP1..TP7", "desc": "Solder J1 SJ1-3533N jack, J2 2x 1x20P sockets trimmed to 1x19P, and J3 1x7P male header. Power with current-limited bench supply and verify TP5=2.80 V, TP6=3.30 V, TP2=1.40 V, TP1=1.40 V, and TP3/TP4 LOD swing."}]};
+const NS = document.getElementById("board-svg").namespaceURI;
+let activeStage = 0;
+let activeGroup = "all";
+let searchQuery = "";
+let selectedRef = "U1";
+let showLabels = true;
+let showPin1 = true;
+let zoomScale = 1.0;
+
+function svgEl(tag, attrs) {
+    const el = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) {
+        el.setAttribute(k, String(v));
+    }
+    return el;
+}
+
+function renderBoard() {
+    const svg = document.getElementById("board-svg");
+    svg.innerHTML = "";
+    svg.style.width = (zoomScale * 100).toFixed(0) + "%";
+
+    svg.appendChild(svgEl("rect", { x: 0, y: 0, width: 92, height: 70, fill: "#134e2a", stroke: "#eab308", "stroke-width": 0.35 }));
+    svg.appendChild(svgEl("rect", { x: 60, y: 0, width: 32, height: 12, fill: "rgba(239,68,68,0.18)", stroke: "#f87171", "stroke-width": 0.25, "stroke-dasharray": "1.2,0.8" }));
+    const kt = svgEl("text", { x: 76, y: 6.2, fill: "#fca5a5", "font-size": 2.2, "text-anchor": "middle", "font-family": "monospace" });
+    kt.textContent = "ANTENNA KEEPOUT";
+    svg.appendChild(kt);
+
+    for (const c of GUIDE_DATA.components) {
+        const matchStage = activeStage === 0 || c.stage === activeStage;
+        const matchGroup = activeGroup === "all" || c.group === activeGroup;
+        const q = searchQuery.trim().toLowerCase();
+        const matchSearch = !q || [c.ref, c.val, c.mpn, c.lcsc, c.pkg].some(s => s.toLowerCase().includes(q));
+        const visible = matchStage && matchGroup && matchSearch;
+
+        const g = svgEl("g", {
+            class: "comp-group" + (visible ? "" : " comp-dim") + (c.ref === selectedRef ? " comp-selected" : ""),
+            "data-ref": c.ref
+        });
+        g.addEventListener("click", () => selectComponent(c.ref));
+
+        g.appendChild(svgEl("rect", {
+            x: c.bx, y: c.by, width: c.bw, height: c.bh, rx: 0.25, class: "comp-body"
+        }));
+
+        for (const p of c.pads) {
+            const isTh = p.dw > 0 || p.dh > 0;
+            const isTp = c.group === "tp";
+            const cls = isTp ? "tp-ring" : (isTh ? "pad-th" : "pad-smd");
+            if (p.s === "circle") {
+                g.appendChild(svgEl("circle", { cx: p.x, cy: p.y, r: p.w / 2, class: cls }));
+            } else if (p.s === "oval") {
+                g.appendChild(svgEl("rect", { x: p.x - p.w / 2, y: p.y - p.h / 2, width: p.w, height: p.h, rx: Math.min(p.w, p.h) / 2, class: cls }));
+            } else {
+                g.appendChild(svgEl("rect", { x: p.x - p.w / 2, y: p.y - p.h / 2, width: p.w, height: p.h, rx: 0.08, class: cls }));
+            }
+            if (p.dw > 0 && p.dh > 0) {
+                if (Math.abs(p.dw - p.dh) < 0.05) {
+                    g.appendChild(svgEl("circle", { cx: p.x, cy: p.y, r: p.dw / 2, class: "pad-drill" }));
+                } else {
+                    g.appendChild(svgEl("rect", { x: p.x - p.dw / 2, y: p.y - p.dh / 2, width: p.dw, height: p.dh, rx: Math.min(p.dw, p.dh) / 2, class: "pad-drill" }));
+                }
+            }
+        }
+
+        if (showPin1 && c.pin1) {
+            g.appendChild(svgEl("circle", { cx: c.pin1.x, cy: c.pin1.y, r: 0.55, class: "pin1-dot" }));
+        }
+
+        if (showLabels) {
+            const lbl = svgEl("text", { x: c.rx, y: c.ry, class: "ref-label" });
+            lbl.textContent = c.ref;
+            g.appendChild(lbl);
+        }
+        svg.appendChild(g);
+    }
+}
+
+function selectComponent(ref) {
+    selectedRef = ref;
+    renderBoard();
+    renderBomTable();
+    renderInspector();
+}
+
+function renderInspector() {
+    const c = GUIDE_DATA.components.find(x => x.ref === selectedRef) || GUIDE_DATA.components[0];
+    const el = document.getElementById("inspector-body");
+    const pin1Txt = c.pin1 ? `Pin ${c.pin1.name} at (${c.pin1.x}, ${c.pin1.y}) mm` : "Non-polarized / Symmetric";
+    const netsTxt = c.nets.length ? c.nets.join(", ") : "None";
+    el.innerHTML = `
+        <div class="inspector-grid">
+            <div class="inspector-k">Designator</div><div class="inspector-v"><strong>${c.ref}</strong> | Value: <code>${c.val}</code> | Stage ${c.stage}</div>
+            <div class="inspector-k">MPN</div><div class="inspector-v"><code>${c.mpn}</code></div>
+            <div class="inspector-k">LCSC</div><div class="inspector-v"><code>${c.lcsc}</code> | Stock: ${c.stock} | Unit USD: $${c.usd.toFixed(4)}</div>
+            <div class="inspector-k">Package</div><div class="inspector-v">${c.pkg}</div>
+            <div class="inspector-k">Position</div><div class="inspector-v">X=${c.x} mm, Y=${c.y} mm, Rot=${c.rot} deg</div>
+            <div class="inspector-k">Pin-1 Marker</div><div class="inspector-v">${pin1Txt}</div>
+            <div class="inspector-k">Pad Nets</div><div class="inspector-v"><code>${netsTxt}</code></div>
+        </div>
+        <div class="note-box"><strong>Soldering &amp; Bring-Up Note:</strong> ${c.note}</div>
+    `;
+}
+
+function renderStages() {
+    const box = document.getElementById("stage-buttons");
+    box.innerHTML = "";
+    for (const s of GUIDE_DATA.stages) {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-stage" + (activeStage === s.id ? " active" : "");
+        btn.textContent = s.title;
+        btn.addEventListener("click", () => {
+            activeStage = s.id;
+            renderStages();
+            renderBoard();
+            renderBomTable();
+        });
+        box.appendChild(btn);
+    }
+    const st = GUIDE_DATA.stages.find(s => s.id === activeStage) || GUIDE_DATA.stages[0];
+    document.getElementById("stage-banner").innerHTML = `<strong>${st.title}:</strong> ${st.desc}`;
+}
+
+function renderBomTable() {
+    const tbody = document.getElementById("bom-tbody");
+    tbody.innerHTML = "";
+    const q = searchQuery.trim().toLowerCase();
+    for (const c of GUIDE_DATA.components) {
+        if (activeStage !== 0 && c.stage !== activeStage) continue;
+        if (activeGroup !== "all" && c.group !== activeGroup) continue;
+        if (q && ![c.ref, c.val, c.mpn, c.lcsc, c.pkg].some(s => s.toLowerCase().includes(q))) continue;
+        const tr = document.createElement("tr");
+        tr.className = "bom-row" + (c.ref === selectedRef ? " selected" : "");
+        tr.innerHTML = `<td><strong>${c.ref}</strong></td><td>${c.val}</td><td><code>${c.mpn}</code></td><td><code>${c.lcsc}</code></td><td>S${c.stage}</td><td>${c.stock}</td>`;
+        tr.addEventListener("click", () => selectComponent(c.ref));
+        tbody.appendChild(tr);
+    }
+}
+
+document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeGroup = btn.getAttribute("data-group");
+        renderBoard();
+        renderBomTable();
+    });
+});
+
+document.getElementById("search-box").addEventListener("input", e => {
+    searchQuery = e.target.value;
+    renderBoard();
+    renderBomTable();
+});
+
+document.getElementById("btn-toggle-labels").addEventListener("click", e => {
+    showLabels = !showLabels;
+    e.target.textContent = "Labels: " + (showLabels ? "ON" : "OFF");
+    renderBoard();
+});
+
+document.getElementById("btn-toggle-pin1").addEventListener("click", e => {
+    showPin1 = !showPin1;
+    e.target.textContent = "Pin-1 Dots: " + (showPin1 ? "ON" : "OFF");
+    renderBoard();
+});
+
+document.getElementById("btn-zoom-in").addEventListener("click", () => { zoomScale = Math.min(3.0, zoomScale + 0.5); renderBoard(); });
+document.getElementById("btn-zoom-out").addEventListener("click", () => { zoomScale = Math.max(1.0, zoomScale - 0.5); renderBoard(); });
+document.getElementById("btn-zoom-reset").addEventListener("click", () => { zoomScale = 1.0; renderBoard(); });
+
+renderStages();
+renderBoard();
+renderBomTable();
+renderInspector();
+</script>
+</body>
+</html>

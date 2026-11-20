@@ -1,0 +1,191 @@
+[
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,B.Cu,F.Mask,B.Mask,F.Silkscreen,B.Silkscreen,Edge.Cuts,F.Paste,B.Paste",
+      "--check-zones",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-F_Cu.gtl'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-B_Cu.gbl'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-F_Paste.gtp'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-B_Paste.gbp'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-B_Silkscreen.gbo'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-B_Mask.gbs'.\nPlotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1'.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "drill",
+      "--excellon-units",
+      "mm",
+      "--excellon-separate-th",
+      "--generate-report",
+      "--report-path",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/drill_report.rpt",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Created file '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl'\nCreated file '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/gerbers/AFE_ECG_PPG_PTT-NPTH.drl'\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pos",
+      "--format",
+      "csv",
+      "--units",
+      "mm",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/placement_mm.csv",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Wrote position data to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/placement_mm.csv'.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "bom",
+      "--fields",
+      "Reference,Value,Footprint,QUANTITY",
+      "--labels",
+      "Reference,Value,Footprint,Quantity",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/BOM.csv",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0,
+    "stdout": "Wrote bill of materials to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/BOM.csv'.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "pdf",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/Schematic.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/Schematic.pdf'.\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pdf",
+      "--layers",
+      "F.Cu,B.Cu,F.Silkscreen,Edge.Cuts",
+      "--mode-multipage",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Layout.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Layout.pdf'.\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pdf",
+      "--layers",
+      "F.Fab,F.CrtYd,Edge.Cuts",
+      "--mode-single",
+      "--scale",
+      "1",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/Assembly_1to1.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/Assembly_1to1.pdf'.\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,F.Silkscreen,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--mode-single",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Top.svg",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Top.svg'.\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "rsvg-convert",
+      "-w",
+      "1400",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Top.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Top.svg"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "B.Cu,B.Silkscreen,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--mode-single",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Bottom.svg",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/candidate/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Plotted to '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Bottom.svg'.\nDone.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "rsvg-convert",
+      "-w",
+      "1400",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Bottom.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/return_path_review_20261113/PCB_Bottom.svg"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

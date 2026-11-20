@@ -1,0 +1,13 @@
+{
+  "sampling_frequency_hz": 500.0,
+  "foot_detection_method": "tangent",
+  "analog_delay_compensation_ms": 5.6,
+  "total_beats": 23,
+  "valid_beats": 22,
+  "rejected_beats": 1,
+  "mean_pat_ms": 279.79,
+  "median_pat_ms": 279.52,
+  "std_pat_ms": 0.69,
+  "min_pat_ms": 279.49,
+  "max_pat_ms": 281.52
+}

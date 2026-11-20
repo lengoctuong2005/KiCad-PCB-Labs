@@ -1,0 +1,100 @@
+[
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "drc",
+      "--refill-zones",
+      "--all-track-errors",
+      "--schematic-parity",
+      "--severity-all",
+      "--exit-code-violations",
+      "--format",
+      "json",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/drc.json",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0,
+    "stdout": "Found 0 violations\nFound 0 unconnected items\nFound 0 schematic parity issues\nSaved DRC Report to /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/drc.json\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "erc",
+      "--severity-all",
+      "--exit-code-violations",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/erc.rpt",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0,
+    "stdout": "Found 0 violations\nSaved ERC Report to /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/erc.rpt\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_analog_netlist.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: analog component values, connectivity, ALERT pull-up, and J2.9 no-connect\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_feedback_netlist.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: actual schematic netlist has negative feedback, gain-setting resistors and isolated REFOUT\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_pcb_netlist.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: 46 footprints, 151 schematic nodes, values, footprint IDs, symbol paths and two-layer outline\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_compact_layout.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: 92 x 70 mm, edge-jack placement, mounting holes, both antenna keepouts and safety label\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_local_returns.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: four tented local GND returns and 0.5 mm J2-to-J3 supply; native DRC required for plane connectivity\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_fabrication_drills.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: 90 PCB holes and slots match Excellon position, diameter, slot direction and plating within 0.0011 mm\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/tests/check_fabrication_zip.py"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS: 11 flat Gerber/drill members, CRC and exact source bytes\n",
+    "stderr": ""
+  }
+]

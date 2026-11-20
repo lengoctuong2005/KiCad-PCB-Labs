@@ -1,0 +1,2 @@
+{"checks": ["parse_typed_and_legacy", "quality_flags", "monitor_interleaved_paired_stream", "typed_firmware_csv_audit_only", "simulation_cli_analysis"], "status": "ok"}
+PY_EXIT=0

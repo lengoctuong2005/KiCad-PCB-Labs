@@ -1,0 +1,4125 @@
+(export
+	(version "E")
+	(design
+		(source "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_sch")
+		(date "2026-11-12T22:44:02")
+		(tool "Eeschema 10.0.8-10.0.8~ubuntu26.04.1")
+		(sheet
+			(number "1")
+			(name "/")
+			(tstamps "/")
+			(title_block
+				(title "AFE ECG + PPG PTT (AD8232+ADS1115+MAX30102+ESP32)")
+				(company "KhoaHe PCB")
+				(rev "v1.0")
+				(date "2026-11-09")
+				(source "AFE_ECG_PPG_PTT.kicad_sch")
+				(comment
+					(number "1")
+					(value "ECG: AD8232 0.5-40Hz G=1100 DC lead-off RLD; ADS1115 475SPS diff")
+				)
+				(comment
+					(number "2")
+					(value "PPG: MAX30102 module I2C; ESP32 DevKit 38P; analog LDO MCP1700-2.8V")
+				)
+				(comment
+					(number "3")
+					(value "")
+				)
+				(comment
+					(number "4")
+					(value "")
+				)
+				(comment
+					(number "5")
+					(value "")
+				)
+				(comment
+					(number "6")
+					(value "")
+				)
+				(comment
+					(number "7")
+					(value "")
+				)
+				(comment
+					(number "8")
+					(value "")
+				)
+				(comment
+					(number "9")
+					(value "")
+				)
+			)
+		)
+	)
+	(components
+		(comp
+			(ref "C1")
+			(value "0.33u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "db3511d8-bce5-40ae-8067-8cc863f2c71a")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C2")
+			(value "0.33u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "1511f167-97ac-478f-874f-a2a5d3ee9880")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C3")
+			(value "1n")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "70c26283-f347-4e3f-bdc5-3a882201e2f8")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C4")
+			(value "0.1u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7cb4bd05-10ca-4090-bd97-793bc2a01121")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C5")
+			(value "1.5n")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "9ebd4472-8712-4291-8f0d-bc79a322fff6")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C6")
+			(value "10n")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b6df60a6-cc95-49c8-8e73-6560c9af669a")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C7")
+			(value "10n")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d010ec90-875c-43ff-8b1d-4401ba51d53b")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C8")
+			(value "0.1u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d9f7c27c-4301-46f5-9d60-2e7217c931e9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C9")
+			(value "1u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "306b66b5-c70d-43fd-bfae-d06a8c2e8005")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C10")
+			(value "1u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "ae906e38-bd1c-47ad-a788-4848976e54b1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "C11")
+			(value "0.1u")
+			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "C")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "195f40a4-041d-4a52-b7ce-5e691f524d95")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H1")
+			(value "MH")
+			(footprint "MountingHole:MountingHole_3.2mm_M3")
+			(fields
+				(field
+					(name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MH")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c68e60a8-848e-4899-99bf-990829808b89")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H2")
+			(value "MH")
+			(footprint "MountingHole:MountingHole_3.2mm_M3")
+			(fields
+				(field
+					(name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MH")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7a348a8b-4b26-44db-9f97-08439e0d4710")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H3")
+			(value "MH")
+			(footprint "MountingHole:MountingHole_3.2mm_M3")
+			(fields
+				(field
+					(name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MH")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "5dc0a5c5-ab45-40ce-8880-e586bff7c7aa")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "H4")
+			(value "MH")
+			(footprint "MountingHole:MountingHole_3.2mm_M3")
+			(fields
+				(field
+					(name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MH")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "21ace3b2-4516-4daf-80b0-e3d0aac46e6f")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J1")
+			(value "ECG_3.5mm")
+			(footprint "Connector_Audio:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal")
+			(fields
+				(field
+					(name "Footprint") "Connector_Audio:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "ECG_JACK_3P5")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d95a6c4b-a44a-4a61-94d5-49444d1189d5")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "T")
+						)
+						(pin
+							(num "R")
+						)
+						(pin
+							(num "S")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J2")
+			(value "ESP32_DEVKIT")
+			(footprint "Connector_PinHeader_2.54mm:PinHeader_2x19_P2.54mm_Vertical")
+			(fields
+				(field
+					(name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_2x19_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "ESP32_DEVKIT_38P")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "78129b77-6c82-45bc-b172-ec98fbf999fb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "22")
+						)
+						(pin
+							(num "23")
+						)
+						(pin
+							(num "24")
+						)
+						(pin
+							(num "25")
+						)
+						(pin
+							(num "26")
+						)
+						(pin
+							(num "27")
+						)
+						(pin
+							(num "28")
+						)
+						(pin
+							(num "29")
+						)
+						(pin
+							(num "30")
+						)
+						(pin
+							(num "31")
+						)
+						(pin
+							(num "32")
+						)
+						(pin
+							(num "33")
+						)
+						(pin
+							(num "34")
+						)
+						(pin
+							(num "35")
+						)
+						(pin
+							(num "36")
+						)
+						(pin
+							(num "37")
+						)
+						(pin
+							(num "38")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "J3")
+			(value "MAX30102")
+			(footprint "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical")
+			(fields
+				(field
+					(name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MAX30102_MODULE")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "adefb146-2290-43d1-b5e7-9eb4b196f010")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R1")
+			(value "360k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "d79427ea-c99f-4b3a-93fc-de82173575fe")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R2")
+			(value "360k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7aaa0466-fdad-46cf-a2d2-4a8fa5f6b042")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R3")
+			(value "360k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f6564375-9b0a-46ef-bdcd-90fde5216cb2")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R4")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7d3f74a6-8437-4181-9bd9-d5fae5d9c446")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R5")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "2ec56c95-4e7c-4b07-a936-bd6b93eb87ee")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R6")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b5bff56c-56c8-48f0-91b4-cc7e3f0aa7c7")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R8")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "c6e865e2-a7b2-4c4d-9c2e-b14d4869ab78")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R9")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "e6a8f0d7-88b1-4639-bfa3-b2bc65d507d1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R10")
+			(value "10M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "7f29ebb6-5865-4d48-ae51-725873c3a8cd")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R11")
+			(value "1M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "6635eac1-d045-45d8-8cae-8145d105b0f8")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R12")
+			(value "1M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "307e8334-e9c4-4476-a5aa-b66319bccab1")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R13")
+			(value "100k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "285aaf95-8cfc-4287-a785-33f63837b3f9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R14")
+			(value "1M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "23027046-6b97-44c8-8252-c86647f91f54")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R15")
+			(value "1k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "9303b8fb-651f-4bde-8a5f-17a1a9b82ab0")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R16")
+			(value "4.7k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "bd301e8e-f571-4242-8254-fa79c8d4e0b9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R17")
+			(value "4.7k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "9a2d7001-2aee-4b6d-b196-104a4210dc9b")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R18")
+			(value "1.4M")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "3da61c3a-cd30-45eb-aec4-2c9e91bfdadf")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "R19")
+			(value "10k")
+			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(fields
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "R")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "b9025087-a9c7-464b-b9bf-d84e8936213e")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP1")
+			(value "ECG_OUT")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "f93022aa-14cc-4c8b-8c57-df76a195e3bb")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP2")
+			(value "REFOUT")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "211286bc-0470-4b6e-bdd4-03cab77cfd01")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP3")
+			(value "LOD_P")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "69b33f77-24ab-4e01-91d6-819bda083d0e")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP4")
+			(value "LOD_N")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "cdb9283f-94d4-4ede-82e7-6b1e0001b9d9")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP5")
+			(value "+VS_A")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "feb347b4-23ab-4abf-a84c-b669c2159e35")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP6")
+			(value "+3V3")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "32dcbccb-352b-4e87-a7a1-6841082ee0c4")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "TP7")
+			(value "GND")
+			(footprint "TestPoint:TestPoint_Pad_D1.5mm")
+			(fields
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "TP")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "3915aed8-10a6-4423-ad39-47d5e7c7a505")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U1")
+			(value "AD8232")
+			(footprint "Package_CSP:LFCSP-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
+			(fields
+				(field
+					(name "Footprint") "Package_CSP:LFCSP-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "AD8232")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "02bdaf33-4d42-4924-8ea3-b89128a61c74")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "6")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "19")
+						)
+						(pin
+							(num "21")
+						)
+						(pin
+							(num "20")
+						)
+						(pin
+							(num "18")
+						)
+						(pin
+							(num "17")
+						)
+						(pin
+							(num "16")
+						)
+						(pin
+							(num "15")
+						)
+						(pin
+							(num "14")
+						)
+						(pin
+							(num "13")
+						)
+						(pin
+							(num "12")
+						)
+						(pin
+							(num "11")
+						)
+						(pin
+							(num "10")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U2")
+			(value "ADS1115")
+			(footprint "Package_SO:TSSOP-10_3x3mm_P0.5mm")
+			(fields
+				(field
+					(name "Footprint") "Package_SO:TSSOP-10_3x3mm_P0.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "ADS1115")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "321f41cb-f201-498e-8286-c823ef482c5d")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "4")
+						)
+						(pin
+							(num "5")
+						)
+						(pin
+							(num "10")
+						)
+						(pin
+							(num "9")
+						)
+						(pin
+							(num "8")
+						)
+						(pin
+							(num "7")
+						)
+						(pin
+							(num "6")
+						)
+					)
+				)
+			)
+		)
+		(comp
+			(ref "U3")
+			(value "MCP1700-2802E")
+			(footprint "Package_TO_SOT_SMD:SOT-23")
+			(fields
+				(field
+					(name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(libsource
+				(lib "afe")
+				(part "MCP1700-2802E_SOT23")
+				(description "")
+			)
+			(property
+				(name "Sheetname")
+				(value "AFE_ECG_PPG_PTT")
+			)
+			(property
+				(name "Sheetfile")
+				(value "AFE_ECG_PPG_PTT.kicad_sch")
+			)
+			(sheetpath
+				(names "/")
+				(tstamps "/")
+			)
+			(tstamps "8e6bb570-3bd7-40a2-8da1-020b10fe130a")
+			(units
+				(unit
+					(name "A")
+					(pins
+						(pin
+							(num "3")
+						)
+						(pin
+							(num "1")
+						)
+						(pin
+							(num "2")
+						)
+					)
+				)
+			)
+		)
+	)
+	(groups)
+	(variants)
+	(libparts
+		(libpart
+			(lib "afe")
+			(part "AD8232")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "AD8232")
+				(field
+					(name "Footprint") "Package_CSP:LFCSP-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "HPDRIVE")
+					(type "output")
+				)
+				(pin
+					(num "2")
+					(name "+IN")
+					(type "input")
+				)
+				(pin
+					(num "3")
+					(name "-IN")
+					(type "input")
+				)
+				(pin
+					(num "4")
+					(name "RLDFB")
+					(type "passive")
+				)
+				(pin
+					(num "5")
+					(name "RLD")
+					(type "output")
+				)
+				(pin
+					(num "6")
+					(name "SW")
+					(type "passive")
+				)
+				(pin
+					(num "7")
+					(name "OPAMP+")
+					(type "input")
+				)
+				(pin
+					(num "8")
+					(name "REFOUT")
+					(type "output")
+				)
+				(pin
+					(num "9")
+					(name "OPAMP-")
+					(type "input")
+				)
+				(pin
+					(num "10")
+					(name "OUT")
+					(type "output")
+				)
+				(pin
+					(num "11")
+					(name "LOD-")
+					(type "output")
+				)
+				(pin
+					(num "12")
+					(name "LOD+")
+					(type "output")
+				)
+				(pin
+					(num "13")
+					(name "SDN")
+					(type "input")
+				)
+				(pin
+					(num "14")
+					(name "AC/DC")
+					(type "input")
+				)
+				(pin
+					(num "15")
+					(name "FR")
+					(type "input")
+				)
+				(pin
+					(num "16")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "17")
+					(name "+VS")
+					(type "power_in")
+				)
+				(pin
+					(num "18")
+					(name "REFIN")
+					(type "input")
+				)
+				(pin
+					(num "19")
+					(name "IAOUT")
+					(type "output")
+				)
+				(pin
+					(num "20")
+					(name "HPSENSE")
+					(type "input")
+				)
+				(pin
+					(num "21")
+					(name "EP")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "ADS1115")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "ADS1115")
+				(field
+					(name "Footprint") "Package_SO:TSSOP-10_3x3mm_P0.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "ADDR")
+					(type "input")
+				)
+				(pin
+					(num "2")
+					(name "ALERT")
+					(type "open_collector")
+				)
+				(pin
+					(num "3")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "4")
+					(name "AIN0")
+					(type "input")
+				)
+				(pin
+					(num "5")
+					(name "AIN1")
+					(type "input")
+				)
+				(pin
+					(num "6")
+					(name "AIN2")
+					(type "input")
+				)
+				(pin
+					(num "7")
+					(name "AIN3")
+					(type "input")
+				)
+				(pin
+					(num "8")
+					(name "VDD")
+					(type "power_in")
+				)
+				(pin
+					(num "9")
+					(name "SDA")
+					(type "bidirectional")
+				)
+				(pin
+					(num "10")
+					(name "SCL")
+					(type "input")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "C")
+			(fields
+				(field
+					(name "Reference") "C")
+				(field
+					(name "Value") "C")
+				(field
+					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "ECG_JACK_3P5")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "ECG_3.5mm")
+				(field
+					(name "Footprint") "Connector_Audio:Jack_3.5mm_CUI_SJ1-3533NG_Horizontal")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "R")
+					(name "LA")
+					(type "passive")
+				)
+				(pin
+					(num "S")
+					(name "RL")
+					(type "passive")
+				)
+				(pin
+					(num "T")
+					(name "RA")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "ESP32_DEVKIT_38P")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "ESP32_DEVKIT_38P")
+				(field
+					(name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x19_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "3V3")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "EN")
+					(type "input")
+				)
+				(pin
+					(num "3")
+					(name "VP")
+					(type "input")
+				)
+				(pin
+					(num "4")
+					(name "VN")
+					(type "input")
+				)
+				(pin
+					(num "5")
+					(name "IO34")
+					(type "input")
+				)
+				(pin
+					(num "6")
+					(name "IO35")
+					(type "input")
+				)
+				(pin
+					(num "7")
+					(name "IO32")
+					(type "bidirectional")
+				)
+				(pin
+					(num "8")
+					(name "IO33")
+					(type "bidirectional")
+				)
+				(pin
+					(num "9")
+					(name "IO25")
+					(type "bidirectional")
+				)
+				(pin
+					(num "10")
+					(name "IO26")
+					(type "bidirectional")
+				)
+				(pin
+					(num "11")
+					(name "IO27")
+					(type "bidirectional")
+				)
+				(pin
+					(num "12")
+					(name "IO14")
+					(type "bidirectional")
+				)
+				(pin
+					(num "13")
+					(name "IO12")
+					(type "bidirectional")
+				)
+				(pin
+					(num "14")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "15")
+					(name "IO13")
+					(type "bidirectional")
+				)
+				(pin
+					(num "16")
+					(name "SD2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "17")
+					(name "SD3")
+					(type "bidirectional")
+				)
+				(pin
+					(num "18")
+					(name "CMD")
+					(type "bidirectional")
+				)
+				(pin
+					(num "19")
+					(name "5V")
+					(type "power_in")
+				)
+				(pin
+					(num "20")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "21")
+					(name "IO23")
+					(type "bidirectional")
+				)
+				(pin
+					(num "22")
+					(name "IO22")
+					(type "bidirectional")
+				)
+				(pin
+					(num "23")
+					(name "TXD0")
+					(type "output")
+				)
+				(pin
+					(num "24")
+					(name "RXD0")
+					(type "input")
+				)
+				(pin
+					(num "25")
+					(name "IO21")
+					(type "bidirectional")
+				)
+				(pin
+					(num "26")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "27")
+					(name "IO19")
+					(type "bidirectional")
+				)
+				(pin
+					(num "28")
+					(name "IO18")
+					(type "bidirectional")
+				)
+				(pin
+					(num "29")
+					(name "IO5")
+					(type "bidirectional")
+				)
+				(pin
+					(num "30")
+					(name "IO17")
+					(type "bidirectional")
+				)
+				(pin
+					(num "31")
+					(name "IO16")
+					(type "bidirectional")
+				)
+				(pin
+					(num "32")
+					(name "IO4")
+					(type "bidirectional")
+				)
+				(pin
+					(num "33")
+					(name "IO0")
+					(type "bidirectional")
+				)
+				(pin
+					(num "34")
+					(name "IO2")
+					(type "bidirectional")
+				)
+				(pin
+					(num "35")
+					(name "IO15")
+					(type "bidirectional")
+				)
+				(pin
+					(num "36")
+					(name "SD1")
+					(type "bidirectional")
+				)
+				(pin
+					(num "37")
+					(name "SD0")
+					(type "bidirectional")
+				)
+				(pin
+					(num "38")
+					(name "CLK")
+					(type "input")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "MAX30102_MODULE")
+			(fields
+				(field
+					(name "Reference") "J")
+				(field
+					(name "Value") "MAX30102_MODULE")
+				(field
+					(name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "VIN")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "SCL")
+					(type "input")
+				)
+				(pin
+					(num "3")
+					(name "SDA")
+					(type "bidirectional")
+				)
+				(pin
+					(num "4")
+					(name "INT")
+					(type "output")
+				)
+				(pin
+					(num "5")
+					(name "RD")
+					(type "no_connect")
+				)
+				(pin
+					(num "6")
+					(name "IRD")
+					(type "no_connect")
+				)
+				(pin
+					(num "7")
+					(name "GND")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "MCP1700-2802E_SOT23")
+			(fields
+				(field
+					(name "Reference") "U")
+				(field
+					(name "Value") "MCP1700-2802E")
+				(field
+					(name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "GND")
+					(type "power_in")
+				)
+				(pin
+					(num "2")
+					(name "VOUT")
+					(type "power_out")
+				)
+				(pin
+					(num "3")
+					(name "VIN")
+					(type "power_in")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "MH")
+			(fields
+				(field
+					(name "Reference") "H")
+				(field
+					(name "Value") "MH")
+				(field
+					(name "Footprint") "MountingHole:MountingHole_3.2mm_M3")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "R")
+			(fields
+				(field
+					(name "Reference") "R")
+				(field
+					(name "Value") "R")
+				(field
+					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+				(pin
+					(num "2")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+		(libpart
+			(lib "afe")
+			(part "TP")
+			(fields
+				(field
+					(name "Reference") "TP")
+				(field
+					(name "Value") "TP")
+				(field
+					(name "Footprint") "TestPoint:TestPoint_Pad_D1.5mm")
+				(field
+					(name "Datasheet")
+				)
+				(field
+					(name "Description")
+				)
+			)
+			(pins
+				(pin
+					(num "1")
+					(name "")
+					(type "passive")
+				)
+			)
+		)
+	)
+	(libraries
+		(library
+			(logical "afe")
+			(uri "${KIPRJMOD}/libs/afe.kicad_sym")
+		)
+	)
+	(nets
+		(net
+			(code "1")
+			(name "+3V3")
+			(class "Default")
+			(node
+				(ref "C8")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C9")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "1")
+				(pinfunction "3V3_1")
+				(pintype "power_in")
+			)
+			(node
+				(ref "J3")
+				(pin "1")
+				(pinfunction "VIN_1")
+				(pintype "power_in")
+			)
+			(node
+				(ref "R16")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R17")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R19")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP6")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "8")
+				(pinfunction "VDD_8")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U3")
+				(pin "3")
+				(pinfunction "VIN_3")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "2")
+			(name "+5V")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "19")
+				(pinfunction "5V_19")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "3")
+			(name "+VS_A")
+			(class "Default")
+			(node
+				(ref "C10")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "C11")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R4")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R5")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R9")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP5")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "13")
+				(pinfunction "SDN_13")
+				(pintype "input")
+			)
+			(node
+				(ref "U1")
+				(pin "15")
+				(pinfunction "FR_15")
+				(pintype "input")
+			)
+			(node
+				(ref "U1")
+				(pin "17")
+				(pinfunction "+VS_17")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U3")
+				(pin "2")
+				(pinfunction "VOUT_2")
+				(pintype "power_out")
+			)
+		)
+		(net
+			(code "4")
+			(name "AD_OUT")
+			(class "Default")
+			(node
+				(ref "C5")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R14")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R15")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "10")
+				(pinfunction "OUT_10")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "5")
+			(name "ALERT")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "11")
+				(pinfunction "IO27_11")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R19")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "2")
+				(pinfunction "ALERT_2")
+				(pintype "open_collector")
+			)
+		)
+		(net
+			(code "6")
+			(name "ECG_OUT")
+			(class "Default")
+			(node
+				(ref "C7")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "5")
+				(pinfunction "IO34_5")
+				(pintype "input")
+			)
+			(node
+				(ref "R15")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "4")
+				(pinfunction "AIN0_4")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "7")
+			(name "GND")
+			(class "Default")
+			(node
+				(ref "C10")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C11")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C4")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C7")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C8")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C9")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "H1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "H2")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "H3")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "H4")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "J2")
+				(pin "14")
+				(pinfunction "GND_14")
+				(pintype "power_in")
+			)
+			(node
+				(ref "J2")
+				(pin "20")
+				(pinfunction "GND_20")
+				(pintype "power_in")
+			)
+			(node
+				(ref "J2")
+				(pin "26")
+				(pinfunction "GND_26")
+				(pintype "power_in")
+			)
+			(node
+				(ref "J3")
+				(pin "7")
+				(pinfunction "GND_7")
+				(pintype "power_in")
+			)
+			(node
+				(ref "R10")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP7")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "14")
+				(pinfunction "AC/DC_14")
+				(pintype "input")
+			)
+			(node
+				(ref "U1")
+				(pin "16")
+				(pinfunction "GND_16")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U1")
+				(pin "21")
+				(pinfunction "EP_21")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U2")
+				(pin "1")
+				(pinfunction "ADDR_1")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "3")
+				(pinfunction "GND_3")
+				(pintype "power_in")
+			)
+			(node
+				(ref "U2")
+				(pin "6")
+				(pinfunction "AIN2_6")
+				(pintype "input")
+			)
+			(node
+				(ref "U2")
+				(pin "7")
+				(pinfunction "AIN3_7")
+				(pintype "input")
+			)
+			(node
+				(ref "U3")
+				(pin "1")
+				(pinfunction "GND_1")
+				(pintype "power_in")
+			)
+		)
+		(net
+			(code "8")
+			(name "HPDRIVE")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "1")
+				(pinfunction "HPDRIVE_1")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "9")
+			(name "HPSENSE")
+			(class "Default")
+			(node
+				(ref "C1")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R6")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "20")
+				(pinfunction "HPSENSE_20")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "10")
+			(name "HP_MID")
+			(class "Default")
+			(node
+				(ref "R18")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R6")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R8")
+				(pin "1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "11")
+			(name "IAOUT")
+			(class "Default")
+			(node
+				(ref "R11")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R8")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "19")
+				(pinfunction "IAOUT_19")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "12")
+			(name "INT_MAX")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "10")
+				(pinfunction "IO26_10")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J3")
+				(pin "4")
+				(pinfunction "INT_4")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "13")
+			(name "LA_IN")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "R")
+				(pinfunction "LA_R")
+				(pintype "passive")
+			)
+			(node
+				(ref "R2")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R5")
+				(pin "2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "14")
+			(name "LA_P")
+			(class "Default")
+			(node
+				(ref "R2")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "3")
+				(pinfunction "-IN_3")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "15")
+			(name "LOD_N")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "8")
+				(pinfunction "IO33_8")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "TP4")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "11")
+				(pinfunction "LOD-_11")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "16")
+			(name "LOD_P")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "7")
+				(pinfunction "IO32_7")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "TP3")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "12")
+				(pinfunction "LOD+_12")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "17")
+			(name "OPAMP_N")
+			(class "Default")
+			(node
+				(ref "R13")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R14")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "9")
+				(pinfunction "OPAMP-_9")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "18")
+			(name "OPAMP_P")
+			(class "Default")
+			(node
+				(ref "C6")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R12")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "7")
+				(pinfunction "OPAMP+_7")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "19")
+			(name "RA_IN")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "T")
+				(pinfunction "RA_T")
+				(pintype "passive")
+			)
+			(node
+				(ref "R1")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R4")
+				(pin "2")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "20")
+			(name "RA_P")
+			(class "Default")
+			(node
+				(ref "R1")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "2")
+				(pinfunction "+IN_2")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "21")
+			(name "REFIN")
+			(class "Default")
+			(node
+				(ref "C4")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R10")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R9")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "18")
+				(pinfunction "REFIN_18")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "22")
+			(name "REFOUT")
+			(class "Default")
+			(node
+				(ref "C2")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "C6")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R13")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "TP2")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "8")
+				(pinfunction "REFOUT_8")
+				(pintype "output")
+			)
+			(node
+				(ref "U2")
+				(pin "5")
+				(pinfunction "AIN1_5")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "23")
+			(name "RLDFB")
+			(class "Default")
+			(node
+				(ref "C3")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "4")
+				(pinfunction "RLDFB_4")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "24")
+			(name "RLD_E")
+			(class "Default")
+			(node
+				(ref "C3")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R3")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "5")
+				(pinfunction "RLD_5")
+				(pintype "output")
+			)
+		)
+		(net
+			(code "25")
+			(name "RL_E")
+			(class "Default")
+			(node
+				(ref "J1")
+				(pin "S")
+				(pinfunction "RL_S")
+				(pintype "passive")
+			)
+			(node
+				(ref "R3")
+				(pin "1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "26")
+			(name "SCL")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "22")
+				(pinfunction "IO22_22")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J3")
+				(pin "2")
+				(pinfunction "SCL_2")
+				(pintype "input")
+			)
+			(node
+				(ref "R16")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "10")
+				(pinfunction "SCL_10")
+				(pintype "input")
+			)
+		)
+		(net
+			(code "27")
+			(name "SDA")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "25")
+				(pinfunction "IO21_25")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "J3")
+				(pin "3")
+				(pinfunction "SDA_3")
+				(pintype "bidirectional")
+			)
+			(node
+				(ref "R17")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U2")
+				(pin "9")
+				(pinfunction "SDA_9")
+				(pintype "bidirectional")
+			)
+		)
+		(net
+			(code "28")
+			(name "SK_N1")
+			(class "Default")
+			(node
+				(ref "C5")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R11")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "R12")
+				(pin "1")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "29")
+			(name "SW_NODE")
+			(class "Default")
+			(node
+				(ref "C2")
+				(pin "1")
+				(pintype "passive")
+			)
+			(node
+				(ref "R18")
+				(pin "2")
+				(pintype "passive")
+			)
+			(node
+				(ref "U1")
+				(pin "6")
+				(pinfunction "SW_6")
+				(pintype "passive")
+			)
+		)
+		(net
+			(code "30")
+			(name "unconnected-(J2-CLK-Pad38)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "38")
+				(pinfunction "CLK_38")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "31")
+			(name "unconnected-(J2-CMD-Pad18)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "18")
+				(pinfunction "CMD_18")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "32")
+			(name "unconnected-(J2-EN-Pad2)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "2")
+				(pinfunction "EN_2")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "33")
+			(name "unconnected-(J2-IO0-Pad33)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "33")
+				(pinfunction "IO0_33")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "34")
+			(name "unconnected-(J2-IO2-Pad34)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "34")
+				(pinfunction "IO2_34")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "35")
+			(name "unconnected-(J2-IO4-Pad32)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "32")
+				(pinfunction "IO4_32")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "36")
+			(name "unconnected-(J2-IO5-Pad29)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "29")
+				(pinfunction "IO5_29")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "37")
+			(name "unconnected-(J2-IO12-Pad13)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "13")
+				(pinfunction "IO12_13")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "38")
+			(name "unconnected-(J2-IO13-Pad15)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "15")
+				(pinfunction "IO13_15")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "39")
+			(name "unconnected-(J2-IO14-Pad12)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "12")
+				(pinfunction "IO14_12")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "40")
+			(name "unconnected-(J2-IO15-Pad35)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "35")
+				(pinfunction "IO15_35")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "41")
+			(name "unconnected-(J2-IO16-Pad31)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "31")
+				(pinfunction "IO16_31")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "42")
+			(name "unconnected-(J2-IO17-Pad30)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "30")
+				(pinfunction "IO17_30")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "43")
+			(name "unconnected-(J2-IO18-Pad28)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "28")
+				(pinfunction "IO18_28")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "44")
+			(name "unconnected-(J2-IO19-Pad27)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "27")
+				(pinfunction "IO19_27")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "45")
+			(name "unconnected-(J2-IO23-Pad21)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "21")
+				(pinfunction "IO23_21")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "46")
+			(name "unconnected-(J2-IO25-Pad9)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "9")
+				(pinfunction "IO25_9")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "47")
+			(name "unconnected-(J2-IO35-Pad6)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "6")
+				(pinfunction "IO35_6")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "48")
+			(name "unconnected-(J2-RXD0-Pad24)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "24")
+				(pinfunction "RXD0_24")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "49")
+			(name "unconnected-(J2-SD0-Pad37)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "37")
+				(pinfunction "SD0_37")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "50")
+			(name "unconnected-(J2-SD1-Pad36)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "36")
+				(pinfunction "SD1_36")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "51")
+			(name "unconnected-(J2-SD2-Pad16)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "16")
+				(pinfunction "SD2_16")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "52")
+			(name "unconnected-(J2-SD3-Pad17)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "17")
+				(pinfunction "SD3_17")
+				(pintype "bidirectional+no_connect")
+			)
+		)
+		(net
+			(code "53")
+			(name "unconnected-(J2-TXD0-Pad23)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "23")
+				(pinfunction "TXD0_23")
+				(pintype "output+no_connect")
+			)
+		)
+		(net
+			(code "54")
+			(name "unconnected-(J2-VN-Pad4)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "4")
+				(pinfunction "VN_4")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "55")
+			(name "unconnected-(J2-VP-Pad3)")
+			(class "Default")
+			(node
+				(ref "J2")
+				(pin "3")
+				(pinfunction "VP_3")
+				(pintype "input+no_connect")
+			)
+		)
+		(net
+			(code "56")
+			(name "unconnected-(J3-IRD-Pad6)")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "6")
+				(pinfunction "IRD_6")
+				(pintype "no_connect")
+			)
+		)
+		(net
+			(code "57")
+			(name "unconnected-(J3-RD-Pad5)")
+			(class "Default")
+			(node
+				(ref "J3")
+				(pin "5")
+				(pinfunction "RD_5")
+				(pintype "no_connect")
+			)
+		)
+	)
+)

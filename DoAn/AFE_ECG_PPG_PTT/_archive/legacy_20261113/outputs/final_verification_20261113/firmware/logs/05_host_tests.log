@@ -1,0 +1,6 @@
+cc -Wall -Wextra -Werror -pedantic -std=c99 -Imain tests/test_ptt_firmware_logic.c -o tests/test_runner
+./tests/test_runner
+PASS: test_ptt_firmware_logic verified all 5 subsystems
+python3 tests/check_acquisition_regression.py
+PASS: actual enqueue keeps drop flags until accepted; ADS read completion ordering, PPG emission and duplicate source verified
+TEST_EXIT=0

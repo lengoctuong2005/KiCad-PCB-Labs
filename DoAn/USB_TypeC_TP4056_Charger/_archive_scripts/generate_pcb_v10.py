@@ -1,3 +1,4 @@
+import pathlib
 import pcbnew
 import math
 
@@ -21,7 +22,7 @@ for n in net_names:
     board.Add(item)
     nets[n] = item
 
-FP_LIB = "/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/libs/charger.pretty"
+FP_LIB = str(pathlib.Path(__file__).resolve().parents[1] / "libs" / "charger.pretty")
 SMD_C = "/usr/share/kicad/footprints/Capacitor_SMD.pretty", "C_0805_2012Metric"
 SMD_R = "/usr/share/kicad/footprints/Resistor_SMD.pretty", "R_0805_2012Metric"
 SMD_LED = "/usr/share/kicad/footprints/LED_SMD.pretty", "LED_0805_2012Metric"
@@ -273,5 +274,5 @@ add_silk_text("MSSV: 23207124", CX, 13.5, pcbnew.B_SilkS, size=0.8)
 add_silk_text("LE NGOC TUONG", CX, 17.0, pcbnew.B_SilkS, size=0.8)
 add_silk_text("HCMUT - 2026", CX, 21.0, pcbnew.B_SilkS, size=0.6)
 
-pcbnew.SaveBoard("/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/USB_TypeC_TP4056_Charger.kicad_pcb", board)
+pcbnew.SaveBoard(str(pathlib.Path(__file__).resolve().parents[1] / "USB_TypeC_TP4056_Charger.kicad_pcb"), board)
 print("PCB V10 Finalized!")

@@ -1,3 +1,4 @@
+import pathlib
 import sys, uuid, math
 
 def get_uuid(): return str(uuid.uuid4())
@@ -391,7 +392,7 @@ out += pwr("PWR_FLAG", 152.4, 45.72) + "\n"
 
 out += ")"
 
-with open("/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/USB_TypeC_TP4056_Charger.kicad_sch", "w") as f:
+with open(str(pathlib.Path(__file__).resolve().parents[1] / "USB_TypeC_TP4056_Charger.kicad_sch"), "w") as f:
     f.write(out)
 
 print("Generated.")

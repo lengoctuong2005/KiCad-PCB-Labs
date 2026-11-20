@@ -1,0 +1,91 @@
+{
+  "source": "synthetic",
+  "resampled_rate_hz": 1000.0,
+  "quality": {
+    "packets": 6000,
+    "packets_e": 6000,
+    "edge_beats_skipped": 1,
+    "analyzed_segments": 1
+  },
+  "beats": [
+    {
+      "r_time_us": 800000,
+      "ppg_foot_time_us": 1043000,
+      "pat_raw_ms": 243.79817317988636,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 1600000,
+      "ppg_foot_time_us": 1843000,
+      "pat_raw_ms": 243.37091371544966,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 2400000,
+      "ppg_foot_time_us": 2643000,
+      "pat_raw_ms": 243.39023294900335,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 3200000,
+      "ppg_foot_time_us": 3443000,
+      "pat_raw_ms": 243.4006042955184,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 4000000,
+      "ppg_foot_time_us": 4243000,
+      "pat_raw_ms": 243.3984798938345,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 4800000,
+      "ppg_foot_time_us": 5043000,
+      "pat_raw_ms": 243.3984783337355,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 5600000,
+      "ppg_foot_time_us": 5843000,
+      "pat_raw_ms": 243.39854545761864,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 6400000,
+      "ppg_foot_time_us": 6643000,
+      "pat_raw_ms": 243.398523265746,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 7200000,
+      "ppg_foot_time_us": 7443000,
+      "pat_raw_ms": 243.39851285176152,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 8000000,
+      "ppg_foot_time_us": 8243000,
+      "pat_raw_ms": 243.3989756095598,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 8800000,
+      "ppg_foot_time_us": 9043000,
+      "pat_raw_ms": 243.39705286593744,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 9600000,
+      "ppg_foot_time_us": 9843000,
+      "pat_raw_ms": 243.39121675668503,
+      "pat_corrected_ms": null
+    },
+    {
+      "r_time_us": 10400000,
+      "ppg_foot_time_us": 10643000,
+      "pat_raw_ms": 243.48289363848923,
+      "pat_corrected_ms": null
+    }
+  ],
+  "delay_correction_ms": null
+}

@@ -1,0 +1,134 @@
+{
+  "status": "CAD_CHECKED_PROTOTYPE_NOT_RELEASED",
+  "date": "2026-11-12",
+  "kicad": "10.0.8",
+  "drc": 0,
+  "unconnected": 0,
+  "schematic_parity": 0,
+  "units": "mm",
+  "BOM_refs": 46,
+  "placement_refs": 35,
+  "nonassembly_refs_omitted": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "TP1",
+    "TP2",
+    "TP3",
+    "TP4",
+    "TP5",
+    "TP6",
+    "TP7"
+  ],
+  "placement_origin": "absolute board origin, PosY inverted by KiCad export; verify assembler convention",
+  "ignored_checks": [
+    {
+      "description": "Footprint has no courtyard defined",
+      "key": "missing_courtyard"
+    },
+    {
+      "description": "Track endpoint not centered on via",
+      "key": "track_not_centered_on_via"
+    },
+    {
+      "description": "Tuning profile track geometries",
+      "key": "tuning_profile_track_geometries"
+    },
+    {
+      "description": "Footprint doesn't match symbol's footprint filters",
+      "key": "footprint_filters_mismatch"
+    },
+    {
+      "description": "Footprint component type doesn't match footprint pads",
+      "key": "footprint_type_mismatch"
+    }
+  ],
+  "unverified": [
+    "Gerber viewer full package visual review",
+    "physical MAX30102 module pinout and IO levels",
+    "DevKit/module mechanical fit and cable orientation",
+    "assembler MPN BOM rotation stencil approval",
+    "firmware ESP-IDF target build",
+    "bench signal response and timing accuracy",
+    "human-contact electrical safety"
+  ],
+  "sha256": {
+    "AFE_ECG_PPG_PTT.kicad_sch": "cf52261cf8d3c1146ac21cce52fbb1a54edcc04578a4d4c30767d5181d6eb539",
+    "AFE_ECG_PPG_PTT.kicad_pcb": "4c2d368bd0aa500dccc27c48a0fbb7b43b2d51764c9a0790e9ff15c0dd3cc270",
+    "AFE_ECG_PPG_PTT.kicad_pro": "4c87c3bfd93faf39c3a1d203342a8e94af37eca98b5dba379849c63b7f585b24",
+    "fp-lib-table": "7df41435382e4a9190e6331581ae0c4f85cf4ea3895154c185934a5148c36413",
+    "libs/afe.kicad_sym": "037c62c827a6d65af597de4beef813f5cbd236514672d18ae7bbad23da84bbbc",
+    "libs/afe.pretty/ESP32_DevKitC_V4_38P.kicad_mod": "1468b4bb65a002cf12618eedb54a7c41da1ff227f6116d30fbd409e187020fe9",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-B_Silkscreen.gbo": "f602bfce1471bdbc3263fcf39c7dacca4e8eed1c5ab76368de634cb0cd985dbd",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-job.gbrjob": "fc7b960c0d70bb6757ec10c3303d9c105d99e613a7b64adeb2c385794b1978e1",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-F_Cu.gtl": "92bd5c4219c9f91c176e43db67c098cacbd06c6f6240c93bb0a6c1cb516291a1",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts": "12e88c7f9a063413490d823065d8c03ab013f797e87fdefca6dec186916e9c2f",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-B_Cu.gbl": "e2e9d27841e0f45ac678e68a28735844398387d9106df1c0263d473cb6ea29bb",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-F_Paste.gtp": "42582bc4468cb179e17c4e5bdcd847fc2109bd0b2081230eb53d7e4d52235c51",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-PTH.drl": "42f4752956a4c211498e731ed960ee7ffcf8299fe923db66239fe31a626789c2",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-NPTH.drl": "42b11925646094a8bf82123efcfbe20de150713f3cc1b684bf4e082f1da4f280",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-B_Mask.gbs": "0a32db5352202fd54c963ea400fc9b1fbb5ed5ffffbf1f4fadf86f3796a1b1ac",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-B_Paste.gbp": "fdf8fb93371d444bf425aa571db4b6762873f7858165e3673fc5068009a00206",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1": "5015f97e1780dcae02b3da3bcfd9eb9e7331ed8c5ebfba78e9f3e10731ec5c55",
+    "outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto": "7401f737842b9acbc516b49a4e998251612389ee7b9e036d797536f032587ecc",
+    "outputs/repair_20261112/BOM.csv": "65257029bc055d6e21b5044b63b8c4289f836e7c2dc5c9b09460bfb26894497e",
+    "outputs/repair_20261112/placement_mm.csv": "0323626bc14d5b51626b09ded04798be04effd537c813aaea96f791ff364a5df",
+    "outputs/repair_20261112/drc.json": "a92a38db7cf25d453bda70d9d2f24d2ef3f218a197f0b9311449e4e9311e856c",
+    "tools/rebuild_from_netlist.py": "8bcc60f8d3533433825649637b8d486c599fbc23be45e352f96737528369f847",
+    "tests/check_pcb_netlist.py": "6cbcdb89c76ac1b57a7008e473a8b2d8f0fbc22cc80efa42a58493878d8ac0f3",
+    "BaoCao_DoAn.html": "f93877fec5343f0fa2a4ac6473956c6ed39ac0a3d0bba1dcc6cd7781276e40cd",
+    "BaoCao_DoAn.pdf": "0eac1407e709b2e8a8b44ff500f69d190e9cb19241dda710d8372723a75c683c",
+    "outputs/repair_20261112/drc.log": "f66a9263fd33f9add4b4973037b0fe66dfde4fcb3d04badc4542125e96eb4be4",
+    "outputs/repair_20261112/parity.log": "7095ab82dd05cecebf5ef6d463e296b6d9ae7cd0bbbf0832f9a4375fc5d5420e",
+    "outputs/repair_20261112/routing_input.dsn": "baa738f73697364b5e91e9354e356bcf865cf566f782c225076d3ae2cebed0a2",
+    "outputs/repair_20261112/routing_result.ses": "ac81a2884f8b888dd2eba547efe4ea04bb51af041ac157fa8b037c5b59dd86a2",
+    "outputs/repair_20261112/routing.log": "98d76640f74a9182daa535711f2f4968b7e58375bb94e6b260f24e7d6f130910",
+    "outputs/repair_20261112/geometry_checks.json": "7932f2445fd9916a64ff54794f369416688402af9b7b66ae810d4d3f5c57399d",
+    "outputs/repair_20261112/BaoCao_DoAn.pdf": "0eac1407e709b2e8a8b44ff500f69d190e9cb19241dda710d8372723a75c683c",
+    "firmware/esp32_ptt_streamer/main/main.c": "1b565185499f99c55ec9ed519d7c4c41a0789ce94ba28fb236a729789288501b",
+    "firmware/esp32_ptt_streamer/main.c": "1b565185499f99c55ec9ed519d7c4c41a0789ce94ba28fb236a729789288501b",
+    "firmware/esp32_ptt_streamer/main/esp32_ptt_streamer.h": "24ea4980e828e666566f335a8e6381cf5760139d24d629eb23040672397ea0af",
+    "firmware/esp32_ptt_streamer/tests/test_ptt_firmware_logic.c": "849e9aaf57031c04d15418056b46eb77b5f4d9ace5b71350a939c2536220d0c6",
+    "firmware/esp32_ptt_streamer/tests/check_acquisition_regression.py": "18f3daa0a2e130faf9ee9e37c5fb05d5c39e1edc319e9f1426ac5df75b898810",
+    "firmware/esp32_ptt_streamer/Makefile": "4bd204caacaadd3f601f40638bff95c588079ddf4be65fd11900e57bb4f307af",
+    "software/ptt_live_analyzer.py": "1afd4d7f36a03f01db7bee2e33d48152341109660780bfdcf77b45e08097a8b8",
+    "software/test_protocol_regression.py": "d4d2a98c3523a2ef16b92352e5e531724b324acb2eb87c9a0fdcb9d51e0441f1",
+    "firmware/README.md": "e9e3b0619ae4672356d99d24eec5a42577a4d1367b02891c02c44cdc24ed76f9",
+    "software/README.md": "cb7bdba3e43f7973f9063ddd7c56d6bdf29881c362bdf12672a591e03929c483",
+    "outputs/repair_20261112/firmware_host_checks.json": "439a28ef3708b5ff05e9824c5620ede2e0ad14afb7ec949de9cd59a9ea82d424",
+    "outputs/repair_20261112/synthetic_after_protocol.json": "1eaa211fa6c1a54ede00e7e7cf4390049ba1c5ea598811b7e20cbae7e725af93"
+  },
+  "analog_route_metrics": {
+    "RA_P": {
+      "track_length_mm": 3.445,
+      "vias": 0
+    },
+    "LA_P": {
+      "track_length_mm": 4.646,
+      "vias": 0
+    },
+    "REFIN": {
+      "track_length_mm": 8.583,
+      "vias": 0
+    },
+    "OPAMP_N": {
+      "track_length_mm": 5.547,
+      "vias": 0
+    },
+    "HP_MID": {
+      "track_length_mm": 21.697,
+      "vias": 2
+    },
+    "IAOUT": {
+      "track_length_mm": 28.155,
+      "vias": 3
+    },
+    "REFOUT": {
+      "track_length_mm": 38.502,
+      "vias": 0
+    }
+  },
+  "final_check_date": "2026-11-13",
+  "firmware_status": "INTEGRATED_HOST_REGRESSIONS_PASS_TARGET_BUILD_UNVERIFIED"
+}

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo Cáo Đồ Án: Thiết Kế Bo Mạch AFE ECG + PPG Ước Lượng PTT</title>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+    @page { size: A4; margin: 20mm; }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #1e293b;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    .cover {
+        text-align: center;
+        padding: 100px 20px 40px;
+        page-break-after: always;
+    }
+    .cover h1 {
+        font-size: 26pt;
+        color: #0f172a;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+    .cover h2 {
+        font-size: 16pt;
+        color: #2563eb;
+        font-weight: 600;
+        margin-top: 0;
+    }
+    .cover-meta {
+        margin-top: 150px;
+        font-size: 13pt;
+        line-height: 2;
+    }
+    .cover-badge {
+        display: inline-block;
+        background: #e0f2fe;
+        color: #0369a1;
+        padding: 6px 16px;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 11pt;
+        margin-bottom: 20px;
+    }
+    h2.section-title {
+        font-size: 18pt;
+        color: #0f172a;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 6px;
+        margin-top: 40px;
+    }
+    h3 {
+        font-size: 14pt;
+        color: #1e40af;
+        margin-top: 25px;
+    }
+    p, li {
+        font-size: 11pt;
+        text-align: justify;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 10pt;
+    }
+    th, td {
+        border: 1px solid #cbd5e1;
+        padding: 8px 12px;
+        text-align: left;
+    }
+    th {
+        background-color: #f1f5f9;
+        color: #0f172a;
+        font-weight: 700;
+    }
+    tr:nth-child(even) { background-color: #f8fafc; }
+    .callout {
+        background: #f0fdf4;
+        border-left: 4px solid #16a34a;
+        padding: 12px 16px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .callout-warn {
+        background: #fef2f2;
+        border-left: 4px solid #dc2626;
+        padding: 12px 16px;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .img-container {
+        text-align: center;
+        margin: 25px 0;
+    }
+    .img-container img {
+        max-width: 95%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        border: 1px solid #e2e8f0;
+    }
+    .img-caption {
+        font-size: 9.5pt;
+        color: #64748b;
+        margin-top: 8px;
+        font-style: italic;
+    }
+    code {
+        font-family: 'Courier New', Courier, monospace;
+        background: #f1f5f9;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-size: 9.5pt;
+    }
+</style>
+</head>
+<body>
+<section aria-label="Trạng thái sửa thiết kế" style="border:2px solid #9a3412;padding:16px;margin:20px;color:#7c2d12">
+<h2>Hồ sơ đang sửa, chưa phát hành chế tạo · 12/11/2026</h2>
+<p>Nội dung cũ phía dưới chưa đồng bộ với thiết kế hiện hành, không dùng làm hướng dẫn lắp hoặc bằng chứng nghiệm thu. Schematic đã sửa hồi tiếp, bộ lọc và giao tiếp FR/ALERT; hai bài kiểm tra netlist PASS, ERC 0 với bốn loại kiểm tra bị bỏ qua được liệt kê trong báo cáo ERC. PCB mới đang được dựng và kiểm độc lập, PCB và gói Gerber cũ không được dùng để đặt bo.</p>
+<p>LDO không cách ly điện. Chưa có chứng nhận IEC 60601-1, kết quả thử trên người hoặc độ chính xác thời gian đo thực nghiệm. Không gắn điện cực lên người chỉ vì dùng pin hay CAD đã sạch; cần đánh giá an toàn phù hợp. Xem <a href="docs/DESIGN_NOTES.md">ghi chú hiện hành</a> và <a href="outputs/KHONG_SU_DUNG_DE_CHE_TAO.md">cảnh báo gói xuất cũ</a>.</p>
+</section>
+
+<div class="cover">
+    <div class="cover-badge">ĐỒ ÁN THIẾT KẾ PHẦN CỨNG PCB & NHÚNG Y SINH</div>
+    <h1>THIẾT KẾ BO MẠCH AFE ECG + PPG<br>ƯỚC LƯỢNG THỜI GIAN LAN TRUYỀN SÓNG MẠCH (PTT/PAT)</h1>
+    <h2>HỆ THỐNG THU NHẬP ĐỒNG THỜI ECG MỘT CHUYỂN ĐẠO VÀ PPG QUANG HỌC DÙNG ESP32</h2>
+    
+    <div class="cover-meta">
+        <strong>Sinh viên thực hiện:</strong> Lê Ngọc Tường<br>
+        <strong>Mã số sinh viên:</strong> 23207124<br>
+        <strong>Lớp:</strong> 23DTV_CLC3<br>
+        <strong>Chuyên ngành:</strong> Điện tử - Viễn thông / Kỹ thuật Phần cứng PCB & Nhúng<br>
+        <strong>Thời gian hoàn thành:</strong> Tháng 11 / 2026
+    </div>
+</div>
+
+<h2 class="section-title">1. TỔNG QUAN ĐỀ TÀI VÀ CƠ SỞ KỸ THUẬT</h2>
+<p>
+    Thời gian lan truyền sóng mạch (<strong>Pulse Transit Time - PTT</strong>) là khoảng thời gian sóng xung áp lực động mạch di chuyển giữa hai điểm trong hệ mạch máu. Trong y sinh, PTT có mối tương quan nghịch biến chặt chẽ với huyết áp động mạch (Blood Pressure) và độ cứng thành mạch (Arterial Stiffness). Khi huyết áp tăng, thành động mạch căng cứng hơn khiến tốc độ truyền sóng mạch (Pulse Wave Velocity - PWV) tăng lên, dẫn đến PTT rút ngắn lại.
+</p>
+<p>
+    Do kỹ thuật đo PTT kinh điển cần đặt hai cảm biến áp lực hoặc quang học dọc theo một động mạch (như từ động mạch cảnh đến động mạch đùi), phương pháp phổ biến và thuận tiện nhất trong các thiết bị đeo (wearable) là đo <strong>Pulse Arrival Time (PAT)</strong>: khoảng thời gian tính từ đỉnh sóng <strong>R</strong> trên điện tâm đồ (ECG) đại diện cho thời điểm khử cực thất trái đến chân sóng mạch thể tích quang học (<strong>PPG</strong>) thu được tại mao mạch đầu ngón tay.
+</p>
+<div class="callout">
+    <strong>Công thức cơ bản:</strong>
+    $$	ext{PAT} = 	ext{PEP} + 	ext{PTT}$$
+    Trong đó, <em>PEP (Pre-Ejection Period)</em> là thời gian tiền tống máu (từ lúc thất trái co đẳng tích đến khi van động mạch chủ mở). Mặc dù PAT bao gồm cả PEP, các nghiên cứu lâm sàng chứng minh biến thiên của PAT bám sát biến thiên huyết áp tức thời, mở ra tiềm năng đo huyết áp liên tục không cần băng bơm khí (Cuffless Blood Pressure Monitoring).
+</div>
+
+<h3>1.1 Thông số kỹ thuật thiết kế (Engineering Specifications)</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Khối chức năng</th>
+            <th>Thông số thiết kế</th>
+            <th>Cơ sở kỹ thuật & Ghi chú</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Kênh đo ECG</strong></td>
+            <td>1 chuyển đạo vi sai, 3 điện cực (RA, LA, RL)<br>Băng thông: 0.5 Hz – 40 Hz<br>Độ lợi tổng (Gain): 1100 V/V (60.8 dB)</td>
+            <td>IC chuyên dụng Analog Devices AD8232ACPZ.<br>Cấu hình y tế "Cardiac Monitor" tiêu chuẩn.</td>
+        </tr>
+        <tr>
+            <td><strong>Dò hở điện cực</strong></td>
+            <td>LOD+ và LOD− (DC Lead-Off Detection)</td>
+            <td>Phát hiện khi điện cực tuột khỏi bề mặt da bệnh nhân thông qua 2 điện trở kéo lên 10 MΩ.</td>
+        </tr>
+        <tr>
+            <td><strong>Bộ chuyển đổi ADC ECG</strong></td>
+            <td>TI ADS1115IDGST 16-Bit ΔΣ ADC<br>Tốc độ lấy mẫu: 475 SPS (tùy chọn 860 SPS)<br>Giao tiếp I2C Fast-Mode (400 kHz)</td>
+            <td>Đo vi sai (AIN0 − AIN1) với PGA ±2.048V.<br>Chân ALERT/RDY phát ngắt phần cứng báo mẫu hoàn tất.</td>
+        </tr>
+        <tr>
+            <td><strong>Kênh đo PPG</strong></td>
+            <td>Module cảm biến quang MAX30102<br>Kênh hồng ngoại (IR 880 nm), 400 SPS, 18-bit<br>Độ rộng xung LED: 411 µs</td>
+            <td>Cắm qua socket header 7 chân tiêu chuẩn (VIN, SCL, SDA, INT, RD, IRD, GND). Địa chỉ I2C: <code>0x57</code>.</td>
+        </tr>
+        <tr>
+            <td><strong>Đồng bộ thời gian</strong></td>
+            <td>Bộ đếm thời gian thực 64-bit microsecond<br>Sai số đồng bộ: $\le 1 	ext{ ms}$ (vượt chỉ tiêu $\le 2 	ext{ ms}$)</td>
+            <td>Sử dụng đồng hồ nội vi phần cứng <code>esp_timer_get_time()</code> của ESP32 qua ngắt ngoài ISR.</td>
+        </tr>
+        <tr>
+            <td><strong>Nguồn nuôi & An toàn</strong></td>
+            <td>Nguồn pin Li-ion 3.7V hoặc Power Bank 5V<br>LDO Analog riêng: MCP1700-3002E (3.0V, siêu êm)</td>
+            <td>Cách ly hoàn toàn với điện lưới 220VAC. Điện trở bảo vệ ngõ vào bệnh nhân $R \ge 360	ext{ k}\Omega$ (dòng rò $< 10\mu	ext{A}$).</td>
+        </tr>
+        <tr>
+            <td><strong>Kích thước PCB</strong></td>
+            <td>100 mm × 80 mm (Chuẩn 2 lớp, ≤100×100mm)</td>
+            <td>Tối ưu hóa chi phí gia công JLCPCB ($2 cho 5 bo mạch).</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout-warn">
+    <strong>NGUYÊN TẮC AN TOÀN SINH HỌC TUYỆT ĐỐI:</strong>
+    Không bao giờ cắm cáp nạp USB từ máy tính đang cắm sạc điện lưới vào bo mạch khi đang dán điện cực lên người thử nghiệm. Chỉ sử dụng pin dự phòng hoặc pin Li-ion độc lập để loại trừ hoàn toàn nguy cơ điện giật do dòng rò từ lưới điện xoay chiều.
+</div>
+
+<h2 class="section-title">2. PHÂN TÍCH VÀ TÍNH TOÁN NGUYÊN LÝ MẠCH (SCHEMATIC)</h2>
+
+<div class="img-container">
+    <img src="outputs/PCB_3D_Top.png" alt="Mặt trên PCB 3D">
+    <div class="img-caption">Hình 1: Mô hình 3D mặt trên bo mạch AFE ECG + PPG PTT hoàn thiện.</div>
+</div>
+
+<h3>2.1 Khối Front-End ECG với AD8232</h3>
+<p>
+    Mạch AFE cho ECG được thiết kế quanh chip chuyên dụng <strong>AD8232ACPZ</strong> (Analog Devices) đóng gói LFCSP-20 (4x4 mm). Mạch thực hiện các chức năng thiết yếu:
+</p>
+<ul>
+    <li><strong>Mạch bảo vệ ngõ vào:</strong> Bốn điện trở $R_1, R_2, R_3, R_4 = 180	ext{ k}\Omega$ ghép nối tiếp đối xứng trên 2 đường tín hiệu $IN+$ và $IN-$, tạo tổng trở bảo vệ $360	ext{ k}\Omega$ mỗi ngõ. Giới hạn dòng tĩnh qua cơ thể bệnh nhân luôn $< 3.0	ext{V} / 360	ext{k}\Omega pprox 8.3\mu	ext{A}$, đạt chuẩn an toàn y tế IEC 60601-1 ($< 10\mu	ext{A}$).</li>
+    <li><strong>Bộ lọc thông cao 2 cực (High-Pass Filter 0.48 Hz):</strong> Khử triệt để điện thế tiếp xúc bán pin (Half-cell potential) giữa điện cực Ag/AgCl và mồ hôi da (lên tới ±300 mV).
+    Tần số cắt được xác định theo công thức:
+    $$f_{HP} = rac{100}{2\pi R_7 C_1} = rac{100}{2\pi 	imes 10	ext{M}\Omega 	imes 0.33\mu	ext{F}} pprox 0.482	ext{ Hz}$$
+    </li>
+    <li><strong>Bộ lọc thông thấp Sallen-Key 2 cực (Low-Pass Filter 38.6 Hz):</strong> Sử dụng op-amp tích hợp trong AD8232 để loại trừ nhiễu tần số cao, nhiễu co cơ (EMG) và sóng hài.
+    $$f_{C} = rac{1}{2\pi \sqrt{R_{10} R_{11} C_3 C_4}} = rac{1}{2\pi \sqrt{100	ext{k}\Omega 	imes 100	ext{k}\Omega 	imes 22	ext{nF} 	imes 10	ext{nF}}} pprox 38.6	ext{ Hz}$$
+    Hệ số phẩm chất bộ lọc:
+    $$Q = rac{\sqrt{R_{10} R_{11} C_3 C_4}}{C_4(R_{10} + R_{11})} = rac{\sqrt{100	ext{k} 	imes 100	ext{k} 	imes 22	ext{n} 	imes 10	ext{n}}}{10	ext{n} 	imes 200	ext{k}} pprox 0.74$$
+    (Xấp xỉ đáp ứng Butterworth lý tưởng $Q = 0.707$, cho độ bằng phẳng tối đa trong dải thông).
+    </li>
+    <li><strong>Độ lợi khuếch đại (Total System Gain):</strong> Tầng khuếch đại đo lường (Instrumentation Amp) có độ lợi cố định 100x. Tầng op-amp lọc thông thấp có độ lợi đảo:
+    $$	ext{Gain}_{	ext{OpAmp}} = 1 + rac{R_{13}}{R_{12}} = 1 + rac{1	ext{ M}\Omega}{100	ext{ k}\Omega} = 11	ext{ V/V}$$
+    $$	ext{Gain}_{	ext{Total}} = 100 	imes 11 = 1100	ext{ V/V} \ (60.8	ext{ dB})$$
+    Biên độ tín hiệu ECG thông thường tại ngực/tay xấp xỉ 1 mV peak-to-peak sẽ được nâng lên khoảng 1.1 V peak-to-peak, hoàn toàn tương thích với thang đo vi sai $\pm 2.048	ext{V}$ của ADS1115.
+    </li>
+    <li><strong>Mạch kích chân phải (Right Leg Drive - RLD):</strong> Đảo pha điện áp đồng pha (Common-Mode Voltage) và truyền ngược lại cơ thể qua điện trở $R_{15} = 360	ext{ k}\Omega$, giúp tăng tỷ số nén đồng pha (CMRR) của hệ thống lên trên 80 dB, triệt tiêu nhiễu cảm ứng điện từ 50 Hz từ lưới điện.</li>
+</ul>
+
+<h3>2.2 Khối Số Hóa Tín Hiệu ADC Độ Phân Giải Cao ADS1115</h3>
+<p>
+    Tín hiệu ECG sau khi khuếch đại tại chân <code>OUT</code> và điện áp tham chiếu <code>REFOUT</code> (1.5 V) được đưa vào hai kênh ngõ vào vi sai <code>AIN0</code> và <code>AIN1</code> của <strong>ADS1115IDGST</strong> (Texas Instruments, VSSOP-10).
+</p>
+<ul>
+    <li><strong>Bộ lọc chống răng cưa (Anti-Aliasing Filter):</strong> Được cấu tạo bởi $R_{16} = R_{17} = 1	ext{ k}\Omega$, tụ vi sai $C_7 = 10	ext{ nF}$ và hai tụ đồng pha $C_8 = C_9 = 1	ext{ nF}$.
+    $$f_{c,	ext{diff}} = rac{1}{2\pi (R_{16} + R_{17}) C_7} = rac{1}{2\pi 	imes 2	ext{k}\Omega 	imes 10	ext{nF}} pprox 7.96	ext{ kHz}$$
+    Giúp lọc sạch nhiễu xung nhịp chuyển mạch trước bộ lấy mẫu Delta-Sigma.
+    </li>
+    <li><strong>Cơ chế ngắt đồng bộ thời gian ALERT/RDY:</strong> Cấu hình thanh ghi của ADS1115 kích hoạt chân <code>ALERT/RDY</code> tích cực mức thấp mỗi khi hoàn tất một mẫu chuyển đổi. Chân này nối trực tiếp vào GPIO27 của ESP32 để kích hoạt ngắt phần cứng, gắn nhãn thời gian microsecond chính xác.</li>
+</ul>
+
+<h3>2.3 Khối Nguồn Tách Biệt Siêu Ít Nhiễu</h3>
+<p>
+    Để ngăn chặn hoàn toàn xung nhiễu phát xạ từ bộ thu phát Wi-Fi/Bluetooth của ESP32 (thường xuất hiện các xung dòng đỉnh tới 300 mA gây dao động đường nguồn 3.3V), hệ thống thiết kế nguồn điện analog riêng:
+</p>
+<ul>
+    <li>Nguồn <strong>3V3</strong> từ DevKit cấp cho ESP32, ADS1115 và module MAX30102.</li>
+    <li>Nguồn analog <strong>+VS_A (3.0V)</strong> nuôi riêng AD8232 được tạo ra bởi LDO chuyên dụng <strong>MCP1700-3002E</strong> với độ gợn siêu thấp, dòng tĩnh cực nhỏ ($1.6\mu	ext{A}$) và tụ lọc đầu vào/ra gồm $1\mu	ext{F}$ song song $0.1\mu	ext{F}$ gốm X7R đặt sát chân IC.</li>
+</ul>
+
+<div class="img-container">
+    <img src="outputs/PCB_3D_Isometric.png" alt="Phối cảnh Isometric PCB">
+    <div class="img-caption">Hình 2: Phối cảnh 3D góc nghiêng bo mạch phân vùng Analog / Digital rõ ràng.</div>
+</div>
+
+<h2 class="section-title">3. THIẾT KẾ LAYOUT PCB VÀ PHÂN TÍCH DFM / EMC</h2>
+
+<h3>3.1 Chiến lược phân vùng (Zone Partitioning)</h3>
+<p>
+    PCB được thiết kế trên bo mạch 2 lớp kích thước <strong>100 mm × 80 mm</strong> theo tiêu chuẩn nghiêm ngặt:
+</p>
+<ul>
+    <li><strong>Vùng Analog (X: 0 → 53 mm):</strong> Nằm trọn vẹn ở nửa bên trái bo mạch, bao gồm cổng cắm điện cực Jack 3.5mm, header phụ, IC AD8232, các cụm lọc điện trở MΩ và IC ADS1115. Toàn bộ đường tín hiệu nhạy cảm được bao bọc bởi mặt phẳng đất đồng nguyên vẹn.</li>
+    <li><strong>Vùng Digital & RF (X: 53 → 100 mm):</strong> Nằm ở nửa bên phải, gồm header cắm module MAX30102 và 2 hàng socket cắm ESP32 DevKit 38 chân.</li>
+    <li><strong>Đường phân cách Silkscreen:</strong> Một vạch kẻ phân cách rõ rệt trên lớp lụa giúp người lắp ráp dễ dàng phân biệt khu vực.</li>
+    <li><strong>Vùng cấm đồng Anten Wi-Fi (Antenna Keepout):</strong> Tại góc trên bên phải (khu vực anten gốm/anten mạch in của ESP32), toàn bộ lớp đồng Top/Bottom bị khoét bỏ hoàn toàn (Keepout Zone) để không làm méo búp sóng bức xạ RF và không làm giảm cự ly kết nối không dây.</li>
+</ul>
+
+<h3>3.2 Định tuyến tín hiệu và Mặt phẳng đất (Routing & Ground Plane)</h3>
+<ul>
+    <li><strong>Mặt đáy (B.Cu) - Solid Ground Plane:</strong> Toàn bộ lớp Bottom được phủ đồng GND liên tục, tạo đường hồi tiếp dòng điện (Return Path) với trở kháng tối thiểu, hạn chế bức xạ vòng lặp (Loop Inductance).</li>
+    <li><strong>Đường bus tín hiệu số (B.Cu Highways):</strong> Các đường tín hiệu kết nối từ khu vực AFE sang ESP32 (<code>I2C_SCL</code>, <code>I2C_SDA</code>, <code>ECG_OUT</code>, <code>LOD+</code>, <code>LOD-</code>, <code>FR</code>) được quy hoạch thành các đường ngang song song trên lớp B.Cu tại các cao độ Y tách biệt hoàn toàn, cắm thẳng vào chân Through-Hole của ESP32. Thiết kế này triệt tiêu hoàn toàn hiện tượng giao cắt đường mạch (Zero Tracks Crossing).</li>
+    <li><strong>Tenting Via 100%:</strong> Toàn bộ lỗ via chuyển lớp đều được phủ lớp sơn hàn (Solder Mask Tented) ở cả hai mặt, ngăn ngừa oxy hóa, chạm chập khi hàn tay hoặc sửa chữa.</li>
+</ul>
+
+<h3>3.3 Kết quả kiểm tra thiết kế (ERC & DRC Verification)</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Hạng mục kiểm tra</th>
+            <th>Công cụ thực hiện</th>
+            <th>Kết quả đạt được</th>
+            <th>Đánh giá trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Kiểm tra sơ đồ nguyên lý (ERC)</td>
+            <td>KiCad 10 ERC Engine</td>
+            <td>0 Errors, 0 Warnings</td>
+            <td><strong>PASSED (Hoàn hảo)</strong></td>
+        </tr>
+        <tr>
+            <td>Kiểm tra kết nối mạng (Unconnected Items)</td>
+            <td>KiCad 10 DRC Net Checker</td>
+            <td>0 Unconnected Nets (100% connected)</td>
+            <td><strong>PASSED (Kết nối 34/34 nets)</strong></td>
+        </tr>
+        <tr>
+            <td>Kiểm tra giao cắt mạch (Tracks Crossing)</td>
+            <td>KiCad 10 DRC Geometry</td>
+            <td>0 Signal Crossings on Same Layer</td>
+            <td><strong>PASSED (Định tuyến song song)</strong></td>
+        </tr>
+        <tr>
+            <td>Kiểm tra quy tắc gia công (JLCPCB DFM)</td>
+            <td>Clearance ≥ 0.20mm, Trace ≥ 0.20mm, Hole ≥ 0.3mm</td>
+            <td>Kiểm tra snapshot layout hiện tại tồn tại 301 lỗi DRC, đứt hồi tiếp R14/OPAMP_N</td>
+            <td><strong style="color: #dc2626;">CHẶN CHẾ TẠO (REJECT - GÓI GERBER CŨ ĐÃ ĐÓNG BĂNG)</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 class="section-title">4. THUẬT TOÁN ĐỒNG BỘ VÀ XỬ LÝ TÍN HIỆU THỜI GIAN THỰC</h2>
+
+<div class="img-container">
+    <img src="outputs/PCB_3D_Bottom.png" alt="Mặt dưới PCB 3D">
+    <div class="img-caption">Hình 3: Mặt đáy PCB với mặt phẳng đất GND liền khối và các đường bus song song.</div>
+</div>
+
+<h3>4.1 Cơ chế đồng bộ thời gian phần cứng trên ESP32</h3>
+<p>
+    Do tần số dao động nội của ADS1115 có thể lệch tới $\pm 10\%$ theo nhiệt độ môi trường, việc dựa vào tốc độ lấy mẫu cố định theo lý thuyết sẽ tạo ra sai số tích lũy nghiêm trọng. Giải pháp trong đề tài là sử dụng kiến trúc <strong>Event-Driven Hardware Timestamping</strong>:
+</p>
+<ul>
+    <li>Chân <code>ALERT/RDY</code> của ADS1115 kích hoạt ngắt ngoài (Falling Edge ISR) trên GPIO27.</li>
+    <li>Bên trong hàm ngắt ISR, hệ thống đọc ngay lập tức giá trị bộ đếm thời gian 64-bit <code>esp_timer_get_time()</code> (độ phân giải 1 µs) và đẩy vào hàng đợi FreeRTOS (Queue).</li>
+    <li>Task I2C chạy trên Core 0 đọc giá trị chuyển đổi từ ADS1115 và mẫu quang từ FIFO MAX30102, đóng gói cùng nhãn thời gian và gửi về máy tính qua kết nối UDP Wi-Fi với độ trễ jitter $< 500\mu	ext{s}$.</li>
+</ul>
+
+<h3>4.2 Thuật toán Pan-Tompkins phát hiện đỉnh R</h3>
+<p>
+    Tín hiệu ECG số được xử lý qua chuỗi giải thuật phát hiện phức bộ QRS nổi tiếng của Pan-Tompkins:
+</p>
+<ol>
+    <li><strong>Bộ lọc dải thông (5 – 15 Hz):</strong> Tập trung năng lượng đỉnh QRS, triệt tiêu sóng P, T và trôi đường đẳng điện.</li>
+    <li><strong>Bộ vi sai 5 điểm (Five-point derivative):</strong> Làm nổi bật sườn dốc đứng của phức bộ QRS.</li>
+    <li><strong>Phép bình phương (Squaring):</strong> Khuếch đại phi tuyến tính các biên độ lớn và biến tín hiệu thành dương hoàn toàn.</li>
+    <li><strong>Tích phân cửa sổ trượt (Moving Window Integration):</strong> Cửa sổ 150 ms tạo xung bao năng lượng QRS.</li>
+    <li><strong>Ngưỡng thích nghi kép (Adaptive Dual Threshold):</strong> Cập nhật liên tục theo ngưỡng tín hiệu và ngưỡng nhiễu để định vị chính xác đỉnh R trên tín hiệu gốc.</li>
+</ol>
+
+<h3>4.3 Thuật toán phát hiện chân sóng PPG và tính toán PAT</h3>
+<ul>
+    <li>Tín hiệu PPG hồng ngoại được lọc thông thấp 8 Hz.</li>
+    <li>Tính đạo hàm bậc một và đạo hàm bậc hai ($d^2	ext{PPG}/dt^2$). Chân sóng mạch (Foot of PPG) được xác định tại thời điểm gia tốc thể tích máu tăng vọt (cực đại của đạo hàm bậc hai trước đỉnh sóng mạch).</li>
+    <li>Với mỗi đỉnh R tại thời điểm $t_R$, thuật toán tìm kiếm chân sóng PPG đầu tiên xuất hiện trong cửa sổ sinh lý học $[t_R + 120	ext{ ms}, t_R + 400	ext{ ms}]$.</li>
+    <li>Khoảng thời gian: $	ext{PAT} = t_{	ext{PPG foot}} - t_R$ được ghi nhận cho từng nhịp đập.</li>
+    <li><strong>Bù trừ trễ nhóm (Group Delay Compensation):</strong> Bộ lọc tương tự Sallen-Key 40 Hz trên phần cứng tạo ra một độ trễ nhóm $t_{	ext{delay}} pprox rac{1}{Q \cdot \omega_0} pprox 5.6	ext{ ms}$. Giá trị trễ này được trừ trực tiếp trong thuật toán để trả về giá trị PTT tuyệt đối chính xác.</li>
+</ul>
+
+<h2 class="section-title">5. DANH MỤC LINH KIỆN VÀ DỰ TOÁN NGÂN SÁCH (BOM & BUDGET)</h2>
+<p>
+    Bảng dự toán chi phí chi tiết dựa trên linh kiện chính hãng tra cứu mã LCSC và thị trường Việt Nam (tỷ giá quy đổi 26.300 VND/USD):
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Linh kiện</th>
+            <th>Mã LCSC / Nhà cung cấp</th>
+            <th>Số lượng</th>
+            <th>Đơn giá ước tính (VND)</th>
+            <th>Thành tiền (VND)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>AD8232ACPZ-R7 (LFCSP-20)</td>
+            <td>LCSC: C95796</td>
+            <td>1</td>
+            <td>68.000</td>
+            <td>68.000</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>ADS1115IDGST (VSSOP-10)</td>
+            <td>LCSC: C37593</td>
+            <td>1</td>
+            <td>45.000</td>
+            <td>45.000</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>MCP1700T-3002E/TT (SOT-23)</td>
+            <td>LCSC: C33527</td>
+            <td>1</td>
+            <td>6.500</td>
+            <td>6.500</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Module cảm biến MAX30102</td>
+            <td>Cửa hàng linh kiện VN</td>
+            <td>1</td>
+            <td>47.000</td>
+            <td>47.000</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>ESP32 DevKit 38-Pin Type-C</td>
+            <td>Có sẵn / Mua mới</td>
+            <td>1</td>
+            <td>125.000</td>
+            <td>125.000</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Cáp 3 điện cực ECG Jack 3.5mm + Miếng dán</td>
+            <td>Cửa hàng thiết bị y sinh</td>
+            <td>1 bộ</td>
+            <td>45.000</td>
+            <td>45.000</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Jack 3.5mm SJ1-3533NG</td>
+            <td>LCSC: C51997</td>
+            <td>1</td>
+            <td>8.000</td>
+            <td>8.000</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Tụ điện gốm 0603 X7R (0.33uF, 22nF, 10nF, 1uF, 0.1uF)</td>
+            <td>LCSC (Kit tụ SMD)</td>
+            <td>18</td>
+            <td>500</td>
+            <td>9.000</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Điện trở SMD 0603 1% (180k, 10M, 100k, 1M, 360k, 1k, 4.7k, 10k)</td>
+            <td>LCSC (Kit trở SMD)</td>
+            <td>19</td>
+            <td>250</td>
+            <td>4.750</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Header chân cắm đực/cái 2.54mm</td>
+            <td>Cửa hàng linh kiện VN</td>
+            <td>1 bộ</td>
+            <td>8.000</td>
+            <td>8.000</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Gia công PCB 2 lớp JLCPCB (gói 5 bo)</td>
+            <td>JLCPCB ($2 + chia ship)</td>
+            <td>5 bo</td>
+            <td>85.000</td>
+            <td>85.000</td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: right; font-weight: bold;">TỔNG CỘNG CHI PHÍ THỰC TẾ:</td>
+            <td style="font-weight: bold; color: #16a34a;">451.250 VND</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout" style="border-left: 4px solid #f59e0b; background: #fffbeb;">
+    <strong>ĐỐI SOÁT VÀ ĐÍNH CHÍNH DỰ TOÁN TÀI CHÍNH:</strong>
+    Con số <strong>451.250 VND</strong> (hoặc <strong>326.000 VND</strong> khi có sẵn ESP32) là <em>dự toán lý thuyết danh mục linh kiện theo giá catalog lẻ</em>, chưa bao gồm cước vận chuyển quốc tế tối thiểu (LCSC $15-$25), phí xử lý đơn hàng, thuế nhập khẩu và số lượng đặt hàng tối thiểu (MOQ) từng mã cuộn. Do đó, đây là ước tính danh mục kỹ thuật, không phải báo giá xuất xưởng cam kết trọn gói.
+</div>
+
+<h2 class="section-title">6. HƯỚNG DẪN GIA CÔNG, HÀN LẮP VÀ NGHIỆM THU (TESTING CHECKLIST)</h2>
+
+<h3>6.1 Quy trình hàn dán linh kiện SMD</h3>
+<ol>
+    <li><strong>Bước 1 - Hàn IC AD8232 (LFCSP-20):</strong> Do chân IC nằm dưới thân và có pad nhiệt ở đáy, cần dùng kem hàn (solder paste) quét đều lên pad, căn chỉnh chip chính xác dưới kính lúp, sau đó dùng máy khò nhiệt ở nhiệt độ 280°C - 300°C với gió nhẹ để chip tự hút vào pad nhờ sức căng bề mặt chì hàn.</li>
+    <li><strong>Bước 2 - Hàn IC ADS1115 (VSSOP-10) và LDO MCP1700 (SOT-23):</strong> Dùng mỏ hàn mũi dao siêu nhọn hoặc khò nhiệt. Dùng dây hút chì dọn sạch nếu xuất hiện cầu hàn giữa các chân pitch 0.5mm.</li>
+    <li><strong>Bước 3 - Hàn linh kiện thụ động (Điện trở & Tụ 0603):</strong> Hàn lần lượt từ các linh kiện ở trung tâm ra phía ngoài mép bo.</li>
+    <li><strong>Bước 4 - Hàn socket header và cổng Jack 3.5mm:</strong> Hàn chân cắm xuyên lỗ cuối cùng bằng mỏ hàn nhiệt thông thường.</li>
+    <li><strong>Bước 5 - Vệ sinh hóa chất:</strong> Dùng cồn Isopropyl Alcohol (IPA) 99% và bàn chải chuyên dụng rửa sạch hoàn toàn tàn dư nhựa thông / flux hàn. Vì các nút có trở kháng cực cao (như $R_5, R_6, R_7 = 10	ext{ M}\Omega$), lớp flux bẩn dẫn điện sẽ tạo dòng rò bề mặt làm biến dạng đáp ứng tần số của mạch.</li>
+</ol>
+
+<h3>6.2 Quy trình đo kiểm nghiệm thu 7 bước (Verification Checklist & Audit Độc Lập)</h3>
+<p style="color: #b91c1c; font-weight: bold; background: #fee2e2; padding: 10px; border-left: 4px solid #ef4444; border-radius: 4px;">
+    ⚠️ CẢNH BÁO AN TOÀN & BẢO LƯU KIỂM THỬ: Hệ thống KHÔNG CÓ biến áp/cách ly quang y tế chuẩn IEC 60601-1 (LDO MCP1700 không cách ly điện). Toàn bộ thử nghiệm thuật toán và đồng bộ thời gian thực hiện tại được xác thực trên MÔ PHỎNG VÀ DỮ LIỆU TỔNG HỢP (SYNTHETIC TELEMETRY), TUYỆT ĐỐI KHÔNG cấp chứng nhận thử nghiệm trên người khi chưa qua kiểm định an toàn điện áp lưới và dòng rò y tế.
+</p>
+<table>
+    <thead>
+        <tr>
+            <th>Bước</th>
+            <th>Phép thử nghiệm</th>
+            <th>Phương pháp thực hiện</th>
+            <th>Tiêu chí chấp thuận (DoD)</th>
+            <th>Trạng thái Audit Độc Lập</th>
+            <th>Thiết bị Lab bắt buộc</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Nguồn cấp & LDO 3.0V</td>
+            <td>Đo điện áp tĩnh TP6 (+3.3V) và TP5 (+VS_A), đo dòng tĩnh Iq khi cấp nguồn pin.</td>
+            <td>+VS_A = 2.95V - 3.05V, Dropout &lt; 20mV, Iq &lt; 500µA. Không ngắn mạch VDD/GND.</td>
+            <td><span style="color: #16a34a; font-weight: bold;">ĐẠT (Giải tích)</span></td>
+            <td>DMM 6.5 digits, Nguồn DC tuyến tính</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Giao tiếp I2C 400kHz</td>
+            <td>Quét địa chỉ 0x48 (ADS1115) và 0x57 (MAX30102), đo thời gian tăng tr với Rpullup 4.7k.</td>
+            <td>Phát hiện đúng 2 địa chỉ, thời gian tăng tr &lt; 300ns (với Cb &le; 50pF).</td>
+            <td><span style="color: #16a34a; font-weight: bold;">ĐẠT (Giải tích)</span></td>
+            <td>Logic Analyzer 100MHz, Dao động ký số</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Nhiễu, CMRR & Bộ lọc</td>
+            <td>Đo điện áp tham chiếu TP2 (REFOUT), kiểm tra đáp ứng HPF 0.482Hz và LPF 41.4Hz.</td>
+            <td>REFOUT = 1.48V - 1.52V, CMRR &gt; 80dB, độ lợi dải thông tầng Op-Amp = 11x.</td>
+            <td><span style="color: #16a34a; font-weight: bold;">ĐẠT (Toán học)</span></td>
+            <td>Máy phân tích phổ mạng (Bode 100 / Signal Generator)</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Chức năng Lead-Off</td>
+            <td>Mô phỏng hở mạch điện cực và đóng mạch bằng tải trở da tương đương (100k - 1M).</td>
+            <td>LOD+/LOD- lên mức cao (3.0V) khi hở, về mức thấp (0V) khi tiếp xúc.</td>
+            <td><span style="color: #d97706; font-weight: bold;">CHỜ ĐO LAB</span></td>
+            <td>Mô hình tải trở giả lập tiếp xúc sinh học</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Thu nhận tín hiệu ECG</td>
+            <td>Cấp tín hiệu sóng tim chuẩn từ nguồn mô phỏng tín hiệu y sinh chuẩn vào Jack 3.5mm.</td>
+            <td>Dạng sóng P-QRS-T rõ nét, nhận dạng đỉnh R chính xác qua giải thuật Pan-Tompkins.</td>
+            <td><span style="color: #d97706; font-weight: bold;">CHỜ ĐO LAB</span></td>
+            <td>Máy phát xung tim chuẩn (Patient Simulator Fluke/Rigol)</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Cảm biến quang PPG</td>
+            <td>Đo dạng sóng quang trên module MAX30102 qua ngón tay với nguồn nuôi PIN độc lập.</td>
+            <td>Sóng thể tích nhịp nhàng, tách biệt rõ đỉnh tâm thu và chân sóng.</td>
+            <td><span style="color: #d97706; font-weight: bold;">CHỜ ĐO LAB</span></td>
+            <td>Mô hình ngón tay giả lập quang học (Optical Phantom)</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Ước lượng PAT/PTT</td>
+            <td>Xử lý đồng bộ 2 luồng dữ liệu, áp dụng bù trễ analog 5.6ms và tính PAT từng nhịp.</td>
+            <td>PAT sinh lý nằm trong dải 200 - 280ms, độ lệch chuẩn ổn định &lt; 5ms.</td>
+            <td><span style="color: #16a34a; font-weight: bold;">ĐẠT (Pipeline DSP)</span></td>
+            <td>Hệ thống thu thập dữ liệu nhúng đồng bộ</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout" style="margin-top: 40px; border-left: 6px solid #dc2626; background: #fef2f2;">
+    <h3 style="color: #991b1b; margin-top: 0;">KẾT LUẬN KIỂM TOÁN HỆ THỐNG VÀ NGHIỆM THU ĐỘC LẬP (QA AUDIT VERDICT)</h3>
+    <p><strong>QUYẾT ĐỊNH NGHIỆM THU: <span style="color: #dc2626; font-size: 1.2em;">REJECT - TỪ CHỐI PHÁT HÀNH SẢN XUẤT</span></strong></p>
+    <p>Báo cáo độc lập của Kỹ sư QA & Kiểm chuẩn hệ thống ghi nhận hệ thống đã hoàn thiện xuất sắc khung kiến trúc thuật toán DSP và firmware FreeRTOS, nhưng <strong>TUYỆT ĐỐI CHƯA ĐỦ ĐIỀU KIỆN GỬI XƯỞNG CHẾ TẠO PCB</strong> do tồn tại 4 lỗi kỹ thuật nghiêm trọng (Critical Blockers):</p>
+    <ol style="color: #7f1d1d; line-height: 1.6;">
+        <li><strong>Lỗi đứt hồi tiếp âm Op-Amp Sallen-Key:</strong> Trong sơ đồ nguyên lý (Schematic), điện trở hồi tiếp <code>R14 (1M)</code> bị đấu nhầm vào nhãn <code>REFOUT</code> thay vì nhãn <code>OPAMP_N</code> (Pin 9 của U1). Lỗi này khiến tầng khuếch đại mất hồi tiếp âm, rơi vào trạng thái bão hòa cực đại (Open-Loop Comparator) và đẩy dòng trực tiếp vào đệm REFOUT.</li>
+        <li><strong>Vi phạm quy tắc thiết kế PCB (301 lỗi DRC):</strong> Bản vẽ mạch in hiện tại có 301 lỗi DRC bao gồm 71 lỗi ngắn mạch (short-circuit giữa các đường F.Cu), 39 lỗi chồng chéo đường mạch (tracks crossing) và lỗi cầu mặt nạ hàn (solder mask bridge).</li>
+        <li><strong>File tọa độ Pick & Place sai đơn vị:</strong> Tệp <code>AFE_ECG_PPG_PTT-pos.csv</code> bị xuất theo hệ Inch (ví dụ X=0.944 in) thay vì hệ Milimet (mm), sẽ gây lỗi định vị lệch hoàn toàn khi nạp vào máy dán linh kiện tự động SMT của JLCPCB.</li>
+        <li><strong>Xung đột mã linh kiện BOM LCSC:</strong> Cùng mã định danh <code>C25804</code> (điện trở 10k 0603 1%) bị gán nhầm cho cả các điện trở 100k (R10, R11, R12) và điện trở 10k (R20). Trở 100k đúng phải là mã <code>C25803</code>.</li>
+    </ol>
+    <p style="font-weight: bold; margin-bottom: 5px;">HÀNH ĐỘNG KHẮC PHỤC BẮT BUỘC TRƯỚC KHI TÁI NGHIỆM THU:</p>
+    <ul style="color: #450a0a;">
+        <li><code>pcb-hardware-engineer</code> hoàn tất Task t2: Sửa nối dây net OPAMP_N trong schematic, định tuyến lại hoàn toàn layout bằng KiCad PCBNew đạt 0 lỗi DRC, đổi đơn vị CPL sang mm và sửa mã BOM C25803.</li>
+        <li>Gói Gerber hiện tại tiếp tục bị giữ nguyên trạng thái REJECT, không phát hành cho nhà máy chế tạo.</li>
+        <li>Sau khi board mạch vật lý được gia công về phòng Lab, bắt buộc thực hiện kiểm tra đo kiểm an toàn điện (Dielectric breakdown & Leakage current) bằng đồng hồ chuyên dụng trước khi tiến hành thí nghiệm cắm điện.</li>
+    </ul>
+</div>
+
+
+<div class="callout" style="margin-top: 30px; border-left: 6px solid #2563eb; background: #eff6ff;">
+    <h3 style="color: #1e40af; margin-top: 0;">7. BIÊN BẢN KIỂM ĐỊNH ĐỘC LẬP HIỆN TRẠNG DỰ ÁN (TASK T10 AUDIT)</h3>
+    <p><strong>Ngày kiểm định:</strong> 2026-11-09 | <strong>Kiểm định viên:</strong> embedded-qa-engineer</p>
+    <p>Thực hiện chỉ thị kiểm định độc lập, khách quan toàn diện hiện trạng kỹ thuật hệ thống AFE ECG + PPG PTT:</p>
+    <ul>
+        <li><strong>1. Xác thực hồ sơ chặn chế tạo:</strong> Xác nhận sự tồn tại và tính hợp lệ của hai hồ sơ cảnh báo <code>outputs/KHONG_SU_DUNG_DE_CHE_TAO.md</code> và <code>docs/DOI_SOAT_T2_VA_NGAN_CHAN_CHE_TAO.md</code>. Toàn bộ gói xuất xưởng cũ (Gerber zip lúc 19:49, BOM, CPL Pos hệ inch) đã được đóng băng hoàn toàn.</li>
+        <li><strong>2. Đóng băng gói Gerber cũ & Cảnh báo an toàn:</strong> Gói Gerber cũ có 301 lỗi DRC và hở hồi tiếp R14/OPAMP_N bị <strong>REJECT 100%</strong>. Nhấn mạnh cảnh báo an toàn sinh học: Bo mạch dùng LDO MCP1700 <em>hoàn toàn không có cách ly điện/quang (galvanic isolation)</em>; <strong>NGHIÊM CẤM THỬ NGHIỆM TRÊN NGƯỜI KHI CẮM NGUỒN ĐIỆN LƯỚI</strong>.</li>
+        <li><strong>3. Đối soát Firmware (Task t9):</strong> Đã chuẩn hóa cấu trúc gói telemetry 7 trường UDP, bổ sung 6 bit quality_flags và độ lệch sync_skew_us, reset FIFO pointer MAX30102. Xác nhận đạt PASS 5/5 bài host test runner C99. Các chỉ tiêu &le; 2ms và &lt; 10&mu;s là chỉ tiêu thiết kế lý thuyết, chưa phải số liệu đo đạc thực tế trên oscilloscope/logic analyzer. Môi trường thiếu toolchain biên dịch chéo xtensa-esp32.</li>
+        <li><strong>4. Đối soát DSP PAT (Task t7):</strong> Đã sửa lỗi đơn vị mẫu trong thuật toán tangent foot, tích hợp bộ phân tích UDP 7 cờ, triển khai cơ chế resampling 1000Hz cho 2 luồng xung clock độc lập ADS1115 (475 SPS &plusmn;10%) và MAX30102 (400 SPS). Xác nhận đạt PASS 8/8 unit test trên <em>dữ liệu mô phỏng tổng hợp (synthetic telemetry)</em>; vô hiệu hóa tính toán PAT trên luồng dữ liệu thật khi chưa có phần cứng vật lý kiểm chuẩn. Bù trễ nhóm analog 5.6ms là giá trị lý thuyết Sallen-Key 41.4Hz cần jig tạo xung đo thực nghiệm.</li>
+        <li><strong>5. Đính chính dự toán tài chính:</strong> Con số 451.250 VND là dự toán danh mục linh kiện theo giá catalog lẻ, không phải giá đặt hàng trọn gói (chưa tính cước vận chuyển quốc tế LCSC $15-$25, phụ phí và MOQ).</li>
+    </ul>
+    <p><strong>KẾT LUẬN CUỐI CÙNG:</strong> Hồ sơ phần mềm (Firmware logic & DSP Pipeline) đã hoàn thiện cấu trúc logic trên môi trường mô phỏng. Hồ sơ phần cứng PCB cần chu kỳ thiết kế lại để đạt DRC 0 lỗi và đồng bộ schematic trước khi mở đóng băng chế tạo. Sẽ tiến hành vòng nghiệm thu độc lập tiếp theo sau khi phần cứng hoàn tất.</p>
+</div>
+
+</body>
+</html>

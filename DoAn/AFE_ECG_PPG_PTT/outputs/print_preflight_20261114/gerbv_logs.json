@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-18",
+  "renderer": "programmatic_gerber_excellon_cam_pillow",
+  "gerbv_installed": false,
+  "zip_source": "GERBER_ONLY_92x70_NOT_CAM_APPROVED.zip",
+  "outline_mm": [
+    92.0,
+    70.0
+  ],
+  "excellon": {
+    "pth_features": 90,
+    "npth_features": 0,
+    "g85_slots_j1": 3,
+    "tented_via_drills": 38,
+    "slot_details": [
+      {
+        "x1": 13.5,
+        "y1": 5.55,
+        "x2": 14.5,
+        "y2": 5.55,
+        "diameter_mm": 1.0
+      },
+      {
+        "x1": 15.5,
+        "y1": 7.95,
+        "x2": 16.5,
+        "y2": 7.95,
+        "diameter_mm": 1.0
+      },
+      {
+        "x1": 15.5,
+        "y1": 13.45,
+        "x2": 16.5,
+        "y2": 13.45,
+        "diameter_mm": 1.0
+      }
+    ]
+  },
+  "solder_mask_verification": {
+    "vias_total": 38,
+    "f_mask_exposed_vias": 0,
+    "b_mask_exposed_vias": 0,
+    "f_mask_tented": 38,
+    "b_mask_tented": 38
+  },
+  "paste_verification": {
+    "total_f_paste_flashes": 95,
+    "u1_total_paste_flashes": 24,
+    "u1_ep_segmented_windows": 4,
+    "u1_ep_window_mm": [
+      1.05,
+      1.05
+    ],
+    "u1_ep_pad_mm": [
+      2.6,
+      2.6
+    ],
+    "u1_ep_paste_coverage_pct": 65.2
+  },
+  "rendered_files": [
+    "CAM_top.png",
+    "CAM_bottom.png",
+    "CAM_mask.png",
+    "CAM_paste.png"
+  ],
+  "note": "Programmatic Gerber/Excellon CAM verification extracted directly from GERBER_ONLY_92x70_NOT_CAM_APPROVED.zip. Manufacturer CAM preview is still required before fabrication payment."
+}

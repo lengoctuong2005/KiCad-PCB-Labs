@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-12",
+  "status": "schematic_repaired_untested_bench",
+  "values": {
+    "R1": "360k",
+    "R2": "360k",
+    "R3": "360k",
+    "R4": "10M",
+    "R5": "10M",
+    "R6": "10M",
+    "R8": "10M",
+    "R9": "10M",
+    "R10": "10M",
+    "R11": "1M",
+    "R12": "1M",
+    "R13": "100k",
+    "R14": "1M",
+    "R15": "1k",
+    "R16": "4.7k",
+    "R17": "4.7k",
+    "R18": "1.4M",
+    "R19": "10k",
+    "C1": "0.33uF",
+    "C2": "0.33uF",
+    "C3": "1nF",
+    "C4": "0.1uF",
+    "C5": "1.5nF",
+    "C6": "10nF",
+    "C7": "10nF",
+    "C8": "0.1uF",
+    "C9": "1uF",
+    "C10": "1uF",
+    "C11": "0.1uF"
+  },
+  "lpf_ideal_sallen_key": {
+    "f0_hz": 41.0936,
+    "q": 0.7746,
+    "gain_k": 11,
+    "r11_r12_ohm": 1000000,
+    "c5_farad": 1.5e-9,
+    "c6_farad": 1e-8,
+    "note": "Ideal Sallen-Key calculation; full-system analog response and cutoff are not bench-measured"
+  },
+  "hpf_topology": {
+    "reference": "AD8232 datasheet Figure 66 Cardiac Monitor",
+    "c1_c2": "0.33uF",
+    "r6_r8": "10M",
+    "r18": "1.4M",
+    "note": "High-pass network repaired per Fig. 66; cutoff frequency requires bench validation"
+  },
+  "safety_disclaimer": "R1/R2/R3=360k are input protection resistors for bench evaluation. They do not constitute certified IEC 60601-1 electrical safety isolation."
+}

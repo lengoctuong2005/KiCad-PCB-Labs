@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "ecg_ppg")(type "KiCad")(uri "${KIPRJMOD}/libs/ecg_ppg.kicad_sym")(options "")(descr ""))
+)

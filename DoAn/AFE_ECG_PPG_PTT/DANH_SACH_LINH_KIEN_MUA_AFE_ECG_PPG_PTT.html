@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Danh Mục Linh Kiện & Mua Sắm - Đồ Án AFE ECG PPG PTT</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 8mm 8mm 9mm 8mm;
+    @bottom-right {
+      content: "Trang " counter(page) " / " counter(pages);
+      font-size: 8pt;
+      color: #64748b;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #0f172a;
+    background-color: #ffffff;
+    font-size: 8pt;
+    line-height: 1.32;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-card {
+    background: linear-gradient(135deg, #091e3a 0%, #1e3a8a 100%);
+    color: #ffffff;
+    padding: 11px 14px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .header-card h1 {
+    font-size: 13.5pt;
+    margin: 0 0 3px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+
+  .header-card .subtitle {
+    font-size: 8.8pt;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 7px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 7.5pt;
+  }
+
+  .meta-item strong {
+    color: #93c5fd;
+  }
+
+  .summary-boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .summary-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid #2563eb;
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
+
+  .summary-box.green {
+    border-left-color: #16a34a;
+  }
+
+  .summary-box.amber {
+    border-left-color: #d97706;
+  }
+
+  .summary-box h3 {
+    margin: 0 0 2px 0;
+    font-size: 7.8pt;
+    text-transform: uppercase;
+    color: #475569;
+  }
+
+  .summary-box .value {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .summary-box .note {
+    font-size: 7pt;
+    color: #64748b;
+    margin-top: 1px;
+  }
+
+  .section-title {
+    background: #1e293b;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-size: 8.5pt;
+    font-weight: 700;
+    border-radius: 3px 3px 0 0;
+    margin-top: 8px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-title .badge {
+    background: #38bdf8;
+    color: #0f172a;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 7pt;
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 4px;
+    font-size: 7.5pt;
+    background: #ffffff;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-weight: 700;
+    text-align: left;
+    padding: 4px 5px;
+    border: 1px solid #cbd5e1;
+    font-size: 7.4pt;
+  }
+
+  td {
+    padding: 3.8px 5px;
+    border: 1px solid #cbd5e1;
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+
+  .font-mono {
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+    font-size: 6.8pt;
+  }
+
+  .badge-tag {
+    display: inline-block;
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-size: 6.8pt;
+    font-weight: 600;
+    margin-right: 2px;
+  }
+
+  .tag-pos {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+
+  .tag-pkg {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+  }
+
+  .link-btn {
+    display: inline-block;
+    padding: 1.5px 4px;
+    margin: 1px 1px 1px 0;
+    background: #eff6ff;
+    color: #1d4ed8 !important;
+    border: 1px solid #bfdbfe;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 6.8pt;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .link-btn.lcsc {
+    background: #f0fdf4;
+    color: #15803d !important;
+    border-color: #bbf7d0;
+  }
+
+  .link-btn.shopee {
+    background: #fff7ed;
+    color: #c2410c !important;
+    border-color: #fed7aa;
+  }
+
+  .link-btn:hover {
+    background: #dbeafe;
+    text-decoration: underline;
+  }
+
+  .link-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .price-highlight {
+    font-weight: 700;
+    color: #047857;
+    white-space: nowrap;
+    font-size: 7.8pt;
+  }
+
+  .price-sub {
+    font-size: 6.8pt;
+    color: #64748b;
+    display: block;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .notice-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 3px solid #2563eb;
+    padding: 6px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+    font-size: 7.4pt;
+    color: #1e3a8a;
+  }
+
+  .notice-box strong {
+    color: #1d4ed8;
+  }
+
+  /* Guide layout for page 3 */
+  .guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .guide-card {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 7px 9px;
+  }
+
+  .guide-card h4 {
+    margin: 0 0 4px 0;
+    font-size: 8.3pt;
+    color: #0f172a;
+    font-weight: 700;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 2px;
+  }
+
+  .guide-card ul {
+    margin: 0;
+    padding-left: 13px;
+    font-size: 7.2pt;
+    color: #334155;
+  }
+
+  .guide-card li {
+    margin-bottom: 3px;
+  }
+
+  .store-table {
+    width: 100%;
+    margin-top: 3px;
+    font-size: 7pt;
+  }
+
+  .store-table th {
+    background: #e2e8f0;
+    padding: 2.5px 4px;
+  }
+
+  .store-table td {
+    padding: 2.5px 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== TRANG 1: TỔNG QUAN, IC & MODULES ==================== -->
+<div class="header-card">
+  <h1>BẢNG KÊ LINH KIỆN & ĐỊA CHỈ ĐẶT HÀNG (BOM & SOURCING)</h1>
+  <div class="subtitle">HỆ THỐNG ĐO TÍN HIỆU SINH HỌC AFE ECG - PPG - PTT (ELECTROCARDIOGRAM & PHOTOPLETHYSMOGRAM)</div>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Mạch thiết kế:</strong> AFE ECG + PPG PTT</div>
+    <div class="meta-item"><strong>Kích thước bo mạch:</strong> 92 x 70 mm (2 Lớp FR-4)</div>
+    <div class="meta-item"><strong>Quy cách:</strong> SMD 0603 / DIP / Modules</div>
+    <div class="meta-item"><strong>Cập nhật giá & link:</strong> 20/11/2026 (Việt Nam)</div>
+  </div>
+</div>
+
+<div class="summary-boxes">
+  <div class="summary-box">
+    <h3>Quy Mô Linh Kiện 1 Bo</h3>
+    <div class="value">35 Vị Trí / 20 Chủng Loại</div>
+    <div class="note">18 Trở SMD + 11 Tụ SMD + 3 IC dán + 3 Header/Jack</div>
+  </div>
+  <div class="summary-box green">
+    <h3>Dự Toán Chi Phí Toàn Bộ</h3>
+    <div class="value">~380.000đ - 460.000đ VNĐ</div>
+    <div class="note">Gồm chip IC, Kit ESP32, Cảm biến MAX30102, Cáp & Điện cực</div>
+  </div>
+  <div class="summary-box amber">
+    <h3>Kênh Phân Phối Trọng Tâm</h3>
+    <div class="value">Thegioiic, Hshop, Shopee VN, LCSC</div>
+    <div class="note">Hàng có sẵn tại VN giao 1-3 ngày; LCSC đặt chuẩn MPN</div>
+  </div>
+</div>
+
+<!-- 1. IC BÁN DẪN & NGUỒN -->
+<div class="section-title">
+  <span>1. VI MẠCH BÁN DẪN TÍCH HỢP & ỔN ÁP NGUỒN (ACTIVE ICS & POWER)</span>
+  <span class="badge">3 IC chính</span>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%;">STT</th>
+      <th style="width: 25%;">Tên linh kiện & Đóng gói</th>
+      <th style="width: 33%;">Chức năng trong mạch AFE ECG PPG PTT</th>
+      <th style="width: 7%;" class="text-center">Số lượng</th>
+      <th style="width: 14%;">Đơn giá tham khảo</th>
+      <th style="width: 17%;">Link mua tại VN & Quốc tế</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">1</td>
+      <td>
+        <strong>AD8232 (AD8232ACPZ-R7)</strong><br>
+        <span class="badge-tag tag-pos">U1</span>
+        <span class="badge-tag tag-pkg">LFCSP-20 (4x4mm, EP)</span><br>
+        <span class="font-mono">MPN: AD8232ACPZ-R7 | LCSC: C43216</span>
+      </td>
+      <td>
+        <strong>IC AFE ECG chuyên dụng:</strong> Khuếch đại vi sai đo điện tim biopotential (&mu;V), lọc chủ động thông dải 2 cực (0.5Hz - 40Hz), mạch đệm hồi tiếp RLD (Right Leg Drive) khử nhiễu đồng pha điện lưới 50Hz, phát hiện tuột điện cực (LOD+/LOD-).
+      </td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 1-2)</small></td>
+      <td>
+        <span class="price-highlight">165.000đ - 180.000đ</span>
+        <span class="price-sub">LCSC: ~6.71 USD (~168k)</span>
+        <span class="price-sub">Module lẻ VN: ~180.000đ</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/mach-cam-bien-nhip-tim-ecg-ad8232" target="_blank">Thegioiic (Mã IC15596)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=AD8232ACPZ" target="_blank">Shopee VN (Chip SMD)</a>
+          <a class="link-btn lcsc" href="https://www.lcsc.com/product-detail/AD8232ACPZ-R7_C43216.html" target="_blank">LCSC (C43216)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">2</td>
+      <td>
+        <strong>ADS1115 (ADS1115IDGSR)</strong><br>
+        <span class="badge-tag tag-pos">U2</span>
+        <span class="badge-tag tag-pkg">VSSOP-10 / TSSOP-10</span><br>
+        <span class="font-mono">MPN: ADS1115IDGSR | LCSC: C37593</span>
+      </td>
+      <td>
+        <strong>ADC 16-Bit Sigma-Delta I2C:</strong> Số hóa tín hiệu analog ECG từ chân ECG_OUT và điện áp REFOUT chuẩn 16-bit, chuyển số liệu qua bus I2C (0x48) về ESP32 để đồng bộ thuật toán tính PTT với xung PPG.
+      </td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 1-2)</small></td>
+      <td>
+        <span class="price-highlight">35.000đ - 55.000đ</span>
+        <span class="price-sub">Thegioiic: ~55.000đ</span>
+        <span class="price-sub">LCSC: ~1.40 USD (~35k)</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/ads1115idgsr-ic-adc-16-bit-vssop-10" target="_blank">Thegioiic (Mã IC36278)</a>
+          <a class="link-btn" href="https://hshop.vn/products/mach-chuyen-doi-adc-16-bit-i2c-ads1115" target="_blank">Hshop (Module ADS1115)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=ADS1115IDGSR" target="_blank">Shopee VN (Chip SMD)</a>
+          <a class="link-btn lcsc" href="https://www.lcsc.com/product-detail/ADS1115IDGSR_C37593.html" target="_blank">LCSC (C37593)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">3</td>
+      <td>
+        <strong>MCP1700-2802E (LDO 2.8V)</strong><br>
+        <span class="badge-tag tag-pos">U3</span>
+        <span class="badge-tag tag-pkg">SOT-23 (3 chân)</span><br>
+        <span class="font-mono">MPN: MCP1700T-2802E/TT | LCSC: C625349</span>
+      </td>
+      <td>
+        <strong>Ổn áp LDO 2.8V siêu ít nhiễu (Ultra-low IQ 1.6&mu;A):</strong> Hạ áp từ 3.3V thành rail analog sạch 2.8V (+VS_A) cấp riêng cho AD8232, triệt tiêu xung nhiễu số và nhiễu sóng vô tuyến Wi-Fi từ ESP32.
+      </td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 2)</small></td>
+      <td>
+        <span class="price-highlight">8.000đ - 15.000đ</span>
+        <span class="price-sub">LCSC: ~0.50 USD (~12k)</span>
+        <span class="price-sub">Thegioiic: ~10.000đ</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/mcp1700t-3302e-tt-ic-on-ap-3-3v-250ma-sot-23" target="_blank">Thegioiic (MCP1700)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=MCP1700+SOT-23" target="_blank">Shopee VN (LDO 2.8V)</a>
+          <a class="link-btn lcsc" href="https://www.lcsc.com/product-detail/MCP1700T-2802E-TT_C625349.html" target="_blank">LCSC (C625349)</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 2. MODULE NGOẠI VI & MCU -->
+<div class="section-title">
+  <span>2. BỘ ĐIỀU KHIỂN TRUNG TÂM & MODULE CẢM BIẾN NGOẠI VI</span>
+  <span class="badge">2 Module cắm rời</span>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%;">STT</th>
+      <th style="width: 25%;">Tên module & Quy cách</th>
+      <th style="width: 33%;">Chức năng trong mạch AFE ECG PPG PTT</th>
+      <th style="width: 7%;" class="text-center">Số lượng</th>
+      <th style="width: 14%;">Đơn giá tham khảo</th>
+      <th style="width: 17%;">Link tìm mua tại VN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">4</td>
+      <td>
+        <strong>ESP32-DevKitC V4 (38 Chân)</strong><br>
+        <span class="badge-tag tag-pos">Cắm lên J2</span>
+        <span class="badge-tag tag-pkg">DIP-38 (2 hàng cách 25.4mm)</span><br>
+        <span class="font-mono">ESP-WROOM-32 / 32E 4MB Flash</span>
+      </td>
+      <td>
+        <strong>MCU trung tâm & DSP sinh học:</strong> Thu thập dữ liệu ECG và PPG qua bus I2C 400kHz, thực thi thuật toán Pan-Tompkins định đỉnh R (ECG) và chân sóng thể tích (PPG), tính toán thời gian dẫn truyền xung mạch PTT và phát Wi-Fi UDP lên máy tính.
+      </td>
+      <td class="text-center"><strong>1</strong></td>
+      <td>
+        <span class="price-highlight">85.000đ - 120.000đ</span>
+        <span class="price-sub">Hshop / Shopee VN</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://hshop.vn/products/kit-phat-trien-esp32-esp-wroom-32-esp32-devkitc" target="_blank">Hshop (ESP32 DevKitC)</a>
+          <a class="link-btn" href="https://www.thegioiic.com/kit-esp32-devkitc-v4" target="_blank">Thegioiic (DevKitC V4)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=ESP32-DevKitC+38+ch%C3%A2n" target="_blank">Shopee VN (Bản 38P)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">5</td>
+      <td>
+        <strong>Module Cảm Biến MAX30102</strong><br>
+        <span class="badge-tag tag-pos">Nối cáp tới J3</span>
+        <span class="badge-tag tag-pkg">Bo rời 7 chân I2C</span><br>
+        <span class="font-mono">Led Đỏ (660nm) & IR (880nm)</span>
+      </td>
+      <td>
+        <strong>Cảm biến quang học đo thể tích biến đổi mạch máu PPG:</strong> Bắt sóng xung mao mạch đầu ngón tay, phối hợp đỉnh R ECG để xác định chỉ số PTT ước tính biến thiên huyết áp không xâm lấn. Đấu dây: +3V3, SCL, SDA, INT, GND.
+      </td>
+      <td class="text-center"><strong>1</strong></td>
+      <td>
+        <span class="price-highlight">45.000đ - 70.000đ</span>
+        <span class="price-sub">Hshop: ~60.000đ</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://hshop.vn/products/cam-bien-nhip-tim-va-oxy-trong-mau-max30102" target="_blank">Hshop (MAX30102)</a>
+          <a class="link-btn" href="https://www.thegioiic.com/cam-bien-nhip-tim-va-spo2-max30102" target="_blank">Thegioiic (MAX30102)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=Module+MAX30102" target="_blank">Shopee VN (MAX30102)</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="notice-box">
+  <strong>Ghi chú tích hợp trang 1:</strong> Hai module ESP32-DevKitC V4 và MAX30102 là thiết bị rời cắm qua header, không hàn chết lên PCB. Trên mặt bo đã có sẵn 7 điểm đo kiểm tra <code>TP1..TP7</code> (ECG_OUT, REFOUT, LOD_P, LOD_N, +VS_A, +3V3, GND) để kỹ sư kiểm tra dạng sóng và mức nguồn bằng VOM/Oscilloscope.
+</div>
+
+<!-- ==================== TRANG 2: ĐẦU NỐI, PHỤ KIỆN & TỤ ĐIỆN ==================== -->
+<div class="page-break"></div>
+
+<!-- 3. ĐẦU NỐI, CÁP ĐO & CƠ KHÍ -->
+<div class="section-title">
+  <span>3. ĐẦU NỐI JACK, CÁP ĐIỆN TIM SINH HỌC & CƠ KHÍ LẮP RÁP</span>
+  <span class="badge">6 Phụ kiện & Đầu cắm</span>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%;">STT</th>
+      <th style="width: 25%;">Tên linh kiện / Phụ kiện</th>
+      <th style="width: 33%;">Chức năng trong mạch & Quy cách</th>
+      <th style="width: 7%;" class="text-center">Số lượng</th>
+      <th style="width: 14%;">Đơn giá tham khảo</th>
+      <th style="width: 17%;">Link tìm mua tại VN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">6</td>
+      <td>
+        <strong>Jack Audio 3.5mm SJ1-3533N</strong><br>
+        <span class="badge-tag tag-pos">J1</span>
+        <span class="badge-tag tag-pkg">Thru-hole ngang 8x14mm</span><br>
+        <span class="font-mono">MPN: SJ1-3533N | LCSC: C4992360</span>
+      </td>
+      <td>
+        <strong>Cổng jack 3.5mm tiếp nhận 3 đạo trình ECG:</strong> Tip = RA (Tay phải), Ring = LA (Tay trái), Sleeve = RL (Chân phải - hồi tiếp RLD). Tương thích các mẫu jack 3.5mm PJ-3533 / PJ-392 chân dán ngang.
+      </td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 2)</small></td>
+      <td>
+        <span class="price-highlight">5.000đ - 15.000đ</span>
+        <span class="price-sub">LCSC: ~2.60 USD</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/search?q=jack+3.5mm" target="_blank">Thegioiic (Jack 3.5mm)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=jack+3.5mm+pj-3533" target="_blank">Shopee VN (PJ-3533)</a>
+          <a class="link-btn lcsc" href="https://www.lcsc.com/product-detail/SJ1-3533N_C4992360.html" target="_blank">LCSC (C4992360)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">7</td>
+      <td>
+        <strong>Cáp đo điện tim ECG 3 nút 3.5mm</strong><br>
+        <span class="badge-tag tag-pos">Cắm vào J1</span>
+        <span class="badge-tag tag-pkg">Jack 3.5mm ra 3 đầu nút snap</span>
+      </td>
+      <td>
+        <strong>Dây dẫn tín hiệu sinh học chống nhiễu:</strong> Dẫn truyền xung điện tim từ cơ thể vào AD8232. 3 màu chuẩn: Đỏ/Trắng (RA), Vàng/Đen (LA), Xanh lá (RL).
+      </td>
+      <td class="text-center"><strong>1</strong></td>
+      <td>
+        <span class="price-highlight">45.000đ - 85.000đ</span>
+        <span class="price-sub">Thường đi kèm bộ AD8232</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/search?q=d%C3%A2y+ecg+ad8232" target="_blank">Thegioiic (Dây ECG)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=c%C3%A1p+%C4%91i%E1%BB%87n+tim+ad8232" target="_blank">Shopee VN (Cáp 3 nút)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">8</td>
+      <td>
+        <strong>Miếng dán điện cực tim Ag/AgCl</strong><br>
+        <span class="badge-tag tag-pos">Phụ kiện đo</span>
+        <span class="badge-tag tag-pkg">Bịch 10 - 50 miếng y tế</span>
+      </td>
+      <td>
+        <strong>Tiếp xúc da:</strong> Dán lồng ngực/cổ tay trích xuất tín hiệu điện tim trở kháng thấp nhờ lớp gel dẫn điện sinh học chuyên dụng.
+      </td>
+      <td class="text-center"><strong>1 bịch</strong><br><small style="color:#64748b;">(10-50 cái)</small></td>
+      <td>
+        <span class="price-highlight">25.000đ - 50.000đ</span>
+        <span class="price-sub">Shopee / Hiệu thuốc</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=mi%E1%BA%BFng+d%C3%A1n+%C4%91i%E1%BB%87n+c%E1%BB%B1c+ecg" target="_blank">Shopee (Miếng dán ECG)</a>
+          <a class="link-btn" href="https://hshop.vn" target="_blank">Hshop / Hiệu thuốc Y tế</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">9</td>
+      <td>
+        <strong>Header Cái 1x20P Pitch 2.54mm</strong><br>
+        <span class="badge-tag tag-pos">J2 (2 thanh)</span>
+        <span class="badge-tag tag-pkg">Thẳng, Female 2.54mm</span>
+      </td>
+      <td>
+        <strong>Đế cắm cho ESP32-DevKitC V4:</strong> 2 thanh 1x20P, cắt bớt 1 chân thành 1x19P (38 chân) cắm module ESP32 tháo lắp linh hoạt.
+      </td>
+      <td class="text-center"><strong>2 thanh</strong><br><small style="color:#64748b;">(mua 4)</small></td>
+      <td>
+        <span class="price-highlight">3.000đ - 5.000đ / thanh</span>
+        <span class="price-sub">Cực kỳ phổ biến</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://hshop.vn/products/header-cai-1x20p-2-54mm-thang" target="_blank">Hshop (Header cái 1x20)</a>
+          <a class="link-btn" href="https://www.thegioiic.com/header-cai-1x20-chieu-cao-nhua-8-5mm" target="_blank">Thegioiic (Header cái)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=header+c%C3%A1i+1x20+2.54mm" target="_blank">Shopee VN</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">10</td>
+      <td>
+        <strong>Header Đực 1x7P Pitch 2.54mm</strong><br>
+        <span class="badge-tag tag-pos">J3</span>
+        <span class="badge-tag tag-pkg">Thẳng, Male 2.54mm</span>
+      </td>
+      <td>
+        <strong>Cổng nối dây tới bo MAX30102:</strong> Chân 1..7: +3V3, SCL, SDA, INT, RD (NC), IRD (NC), GND.
+      </td>
+      <td class="text-center"><strong>1 thanh</strong><br><small style="color:#64748b;">(mua 1 vỉ 40P)</small></td>
+      <td>
+        <span class="price-highlight">2.000đ - 4.000đ / vỉ</span>
+        <span class="price-sub">Bẻ 7 chân từ thanh 40P</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://hshop.vn/products/header-duc-1x40p-2-54mm-thang" target="_blank">Hshop (Header đực 40P)</a>
+          <a class="link-btn" href="https://www.thegioiic.com/header-duc-1x40-chieu-dai-chan-11-5mm" target="_blank">Thegioiic (Header đực)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=header+%C4%91%E1%BB%B1c+2.54mm" target="_blank">Shopee VN</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">11</td>
+      <td>
+        <strong>Bộ Trụ Đồng M3 + Vít M3 (10-15mm)</strong><br>
+        <span class="badge-tag tag-pos">H1..H4</span>
+        <span class="badge-tag tag-pkg">Lỗ 3.2mm bắt ốc M3</span>
+      </td>
+      <td>
+        <strong>Chân đế cơ khí cố định PCB:</strong> Nâng bo cách mặt bàn chống chập mass, bắt pad nối GND tĩnh điện an toàn tại 4 góc bo mạch.
+      </td>
+      <td class="text-center"><strong>4 bộ</strong><br><small style="color:#64748b;">(trụ + ốc)</small></td>
+      <td>
+        <span class="price-highlight">10.000đ - 18.000đ / bộ</span>
+        <span class="price-sub">4 trụ đồng + 8 ốc M3</span>
+      </td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://hshop.vn/products/tru-dong-m3-luc-giac" target="_blank">Hshop (Trụ đồng M3)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=tr%E1%BB%A5+%C4%91%E1%BB%93ng+m3" target="_blank">Shopee VN (Trụ M3)</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 4. TỤ ĐIỆN DÁN SMD 0603 -->
+<div class="section-title">
+  <span>4. TỤ ĐIỆN DÁN GỐM CERAMIC SMD 0603 (1608 METRIC) - KHÔNG PHÂN CỰC</span>
+  <span class="badge">6 Trị số / 11 Vị trí</span>
+</div>
+<p style="font-size:7pt; color:#475569; margin: 2px 0 4px 0;">
+  * Toàn bộ là tụ gốm MLCC dán SMD 0603. Mua theo tép 10-20 con trên Shopee/Thegioiic để dự phòng khi hàn khò.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%;">STT</th>
+      <th style="width: 13%;">Trị số tụ</th>
+      <th style="width: 12%;">Vị trí trên bo</th>
+      <th style="width: 18%;">Quy cách kỹ thuật & MPN</th>
+      <th style="width: 29%;">Chức năng trong mạch AFE</th>
+      <th style="width: 7%;" class="text-center">Số lượng</th>
+      <th style="width: 17%;">Link mua tại VN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">12</td>
+      <td><strong>0.33 &mu;F</strong><br><small style="color:#64748b;">(330 nF)</small></td>
+      <td><span class="badge-tag tag-pos">C1, C2</span></td>
+      <td>25V X7R &plusmn;10%<br><span class="font-mono">0603B334K250CT | C384782</span></td>
+      <td><strong>Tụ lọc thông cao 2 cực AD8232:</strong> Cắt dòng rò DC nửa tế bào (DC offset &plusmn;300mV) từ tiếp xúc da - điện cực, tạo tần số cắt dưới ~0.5Hz.</td>
+      <td class="text-center"><strong>2</strong><br><small style="color:#64748b;">(mua 5-10)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 330nF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+330nf" target="_blank">Shopee VN (330nF)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">13</td>
+      <td><strong>1 nF</strong><br><small style="color:#64748b;">(1000 pF / 102)</small></td>
+      <td><span class="badge-tag tag-pos">C3</span></td>
+      <td>100V C0G/NPO &plusmn;5%<br><span class="font-mono">GCM1885C2A102JA16D | C437457</span></td>
+      <td><strong>Tụ bù ổn định mạch RLD:</strong> Chống tự kích dao động cao tần cho bộ đệm chân phải (Right Leg Drive) của AD8232.</td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 1nF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+1nf" target="_blank">Shopee VN (1nF 0603)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">14</td>
+      <td><strong>0.1 &mu;F</strong><br><small style="color:#64748b;">(100 nF / 104)</small></td>
+      <td><span class="badge-tag tag-pos">C4, C8, C11</span></td>
+      <td>50V X7R &plusmn;10%<br><span class="font-mono">MT18B104K500CT | C323570</span></td>
+      <td><strong>Tụ Decoupling lọc nguồn cao tần:</strong> Bỏ qua xung nhiễu đặt sát các chân nguồn VDD của AD8232, ADS1115 và MCP1700.</td>
+      <td class="text-center"><strong>3</strong><br><small style="color:#64748b;">(mua 10)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 100nF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+100nf" target="_blank">Shopee VN (100nF)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">15</td>
+      <td><strong>1.5 nF</strong><br><small style="color:#64748b;">(1500 pF / 152)</small></td>
+      <td><span class="badge-tag tag-pos">C5</span></td>
+      <td>50V C0G/NPO &plusmn;5%<br><span class="font-mono">GRM1885C1H152JA01D | C162204</span></td>
+      <td><strong>Tụ lọc thông thấp tích cực Sallen-Key:</strong> Thiết lập tần số cắt 40Hz cho mạch lọc ECG, triệt tiêu nhiễu điện cơ EMG và sóng 50Hz.</td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 1.5nF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+1.5nf" target="_blank">Shopee VN (1.5nF)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">16</td>
+      <td><strong>10 nF</strong><br><small style="color:#64748b;">(0.01 &mu;F / 103)</small></td>
+      <td><span class="badge-tag tag-pos">C6, C7</span></td>
+      <td>50V C0G &plusmn;5%<br><span class="font-mono">0603CG103J500NT | C82282</span></td>
+      <td><strong>Tụ lọc hồi tiếp & phục hồi nhanh:</strong> Ổn định độ lợi và tham gia mạch Fast-Restore khi có xung gai sốc biên độ lớn.</td>
+      <td class="text-center"><strong>2</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 10nF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+10nf" target="_blank">Shopee VN (10nF)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">17</td>
+      <td><strong>1 &mu;F</strong><br><small style="color:#64748b;">(1000 nF / 105)</small></td>
+      <td><span class="badge-tag tag-pos">C9, C10</span></td>
+      <td>50V X7R &plusmn;10%<br><span class="font-mono">TCC0603X7R105K500CT | C5360793</span></td>
+      <td><strong>Tụ lọc nguồn vào & ra LDO MCP1700:</strong> Định mức 50V X7R tránh suy giảm điện dung hiệu dụng do DC bias tại 2.8V, giữ ESR &le; 2&Omega;.</td>
+      <td class="text-center"><strong>2</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/tu-dien-smd-0603" target="_blank">Thegioiic (0603 1uF)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=t%E1%BB%A5+0603+1uf" target="_blank">Shopee VN (1uF 50V)</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ==================== TRANG 3: ĐIỆN TRỞ & HƯỚNG DẪN MUA SẮM ==================== -->
+<div class="page-break"></div>
+
+<!-- 5. ĐIỆN TRỞ DÁN SMD 0603 -->
+<div class="section-title">
+  <span>5. ĐIỆN TRỞ DÁN SMD 0603 (1608 METRIC) - CÔNG SUẤT 100mW - SAI SỐ 1%</span>
+  <span class="badge">8 Trị số / 18 Vị trí</span>
+</div>
+<p style="font-size:7pt; color:#475569; margin: 2px 0 4px 0;">
+  * Toàn bộ là điện trở dán SMD 0603 sai số chuẩn 1%. Đơn giá tại VN khoảng 2.000đ - 3.000đ / tép (10 - 20 con). Khuyên mua mỗi trị số 1 tép.
+</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 4%;">STT</th>
+      <th style="width: 13%;">Trị số trở</th>
+      <th style="width: 14%;">Vị trí trên bo</th>
+      <th style="width: 18%;">Quy cách & MPN</th>
+      <th style="width: 27%;">Chức năng trong mạch AFE</th>
+      <th style="width: 7%;" class="text-center">Số lượng</th>
+      <th style="width: 17%;">Link mua tại VN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">18</td>
+      <td><strong>360 k&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R1, R2, R3</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">RCT03360KFLF | C177519</span></td>
+      <td>Mạch chia áp và lọc thông cao HPF hồi tiếp của AD8232.</td>
+      <td class="text-center"><strong>3</strong><br><small style="color:#64748b;">(mua 5-10)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 360k)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+360k" target="_blank">Shopee VN (360k)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">19</td>
+      <td><strong>10 M&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R4, R5, R6, R8, R9, R10</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">AC0603FR-0710ML | C227547</span></td>
+      <td><strong>Trở phân cực ngõ vào siêu cao (10M):</strong> Giữ trở kháng vào cực lớn, chống suy hao biên độ vi vôn và bảo vệ ngõ vào instrumentation amp.</td>
+      <td class="text-center"><strong>6</strong><br><small style="color:#64748b;">(mua 10-15)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 10M)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+10m" target="_blank">Shopee VN (10M)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">20</td>
+      <td><strong>1 M&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R11, R12, R14</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">CRCW06031M00FKEA | C844922</span></td>
+      <td>Thiết lập độ lợi (Gain) khuếch đại đảo và tầng hồi tiếp mạch đệm RLD của AD8232.</td>
+      <td class="text-center"><strong>3</strong><br><small style="color:#64748b;">(mua 5-10)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 1M)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+1m" target="_blank">Shopee VN (1M)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">21</td>
+      <td><strong>100 k&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R13</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">CRCW0603100KFKTA | C844120</span></td>
+      <td>Phối hợp với R11 và R12 tạo độ lợi khép kín cho bộ khuếch đại đo sinh học.</td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 100k)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+100k" target="_blank">Shopee VN (100k)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">22</td>
+      <td><strong>1 k&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R15</span></td>
+      <td>1% 333mW 0603<br><span class="font-mono">ERJPA3F1001V | C441922</span></td>
+      <td>Trở cách ly ngõ ra analog của AD8232 dẫn sang chân ngõ vào tương tự của ADS1115.</td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 1k)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+1k" target="_blank">Shopee VN (1k 0603)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">23</td>
+      <td><strong>4.7 k&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R16, R17</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">0603WAF4701T5E | C23162</span></td>
+      <td><strong>Trở kéo lên bus I2C (Pull-up SCL, SDA):</strong> Đảm bảo sườn xung vuông I2C 400kHz chuẩn xác giữa ESP32, ADS1115 và MAX30102.</td>
+      <td class="text-center"><strong>2</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 4.7k)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+4.7k" target="_blank">Shopee VN (4.7k)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">24</td>
+      <td><strong>1.4 M&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R18</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">0603WAF1404T5E | C38070</span></td>
+      <td>
+        <strong>Định thời hồi phục nhanh (Fast Restore):</strong> Giúp mạch tự hồi phục sau khi tuột hoặc sốc tín hiệu điện cực. <em>(Nếu thiếu 1.4M lẻ, có thể ghép nối tiếp 1M + 390k).</em>
+      </td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 2-5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+1.4m" target="_blank">Shopee VN (1.4M 0603)</a>
+          <a class="link-btn lcsc" href="https://www.lcsc.com/product-detail/0603WAF1404T5E_C38070.html" target="_blank">LCSC (C38070)</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">25</td>
+      <td><strong>10 k&Omega;</strong></td>
+      <td><span class="badge-tag tag-pos">R19</span></td>
+      <td>1% 100mW 0603<br><span class="font-mono">CRGCQ0603F10K | C4210728</span></td>
+      <td>Điện trở kéo trạng thái logic phân cực chân Shutdown (SDN) kích hoạt AD8232 luôn hoạt động.</td>
+      <td class="text-center"><strong>1</strong><br><small style="color:#64748b;">(mua 5)</small></td>
+      <td>
+        <div class="link-box">
+          <a class="link-btn" href="https://www.thegioiic.com/dien-tro-smd-0603-1" target="_blank">Thegioiic (0603 10k)</a>
+          <a class="link-btn shopee" href="https://shopee.vn/search?keyword=%C4%91i%E1%BB%87n+tr%E1%BB%9F+0603+10k" target="_blank">Shopee VN (10k 0603)</a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- HƯỚNG DẪN MUA SẮM & KỸ THUẬT HÀN LẮP -->
+<div class="section-title">
+  <span>6. DANH BẠ NHÀ CUNG CẤP TẠI VIỆT NAM & HƯỚNG DẪN HÀN LẮP THỰC TẾ</span>
+  <span class="badge">Kinh nghiệm chế tạo</span>
+</div>
+
+<div class="guide-grid">
+  <!-- Cột 1: Danh sách cửa hàng VN -->
+  <div class="guide-card">
+    <h4>1. Kênh Cung Cấp Uy Tín Tại Việt Nam</h4>
+    <table class="store-table">
+      <thead>
+        <tr>
+          <th>Cửa hàng</th>
+          <th>Mặt hàng thế mạnh</th>
+          <th>Liên hệ / Đặt hàng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Thế Giới IC</strong><br><small>(TP. Thủ Đức, HCM)</small></td>
+          <td>IC dán ADS1115IDGSR, LDO MCP1700 SOT-23, Tụ/Trở SMD 0603, Jack 3.5mm, Cáp ECG</td>
+          <td><a href="https://www.thegioiic.com" target="_blank">thegioiic.com</a><br>Hotline: (028) 2205 6688</td>
+        </tr>
+        <tr>
+          <td><strong>Hshop.vn</strong><br><small>(Bình Thạnh, HCM)</small></td>
+          <td>ESP32-DevKitC V4 38P, Module MAX30102, Module ADS1115, Header cái/đực, Trụ đồng M3</td>
+          <td><a href="https://hshop.vn" target="_blank">hshop.vn</a><br>Hotline: 028.6670.4455</td>
+        </tr>
+        <tr>
+          <td><strong>Shopee Việt Nam</strong><br><small>(Toàn quốc / Hỏa tốc)</small></td>
+          <td>Chip dán AD8232ACPZ rời, dải tép tụ/trở 0603 đủ trị số, miếng dán điện cực Ag/AgCl</td>
+          <td><a href="https://shopee.vn" target="_blank">shopee.vn</a><br>Ship 1-3 ngày toàn quốc</td>
+        </tr>
+        <tr>
+          <td><strong>LCSC / Mua hộ LCSC</strong><br><small>(Thâm Quyến / VN)</small></td>
+          <td>Chuẩn MPN 100% linh kiện chính hãng nhà máy JLCPCB, đặt theo mã Cxxxxx</td>
+          <td><a href="https://www.lcsc.com" target="_blank">lcsc.com</a> (hoặc dịch vụ ship LCSC VN)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4 style="margin-top:6px;">2. Kinh Nghiệm Gom Đơn Tiết Kiệm (2 Giỏ Hàng)</h4>
+    <ul>
+      <li><strong>Giỏ hàng 1 (Shopee):</strong> Mua Kit ESP32 38 chân + Module MAX30102 + Cáp đo ECG 3 nút 3.5mm kèm miếng dán + Header cái 1x20 + Trụ đồng M3 + Combo tép tụ trở SMD 0603. (Tiết kiệm ship, tổng ~250k).</li>
+      <li><strong>Giỏ hàng 2 (Thegioiic hoặc LCSC):</strong> Mua IC ADS1115IDGSR dán + IC AD8232 dán + LDO MCP1700 SOT-23 + Jack 3.5mm PJ-3533 + Cồn IPA 99% để rửa mạch.</li>
+    </ul>
+  </div>
+
+  <!-- Cột 2: Kỹ thuật hàn ráp & Đo nghiệm thu -->
+  <div class="guide-card">
+    <h4>3. Kỹ Thuật Hàn Ráp & Vệ Sinh Mạch Chống Rò</h4>
+    <ul>
+      <li><strong>Hàn khò IC U1 (AD8232 LFCSP-20):</strong>
+        <ul>
+          <li>Gói chân QFN nằm hoàn toàn dưới gầm. Quét kem hàn (solder paste) mỏng qua stencil (hoặc chấm đều 4 cửa sổ pad), bôi nhẹ flux.</li>
+          <li>Gia nhiệt máy khò 240&deg;C - 260&deg;C gió nhẹ, hâm nóng đều vùng xung quanh rồi tập trung vào thân IC cho đến khi thiếc bóng chảy đều và IC tự hút căn vị trí (self-aligning).</li>
+          <li>Soi kính lúp kiểm tra kỹ 20 chân xem có cầu thiếc chập sang nhau không.</li>
+        </ul>
+      </li>
+      <li><strong>Rửa sạch nhựa thông bằng Cồn IPA 99%:</strong>
+        <ul>
+          <li>Các nút trở kháng 10 M&Omega; (R4, R5, R6, R8, R9, R10) rất nhạy cảm với dòng rò điện. Nhựa thông sót lại có thể dẫn dòng vi mô, biến trở kháng vào từ 10M tụt xuống vài trăm k&Omega;, làm méo hoặc mất hoàn toàn sóng ECG.</li>
+          <li>Dùng cồn IPA 99% và bàn chải đánh răng chà rửa kỹ 2 mặt bo mạch, sau đó sấy khô hoàn toàn bằng máy sấy nhiệt trước khi cấp điện.</li>
+        </ul>
+      </li>
+      <li><strong>Quy trình đo kiểm nguội an toàn (Trước khi cắm điện):</strong>
+        <ul>
+          <li>Dùng đồng hồ VOM đo trở kháng: TP6 (+3V3) tới TP7 (GND) phải &gt; 10 k&Omega;.</li>
+          <li>Đo TP5 (+VS_A 2.8V) tới TP7 (GND) phải &gt; 10 k&Omega;.</li>
+          <li>TP7 (GND) phải thông 0 &Omega; tuyệt đối với 4 lỗ bắt ốc H1..H4.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4 style="margin-top:5px; color:#b91c1c;">4. Cảnh Báo An Toàn Thí Nghiệm Sinh Học</h4>
+    <ul>
+      <li><strong>Mạch đo thử nghiệm:</strong> Mạch nghiên cứu học thuật, không có cách ly y tế IEC 60601-1.</li>
+      <li><strong>Quy tắc an toàn:</strong> Cấp nguồn ESP32 từ laptop chạy pin (không cắm sạc adapter 220V vào laptop) hoặc dùng pin sạc dự phòng khi gắn que đo vào người.</li>
+    </ul>
+  </div>
+</div>
+
+<div style="margin-top: 6px; padding: 4px 8px; background: #f1f5f9; border-left: 3px solid #0284c7; font-size: 6.8pt; color: #334155; border-radius: 3px;">
+  <strong>Tài liệu kỹ thuật gốc & Datasheets:</strong>
+  Analog Devices AD8232 Datasheet &bull; Texas Instruments ADS1115 Datasheet &bull; Microchip MCP1700 Low-Noise LDO &bull; Espressif ESP32-DevKitC V4 Pinout Guide &bull; Sơ đồ nguyên lý KiCad: <code>AFE_ECG_PPG_PTT.kicad_sch</code>
+</div>
+
+</body>
+</html>

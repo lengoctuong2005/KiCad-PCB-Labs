@@ -1,0 +1,28 @@
+menu "AFE ECG PPG PTT Configuration"
+
+    config WIFI_SSID
+        string "WiFi SSID"
+        default "AFE_PTT_NET"
+        help
+            Wi-Fi network SSID for the ESP32 station.
+
+    config WIFI_PASS
+        string "WiFi Password"
+        default "12345678"
+        help
+            Wi-Fi WPA2 PSK password for the target network.
+
+    config TARGET_IP
+        string "Target Host IP"
+        default "192.168.4.2"
+        help
+            Destination IPv4 address receiving UDP telemetry packets.
+
+    config UDP_PORT
+        int "UDP Telemetry Port"
+        range 1 65535
+        default 5005
+        help
+            Destination UDP port receiving telemetry packets.
+
+endmenu

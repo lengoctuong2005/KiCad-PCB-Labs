@@ -1,0 +1,308 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-08T18:57:58",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.8",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/136b41d4-6b1f-4edc-af6f-2f30cf83ab50",
+            "violations": [
+                {
+                    "description": "Symbol 'USB_C_Receptacle' doesn't match copy in library 'charger'",
+                    "items": [
+                        {
+                            "description": "Symbol J1 [USB_C_Receptacle]",
+                            "pos": {
+                                "x": 40.64,
+                                "y": 60.96
+                            },
+                            "uuid": "1ee89ec1-5767-47f3-9c33-5918ab71a1ba"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R1 [R]",
+                            "pos": {
+                                "x": 71.12,
+                                "y": 50.8
+                            },
+                            "uuid": "f49ea0d2-0e7c-4551-8d5b-54249d2223b8"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R2 [R]",
+                            "pos": {
+                                "x": 86.36,
+                                "y": 50.8
+                            },
+                            "uuid": "bdf88a7d-cce4-4b68-bbbd-7bf516fe408d"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'C' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol C1 [C]",
+                            "pos": {
+                                "x": 101.6,
+                                "y": 50.8
+                            },
+                            "uuid": "51a9774d-cca2-4675-85da-884dd568e055"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'C' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol C2 [C]",
+                            "pos": {
+                                "x": 116.84,
+                                "y": 50.8
+                            },
+                            "uuid": "fe1cdf07-bc61-4223-b02a-11dc1c70f115"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R3 [R]",
+                            "pos": {
+                                "x": 127.0,
+                                "y": 81.28
+                            },
+                            "uuid": "a8dbab31-6855-4f61-8e94-75b7c4b17bbb"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'TP4056' doesn't match copy in library 'charger'",
+                    "items": [
+                        {
+                            "description": "Symbol U1 [TP4056]",
+                            "pos": {
+                                "x": 147.32,
+                                "y": 60.96
+                            },
+                            "uuid": "46435861-28c2-4332-bee7-9acbd31dc6ea"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R4 [R]",
+                            "pos": {
+                                "x": 177.8,
+                                "y": 45.72
+                            },
+                            "uuid": "c2086ab0-3ccc-40ff-bd22-691a80d97f9f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'LED' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol D1 [LED]",
+                            "pos": {
+                                "x": 177.8,
+                                "y": 60.96
+                            },
+                            "uuid": "1921e2a6-f30e-4b2e-84b0-feb2a3e08613"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'C' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol C3 [C]",
+                            "pos": {
+                                "x": 177.8,
+                                "y": 81.28
+                            },
+                            "uuid": "5f601aab-4435-4050-938a-2bd1c91bcc17"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R5 [R]",
+                            "pos": {
+                                "x": 193.04,
+                                "y": 45.72
+                            },
+                            "uuid": "98deabf3-38e9-4563-9507-487b768ba30e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'LED' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol D2 [LED]",
+                            "pos": {
+                                "x": 193.04,
+                                "y": 60.96
+                            },
+                            "uuid": "9711d959-e8f2-41c1-9cd5-bd4c31db0432"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R6 [R]",
+                            "pos": {
+                                "x": 208.28,
+                                "y": 45.72
+                            },
+                            "uuid": "3d85e9b1-f50d-4979-93c2-a9dfb1ef52ef"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'C' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol C4 [C]",
+                            "pos": {
+                                "x": 208.28,
+                                "y": 60.96
+                            },
+                            "uuid": "d022ea56-0c68-4761-81d6-5a3b7e2c251b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'DW01A' doesn't match copy in library 'charger'",
+                    "items": [
+                        {
+                            "description": "Symbol U2 [DW01A]",
+                            "pos": {
+                                "x": 228.6,
+                                "y": 55.88
+                            },
+                            "uuid": "86548d1c-f9eb-43a5-a2e4-641272c6fbef"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'R' doesn't match copy in library 'Device'",
+                    "items": [
+                        {
+                            "description": "Symbol R7 [R]",
+                            "pos": {
+                                "x": 228.6,
+                                "y": 81.28
+                            },
+                            "uuid": "8170e996-d74a-48f4-a21f-cecb2aa5084c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'FS8205A' doesn't match copy in library 'charger'",
+                    "items": [
+                        {
+                            "description": "Symbol Q1 [FS8205A]",
+                            "pos": {
+                                "x": 259.08,
+                                "y": 55.88
+                            },
+                            "uuid": "24c53383-26c6-40c2-acda-648a7b7b0d38"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                },
+                {
+                    "description": "Symbol 'Conn_01x02' doesn't match copy in library 'Connector_Generic'",
+                    "items": [
+                        {
+                            "description": "Symbol J2 [Conn_01x02]",
+                            "pos": {
+                                "x": 284.48,
+                                "y": 55.88
+                            },
+                            "uuid": "41b70e5a-b626-4e92-afe5-8ec9c174ccff"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "lib_symbol_mismatch"
+                }
+            ]
+        }
+    ],
+    "source": "USB_TypeC_TP4056_Charger.kicad_sch"
+}

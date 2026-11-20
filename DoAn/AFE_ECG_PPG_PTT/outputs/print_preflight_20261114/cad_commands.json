@@ -1,0 +1,255 @@
+[
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "drc",
+      "--refill-zones",
+      "--all-track-errors",
+      "--schematic-parity",
+      "--severity-all",
+      "--exit-code-violations",
+      "--format",
+      "json",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/drc.json",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "erc",
+      "--severity-all",
+      "--exit-code-violations",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/erc.rpt",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "gerbers",
+      "--layers",
+      "F.Cu,B.Cu,F.Mask,B.Mask,F.Silkscreen,B.Silkscreen,Edge.Cuts,F.Paste,B.Paste",
+      "--check-zones",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/gerbers/",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "drill",
+      "--excellon-units",
+      "mm",
+      "--excellon-separate-th",
+      "--generate-report",
+      "--report-path",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/drill_report.rpt",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/gerbers/",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pos",
+      "--format",
+      "csv",
+      "--units",
+      "mm",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/placement_mm.csv",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "bom",
+      "--fields",
+      "Reference,Value,Footprint,MPN,LCSC,QUANTITY",
+      "--labels",
+      "Reference,Value,Footprint,MPN,LCSC,Quantity",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/BOM.csv",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "sch",
+      "export",
+      "pdf",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/Schematic.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_sch"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "pdftoppm",
+      "-png",
+      "-r",
+      "200",
+      "-singlefile",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/Schematic.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/Schematic"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pdf",
+      "--layers",
+      "F.Cu,B.Cu,F.Silkscreen,Edge.Cuts",
+      "--mode-multipage",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Layout.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "pdf",
+      "--layers",
+      "F.Fab,F.CrtYd,Edge.Cuts",
+      "--mode-single",
+      "--scale",
+      "1",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/Assembly_1to1.pdf",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "F.Cu,F.Silkscreen,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--mode-single",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Top.svg",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "rsvg-convert",
+      "-w",
+      "1400",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Top.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Top.svg"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "export",
+      "svg",
+      "--layers",
+      "B.Cu,B.Silkscreen,Edge.Cuts",
+      "--page-size-mode",
+      "2",
+      "--exclude-drawing-sheet",
+      "--mode-single",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Bottom.svg",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "rsvg-convert",
+      "-w",
+      "1400",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Bottom.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_Bottom.svg"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "render",
+      "--side",
+      "top",
+      "--quality",
+      "high",
+      "--background",
+      "opaque",
+      "-w",
+      "1600",
+      "-h",
+      "1200",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_3D_Top.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "kicad-cli",
+      "pcb",
+      "render",
+      "--rotate",
+      "-45,0,45",
+      "--perspective",
+      "--quality",
+      "high",
+      "--background",
+      "opaque",
+      "-w",
+      "1600",
+      "-h",
+      "1200",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/print_preflight_20261114/PCB_3D_Iso.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/AFE_ECG_PPG_PTT.kicad_pcb"
+    ],
+    "exit_code": 0
+  }
+]

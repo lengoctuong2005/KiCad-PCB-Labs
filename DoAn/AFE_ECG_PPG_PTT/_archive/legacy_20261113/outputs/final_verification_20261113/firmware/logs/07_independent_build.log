@@ -1,0 +1,19 @@
+Executing action: all (aliases: build)
+Running ninja in directory /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build
+Executing "ninja all"...
+[1/4] Performing build step for 'bootloader'
+[1/1] cd /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/bootloader/esp-idf/esptool_py && /tmp/opencode/esp_tools/python_env/idf5.5_py3.14_env/bin/python /tmp/opencode/esp_extract/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/bootloader/bootloader.bin
+Bootloader binary size 0x6680 bytes. 0x980 bytes (8%) free.
+[2/4] cd /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp-idf/esptool_py && /tmp/opencode/esp_tools/python_env/idf5.5_py3.14_env/bin/python /tmp/opencode/esp_extract/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/partition_table/partition-table.bin /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp32_ptt_streamer.bin
+esp32_ptt_streamer.bin binary size 0xbd7e0 bytes. Smallest app partition is 0x100000 bytes. 0x42820 bytes (26%) free.
+[3/4] No install step for 'bootloader'
+[4/4] Completed 'bootloader'
+
+Project build complete. To flash, run:
+ idf.py flash
+or
+ idf.py -p PORT flash
+or
+ python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 2MB --flash_freq 40m 0x1000 DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/bootloader/bootloader.bin 0x8000 DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/partition_table/partition-table.bin 0x10000 DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp32_ptt_streamer.bin
+or from the "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build" directory
+ python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_reset write_flash "@flash_args"

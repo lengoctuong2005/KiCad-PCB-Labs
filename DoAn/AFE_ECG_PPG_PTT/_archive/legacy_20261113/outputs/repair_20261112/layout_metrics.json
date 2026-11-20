@@ -1,0 +1,30 @@
+{
+  "RA_P": {
+    "track_length_mm": 3.445,
+    "vias": 0
+  },
+  "LA_P": {
+    "track_length_mm": 4.646,
+    "vias": 0
+  },
+  "REFIN": {
+    "track_length_mm": 8.583,
+    "vias": 0
+  },
+  "OPAMP_N": {
+    "track_length_mm": 5.547,
+    "vias": 0
+  },
+  "HP_MID": {
+    "track_length_mm": 21.697,
+    "vias": 2
+  },
+  "IAOUT": {
+    "track_length_mm": 28.155,
+    "vias": 3
+  },
+  "REFOUT": {
+    "track_length_mm": 38.502,
+    "vias": 0
+  }
+}

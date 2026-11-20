@@ -1,0 +1,50 @@
+Checking "python3" ...
+Python 3.14.4
+"python3" has been detected
+Activating ESP-IDF 5.5
+Setting IDF_PATH to '/tmp/opencode/esp_extract/esp-idf'.
+* Checking python version ... 3.14.4
+* Checking python dependencies ... OK
+* Deactivating the current ESP-IDF environment (if any) ... OK
+* Establishing a new ESP-IDF environment ... OK
+* Identifying shell ... bash
+* Detecting outdated tools in system ... OK - no outdated tools found
+* Shell completion ... Autocompletion code generated
+
+Done! You can now compile ESP-IDF projects.
+Go to the project directory and run:
+
+  idf.py build
+Executing action: all (aliases: build)
+Running ninja in directory /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build
+Executing "ninja all"...
+[1/13] Linking C static library esp-idf/fatfs/libfatfs.a
+[2/13] Linking C static library esp-idf/spiffs/libspiffs.a
+[3/13] Linking C static library esp-idf/wifi_provisioning/libwifi_provisioning.a
+[4/13] Performing build step for 'bootloader'
+[1/1] cd /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/bootloader/esp-idf/esptool_py && /tmp/opencode/esp_tools/python_env/idf5.5_py3.14_env/bin/python /tmp/opencode/esp_extract/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/bootloader/bootloader.bin
+Bootloader binary size 0x6680 bytes. 0x980 bytes (8%) free.
+[5/13] No install step for 'bootloader'
+[6/13] Completed 'bootloader'
+[7/13] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+[8/13] Linking C static library esp-idf/main/libmain.a
+[9/13] Generating esp-idf/esp_system/ld/sections.ld
+[10/13] Building C object CMakeFiles/esp32_ptt_streamer.elf.dir/project_elf_src_esp32.c.obj
+[11/13] Linking CXX executable esp32_ptt_streamer.elf
+[12/13] Generating binary image from built executable
+esptool.py v4.13.0
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp32_ptt_streamer.bin
+[13/13] cd /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp-idf/esptool_py && /tmp/opencode/esp_tools/python_env/idf5.5_py3.14_env/bin/python /tmp/opencode/esp_extract/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/partition_table/partition-table.bin /home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/esp32_ptt_streamer.bin
+esp32_ptt_streamer.bin binary size 0xbd7e0 bytes. Smallest app partition is 0x100000 bytes. 0x42820 bytes (26%) free.
+
+Project build complete. To flash, run:
+ idf.py flash
+or
+ idf.py -p PORT flash
+or
+ python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 2MB --flash_freq 40m 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin 0x10000 build/esp32_ptt_streamer.bin
+or from the "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build" directory
+ python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_reset write_flash "@flash_args"

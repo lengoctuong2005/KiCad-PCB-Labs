@@ -1,0 +1,60 @@
+{
+  "verdict": "REJECT",
+  "results": [
+    {
+      "name": "Test 1: Ngu\u1ed3n & LDO (Power)",
+      "status": "passed",
+      "evidence": "Quiescent current 171.6 uA, Headroom 0.135 V"
+    },
+    {
+      "name": "Test 2: Bus I2C & Tr\u1edf kh\u00e1ng k\u00e9o (I2C)",
+      "status": "passed",
+      "evidence": "Typical rise time 199.1 ns < 300 ns (at Cb=50pF), Addresses 0x48 & 0x57 distinct"
+    },
+    {
+      "name": "Test 3: Nhi\u1ec5u, CMRR & B\u1ed9 l\u1ecdc (Noise/Filters)",
+      "status": "passed",
+      "evidence": "HPF: 0.482 Hz, LPF: 41.4 Hz, Gain: 11.0x, AAF: 7957.7 Hz"
+    },
+    {
+      "name": "Test 4: ECG & Ch\u1ee9c n\u0103ng Lead-off (ECG/LOD)",
+      "status": "passed",
+      "evidence": "Patient protection resistance: 360 kOhm, Max fault current: 9.17 uA"
+    },
+    {
+      "name": "Test 5: C\u1ea3m bi\u1ebfn quang PPG (PPG)",
+      "status": "passed",
+      "evidence": "MAX30102 Sample rate: 400.0 SPS, Pulse width: 411.0 us (18-bit)"
+    },
+    {
+      "name": "Test 6: \u0110\u1ed3ng b\u1ed9 xung chu\u1ea9n ph\u1ea7n c\u1ee9ng (Sync)",
+      "status": "passed",
+      "evidence": "Firmware SYNC_MAX_SKEW_US: 2000 us (<= 2000 us)"
+    },
+    {
+      "name": "Test 7: \u01af\u1edbc l\u01b0\u1ee3ng PAT/PTT gi\u1ea3i thu\u1eadt DSP (PAT)",
+      "status": "failed",
+      "evidence": "module 'ptt_live_analyzer' has no attribute 'PTTProcessor'"
+    },
+    {
+      "name": "Test 8: \u0110\u1ed1i so\u00e1t BOM LCSC (BOM Audit)",
+      "status": "failed",
+      "evidence": "CRITICAL: LCSC part C25804 assigned to conflicting values: 100k (R12) vs 10k (R20)"
+    },
+    {
+      "name": "Test 9: \u0110\u1ecbnh d\u1ea1ng t\u1ecda \u0111\u1ed9 Pick & Place (CPL/Pos)",
+      "status": "failed",
+      "evidence": "CRITICAL: Pos file exported in INCHES (0.944882 in), JLCPCB requires MILLIMETERS!"
+    },
+    {
+      "name": "Test 10: T\u00ednh to\u00e0n v\u1eb9n m\u1ea1ch h\u1ed3i ti\u1ebfp Op-Amp (Feedback)",
+      "status": "failed",
+      "evidence": "CRITICAL: Net OPAMP_N not found in schematic netlist"
+    },
+    {
+      "name": "Test 11: Ki\u1ec3m tra quy chu\u1ea9n ch\u1ebf t\u1ea1o DRC (DRC Clean)",
+      "status": "passed",
+      "evidence": "0 DRC violations"
+    }
+  ]
+}

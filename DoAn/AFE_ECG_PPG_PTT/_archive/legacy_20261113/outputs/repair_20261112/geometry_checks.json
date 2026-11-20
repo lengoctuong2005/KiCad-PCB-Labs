@@ -1,0 +1,11 @@
+{
+  "F.Cu": {
+    "antenna_keepout": true
+  },
+  "B.Cu": {
+    "antenna_keepout": true
+  },
+  "ground_reference": "B.Cu GND zone present and filled by successful CLI refill/DRC",
+  "track_min_mm": 0.2,
+  "via_drill_min_mm": 0.3
+}

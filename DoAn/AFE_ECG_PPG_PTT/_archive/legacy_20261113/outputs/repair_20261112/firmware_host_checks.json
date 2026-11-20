@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-13",
+  "target_build": "NOT_RUN: ESP-IDF unavailable",
+  "checks": [
+    {
+      "command": [
+        "make",
+        "-B",
+        "-C",
+        "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer",
+        "test"
+      ],
+      "exit_code": 0,
+      "stdout": "make: Entering directory '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer'\ncc -Wall -Wextra -Werror -pedantic -std=c99 -Imain tests/test_ptt_firmware_logic.c -o tests/test_runner\n./tests/test_runner\nPASS: test_ptt_firmware_logic verified all 5 subsystems\nmake: Leaving directory '/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer'\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/tests/check_acquisition_regression.py"
+      ],
+      "exit_code": 0,
+      "stdout": "PASS: actual enqueue keeps drop flags until accepted; ADS read completion ordering, PPG emission and duplicate source verified\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/software/test_protocol_regression.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"checks\": [\"parse_typed_and_legacy\", \"quality_flags\", \"monitor_interleaved_paired_stream\", \"typed_firmware_csv_audit_only\", \"simulation_cli_analysis\"], \"status\": \"ok\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "/home/tuong/HK3_Semester/KhoaHe_PCB/tests/test_dsp_ptt_pipeline.py"
+      ],
+      "exit_code": 0,
+      "stdout": "ALL DSP PTT PIPELINE TESTS PASSED\n",
+      "stderr": ""
+    }
+  ]
+}

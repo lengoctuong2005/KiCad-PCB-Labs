@@ -1,6 +1,7 @@
+import pathlib
 import pcbnew
 
-board = pcbnew.LoadBoard('/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/USB_TypeC_TP4056_Charger.kicad_pcb')
+board = pcbnew.LoadBoard(str(pathlib.Path(__file__).resolve().parents[1] / "USB_TypeC_TP4056_Charger.kicad_pcb"))
 
 def set_3d_model(fp, model_path, offset=(0,0,0), scale=(1,1,1), rotate=(0,0,0)):
     fp.Models().clear()
@@ -24,5 +25,5 @@ for fp in board.GetFootprints():
     elif ref == "J2":
         set_3d_model(fp, "/usr/share/kicad/3dmodels/Connector_JST.3dshapes/JST_PH_B2B-PH-SM4-TB_1x02-1MP_P2.00mm_Vertical.step")
 
-pcbnew.SaveBoard('/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/USB_TypeC_TP4056_Charger.kicad_pcb', board)
+pcbnew.SaveBoard(str(pathlib.Path(__file__).resolve().parents[1] / "USB_TypeC_TP4056_Charger.kicad_pcb"), board)
 print("Updated all 3D models!")

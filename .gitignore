@@ -35,3 +35,6 @@ _saved-*
 .DS_Store
 Thumbs.db
 
+
+# ESP-IDF build artifacts (keep only prebuilt .bin if explicitly tracked)
+DoAn/AFE_ECG_PPG_PTT/firmware/esp32_ptt_streamer/build/

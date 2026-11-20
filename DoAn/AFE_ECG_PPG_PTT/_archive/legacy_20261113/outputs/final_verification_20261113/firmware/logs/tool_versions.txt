@@ -1,0 +1,4 @@
+IDF_VERSION=ESP-IDF v5.5
+XTENSA=xtensa-esp-elf-gcc (crosstool-NG esp-14.2.0_20241119) 14.2.0
+CMAKE=cmake version 4.2.3
+NINJA=1.13.2

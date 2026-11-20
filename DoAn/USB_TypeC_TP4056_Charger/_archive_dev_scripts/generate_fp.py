@@ -1,9 +1,10 @@
+import pathlib
 import sys, os
 sys.path.append('/usr/lib/python3/dist-packages')
 import pcbnew
 import math
 
-FP_DIR = "/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/libs/charger.pretty"
+FP_DIR = str(pathlib.Path(__file__).resolve().parents[1] / "libs" / "charger.pretty")
 if not os.path.exists(FP_DIR): os.makedirs(FP_DIR)
 
 # Just save standard footprint strings

@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-12",
+  "kicad_version": "10.0.8",
+  "scope": "schematic topology checks only; no physical or medical safety approval",
+  "ignored_erc_checks": [
+    "Global label only appears once in the schematic",
+    "Four connection points are joined together",
+    "SPICE model issue",
+    "Assigned footprint doesn't match footprint filters"
+  ],
+  "sha256": {
+    "AFE_ECG_PPG_PTT.kicad_sch": "cf52261cf8d3c1146ac21cce52fbb1a54edcc04578a4d4c30767d5181d6eb539",
+    "AFE_ECG_PPG_PTT.kicad_pro": "4c87c3bfd93faf39c3a1d203342a8e94af37eca98b5dba379849c63b7f585b24",
+    "libs/afe.kicad_sym": "037c62c827a6d65af597de4beef813f5cbd236514672d18ae7bbad23da84bbbc",
+    "libs/afe.pretty/ESP32_DevKitC_V4_38P.kicad_mod": "1468b4bb65a002cf12618eedb54a7c41da1ff227f6116d30fbd409e187020fe9",
+    "fp-lib-table": "7df41435382e4a9190e6331581ae0c4f85cf4ea3895154c185934a5148c36413",
+    "tests/check_feedback_netlist.py": "c03c2393c30ea73b70505750640dcd8454a3edf1f3d2f70a8393ce81e1c8464b",
+    "tests/check_analog_netlist.py": "1a5dcff3624c08ddaf5c6a6ef17a912f221f52f3092403f039598e92850e8f37",
+    "tests/check_pcb_netlist.py": "f6defc5f646b3b1d64cc434af4f23541d509ccfd935a76d9080369712214e4dd"
+  }
+}

@@ -1,3 +1,4 @@
+import pathlib
 import pcbnew
 import math
 
@@ -21,7 +22,7 @@ for n in net_names:
     board.Add(item)
     nets[n] = item
 
-FP_LIB = "/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/libs/charger.pretty"
+FP_LIB = str(pathlib.Path(__file__).resolve().parents[1] / "libs" / "charger.pretty")
 SMD_C = "/usr/share/kicad/footprints/Capacitor_SMD.pretty", "C_0805_2012Metric"
 SMD_R = "/usr/share/kicad/footprints/Resistor_SMD.pretty", "R_0805_2012Metric"
 SMD_LED = "/usr/share/kicad/footprints/LED_SMD.pretty", "LED_0805_2012Metric"
@@ -309,5 +310,5 @@ add_silk_text("TP4056 USB-C CHARGER", CX, 11.0, pcbnew.B_SilkS, size=0.75, thick
 add_silk_text("5V 1A LI-ION MODULE", CX, 15.0, pcbnew.B_SilkS, size=0.65, thickness=0.12)
 add_silk_text("HCMUS - 2026", CX, 19.0, pcbnew.B_SilkS, size=0.65, thickness=0.12)
 
-pcbnew.SaveBoard("/mnt/Windows/HK3-25-26/KhoaHe_PCB/DoAn/USB_TypeC_TP4056_Charger/USB_TypeC_TP4056_Charger.kicad_pcb", board)
+pcbnew.SaveBoard(str(pathlib.Path(__file__).resolve().parents[1] / "USB_TypeC_TP4056_Charger.kicad_pcb"), board)
 print("PCB V19 Perfect Net Connectivity Complete!")

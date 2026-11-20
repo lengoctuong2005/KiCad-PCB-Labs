@@ -1,6 +1,18 @@
 import markdown
 import sys
 import os
+from lxml import html as LH
+from lxml_html_clean import Cleaner
+
+
+_CLEAN = Cleaner(scripts=True, javascript=True, comments=True, style=False,
+                 links=False, meta=False, page_structure=False,
+                 embedded=True, frames=True, forms=True)
+
+def sanitize_html(fragment):
+    node = LH.fragment_fromstring(fragment, create_parent='div')
+    node = _CLEAN.clean_html(node)
+    return (node.text or '') + ''.join(LH.tostring(c, encoding='unicode') for c in node)
 
 def render_md_to_html(md_file, html_file):
     with open(md_file, 'r', encoding='utf-8') as f:
@@ -22,6 +34,7 @@ def render_md_to_html(md_file, html_file):
         body_content = text[:s_start] + text[s_end:]
 
     html = markdown.markdown(body_content.strip(), extensions=['tables', 'fenced_code'])
+    html = sanitize_html(html)
 
     full_html = f"""<!DOCTYPE html>
 <html lang="vi">

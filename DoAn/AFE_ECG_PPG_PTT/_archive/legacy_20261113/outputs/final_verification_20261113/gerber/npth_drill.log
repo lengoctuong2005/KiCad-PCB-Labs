@@ -1,0 +1,14 @@
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TF% at line 1 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TF% at line 2 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TF% at line 3 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TF% at line 4 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TF% at line 5 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TA% at line 13 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:179656): CRITICAL **: 01:03:14.527: Unknown RS-274X extension found %TD% at line 15 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/repair_20261112/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"

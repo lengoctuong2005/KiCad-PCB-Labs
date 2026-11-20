@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-14T11:01:03",
+    "ignored_checks": [],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.8",
+    "schematic_parity": [],
+    "source": "AFE_ECG_PPG_PTT.silk15.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Silkscreen clearance (board setup constraints silk clearance 0.1500 mm; actual 0.1064 mm)",
+            "items": [
+                {
+                    "description": "Reference field of C4",
+                    "pos": {
+                        "x": 39.0,
+                        "y": 30.57
+                    },
+                    "uuid": "84451b45-a87f-41ac-afe6-237194b89199"
+                },
+                {
+                    "description": "Reference field of C11",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 31.57
+                    },
+                    "uuid": "cd894bfa-2f58-4ce4-9d0f-0bacd4fea9bd"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clearance (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Reference field of TP3",
+                    "pos": {
+                        "x": 44.0,
+                        "y": 30.2
+                    },
+                    "uuid": "1c5b0d8a-9764-47fa-8a88-008acec16984"
+                },
+                {
+                    "description": "Segment of R10 on F.Silkscreen",
+                    "pos": {
+                        "x": 43.762742,
+                        "y": 29.5225
+                    },
+                    "uuid": "758aa3ca-e9cb-4889-b4ee-100201fbc015"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_overlap"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "Reference field of C11",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 31.57
+                    },
+                    "uuid": "cd894bfa-2f58-4ce4-9d0f-0bacd4fea9bd"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        }
+    ]
+}

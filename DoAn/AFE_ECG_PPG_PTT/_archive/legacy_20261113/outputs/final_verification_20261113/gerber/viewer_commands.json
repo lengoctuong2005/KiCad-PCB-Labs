@@ -1,0 +1,119 @@
+[
+  {
+    "image": "top_copper_outline_drill.png",
+    "command": [
+      "xvfb-run",
+      "-a",
+      "/tmp/afe-gerbv-extracted-20261113/usr/bin/gerbv",
+      "-x",
+      "png",
+      "-w",
+      "1600x1280",
+      "-b",
+      "#101820",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerber/top_copper_outline_drill.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Cu.gtl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+    ],
+    "exit_code": 0,
+    "other_diagnostics": [],
+    "x2_attributes_unsupported": true
+  },
+  {
+    "image": "bottom_copper_drill.png",
+    "command": [
+      "xvfb-run",
+      "-a",
+      "/tmp/afe-gerbv-extracted-20261113/usr/bin/gerbv",
+      "-x",
+      "png",
+      "-w",
+      "1600x1280",
+      "-b",
+      "#101820",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerber/bottom_copper_drill.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-B_Cu.gbl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+    ],
+    "exit_code": 0,
+    "other_diagnostics": [],
+    "x2_attributes_unsupported": true
+  },
+  {
+    "image": "top_mask_silk.png",
+    "command": [
+      "xvfb-run",
+      "-a",
+      "/tmp/afe-gerbv-extracted-20261113/usr/bin/gerbv",
+      "-x",
+      "png",
+      "-w",
+      "1600x1280",
+      "-b",
+      "#101820",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerber/top_mask_silk.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+    ],
+    "exit_code": 0,
+    "other_diagnostics": [
+      "** (process:185669): WARNING **: 01:13:10.789: Most likely found a RS-274D file \"/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts\" ... trying to open anyways",
+      "** (process:185669): WARNING **: 01:13:10.791: Missing apertures/drill sizes...trying to load anyways"
+    ],
+    "x2_attributes_unsupported": true
+  },
+  {
+    "image": "bottom_mask.png",
+    "command": [
+      "xvfb-run",
+      "-a",
+      "/tmp/afe-gerbv-extracted-20261113/usr/bin/gerbv",
+      "-x",
+      "png",
+      "-w",
+      "1600x1280",
+      "-b",
+      "#101820",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerber/bottom_mask.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-B_Mask.gbs",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+    ],
+    "exit_code": 0,
+    "other_diagnostics": [
+      "** (process:185692): WARNING **: 01:13:11.202: Most likely found a RS-274D file \"/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-B_Mask.gbs\" ... trying to open anyways",
+      "** (process:185692): WARNING **: 01:13:11.203: Missing apertures/drill sizes...trying to load anyways"
+    ],
+    "x2_attributes_unsupported": true
+  },
+  {
+    "image": "top_paste.png",
+    "command": [
+      "xvfb-run",
+      "-a",
+      "/tmp/afe-gerbv-extracted-20261113/usr/bin/gerbv",
+      "-x",
+      "png",
+      "-w",
+      "1600x1280",
+      "-b",
+      "#101820",
+      "-o",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerber/top_paste.png",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Paste.gtp",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-PTH.drl",
+      "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+    ],
+    "exit_code": 0,
+    "other_diagnostics": [],
+    "x2_attributes_unsupported": true
+  }
+]

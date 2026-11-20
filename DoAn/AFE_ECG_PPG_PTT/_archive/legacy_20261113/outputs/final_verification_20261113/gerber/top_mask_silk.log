@@ -1,0 +1,130 @@
+
+** (process:185669): WARNING **: 01:13:10.789: Most likely found a RS-274D file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts" ... trying to open anyways
+
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 1 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 2 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 3 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 4 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 5 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): CRITICAL **: 01:13:10.789: Unknown RS-274X extension found %TF% at line 6 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Mask.gts"
+
+** (process:185669): WARNING **: 01:13:10.791: Missing apertures/drill sizes...trying to load anyways
+
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 1 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 2 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 3 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 4 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 5 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.793: Unknown RS-274X extension found %TF% at line 6 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3109 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3114 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3119 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3145 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3158 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3163 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3168 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3173 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3178 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3183 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3188 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3193 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3198 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3203 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3214 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3225 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3230 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3235 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3240 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3251 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3262 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3267 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3295 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3300 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3305 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3310 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.794: Unknown RS-274X extension found %TO% at line 3315 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3320 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3325 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3336 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3341 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3352 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3357 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3368 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3392 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3397 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3402 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3407 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3424 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3429 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3434 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TO% at line 3445 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TD% at line 3450 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-F_Silkscreen.gto"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TF% at line 1 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TF% at line 2 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TF% at line 3 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TF% at line 4 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TF% at line 5 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TA% at line 13 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
+
+** (process:185669): CRITICAL **: 01:13:10.795: Unknown RS-274X extension found %TD% at line 15 in file "/home/tuong/HK3_Semester/KhoaHe_PCB/DoAn/AFE_ECG_PPG_PTT/outputs/final_verification_20261113/gerbers/AFE_ECG_PPG_PTT-Edge_Cuts.gm1"
